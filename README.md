@@ -21,3 +21,12 @@
 **Case Study**:  "Agenzia Immobiliare"
 
 Please check out the **docs/Case Study.md** file for more informations.
+
+
+
+### Opening the project
+
+1. Download and install **Eclipse** (required by the professor)
+2. Open it and go to **File -> Open Project from File System**
+3. Select the **Valerio_Napoletano-AgImmobiliare** folder present in this repository.
+
