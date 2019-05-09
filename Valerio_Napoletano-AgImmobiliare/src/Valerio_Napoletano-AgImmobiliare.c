@@ -11,11 +11,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "menus.h"
 #include "utils.h"
 #include "datatypes.h"
 
 int main(void) {
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
+	mainMenu();
+
 	system("pause");
 	return EXIT_SUCCESS;
 }
