@@ -53,6 +53,8 @@ int clientsMenu() {
 	int choice;
 
 	do {
+		clearScr();
+
 		newLine();
 		puts("--- CLIENTI ---");
 		newLine();
@@ -79,6 +81,8 @@ int professMenu() {
 	int choice;
 
 	do {
+		clearScr();
+
 		newLine();
 		puts("--- PROFESSIONISTI ---");
 		newLine();
@@ -105,6 +109,8 @@ int propertyMenu() {
 	int choice;
 
 	do {
+		clearScr();
+
 		newLine();
 		puts("--- IMMOBILI ---");
 		newLine();
