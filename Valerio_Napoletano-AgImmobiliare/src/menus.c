@@ -123,7 +123,12 @@ int propertyMenu() {
 
 		switch (choice) {
 		case 1:
-			addbuild();
+			choice = addbuild();
+			//clearScr();
+			break;
+		case 2:
+			choice = editbuild();
+			//clearScr();
 			break;
 		case 4:
 			return 0;
@@ -132,6 +137,7 @@ int propertyMenu() {
 			choice = 0;
 			break;
 		}
+
 
 	} while (choice < 0 || choice > 4);
 	return 1;

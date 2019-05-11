@@ -12,14 +12,14 @@
 #include "datatypes.h"
 
 
-void addbuild(){
+int addbuild(){
 
 	int ret = 0;
 
     FILE *fp_build;
 
     do{
-		fp_build = fopen ("buildings.csv", "a+");
+		fp_build = fopen ("buildings.txt", "a+");
 		if (fp_build==NULL){
 			printf("\n------------------------ WARNING ------------------------");
 			printf("\nBuilding store file does not exist. Creating new one....\n");
@@ -54,10 +54,42 @@ void addbuild(){
 			fclose (fp_build);
 		}
     }while(ret == 1);
+    return -1;
 }
-void editbuild(){
+int editbuild(){
 
+	int count = 0; //File rows counter
+	FILE *fp_build;
+
+	fp_build = fopen ("buildings.txt", "r");
+	if (fp_build==NULL){
+		printf("\n------------------------ WARNING ------------------------");
+		printf("\nBuilding store file does not exist. Create new one first\n");
+
+		/*
+		fp_build = fopen ("buildings.txt", "w+");
+		if (fp_build==NULL){
+			printf("\n------------------------------------ ERROR ------------------------------------");
+			printf("\nAn error as occured while creating the file. Check your file system and retry.\n");
+		}
+		else{
+			fclose (fp_build);
+		}*/
+	}
+	else{
+	      char line [ 400 ]; /* or other suitable maximum line size */
+	      while ( fgets ( line, sizeof line, fp_build ) != NULL ) /* read a line */
+	      {
+	    	  printf("%d. ", count+1);
+	    	  fputs ( line, stdout ); /* write the line */
+	    	  count++;
+	      }
+
+	      count = 0;
+	      fclose (fp_build);
+	}
+	return -1;
 }
-void removebuild(){
-
+int removebuild(){
+	return -1;
 }

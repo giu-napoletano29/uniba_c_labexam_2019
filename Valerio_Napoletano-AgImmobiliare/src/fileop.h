@@ -7,6 +7,6 @@
 #include <stdio.h>
 
 //Operazioni su immobili
-void addbuild();
-void editbuild();
-void removebuild();
+int addbuild();
+int editbuild();
+int removebuild();
