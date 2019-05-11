@@ -6,6 +6,6 @@
  */
 
 void mainMenu();
-void clientsMenu();
-void professMenu();
-void propertyMenu();
+int clientsMenu();
+int professMenu();
+int propertyMenu();

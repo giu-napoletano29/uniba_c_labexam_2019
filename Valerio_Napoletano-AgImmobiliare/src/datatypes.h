@@ -5,6 +5,9 @@
  *      Author: Saverio Valerio
  */
 
+#ifndef DATATYPES_H
+#define DATATYPES_H
+
 #define STRING_SIZE 50
 
 enum client_type {
@@ -48,3 +51,5 @@ typedef struct {
 	char locality[STRING_SIZE];
 	char type[STRING_SIZE];
 } property;
+
+#endif

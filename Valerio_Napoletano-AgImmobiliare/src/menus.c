@@ -14,6 +14,8 @@ void mainMenu() {
 	int choice;
 
 	do {
+		clearScr();
+
 		newLine();
 		puts("-- Agenzia Immobiliare --");
 		puts("- MENU PRINCIPALE -");
@@ -30,24 +32,24 @@ void mainMenu() {
 		scanf("%d", &choice);
 
 		switch (choice) {
-			case 1:
-				clientsMenu();
-				break;
-			case 2:
-				professMenu();
-				break;
-			case 3:
-				propertyMenu();
-				break;
-			default:
-				choice = 0;
-				break;
+		case 1:
+			choice = clientsMenu();
+			break;
+		case 2:
+			choice = professMenu();
+			break;
+		case 3:
+			choice = propertyMenu();
+			break;
+		default:
+			choice = 0;
+			break;
 		}
 
 	} while (choice <= 0 || choice > 3);
 }
 
-void clientsMenu() {
+int clientsMenu() {
 	int choice;
 
 	do {
@@ -65,10 +67,15 @@ void clientsMenu() {
 
 		printf("Operazione: ");
 		scanf("%d", &choice);
+
+		if (choice == 4) {
+			return 0;
+		}
 	} while (choice < 0 || choice > 4);
+	return 1;
 }
 
-void professMenu() {
+int professMenu() {
 	int choice;
 
 	do {
@@ -86,10 +93,15 @@ void professMenu() {
 
 		printf("Operazione: ");
 		scanf("%d", &choice);
+
+		if (choice == 4) {
+			return 0;
+		}
 	} while (choice < 0 || choice > 4);
+	return 1;
 }
 
-void propertyMenu() {
+int propertyMenu() {
 	int choice;
 
 	do {
@@ -107,5 +119,10 @@ void propertyMenu() {
 
 		printf("Operazione: ");
 		scanf("%d", &choice);
+
+		if (choice == 4) {
+			return 0;
+		}
 	} while (choice < 0 || choice > 4);
+	return 1;
 }

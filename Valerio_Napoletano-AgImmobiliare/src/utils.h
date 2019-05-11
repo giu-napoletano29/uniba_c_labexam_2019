@@ -12,3 +12,4 @@ typedef struct {
 } date;
 
 void newLine();
+void clearScr();
