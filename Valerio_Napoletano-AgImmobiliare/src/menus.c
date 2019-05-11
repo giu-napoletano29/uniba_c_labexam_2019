@@ -9,6 +9,7 @@
 
 #include "menus.h"
 #include "utils.h"
+#include "fileop.h"
 
 void mainMenu() {
 	int choice;
@@ -120,9 +121,18 @@ int propertyMenu() {
 		printf("Operazione: ");
 		scanf("%d", &choice);
 
-		if (choice == 4) {
+		switch (choice) {
+		case 1:
+			addbuild();
+			break;
+		case 4:
 			return 0;
+			break;
+		default:
+			choice = 0;
+			break;
 		}
+
 	} while (choice < 0 || choice > 4);
 	return 1;
 }
