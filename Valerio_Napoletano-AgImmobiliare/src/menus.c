@@ -10,6 +10,8 @@
 #include "menus.h"
 #include "utils.h"
 
+#include "entities/clients.h"
+
 void mainMenu() {
 	int choice;
 
@@ -45,7 +47,6 @@ void mainMenu() {
 			choice = 0;
 			break;
 		}
-
 	} while (choice <= 0 || choice > 3);
 }
 
@@ -69,6 +70,21 @@ int clientsMenu() {
 
 		printf("Operazione: ");
 		scanf("%d", &choice);
+
+		switch (choice) {
+		case 1:
+			choice = addClient();
+			break;
+		case 2:
+			//choice = professMenu();
+			break;
+		case 3:
+			//choice = propertyMenu();
+			break;
+		default:
+			choice = 0;
+			break;
+		}
 
 		if (choice == 4) {
 			return 0;

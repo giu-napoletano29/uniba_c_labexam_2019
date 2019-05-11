@@ -10,23 +10,17 @@
 
 #define STRING_SIZE 50
 
-enum client_type {
-	family, single, company, government
-};
-
 typedef struct {
-	char name[STRING_SIZE];
-	char surname[STRING_SIZE];
-	// Client type (company, private, etc..)
-	char cl_type[STRING_SIZE];
-	// Company name (if type is company)
-	char company_name[STRING_SIZE];
-	int budget;
-	// Type of the property that needs to be searched
-	char pr_search_type[STRING_SIZE];
-} clients;
+	short int day;
+	short int month;
+	short int year;
+} date;
 
-enum property_type {
+typedef enum {
+	family, single, company, government
+} client_type;
+
+typedef enum {
 	// Appartamento
 	flat,
 	/*
@@ -40,7 +34,19 @@ enum property_type {
 	farmhouse,
 	// Attico
 	attic
-};
+} property_type;
+
+typedef struct {
+	char name[STRING_SIZE];
+	char surname[STRING_SIZE];
+	// Client type (company, private, etc..)
+	client_type cl_type;
+	// Company name (if type is company)
+	char company_name[STRING_SIZE];
+	int budget;
+	// Type of the property that needs to be searched
+	property_type pr_search_type;
+} clients;
 
 typedef struct {
 	int id;
