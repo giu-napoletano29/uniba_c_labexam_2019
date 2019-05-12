@@ -46,7 +46,7 @@ int addbuild(){
 			printf("Inserisci il prezzo: \n");
 			scanf("%d", &p.price);
 			printf("Inserisci la data: \n");
-			scanf("%hd %hd %hd", &p.reg_date.day, &p.reg_date.month, &p.reg_date.year);
+			scanf("%hd %hd %hd", &p.reg_date.day, &p.reg_date.month, &p.reg_date.year);	//TODO: Inserire controllo data
 
 
 			fprintf(fp_build, "%d, %s, %s, %d, %hd/%hd/%hd\n", p.id, p.name, p.locality, p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
@@ -59,9 +59,11 @@ int addbuild(){
 int editbuild(){
 
 	int count = 0; //File rows counter
+	int stop = 0; //Valid choice controller
+	int choice = 0;
 	FILE *fp_build;
 
-	fp_build = fopen ("buildings.txt", "r");
+	fp_build = fopen ("buildings.txt", "r+");
 	if (fp_build==NULL){
 		printf("\n------------------------ WARNING ------------------------");
 		printf("\nBuilding store file does not exist. Create new one first\n");
@@ -77,12 +79,33 @@ int editbuild(){
 		}*/
 	}
 	else{
-	      char line [ 400 ]; /* or other suitable maximum line size */
+	      char line [ 400 ];
 	      while ( fgets ( line, sizeof line, fp_build ) != NULL ) /* read a line */
 	      {
 	    	  printf("%d. ", count+1);
 	    	  fputs ( line, stdout ); /* write the line */
 	    	  count++;
+	      }
+	      printf("\n%d\n",count);
+	      //count = 0;
+	      if(count>0){
+		      do{
+			      printf("Inserisci il numero dell'immobile da modificare: \n");
+			      scanf("%d",&choice);
+
+			      if(choice > 0 && choice <= count){
+
+			    	  stop=0;
+			      }
+			      else{
+			    	  printf("\nYou must enter a valid number.\n");
+			    	  stop=1;
+			      }
+		      }while(stop==1);
+	      }
+	      else{
+	    	  printf("\n---- WARNING ----");
+	    	  printf("\nNo data found.\n");
 	      }
 
 	      count = 0;
