@@ -19,7 +19,7 @@ int addbuild(){
     FILE *fp_build;
 
     do{
-		fp_build = fopen ("buildings.txt", "a+");
+		fp_build = fopen ("buildings.dat", "a+b");
 		if (fp_build==NULL){
 			printf("\n------------------------ WARNING ------------------------");
 			printf("\nBuilding store file does not exist. Creating new one....\n");
@@ -36,7 +36,7 @@ int addbuild(){
 		}
 		else{
 			property p;
-
+			//TODO: need to handle escape characters
 			printf("Inserisci l'ID dell'immobile: \n");
 			scanf("%d",&p.id);
 			printf("Inserisci il nome dell'immobile: \n");
@@ -60,10 +60,13 @@ int editbuild(){
 
 	int count = 0; //File rows counter
 	int stop = 0; //Valid choice controller
+	int len = 0;
 	int choice = 0;
 	FILE *fp_build;
+	FILE *fp_temp;
+	property p;
 
-	fp_build = fopen ("buildings.txt", "r+");
+	fp_build = fopen ("buildings.dat", "rb");
 	if (fp_build==NULL){
 		printf("\n------------------------ WARNING ------------------------");
 		printf("\nBuilding store file does not exist. Create new one first\n");
@@ -84,18 +87,62 @@ int editbuild(){
 	      {
 	    	  printf("%d. ", count+1);
 	    	  fputs ( line, stdout ); /* write the line */
+	    	  len = ftell(fp_build);
+	    	  printf("\nPosizione file: %d\n", len);
 	    	  count++;
 	      }
-	      printf("\n%d\n",count);
+	      fclose (fp_build);
+	      fp_build = fopen ("buildings.dat", "rb");
+	      fp_temp = fopen ("temp_build.dat", "w+b");
 	      //count = 0;
 	      if(count>0){
 		      do{
 			      printf("Inserisci il numero dell'immobile da modificare: \n");
 			      scanf("%d",&choice);
 
-			      if(choice > 0 && choice <= count){
+			      if(choice <= count){
 
-			    	  stop=0;
+			    	  count = 0;
+				      while ( fgets ( line, sizeof line, fp_build ) != NULL ) /* read a line */
+				      {
+				    	  count++;
+				    	  //len = ftell(fp_build);
+
+				    	  if(choice == count){
+				    		  printf("Inserisci l'ID dell'immobile: \n");
+				    		  scanf("%d",&p.id);
+				    		  printf("Inserisci il nome dell'immobile: \n");
+				    		  scanf("%s", p.name);
+				    		  printf("Inserisci la localita': \n");
+				    		  scanf("%s", p.locality);
+				    		  printf("Inserisci il prezzo: \n");
+				    		  scanf("%d", &p.price);
+				    		  printf("Inserisci la data: \n");
+				    		  scanf("%hd %hd %hd", &p.reg_date.day, &p.reg_date.month, &p.reg_date.year);	//TODO: Inserire controllo data
+
+				    		  fprintf(fp_temp, "%d, %s, %s, %d, %hd/%hd/%hd\n", p.id, p.name, p.locality, p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
+
+				    	  }
+				    	  else{
+				    		  fputs( line, fp_temp);
+				    	  }
+
+				      }
+				      fclose (fp_temp);
+				      fclose (fp_build);
+
+
+				      fp_build = fopen ("buildings.dat", "w+b");
+				      fp_temp = fopen ("temp_build.dat", "rb");
+
+			    	  count = 0;
+				      while ( fgets ( line, sizeof line, fp_temp ) != NULL ) /* read a line */
+				      {
+				    	  count++;
+				    	  fputs( line, fp_build);
+				      }
+
+				      stop=0;
 			      }
 			      else{
 			    	  printf("\nYou must enter a valid number.\n");
@@ -109,7 +156,9 @@ int editbuild(){
 	      }
 
 	      count = 0;
+	      fclose (fp_temp);
 	      fclose (fp_build);
+	      remove("temp_building.dat");
 	}
 	return -1;
 }
