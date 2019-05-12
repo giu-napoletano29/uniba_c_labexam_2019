@@ -48,7 +48,10 @@ int addClient() {
 	do {
 		newLine();
 		printf("Inserisci il numero che identifica la tipologia: ");
-		scanf("%d", &client.cl_type);
+		// %u placeholders for enums
+		// "Normally, the type is unsigned int if there are no negative values in the enumeration, otherwise int."
+		// http://gcc.gnu.org/onlinedocs/gcc/Structures-unions-enumerations-and-bit_002dfields-implementation.html
+		scanf("%u", &client.cl_type);
 	} while (client.cl_type < 1 || client.cl_type > 4);
 
 	// Ask for the company name if the user selected the company
@@ -89,13 +92,15 @@ int addClient() {
 	do {
 		newLine();
 		printf("Inserisci il numero che identifica la tipologia: ");
-		scanf("%d", &client.pr_search_type);
+		scanf("%u", &client.cl_type);
 	} while (client.pr_search_type < 1 || client.pr_search_type > 5);
 
 	// FOR TESTING
 
 	newLine();
 	printf("--- RIEPILOGO ---");
+	newLine();
+	newLine();
 	printf("Nome: %s", client.name);
 	newLine();
 	printf("Cognome: %s", client.surname);
