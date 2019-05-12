@@ -57,6 +57,10 @@ int readString(char *buffer) {
 	// Get the string and directly write to memory
 	fgets(buffer, STRING_SIZE, stdin);
 
+	// Remove \n registerd with fgets
+	// https://www.freebsd.org/cgi/man.cgi?query=strcspn&sektion=3
+	buffer[strcspn(buffer, "\n")] = 0;
+
 	/* FIXME: This does not work FOR NOW
 	if (isNumber(buffer) == 1) {
 		printf("Inserisci una stringa corretta.");
