@@ -7,6 +7,8 @@
 
 #include <stdio.h>
 #include <string.h>
+// Boolean (introduced in C99)
+#include <stdbool.h>
 
 #include "../utils.h"
 #include "../datatypes.h"
@@ -95,6 +97,8 @@ void reqSurname(clients *client) {
 }
 
 void reqType(clients *client) {
+	bool error = false;
+
 	// TYPE
 	puts("--- Tipo ---");
 	printf("1. Famiglia \n");
@@ -104,11 +108,20 @@ void reqType(clients *client) {
 
 	do {
 		newLine();
+
+		if (error) {
+			puts("Tipologia non trovata, per favore riprova. \n");
+		}
+
 		printf("Inserisci il numero che identifica la tipologia: ");
 		// %u placeholders for enums
 		// "Normally, the type is unsigned int if there are no negative values in the enumeration, otherwise int."
 		// http://gcc.gnu.org/onlinedocs/gcc/Structures-unions-enumerations-and-bit_002dfields-implementation.html
 		scanf("%u", &client->cl_type);
+
+		if (client->cl_type < 1 || client->cl_type > 4) {
+			error = true;
+		}
 	} while (client->cl_type < 1 || client->cl_type > 4);
 
 	clearScr();
@@ -131,17 +144,29 @@ void reqCompanyName(clients *client) {
 }
 
 void reqBudget(clients *client) {
+	bool error = false;
+
 	// BUDGET
-	// Limits are: 50 minimum and 1 bilion maximum (maybe needs some tuning)
+	// Limits are: 100 minimum and 1 bilion maximum (maybe needs some tuning)
 	do {
+		if (error) {
+			puts("Inserisci un valore in euro tra 100 e 1 000 000 000 euro. \n");
+		}
+
 		printf("Budget in euro: ");
 		scanf("%d", &client->budget);
+
+		if (client->budget < 50 || client->cl_type > 1000000000) {
+			error = true;
+		}
 	} while (client->budget < 50 || client->cl_type > 1000000000);
 
 	clearScr();
 }
 
 void reqPropertyType(clients *client) {
+	bool error = false;
+
 	// TYPE PROPERTY
 	printf("Tipologia immobile da cercare: ");
 	newLine();
@@ -159,8 +184,17 @@ void reqPropertyType(clients *client) {
 
 	do {
 		newLine();
+
+		if (error) {
+			puts("Tipologia non trovata, per favore riprova. \n");
+		}
+
 		printf("Inserisci il numero che identifica la tipologia: ");
 		scanf("%u", &client->pr_search_type);
+
+		if (client->pr_search_type < 1 || client->pr_search_type > 5) {
+			error = true;
+		}
 	} while (client->pr_search_type < 1 || client->pr_search_type > 5);
 
 	clearScr();

@@ -5,11 +5,11 @@
  *      Author: Saverio Valerio
  */
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
 // Only for getting STRING_SIZE constant
 #include "datatypes.h"
 
