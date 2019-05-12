@@ -60,7 +60,6 @@ int editbuild(){
 
 	int count = 0; //File rows counter
 	int stop = 0; //Valid choice controller
-	int len = 0;
 	int choice = 0;
 	FILE *fp_build;
 	FILE *fp_temp;
@@ -87,8 +86,6 @@ int editbuild(){
 	      {
 	    	  printf("%d. ", count+1);
 	    	  fputs ( line, stdout ); /* write the line */
-	    	  len = ftell(fp_build);
-	    	  printf("\nPosizione file: %d\n", len);
 	    	  count++;
 	      }
 	      fclose (fp_build);
@@ -97,6 +94,7 @@ int editbuild(){
 	      //count = 0;
 	      if(count>0){
 		      do{
+		    	  newLine();
 			      printf("Inserisci il numero dell'immobile da modificare: \n");
 			      scanf("%d",&choice);
 
@@ -106,7 +104,6 @@ int editbuild(){
 				      while ( fgets ( line, sizeof line, fp_build ) != NULL ) /* read a line */
 				      {
 				    	  count++;
-				    	  //len = ftell(fp_build);
 
 				    	  if(choice == count){
 				    		  printf("Inserisci l'ID dell'immobile: \n");
@@ -135,10 +132,8 @@ int editbuild(){
 				      fp_build = fopen ("buildings.dat", "w+b");
 				      fp_temp = fopen ("temp_build.dat", "rb");
 
-			    	  count = 0;
 				      while ( fgets ( line, sizeof line, fp_temp ) != NULL ) /* read a line */
 				      {
-				    	  count++;
 				    	  fputs( line, fp_build);
 				      }
 
@@ -163,5 +158,63 @@ int editbuild(){
 	return -1;
 }
 int removebuild(){
+	int count = 0; //File rows counter
+	int stop = 0; //Valid choice controller
+	int choice = 0;
+	FILE *fp_build;
+	FILE *fp_temp;
+
+	fp_build = fopen ("buildings.dat", "rb");
+	if (fp_build==NULL){
+		printf("\n------------------------ WARNING ------------------------");
+		printf("\nBuilding store file does not exist. Create new one first\n");
+	}
+	else{
+		char line [ 400 ];
+	    while ( fgets ( line, sizeof line, fp_build ) != NULL ) /* read a line */
+	    {
+	    	printf("%d. ", count+1);
+	    	fputs ( line, stdout ); /* write the line */
+	    	count++;
+	    }
+	    fclose (fp_build);
+	    fp_build = fopen ("buildings.dat", "rb");
+	    fp_temp = fopen ("temp_build.dat", "w+b");
+	    if(count>0){
+	    	do{
+	    		newLine();
+	    		printf("Inserisci il numero dell'immobile da eliminare: \n");
+			    scanf("%d",&choice);
+			    if(choice <= count){
+			    	count = 0;
+				    while ( fgets ( line, sizeof line, fp_build ) != NULL ) /* read a line */
+				    {
+				    	count++;
+				    	if(choice != count){
+				    		fputs( line, fp_temp);
+				    	}
+				    }
+				    fclose (fp_temp);
+				    fclose (fp_build);
+				    fp_build = fopen ("buildings.dat", "w+b");
+				    fp_temp = fopen ("temp_build.dat", "rb");
+
+				    while ( fgets ( line, sizeof line, fp_temp ) != NULL ) /* read a line */
+				    {
+				    	fputs( line, fp_build);
+				    }
+				    stop=0;
+			    }
+			    else{
+			    	printf("\nYou must enter a valid number.\n");
+			    	stop = 1;
+			    }
+	    	}while(stop==1);
+	    }
+	}
+	fclose (fp_temp);
+	fclose (fp_build);
+	remove("temp_building.dat");
+
 	return -1;
 }

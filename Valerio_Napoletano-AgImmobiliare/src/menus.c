@@ -113,8 +113,9 @@ int propertyMenu() {
 		puts("Scegli un'operazione:");
 		puts("1. Aggiungi un immobile");
 		puts("2. Modifica un immobile");
-		puts("3. Cerca un immobile");
-		puts("4. Torna indietro");
+		puts("3. Cancella un immobile");
+		puts("4. Cerca un immobile");
+		puts("5. Torna indietro");
 
 		newLine();
 
@@ -130,7 +131,11 @@ int propertyMenu() {
 			choice = editbuild();
 			//clearScr();
 			break;
-		case 4:
+		case 3:
+			choice = removebuild();
+			//clearScr();
+			break;
+		case 5:
 			return 0;
 			break;
 		default:
