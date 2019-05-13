@@ -12,6 +12,7 @@
 
 #include "../utils.h"
 #include "../datatypes.h"
+#include "../consts.h"
 
 void showPropertyType(int type) {
 	switch (type) {
@@ -161,7 +162,6 @@ void reqBudget(clients *client) {
 	bool error = false;
 
 	// BUDGET
-	// Limits are: 100 minimum and 1 bilion maximum (maybe needs some tuning)
 	do {
 		if (error) {
 			puts("Inserisci un valore in euro tra 100 e 1 000 000 000 euro. \n");
@@ -170,10 +170,10 @@ void reqBudget(clients *client) {
 		printf("Budget in euro: ");
 		scanf("%d", &client->budget);
 
-		if (client->budget < 50 || client->cl_type > 1000000000) {
+		if (client->budget < MIN_USER_BUDGET || client->cl_type > MAX_USER_BUDGET) {
 			error = true;
 		}
-	} while (client->budget < 50 || client->cl_type > 1000000000);
+	} while (client->budget < MIN_USER_BUDGET || client->cl_type > MAX_USER_BUDGET);
 
 	clearScr();
 }
