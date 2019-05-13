@@ -10,6 +10,7 @@
 
 #include "menus.h"
 #include "utils.h"
+#include "fileop.h"
 
 #include "entities/clients.h"
 
@@ -182,8 +183,9 @@ int propertyMenu() {
 		puts("Scegli un'operazione:");
 		puts("1. Aggiungi un immobile");
 		puts("2. Modifica un immobile");
-		puts("3. Cerca un immobile");
-		puts("4. Torna indietro");
+		puts("3. Cancella un immobile");
+		puts("4. Cerca un immobile");
+		puts("5. Torna indietro");
 
 		newLine();
 
@@ -191,14 +193,13 @@ int propertyMenu() {
 		scanf("%hu", &choice);
 
 		switch (choice) {
-		case 1:
-			//choice = addClient();
+			choice = addbuild();
 			break;
 		case 2:
-			//choice = professMenu();
+			choice = editbuild();
 			break;
 		case 3:
-			//choice = propertyMenu();
+			choice = removebuild();
 			break;
 		case 4:
 			// This is used as a flag for the "go back" choice
