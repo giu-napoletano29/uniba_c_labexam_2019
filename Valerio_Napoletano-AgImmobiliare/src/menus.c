@@ -14,7 +14,7 @@
 #include "entities/clients.h"
 
 void mainMenu() {
-	int choice;
+	short int choice;
 	bool error = false;
 
 	do {
@@ -38,7 +38,9 @@ void mainMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		scanf("%d", &choice);
+		// short integer placeholder is %hu
+		// ISO/IEC 9899:201x - 7.21.6.1-7
+		scanf("%hu", &choice);
 
 		switch (choice) {
 		case 1:
@@ -58,7 +60,7 @@ void mainMenu() {
 }
 
 int clientsMenu() {
-	int choice;
+	short int choice;
 	bool error = false;
 
 	do {
@@ -82,7 +84,7 @@ int clientsMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		scanf("%d", &choice);
+		scanf("%hu", &choice);
 
 		switch (choice) {
 		case 1:
@@ -110,7 +112,7 @@ int clientsMenu() {
 }
 
 int professMenu() {
-	int choice;
+	short int choice;
 	bool error = false;
 
 	do {
@@ -134,7 +136,7 @@ int professMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		scanf("%d", &choice);
+		scanf("%hu", &choice);
 
 		switch (choice) {
 		case 1:
@@ -162,7 +164,7 @@ int professMenu() {
 }
 
 int propertyMenu() {
-	int choice;
+	short int choice;
 	bool error = false;
 
 	do {
@@ -186,7 +188,7 @@ int propertyMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		scanf("%d", &choice);
+		scanf("%hu", &choice);
 
 		switch (choice) {
 		case 1:
