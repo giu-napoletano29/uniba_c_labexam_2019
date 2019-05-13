@@ -88,44 +88,31 @@ int removebuild(){
 	FILE *fp_temp;
 
 	fp_build = fopen ("buildings.dat", "rb");
-	if (fp_build==NULL){
-		printf("\n------------------------ WARNING ------------------------");
-		printf("\nBuilding store file does not exist. Create new one first\n");
-	}
-	else{
-		char line [ 400 ];
-	    while ( fgets ( line, sizeof line, fp_build ) != NULL ) /* read a line */
-	    {
-	    	printf("%d. ", count+1);
-	    	fputs ( line, stdout ); /* write the line */
-	    	count++;
-	    }
+	checkFile(fp_build);
+	if (fp_build!=NULL){
+		count = countRows(fp_build);
 	    fclose (fp_build);
 	    fp_build = fopen ("buildings.dat", "rb");
+	    checkFile(fp_build);
 	    fp_temp = fopen ("temp_build.dat", "w+b");
-	    if(count>0){
+	    stop = checkFile(fp_temp);
+	    char line[400];
+	    if(count>0 && stop == 0){
 	    	do{
 	    		newLine();
 	    		printf("Inserisci il numero dell'immobile da eliminare: \n");
 			    scanf("%d",&choice);
 			    if(choice <= count){
 			    	count = 0;
-				    while ( fgets ( line, sizeof line, fp_build ) != NULL ) /* read a line */
-				    {
-				    	count++;
-				    	if(choice != count){
-				    		fputs( line, fp_temp);
-				    	}
-				    }
+			    	copyFile(fp_build, fp_temp, -choice);
+
 				    fclose (fp_temp);
 				    fclose (fp_build);
 				    fp_build = fopen ("buildings.dat", "w+b");
 				    fp_temp = fopen ("temp_build.dat", "rb");
 
-				    while ( fgets ( line, sizeof line, fp_temp ) != NULL ) /* read a line */
-				    {
-				    	fputs( line, fp_build);
-				    }
+				    copyFile(fp_temp, fp_build, 0);
+
 				    stop=0;
 			    }
 			    else{

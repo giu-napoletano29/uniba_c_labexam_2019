@@ -14,7 +14,7 @@ int checkFile(FILE *fp_build){
 
 	if (fp_build==NULL){
 		printf("\n------------------------ WARNING ------------------------");
-		perror("Error: ");
+		perror("\nError: ");
 		printf("\nCheck your file system and retry.\n");
 		/*
 		printf("\nBuilding store file does not exist. Creating new one....\n");
@@ -61,18 +61,24 @@ int countRows(FILE *fp_build){
 
 void copyFile(FILE *fp_from, FILE *fp_to, int choice){
 	char line [ 400 ];
+	unsigned int Uchoice = -choice;
 	int count = 0;
     while ( fgets ( line, sizeof line, fp_from ) != NULL ) /* read a line */
     {
+    	count++;
     	if(choice==0){
     		fputs( line, fp_to);
     	}
-    	else{
-        	count++;
+    	else if(choice > 0){
         	if(choice == count){
         		infoBuild(fp_to);
         	}
         	else{
+        		fputs( line, fp_to);
+        	}
+    	}
+    	else{
+        	if(Uchoice != count){
         		fputs( line, fp_to);
         	}
     	}
