@@ -14,6 +14,7 @@
 int addClient();
 
 // Functions for asking data to the user
+void reqID(clients *client);
 void reqName(clients *client);
 void reqSurname(clients *client);
 void reqType(clients *client);

@@ -62,6 +62,7 @@ void showClientType(int type) {
 
 void showClientData(clients *cl) {
 	puts("--- RIEPILOGO ---");
+	printf("Codice fiscale: %s \n", cl->id);
 	printf("Nome: %s \n", cl->name);
 	printf("Cognome: %s \n", cl->surname);
 	printf("Tipo cliente: ");
@@ -75,15 +76,27 @@ void showClientData(clients *cl) {
 	showPropertyType(cl->pr_search_type);
 }
 
-void reqName(clients *client) {
-	int status = 0;
+void reqID(clients *client) {
+	bool error = false;
 
-	//TODO: Add check if the string is consistent (should not have any numbers/symbols)
+	//TODO: Validate codice fiscale.(regex + length validation?)
+	do {
+		printf("Codice fiscale: ");
+		// "Codice fiscale" can have numbers, numCheck is false
+		error = readString(client->id, false);
+	} while (error == true);
+
+	clearScr();
+}
+
+void reqName(clients *client) {
+	bool error = false;
+
 	/// NAME
 	do {
 		printf("Nome: ");
-		status = readString(&client->name);
-	} while (status != 0);
+		error = readString(client->name, true);
+	} while (error == true);
 
 	clearScr();
 }
@@ -91,7 +104,7 @@ void reqName(clients *client) {
 void reqSurname(clients *client) {
 	// SURNAME
 	printf("Cognome: ");
-	readString(&client->name);
+	readString(client->name, true);
 
 	clearScr();
 }
@@ -133,7 +146,8 @@ void reqCompanyName(clients *client) {
 	if (client->cl_type == 3) {
 		newLine();
 		printf("Nome azienda: ");
-		readString(&client->company_name);
+		// numCheck is false because a company name can have numbers
+		readString(client->company_name, false);
 	} else {
 		strcpy(client->company_name, "");
 	}
@@ -207,6 +221,8 @@ int addClient() {
 	newLine();
 
 	puts("--- AGGIUNTA CLIENTE --- ");
+
+	reqID(&client);
 
 	reqName(&client);
 

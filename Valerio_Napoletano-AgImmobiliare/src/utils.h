@@ -5,6 +5,10 @@
  *      Author: Saverio Valerio
  */
 
+#include <stdbool.h>
+
 void newLine();
 void clearScr();
-int readString();
+
+bool isNumber(char *str);
+bool readString(char *buffer, bool numCheck);

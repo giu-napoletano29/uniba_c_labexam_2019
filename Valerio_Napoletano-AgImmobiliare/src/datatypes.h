@@ -37,6 +37,8 @@ typedef enum {
 } property_type;
 
 typedef struct {
+	// "Codice Fiscale" in Italy
+	char id[STRING_SIZE];
 	char name[STRING_SIZE];
 	char surname[STRING_SIZE];
 	// Client type (company, private, etc..)

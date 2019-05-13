@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdbool.h>
+
 // Only for getting STRING_SIZE constant
 #include "datatypes.h"
 
@@ -20,34 +22,35 @@ void newLine() {
 
 // Clear the console emulator screen (multiplatform)
 void clearScr() {
-	// Macros from https://sourceforge.net/p/predef/wiki/OperatingSystems/`
+	// Macros from https://sourceforge.net/p/predef/wiki/OperatingSystems/
 	// "defined": http://port70.net/~nsz/c/c11/n1570.html#6.10.1p1
 	#if defined(_WIN32)
 		// Windows
 		system("cls");
 	#elif defined(__unix__) || defined(__APPLE__) && defined(__MACH__)
-			// Unix based systems (GNU/Linux, macOS, etc..)
-			system("clear");
+		// Unix based systems (GNU/Linux, macOS, etc..)
+		system("clear");
 	#endif
 }
 
-
-// FIXME: This does not work FOR NOW
 // Check if there is any number in the string
-int isNumber(char s[]) {
-	for (int i = 0; i < strlen(s); i++)
-		if (isdigit(s[i]) == 0)
-			return 0;
-
-	return 1;
+bool isNumber(char *str) {
+	bool numFound = false;
+	for (int i = 0; i < strlen(str); i++) {
+		//isdigit: Non-zero value if the character is a numeric character, zero otherwise.
+		if (isdigit(str[i]) != 0) {
+			numFound = true;
+		}
+	}
+	return numFound;
 }
 
 // Read properly a string from stdin
-int readString(char *buffer) {
+bool readString(char *buffer, bool numCheck) {
 	// Boolean for detecting if string is correct
-	// 0 = string is correct
-	// 1 = string is not correct, ask again the user
-	int status = 0;
+	// false = string is correct
+	// true = string is not correct, ask again the user
+	bool error = false;
 
 	// Workaround: remove newline character not detected by scanf for making fgets work properly
 	// "Any trailing white space (including <newline> characters) shall be left unread unless matched by a conversion specification."
@@ -61,14 +64,12 @@ int readString(char *buffer) {
 	// https://www.freebsd.org/cgi/man.cgi?query=strcspn&sektion=3
 	buffer[strcspn(buffer, "\n")] = 0;
 
-	/* FIXME: This does not work FOR NOW
-	if (isNumber(buffer) == 1) {
-		printf("Inserisci una stringa corretta.");
-		status = 0;
-	} else {
-		status = 1;
+	// Check if there are any numbers in the string
+	// Only if the flag numCheck is active
+	if (numCheck && isNumber(buffer)) {
+		puts("\nInserisci una stringa corretta. \n");
+		error = true;
 	}
-	*/
 
-	return status;
+	return error;
 }

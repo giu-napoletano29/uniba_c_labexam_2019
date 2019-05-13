@@ -91,10 +91,10 @@ int clientsMenu() {
 			choice = addClient();
 			break;
 		case 2:
-			//choice = professMenu();
+			//choice = editClient();
 			break;
 		case 3:
-			//choice = propertyMenu();
+			//choice = searchClientMenu();
 			break;
 		case 4:
 			// This is used as a flag for the "go back" choice
