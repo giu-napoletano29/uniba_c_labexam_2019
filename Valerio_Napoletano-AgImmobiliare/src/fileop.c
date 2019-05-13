@@ -14,10 +14,19 @@
 
 int addbuild(){
 
-	int ret = 0;
+	//int ret = 0;
 
     FILE *fp_build;
+    fp_build = fopen ("buildings.dat", "a+b");
 
+    checkFile(fp_build);
+    if (fp_build!=NULL){
+    	infoBuild(fp_build);
+    }
+
+    fclose(fp_build);
+
+    /*
     do{
 		fp_build = fopen ("buildings.dat", "a+b");
 		if (fp_build==NULL){
@@ -53,7 +62,7 @@ int addbuild(){
 			ret = 0;
 			fclose (fp_build);
 		}
-    }while(ret == 1);
+    }while(ret == 1);*/
     return -1;
 }
 int editbuild(){
