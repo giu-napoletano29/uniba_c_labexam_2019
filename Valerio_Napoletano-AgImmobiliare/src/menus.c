@@ -6,18 +6,27 @@
  */
 
 #include <stdio.h>
+#include <stdbool.h>
 
 #include "menus.h"
 #include "utils.h"
 #include "fileop.h"
 
+#include "entities/clients.h"
+
 void mainMenu() {
-	int choice;
+	short int choice;
+	bool error = false;
 
 	do {
 		clearScr();
 
 		newLine();
+
+		if (error) {
+			puts("Tipologia non trovata, per favore riprova. \n");
+		}
+
 		puts("-- Agenzia Immobiliare --");
 		puts("- MENU PRINCIPALE -");
 		newLine();
@@ -30,7 +39,9 @@ void mainMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		scanf("%d", &choice);
+		// short integer placeholder is %hu
+		// ISO/IEC 9899:201x - 7.21.6.1-7
+		scanf("%hu", &choice);
 
 		switch (choice) {
 		case 1:
@@ -43,18 +54,25 @@ void mainMenu() {
 			choice = propertyMenu();
 			break;
 		default:
-			choice = 0;
+			error = true;
 			break;
 		}
-
-	} while (choice <= 0 || choice > 3);
+	} while (error == true || choice == -1);
 }
 
 int clientsMenu() {
-	int choice;
+	short int choice;
+	bool error = false;
 
 	do {
+		clearScr();
+
 		newLine();
+
+		if (error) {
+			puts("Tipologia non trovata, per favore riprova. \n");
+		}
+
 		puts("--- CLIENTI ---");
 		newLine();
 
@@ -67,20 +85,46 @@ int clientsMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		scanf("%d", &choice);
+		scanf("%hu", &choice);
 
-		if (choice == 4) {
-			return 0;
+		switch (choice) {
+		case 1:
+			choice = addClient();
+			break;
+		case 2:
+			//choice = editClient();
+			break;
+		case 3:
+			//choice = searchClientMenu();
+			break;
+		case 4:
+			// This is used as a flag for the "go back" choice
+			// It's not that likely that an user will manually insert -1 as a choice.
+			choice = -1;
+			error = false;
+			break;
+		default:
+			error = true;
+			break;
 		}
-	} while (choice < 0 || choice > 4);
-	return 1;
+	} while (error == true);
+
+	return choice;
 }
 
 int professMenu() {
-	int choice;
+	short int choice;
+	bool error = false;
 
 	do {
+		clearScr();
+
 		newLine();
+
+		if (error) {
+			puts("Tipologia non trovata, per favore riprova. \n");
+		}
+
 		puts("--- PROFESSIONISTI ---");
 		newLine();
 
@@ -93,20 +137,46 @@ int professMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		scanf("%d", &choice);
+		scanf("%hu", &choice);
 
-		if (choice == 4) {
-			return 0;
+		switch (choice) {
+		case 1:
+			//choice = addClient();
+			break;
+		case 2:
+			//choice = professMenu();
+			break;
+		case 3:
+			//choice = propertyMenu();
+			break;
+		case 4:
+			// This is used as a flag for the "go back" choice
+			// It's not that likely that an user will manually insert -1 as a choice.
+			choice = -1;
+			error = false;
+			break;
+		default:
+			error = true;
+			break;
 		}
-	} while (choice < 0 || choice > 4);
-	return 1;
+
+	} while (error == true);
+	return choice;
 }
 
 int propertyMenu() {
-	int choice;
+	short int choice;
+	bool error = false;
 
 	do {
+		clearScr();
+
 		newLine();
+
+		if (error) {
+			puts("Tipologia non trovata, per favore riprova. \n");
+		}
+
 		puts("--- IMMOBILI ---");
 		newLine();
 
@@ -120,30 +190,28 @@ int propertyMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		scanf("%d", &choice);
+		scanf("%hu", &choice);
 
 		switch (choice) {
-		case 1:
 			choice = addbuild();
-			//clearScr();
 			break;
 		case 2:
 			choice = editbuild();
-			//clearScr();
 			break;
 		case 3:
 			choice = removebuild();
-			//clearScr();
 			break;
-		case 5:
-			return 0;
+		case 4:
+			// This is used as a flag for the "go back" choice
+			// It's not that likely that an user will manually insert -1 as a choice.
+			choice = -1;
+			error = false;
 			break;
 		default:
-			choice = 0;
+			error = true;
 			break;
 		}
 
-
-	} while (choice < 0 || choice > 4);
-	return 1;
+	} while (error == true);
+	return choice;
 }
