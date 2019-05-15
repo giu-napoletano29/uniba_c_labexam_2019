@@ -72,7 +72,7 @@ void showClientData(clients *cl) {
 	if (cl->cl_type == 3) {
 		printf("Nome azienda: %s \n", cl->company_name);
 	}
-	printf("Budget in euro: %d \n", cl->budget);
+	printf("Budget in euro: %d euro \n", cl->budget);
 	printf("Tipologia immobile da cercare: ");
 	showPropertyType(cl->pr_search_type);
 }

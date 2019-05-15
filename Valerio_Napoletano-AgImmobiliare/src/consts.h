@@ -9,8 +9,8 @@
 #define CONSTS_H
 
 // User budget limits (in euro)
-#define MAX_USER_BUDGET 100
+#define MIN_USER_BUDGET 100
 // One bilion
-#define MIN_USER_BUDGET 1000000000
+#define MAX_USER_BUDGET 1000000000
 
 #endif /* CONSTS_H */
