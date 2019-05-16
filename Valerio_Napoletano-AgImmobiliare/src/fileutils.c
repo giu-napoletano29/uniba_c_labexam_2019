@@ -36,7 +36,7 @@ void infoBuild(FILE *fp_build){
 	printf("Inserisci la data: \n");
 	scanf("%hd %hd %hd", &p.reg_date.day, &p.reg_date.month, &p.reg_date.year);	//TODO: Inserire controllo data
 
-	fprintf(fp_build, "\n%d, %s, %s, %d, %hd/%hd/%hd", p.id, p.name, p.locality, p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
+	fprintf(fp_build, "%d, %s, %s, %d, %hd/%hd/%hd\n", p.id, p.name, p.locality, p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
 }
 
 void infoPro(FILE *fp_build){

@@ -62,7 +62,8 @@ bool readString(char *buffer, bool numCheck) {
 
 	// Remove \n registerd with fgets
 	// https://www.freebsd.org/cgi/man.cgi?query=strcspn&sektion=3
-	buffer[strcspn(buffer, "\n")] = 0;
+	//buffer[strcspn(buffer, "\n")] = 0;
+	//TODO: removing \n need evaluation
 
 	// Check if there are any numbers in the string
 	// Only if the flag numCheck is active
