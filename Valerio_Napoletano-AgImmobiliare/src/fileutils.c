@@ -51,7 +51,7 @@ void infoPro(FILE *fp_build){
 	printf("Inserisci il numero di immobili venduti: \n");
 	scanf("%d", &p.n_sold);
 
-	fprintf(fp_build, "%s, %s, %s, %d\n", p.id, p.name, p.competence_area, p.n_sold);
+	fprintf(fp_build, "%s, %s, %s, %d;\n", p.id, p.name, p.competence_area, p.n_sold);
 }
 
 int countRows(FILE *fp_build){
