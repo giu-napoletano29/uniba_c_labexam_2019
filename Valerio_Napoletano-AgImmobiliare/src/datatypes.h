@@ -51,6 +51,15 @@ typedef struct {
 } clients;
 
 typedef struct {
+	// "Codice Fiscale" in Italy
+	char id[STRING_SIZE];
+	char name[STRING_SIZE];
+	char competence_area[STRING_SIZE];
+	//number of sold house
+	int n_sold;
+} professionals;
+
+typedef struct {
 	int id;
 	char name[STRING_SIZE];
 	// Registration date

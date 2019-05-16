@@ -13,6 +13,7 @@
 #include "fileop.h"
 
 #include "entities/clients.h"
+#include "entities/pros.h"
 
 void mainMenu() {
 	short int choice;
@@ -141,7 +142,7 @@ int professMenu() {
 
 		switch (choice) {
 		case 1:
-			//choice = addClient();
+			choice = addPro();
 			break;
 		case 2:
 			//choice = professMenu();
@@ -160,7 +161,7 @@ int professMenu() {
 			break;
 		}
 
-	} while (error == true);
+	} while (error == true || choice == -2);
 	return choice;
 }
 
@@ -193,6 +194,7 @@ int propertyMenu() {
 		scanf("%hu", &choice);
 
 		switch (choice) {
+		case 1:
 			choice = addbuild();
 			break;
 		case 2:

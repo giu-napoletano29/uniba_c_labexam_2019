@@ -12,6 +12,7 @@
 
 int checkFile(FILE *fp_build);
 void infoBuild(FILE *fp_build);
+void infoPro(FILE *fp_build);
 int countRows(FILE *fp_build);
 void copyFile(FILE *fp_from, FILE *fp_to, int choice);
 

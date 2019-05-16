@@ -16,14 +16,6 @@ int checkFile(FILE *fp_build){
 		printf("\n------------------------ WARNING ------------------------");
 		perror("\nError: ");
 		printf("\nCheck your file system and retry.\n");
-		/*
-		printf("\nBuilding store file does not exist. Creating new one....\n");
-
-		fp_build = fopen ("buildings.dat", "a+b");
-		if (fp_build==NULL){
-			printf("\n------------------------------------ ERROR ------------------------------------");
-			printf("\nAn error as occured while creating the file. Check your file system and retry.\n");
-		}*/
 		res = 1;
 		fclose(fp_build);
 	}
@@ -44,7 +36,22 @@ void infoBuild(FILE *fp_build){
 	printf("Inserisci la data: \n");
 	scanf("%hd %hd %hd", &p.reg_date.day, &p.reg_date.month, &p.reg_date.year);	//TODO: Inserire controllo data
 
-	fprintf(fp_build, "%d, %s, %s, %d, %hd/%hd/%hd\n", p.id, p.name, p.locality, p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
+	fprintf(fp_build, "\n%d, %s, %s, %d, %hd/%hd/%hd", p.id, p.name, p.locality, p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
+}
+
+void infoPro(FILE *fp_build){
+	professionals p;
+	//TODO: need to handle escape characters
+	printf("Inserisci il codice fiscale del professionista: \n");
+	scanf("%s",&p.id);
+	printf("Inserisci il nome del professionista: \n");
+	scanf("%s", p.name);
+	printf("Inserisci l'area di competenza: \n");
+	scanf("%s", p.competence_area);
+	printf("Inserisci il numero di immobili venduti: \n");
+	scanf("%d", &p.n_sold);
+
+	fprintf(fp_build, "%s, %s, %s, %d\n", p.id, p.name, p.competence_area, p.n_sold);
 }
 
 int countRows(FILE *fp_build){

@@ -8,6 +8,8 @@
 #ifndef PROS_H_
 #define PROS_H_
 
-
+int addPro();
+int loadProFile();
+int updProFile();
 
 #endif /* PROS_H_ */
