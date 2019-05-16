@@ -11,5 +11,6 @@
 int addPro();
 int loadProFile();
 int updProFile();
+int editPro();
 
 #endif /* PROS_H_ */

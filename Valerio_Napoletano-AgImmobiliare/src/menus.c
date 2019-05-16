@@ -145,7 +145,7 @@ int professMenu() {
 			choice = addPro();
 			break;
 		case 2:
-			//choice = professMenu();
+			choice = editPro();
 			break;
 		case 3:
 			//choice = propertyMenu();

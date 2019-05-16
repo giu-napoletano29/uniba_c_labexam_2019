@@ -40,7 +40,7 @@ int addPro(){
 
 		switch (choice) {
 		case 1:
-			//choice = loadProFile();
+			choice = loadProFile();
 			break;
 		case 2:
 			choice = updProFile();
@@ -61,20 +61,39 @@ int addPro(){
 }
 
 int updProFile(){
-	FILE *fp_build;
-	fp_build = fopen ("professionals.dat", "a+b");
+	FILE *fp_pro;
+	fp_pro = fopen ("professionals.dat", "a+b");
 
-    checkFile(fp_build);
-    if (fp_build!=NULL){
-    	infoPro(fp_build);
+    checkFile(fp_pro);
+    if (fp_pro!=NULL){
+    	infoPro(fp_pro);
     }
 
-    fclose(fp_build);
+    fclose(fp_pro);
+	return -1;
+}
+
+int editPro(){
+
 	return -1;
 }
 
 int loadProFile(){
+	int rows = 0;
+	FILE *fp_pro;
+	fp_pro = fopen ("professionals.dat", "rb");
+	system("pause");
+    checkFile(fp_pro);
+    if (fp_pro!=NULL){
+    	rows = countRows(fp_pro);
+    	professionals p[rows];
+    	printf("\nPROVA 1\n");
+    	system("pause");
+    	readFilePro(fp_pro, rows, p);
+    }
 
+    fclose(fp_pro);
+	return -1;
 
 	return -1;
 }

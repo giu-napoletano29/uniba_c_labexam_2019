@@ -39,7 +39,7 @@ void infoBuild(FILE *fp_build){
 	fprintf(fp_build, "%d, %s, %s, %d, %hd/%hd/%hd\n", p.id, p.name, p.locality, p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
 }
 
-void infoPro(FILE *fp_build){
+void infoPro(FILE *fp_pro){
 	professionals p;
 	//TODO: need to handle escape characters
 	printf("Inserisci il codice fiscale del professionista: \n");
@@ -51,7 +51,22 @@ void infoPro(FILE *fp_build){
 	printf("Inserisci il numero di immobili venduti: \n");
 	scanf("%d", &p.n_sold);
 
-	fprintf(fp_build, "%s, %s, %s, %d;\n", p.id, p.name, p.competence_area, p.n_sold);
+	fprintf(fp_pro, "%s, %s, %s, %d;\n", p.id, p.name, p.competence_area, p.n_sold);
+}
+
+void readFilePro(FILE *fp_pro, int rows, professionals *p){
+	int c = 0;
+	system("pause");
+	for(c = 0; c < rows; c++){
+		fscanf(fp_pro, "%s %s %s %d", p[c].id, p[c].name, p[c].competence_area, &p[c].n_sold);
+	}
+	printf("\nPROVA:\n");
+	system("pause");
+	for(c = 0; c < rows; c++){
+
+		printf("\n%s %s %s %d\n", p[c].id, p[c].name, p[c].competence_area, p[c].n_sold);
+	}
+	system("pause");
 }
 
 int countRows(FILE *fp_build){
