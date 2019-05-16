@@ -45,30 +45,64 @@ bool isNumber(char *str) {
 	return numFound;
 }
 
-// Read properly a string from stdin
+// Read a string from stdin with input checks
 bool readString(char *buffer, bool numCheck) {
 	// Boolean for detecting if string is correct
 	// false = string is correct
 	// true = string is not correct, ask again the user
 	bool error = false;
 
-	// Workaround: remove newline character not detected by scanf for making fgets work properly
-	// "Any trailing white space (including <newline> characters) shall be left unread unless matched by a conversion specification."
-	// http://pubs.opengroup.org/onlinepubs/9699919799/functions/scanf.html
-	fgetc(stdin);
-
-	// Get the string and directly write to memory
-	fgets(buffer, STRING_SIZE, stdin);
-
-	// Remove \n registerd with fgets
-	// https://www.freebsd.org/cgi/man.cgi?query=strcspn&sektion=3
-	buffer[strcspn(buffer, "\n")] = 0;
+	// STRING_SIZE is 50, then limit scanf to 50 characters
+	scanf("%50s", buffer);
 
 	// Check if there are any numbers in the string
 	// Only if the flag numCheck is active
 	if (numCheck && isNumber(buffer)) {
 		puts("\nInserisci una stringa corretta. \n");
 		error = true;
+	}
+
+	return error;
+}
+
+// Check if there is any characters in the string
+bool isChar(char *str) {
+	bool charFound = false;
+	for (int i = 0; i < strlen(str); i++) {
+		//isalpha: Non-zero value if the character is a numeric character, zero otherwise.
+		if (isalpha(str[i]) != 0) {
+			charFound = true;
+		}
+	}
+	return charFound;
+}
+
+// Read an integer from stdin with input checks
+bool readInteger(int *result_num, bool charCheck) {
+	// Boolean for detecting if number is correct
+	// false = string is correct
+	// true = string is not correct, ask again the user
+	bool error = false;
+	int num;
+
+	// Internal string buffer
+	char buffer[STRING_SIZE];
+
+	// Read from stdin (as a string)
+	scanf("%50s", buffer);
+
+	// Check if there are any numbers in the string
+	// Only if the flag numCheck is active
+	if (charCheck && isChar(buffer)) {
+		puts("\nInserisci un numero corretto. \n");
+		error = true;
+	}
+
+	if (!error) {
+		// If no error are found, convert to integer.
+
+		num = atoi(buffer);
+		result_num = &num;
 	}
 
 	return error;

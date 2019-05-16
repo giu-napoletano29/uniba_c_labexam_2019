@@ -8,7 +8,7 @@
 #ifndef DATATYPES_H
 #define DATATYPES_H
 
-#define STRING_SIZE 50
+#include "consts.h"
 
 typedef struct {
 	short int day;

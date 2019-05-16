@@ -105,7 +105,7 @@ void reqName(clients *client) {
 void reqSurname(clients *client) {
 	// SURNAME
 	printf("Cognome: ");
-	readString(client->name, true);
+	readString(client->surname, true);
 
 	clearScr();
 }
@@ -169,6 +169,8 @@ void reqBudget(clients *client) {
 
 		printf("Budget in euro: ");
 		scanf("%d", &client->budget);
+		//WIP
+		//readInteger(&client->budget, true);
 
 		if (client->budget < MIN_USER_BUDGET || client->cl_type > MAX_USER_BUDGET) {
 			error = true;
