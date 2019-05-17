@@ -6,12 +6,14 @@
  */
 
 #include <stdbool.h>
+#include "datatypes.h"
 
 void newLine();
 void clearScr();
 
+// Utils functions used by readString and readInteger for input checks
 bool isNumber(char *str);
-bool readString(char *buffer, bool numCheck);
-
 bool isChar(char *str);
-bool readInteger(int *result_num, bool charCheck);
+
+str_result readString(bool numCheck);
+int_result readInteger();

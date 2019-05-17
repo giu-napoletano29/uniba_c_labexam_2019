@@ -60,4 +60,17 @@ typedef struct {
 	char type[STRING_SIZE];
 } property;
 
+// -- UTILS --
+// readInteger result struct
+typedef struct {
+	bool error;
+	int val;
+} int_result;
+
+// readString result struct
+typedef struct {
+	bool error;
+	char val[STRING_SIZE];
+} str_result;
+
 #endif

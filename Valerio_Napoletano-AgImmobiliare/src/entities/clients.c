@@ -14,6 +14,8 @@
 #include "../datatypes.h"
 #include "../consts.h"
 
+#include <stdlib.h>
+
 void showPropertyType(int type) {
 	switch (type) {
 	case 1:
@@ -84,7 +86,7 @@ void reqID(clients *client) {
 	do {
 		printf("Codice fiscale: ");
 		// "Codice fiscale" can have numbers, numCheck is false
-		error = readString(client->id, false);
+		strcpy(client->id, readString(false).val);
 	} while (error == true);
 
 	clearScr();
@@ -96,16 +98,24 @@ void reqName(clients *client) {
 	/// NAME
 	do {
 		printf("Nome: ");
-		error = readString(client->name, true);
+		str_result value = readString(true);
+		strcpy(client->name, value.val);
+		error = value.error;
 	} while (error == true);
 
 	clearScr();
 }
 
 void reqSurname(clients *client) {
+	bool error = false;
+
 	// SURNAME
-	printf("Cognome: ");
-	readString(client->surname, true);
+	do {
+		printf("Surname: ");
+		str_result value = readString(true);
+		strcpy(client->surname, value.val);
+		error = value.error;
+	} while (error == true);
 
 	clearScr();
 }
@@ -148,7 +158,7 @@ void reqCompanyName(clients *client) {
 		newLine();
 		printf("Nome azienda: ");
 		// numCheck is false because a company name can have numbers
-		readString(client->company_name, false);
+		strcpy(client->company_name, readString(false).val);
 	} else {
 		strcpy(client->company_name, "");
 	}
@@ -164,18 +174,19 @@ void reqBudget(clients *client) {
 	// BUDGET
 	do {
 		if (error) {
-			puts("Inserisci un valore in euro tra 100 e 1 000 000 000 euro. \n");
+			puts(
+					"Inserisci un valore in euro tra 100 e 1 000 000 000 euro. \n");
 		}
 
 		printf("Budget in euro: ");
-		scanf("%d", &client->budget);
-		//WIP
-		//readInteger(&client->budget, true);
+		client->budget = readInteger().val;
 
-		if (client->budget < MIN_USER_BUDGET || client->cl_type > MAX_USER_BUDGET) {
+		if (client->budget < MIN_USER_BUDGET
+				|| client->cl_type > MAX_USER_BUDGET) {
 			error = true;
 		}
-	} while (client->budget < MIN_USER_BUDGET || client->cl_type > MAX_USER_BUDGET);
+	} while (client->budget < MIN_USER_BUDGET
+			|| client->cl_type > MAX_USER_BUDGET);
 
 	clearScr();
 }

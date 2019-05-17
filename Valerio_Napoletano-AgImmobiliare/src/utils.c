@@ -33,6 +33,7 @@ void clearScr() {
 	#endif
 }
 
+
 // Check if there is any number in the string
 bool isNumber(char *str) {
 	bool numFound = false;
@@ -46,23 +47,26 @@ bool isNumber(char *str) {
 }
 
 // Read a string from stdin with input checks
-bool readString(char *buffer, bool numCheck) {
+str_result readString(bool numCheck) {
+	// Struct for handling errors and the inserted value
+	str_result readValue;
+
 	// Boolean for detecting if string is correct
 	// false = string is correct
 	// true = string is not correct, ask again the user
-	bool error = false;
+	readValue.error = false;
 
 	// STRING_SIZE is 50, then limit scanf to 50 characters
-	scanf("%50s", buffer);
+	scanf("%50s", readValue.val);
 
 	// Check if there are any numbers in the string
 	// Only if the flag numCheck is active
-	if (numCheck && isNumber(buffer)) {
+	if (numCheck && isNumber(readValue.val)) {
 		puts("\nInserisci una stringa corretta. \n");
-		error = true;
+		readValue.error = true;
 	}
 
-	return error;
+	return readValue;
 }
 
 // Check if there is any characters in the string
@@ -78,32 +82,32 @@ bool isChar(char *str) {
 }
 
 // Read an integer from stdin with input checks
-bool readInteger(int *result_num, bool charCheck) {
+int_result readInteger() {
+	// Struct for handling errors and the inserted value
+	int_result readValue;
+
 	// Boolean for detecting if number is correct
 	// false = string is correct
 	// true = string is not correct, ask again the user
-	bool error = false;
-	int num;
+	readValue.error = false;
 
 	// Internal string buffer
 	char buffer[STRING_SIZE];
 
 	// Read from stdin (as a string)
-	scanf("%50s", buffer);
+	scanf("%s", buffer);
 
 	// Check if there are any numbers in the string
 	// Only if the flag numCheck is active
-	if (charCheck && isChar(buffer)) {
+	if (isChar(buffer)) {
 		puts("\nInserisci un numero corretto. \n");
-		error = true;
+		readValue.error = true;
 	}
 
-	if (!error) {
-		// If no error are found, convert to integer.
-
-		num = atoi(buffer);
-		result_num = &num;
+	if (!readValue.error) {
+		// If no errors are found, convert to integer.
+		readValue.val = atoi(buffer);
 	}
 
-	return error;
+	return readValue;
 }
