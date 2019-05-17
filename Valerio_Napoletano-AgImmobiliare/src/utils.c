@@ -56,6 +56,8 @@ str_result readString(bool numCheck) {
 	// true = string is not correct, ask again the user
 	readValue.error = false;
 
+	// TODO: Handle spaces.
+
 	// STRING_SIZE is 50, then limit scanf to 50 characters
 	scanf("%50s", readValue.val);
 

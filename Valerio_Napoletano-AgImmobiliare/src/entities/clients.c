@@ -81,12 +81,22 @@ void showClientData(clients *cl) {
 
 void reqID(clients *client) {
 	bool error = false;
+	str_result value;
 
-	//TODO: Validate codice fiscale.(regex + length validation?)
 	do {
-		printf("Codice fiscale: ");
-		// "Codice fiscale" can have numbers, numCheck is false
-		strcpy(client->id, readString(false).val);
+		if (client->cl_type == 3) {
+			printf("Partita IVA: ");
+			// "VAT number" can only have numbers, numCheck is true
+			//TODO: Validate P.IVA
+			value = readString(false);
+		} else {
+			printf("Codice fiscale: ");
+			// "Codice fiscale" can have numbers, numCheck is false
+			//TODO: Validate codice fiscale.(regex + length validation?)
+			value = readString(false);
+		}
+		strcpy(client->id, value.val);
+		error = value.error;
 	} while (error == true);
 
 	clearScr();
@@ -111,7 +121,7 @@ void reqSurname(clients *client) {
 
 	// SURNAME
 	do {
-		printf("Surname: ");
+		printf("Cognome: ");
 		str_result value = readString(true);
 		strcpy(client->surname, value.val);
 		error = value.error;
@@ -235,13 +245,13 @@ int addClient() {
 
 	puts("--- AGGIUNTA CLIENTE --- ");
 
-	reqID(&client);
-
 	reqName(&client);
 
 	reqSurname(&client);
 
 	reqType(&client);
+
+	reqID(&client);
 
 	reqCompanyName(&client);
 
