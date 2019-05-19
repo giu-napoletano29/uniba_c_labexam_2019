@@ -86,6 +86,7 @@ int loadProFile(){
     checkFile(fp_pro);
     if (fp_pro!=NULL){
     	rows = countRows(fp_pro);
+    	rewind(fp_pro);
     	professionals p[rows];
     	printf("\nPROVA 1\n");
     	system("pause");

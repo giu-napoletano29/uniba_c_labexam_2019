@@ -56,15 +56,66 @@ void infoPro(FILE *fp_pro){
 
 void readFilePro(FILE *fp_pro, int rows, professionals *p){
 	int c = 0;
+	int section = 1; //determinate in which VAR saving stream
+	char line [ 400 ];
 	system("pause");
-	for(c = 0; c < rows; c++){
-		fscanf(fp_pro, "%s %s %s %d", p[c].id, p[c].name, p[c].competence_area, &p[c].n_sold);
+	//for(c = 0; c < rows; c++){
+    while ( fgets ( line, sizeof line, fp_pro ) != NULL ) /* read a line */
+    {
+		//fscanf(fp_pro, "%s %s %s %d", p[c].id, p[c].name, p[c].competence_area, &p[c].n_sold);
+		printf("\nTEST ANDIAMOOO: %s\n", line);
+		//fgets ( line, sizeof line, fp_pro );
+		fputs ( line, stdout );
+		system("pause");
+		for(int tcount = 0; tcount >= 0; tcount++){
+
+			if(line[tcount] != ',' && line[tcount] != ';'){
+			//if(!strcpy(line[tcount], ",")){
+				/*printf("\nTCOUNT: %d\n", tcount);
+				printf("\nCHAR: %c\n", line[tcount]);
+				system("pause");*/
+				switch(section){
+					case 1:
+						p[c].id[tcount] = line[tcount];
+						//printf("\nID: %c, \n", p[c].id[tcount]);
+						break;
+					case 2:
+						p[c].name[tcount] = line[tcount];
+						//printf("\nNAME: %c, \n", p[c].name[tcount]);
+						break;
+					case 3:
+						p[c].competence_area[tcount] = line[tcount];
+						//printf("\nCOMP: %c\n", p[c].competence_area[tcount]);
+						break;
+					case 4:
+						//p[c].n_sold[tcount] = line[tcount];
+						break;
+				}
+			}
+			else if(line[tcount] == ';'){
+			//else if(strcpy(line[tcount], ";")){
+				tcount = -1;	//exit cycle
+				printf("\nFINE 2: %s, %s, %s\n", p[c].id, p[c].name, p[c].competence_area);
+				system("pause");
+				break;
+			}
+			else{
+				printf("\nFINE 1:\n");
+				system("pause");
+				section++;
+				if(section > 4){
+					section = 1;
+				}
+			}
+
+		}
+		c++;
 	}
 	printf("\nPROVA:\n");
 	system("pause");
 	for(c = 0; c < rows; c++){
 
-		printf("\n%s %s %s %d\n", p[c].id, p[c].name, p[c].competence_area, p[c].n_sold);
+		printf("\n%s %s %s \n", p[c].id, p[c].name, p[c].competence_area);
 	}
 	system("pause");
 }
