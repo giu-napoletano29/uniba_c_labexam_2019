@@ -109,7 +109,8 @@ int clientsMenu() {
 		}
 	} while (error == true);
 
-	return choice;
+	// Go back
+	return -1;
 }
 
 int professMenu() {

@@ -80,27 +80,51 @@ void showClientData(clients *cl) {
 	printf("Budget in euro: %d euro \n", cl->budget);
 	printf("Tipologia immobile da cercare: ");
 	showPropertyType(cl->pr_search_type);
-	printf("Data di registrazione: %hd/%hd/%hd \n", cl->reg_date.day, cl->reg_date.month, cl->reg_date.year);
+	printf("Data di registrazione: %hd/%hd/%hd \n", cl->reg_date.day,
+			cl->reg_date.month, cl->reg_date.year);
+
+	system("pause");
 }
 
 void reqID(clients *client) {
-	bool error = false;
 	str_result value;
+	bool error;
 
 	do {
+		if (error) {
+			puts("\nInserisci un valore corretto. \n");
+		}
+		// Reset "error" value
+		error = false;
+
+		//TODO: Move these requests and checks to custom functions
+
+		// Client type is "company"
 		if (client->cl_type == 3) {
 			printf("Partita IVA: ");
 			// "VAT number" can only have numbers, numCheck is true
-			//TODO: Validate P.IVA
+			// Italian PIVA is 11 digit
+			// https://it.wikipedia.org/wiki/Partita_IVA
 			value = readString(false);
+
+			// Validate P.IVA length
+			if (strlen(value.val) != 11) {
+				error = true;
+			}
 		} else {
 			printf("Codice fiscale: ");
 			// "Codice fiscale" can have numbers, numCheck is false
-			//TODO: Validate codice fiscale.(regex + length validation?)
+			// https://it.wikipedia.org/wiki/Codice_fiscale
 			value = readString(false);
+
+			// Validate CF length
+			if (strlen(value.val) != 16) {
+				error = true;
+			}
+
+			//error = value.error;
 		}
 		strcpy(client->id, value.val);
-		error = value.error;
 	} while (error == true);
 
 	clearScr();
