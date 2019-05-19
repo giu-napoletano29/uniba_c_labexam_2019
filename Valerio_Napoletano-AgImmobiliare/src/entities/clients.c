@@ -10,6 +10,9 @@
 // Boolean (introduced in C99)
 #include <stdbool.h>
 
+// For getting local time on Windows (SYSTEMTIME struct and GetLocalTime() function)
+#include <windows.h>
+
 #include "../utils.h"
 #include "../datatypes.h"
 #include "../consts.h"
@@ -77,6 +80,7 @@ void showClientData(clients *cl) {
 	printf("Budget in euro: %d euro \n", cl->budget);
 	printf("Tipologia immobile da cercare: ");
 	showPropertyType(cl->pr_search_type);
+	printf("Data di registrazione: %hd/%hd/%hd \n", cl->reg_date.day, cl->reg_date.month, cl->reg_date.year);
 }
 
 void reqID(clients *client) {
@@ -237,6 +241,20 @@ void reqPropertyType(clients *client) {
 	clearScr();
 }
 
+// Get local system date and save in the related struct (only for Windows)
+void saveLocalDate(clients *client) {
+	// https://docs.microsoft.com/it-it/windows/desktop/api/minwinbase/ns-minwinbase-systemtime
+	SYSTEMTIME t;
+
+	// https://docs.microsoft.com/en-us/windows/desktop/api/sysinfoapi/nf-sysinfoapi-getlocaltime
+	GetLocalTime(&t); // Fill out the struct so that it can be used
+
+	// Save local system date to the struct
+	client->reg_date.day = t.wDay;
+	client->reg_date.month = t.wMonth;
+	client->reg_date.year = t.wYear;
+}
+
 int addClient() {
 	clients client;
 
@@ -258,6 +276,8 @@ int addClient() {
 	reqBudget(&client);
 
 	reqPropertyType(&client);
+
+	saveLocalDate(&client);
 
 	showClientData(&client);
 

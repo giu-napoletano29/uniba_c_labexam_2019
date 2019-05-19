@@ -46,6 +46,8 @@ typedef struct {
 	// Company name (if type is company)
 	char company_name[STRING_SIZE];
 	int budget;
+	// Registration date
+	date reg_date;
 	// Type of the property that needs to be searched
 	property_type pr_search_type;
 } clients;

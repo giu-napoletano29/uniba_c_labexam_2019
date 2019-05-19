@@ -22,6 +22,9 @@ void reqCompanyName(clients *client);
 void reqBudget(clients *client);
 void reqPropertyType(clients *client);
 
+// Get local system date and save in the related struct (only for Windows)
+void saveLocalDate(clients *client);
+
 // Functions for showing data to the user
 void showClientType();
 void showPropertyType();
