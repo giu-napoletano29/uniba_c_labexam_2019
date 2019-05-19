@@ -56,16 +56,16 @@ void infoPro(FILE *fp_pro){
 
 void readFilePro(FILE *fp_pro, int rows, professionals *p){
 	int c = 0;
+	int arrayc = 0;
 	int section = 1; //determinate in which VAR saving stream
 	char line [ 400 ];
-	system("pause");
 	//for(c = 0; c < rows; c++){
     while ( fgets ( line, sizeof line, fp_pro ) != NULL ) /* read a line */
     {
+    	arrayc = 0;
 		//fscanf(fp_pro, "%s %s %s %d", p[c].id, p[c].name, p[c].competence_area, &p[c].n_sold);
 		printf("\nTEST ANDIAMOOO: %s\n", line);
 		//fgets ( line, sizeof line, fp_pro );
-		fputs ( line, stdout );
 		system("pause");
 		for(int tcount = 0; tcount >= 0; tcount++){
 
@@ -76,32 +76,38 @@ void readFilePro(FILE *fp_pro, int rows, professionals *p){
 				system("pause");*/
 				switch(section){
 					case 1:
-						p[c].id[tcount] = line[tcount];
-						//printf("\nID: %c, \n", p[c].id[tcount]);
+						p[c].id[arrayc] = line[tcount];
+						printf("\nID: %c, \n", p[c].id[arrayc]);
+						printf("\nID: %s, \n", p[c].id);
 						break;
 					case 2:
-						p[c].name[tcount] = line[tcount];
-						//printf("\nNAME: %c, \n", p[c].name[tcount]);
+						p[c].name[arrayc] = line[tcount];
+						printf("\nNAME: %c, \n", p[c].name[arrayc]);
+						printf("\nNAME: %s, \n", p[c].name);
 						break;
 					case 3:
-						p[c].competence_area[tcount] = line[tcount];
-						//printf("\nCOMP: %c\n", p[c].competence_area[tcount]);
+						p[c].competence_area[arrayc] = line[tcount];
+						printf("\nCOMP: %c\n", p[c].competence_area[arrayc]);
+						printf("\nCOMP: %s\n", p[c].competence_area);
 						break;
 					case 4:
 						//p[c].n_sold[tcount] = line[tcount];
 						break;
 				}
+				arrayc++;
 			}
 			else if(line[tcount] == ';'){
-			//else if(strcpy(line[tcount], ";")){
-				tcount = -1;	//exit cycle
+				//tcount = -1;	//exit cycle
+				printf("\nsec: %d\n", section);
+				section = 1;
 				printf("\nFINE 2: %s, %s, %s\n", p[c].id, p[c].name, p[c].competence_area);
 				system("pause");
 				break;
 			}
 			else{
-				printf("\nFINE 1:\n");
+				printf("\nFINE 1: %d\n", section);
 				system("pause");
+				arrayc=0;
 				section++;
 				if(section > 4){
 					section = 1;

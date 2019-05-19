@@ -82,14 +82,11 @@ int loadProFile(){
 	int rows = 0;
 	FILE *fp_pro;
 	fp_pro = fopen ("professionals.dat", "rb");
-	system("pause");
     checkFile(fp_pro);
     if (fp_pro!=NULL){
     	rows = countRows(fp_pro);
     	rewind(fp_pro);
     	professionals p[rows];
-    	printf("\nPROVA 1\n");
-    	system("pause");
     	readFilePro(fp_pro, rows, p);
     }
 
