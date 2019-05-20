@@ -18,7 +18,9 @@ int checkFile(FILE *fp_build){
 		printf("\nCheck your file system and retry.\n");
 		res = 1;
 		fclose(fp_build);
+		system("pause");
 	}
+
 	return res;
 }
 
