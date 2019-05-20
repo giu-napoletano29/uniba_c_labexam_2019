@@ -6,11 +6,43 @@
  */
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "../utils.h"
 #include "../datatypes.h"
 #include "../consts.h"
 #include "../fileutils.h"
+
+int loadProFile(){
+	int rows = 0;
+	FILE *fp_pro;
+	fp_pro = fopen ("professionals.dat", "rb");
+    checkFile(fp_pro);
+    if (fp_pro!=NULL){
+    	rows = countRows(fp_pro);
+    	rewind(fp_pro);
+    	professionals p[rows];
+    	readFilePro(fp_pro, rows, p);
+    }
+
+    fclose(fp_pro);
+	return -1;
+
+	return -1;
+}
+
+int updProFile(){
+	FILE *fp_pro;
+	fp_pro = fopen ("professionals.dat", "a+b");
+
+    checkFile(fp_pro);
+    if (fp_pro!=NULL){
+    	infoPro(fp_pro);
+    }
+
+    fclose(fp_pro);
+	return -1;
+}
 
 int addPro(){
 	short int choice;
@@ -60,38 +92,8 @@ int addPro(){
 	return choice;
 }
 
-int updProFile(){
-	FILE *fp_pro;
-	fp_pro = fopen ("professionals.dat", "a+b");
-
-    checkFile(fp_pro);
-    if (fp_pro!=NULL){
-    	infoPro(fp_pro);
-    }
-
-    fclose(fp_pro);
-	return -1;
-}
 
 int editPro(){
-
-	return -1;
-}
-
-int loadProFile(){
-	int rows = 0;
-	FILE *fp_pro;
-	fp_pro = fopen ("professionals.dat", "rb");
-    checkFile(fp_pro);
-    if (fp_pro!=NULL){
-    	rows = countRows(fp_pro);
-    	rewind(fp_pro);
-    	professionals p[rows];
-    	readFilePro(fp_pro, rows, p);
-    }
-
-    fclose(fp_pro);
-	return -1;
 
 	return -1;
 }

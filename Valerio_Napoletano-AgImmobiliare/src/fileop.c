@@ -8,9 +8,10 @@
 //Operazioni su immobili
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "utils.h"
 #include "datatypes.h"
-
+#include "fileutils.h"
 
 int addbuild(){
     FILE *fp_build;
@@ -96,7 +97,8 @@ int removebuild(){
 	    checkFile(fp_build);
 	    fp_temp = fopen ("temp_build.dat", "w+b");
 	    stop = checkFile(fp_temp);
-	    char line[400];
+	    //UNUSED
+	    //char line[400];
 	    if(count>0 && stop == 0){
 	    	do{
 	    		newLine();

@@ -43,7 +43,7 @@ void infoPro(FILE *fp_pro){
 	professionals p;
 	//TODO: need to handle escape characters
 	printf("Inserisci il codice fiscale del professionista: \n");
-	scanf("%s",&p.id);
+	scanf("%s", p.id);
 	printf("Inserisci il nome del professionista: \n");
 	scanf("%s", p.name);
 	printf("Inserisci l'area di competenza: \n");
