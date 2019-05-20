@@ -13,6 +13,24 @@
 #include "../file_utils.h"
 #include "../datatypes.h"
 
+void infoBuild(FILE *fp_build) {
+	property p;
+	//TODO: need to handle escape characters
+	printf("Inserisci l'ID dell'immobile: \n");
+	scanf("%d", &p.id);
+	printf("Inserisci il nome dell'immobile: \n");
+	scanf("%s", p.name);
+	printf("Inserisci la localita': \n");
+	scanf("%s", p.locality);
+	printf("Inserisci il prezzo: \n");
+	scanf("%d", &p.price);
+	printf("Inserisci la data: \n");
+	scanf("%hd %hd %hd", &p.reg_date.day, &p.reg_date.month, &p.reg_date.year);	//TODO: Inserire controllo data
+
+	fprintf(fp_build, "%d, %s, %s, %d, %hd/%hd/%hd\n", p.id, p.name, p.locality,
+			p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
+}
+
 int addBuild() {
 	FILE *fp_build;
 	fp_build = fopen("buildings.dat", "a+b");

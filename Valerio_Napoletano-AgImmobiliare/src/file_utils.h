@@ -12,9 +12,6 @@
 #include "datatypes.h"
 
 int checkFile(FILE *fp_build);
-void infoBuild(FILE *fp_build);
-void infoPro(FILE *fp_pro);
-void readFilePro(FILE *fp_build, int rows, professionals *p);
 int countRows(FILE *fp_build);
 void copyFile(FILE *fp_from, FILE *fp_to, int choice);
 

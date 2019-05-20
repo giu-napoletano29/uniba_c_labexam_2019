@@ -13,4 +13,7 @@ int loadProFile();
 int updProFile();
 int editPro();
 
+void infoPro(FILE *fp_pro);
+void readFilePro(FILE *fp_build, int rows, professionals *p);
+
 #endif /* PROS_H_ */
