@@ -195,13 +195,13 @@ int propertyMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = addbuild();
+			choice = addBuild();
 			break;
 		case 2:
-			choice = editbuild();
+			choice = editBuild();
 			break;
 		case 3:
-			choice = removebuild();
+			choice = removeBuild();
 			break;
 		case 4:
 			// This is used as a flag for the "go back" choice

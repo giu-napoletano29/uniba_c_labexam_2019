@@ -18,5 +18,4 @@ void readFilePro(FILE *fp_build, int rows, professionals *p);
 int countRows(FILE *fp_build);
 void copyFile(FILE *fp_from, FILE *fp_to, int choice);
 
-
 #endif /* FILEUTILS_H_ */

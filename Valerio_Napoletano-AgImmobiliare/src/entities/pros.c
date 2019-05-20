@@ -13,38 +13,36 @@
 #include "../consts.h"
 #include "../fileutils.h"
 
-int loadProFile(){
+int loadProFile() {
 	int rows = 0;
 	FILE *fp_pro;
-	fp_pro = fopen ("professionals.dat", "rb");
-    checkFile(fp_pro);
-    if (fp_pro!=NULL){
-    	rows = countRows(fp_pro);
-    	rewind(fp_pro);
-    	professionals p[rows];
-    	readFilePro(fp_pro, rows, p);
-    }
+	fp_pro = fopen("professionals.dat", "rb");
+	checkFile(fp_pro);
+	if (fp_pro != NULL) {
+		rows = countRows(fp_pro);
+		rewind(fp_pro);
+		professionals p[rows];
+		readFilePro(fp_pro, rows, p);
+	}
 
-    fclose(fp_pro);
-	return -1;
-
+	fclose(fp_pro);
 	return -1;
 }
 
-int updProFile(){
+int updProFile() {
 	FILE *fp_pro;
-	fp_pro = fopen ("professionals.dat", "a+b");
+	fp_pro = fopen("professionals.dat", "ab+");
 
-    checkFile(fp_pro);
-    if (fp_pro!=NULL){
-    	infoPro(fp_pro);
-    }
+	checkFile(fp_pro);
+	if (fp_pro != NULL) {
+		infoPro(fp_pro);
+	}
 
-    fclose(fp_pro);
+	fclose(fp_pro);
 	return -1;
 }
 
-int addPro(){
+int addPro() {
 	short int choice;
 	bool error = false;
 
@@ -92,8 +90,7 @@ int addPro(){
 	return choice;
 }
 
-
-int editPro(){
+int editPro() {
 
 	return -1;
 }
