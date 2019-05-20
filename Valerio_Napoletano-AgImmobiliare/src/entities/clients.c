@@ -86,6 +86,14 @@ void showClientData(clients *cl) {
 	system("pause");
 }
 
+int showAllClients() {
+	clearScr();
+	puts("--- LISTA CLIENTI ---");
+
+	system("PAUSE");
+	return -1;
+}
+
 void reqID(clients *client) {
 	str_result value;
 	bool error;
@@ -277,6 +285,19 @@ void saveLocalDate(clients *client) {
 	client->reg_date.day = t.wDay;
 	client->reg_date.month = t.wMonth;
 	client->reg_date.year = t.wYear;
+}
+
+int deleteClient() {
+	clearScr();
+
+	puts("--- ELIMINAZIONE CLIENTI --- ");
+
+	// TODO: Add check for deleting old users (I think that one 6 months should be enough).
+
+	// TODO: Ask for the client ID in order to delete the specific one.
+
+	system("pause");
+	return -1;
 }
 
 int addClient() {

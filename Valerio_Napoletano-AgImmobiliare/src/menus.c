@@ -77,8 +77,10 @@ int clientsMenu() {
 		newLine();
 
 		puts("Scegli un'operazione:");
-		puts("1. Aggiungi un cliente");
-		puts("2. Torna indietro");
+		puts("1. Visualizza tutti i clienti");
+		puts("2. Aggiungi un cliente");
+		puts("3. Cancella clienti");
+		puts("4. Torna indietro");
 
 		newLine();
 
@@ -87,9 +89,15 @@ int clientsMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = addClient();
+			choice = showAllClients();
 			break;
 		case 2:
+			choice = addClient();
+			break;
+		case 3:
+			choice = deleteClient();
+			break;
+		case 4:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
 			choice = -1;
@@ -178,6 +186,7 @@ int propertyMenu() {
 		scanf("%hu", &choice);
 
 		switch (choice) {
+		case 1:
 			choice = addbuild();
 			break;
 		case 2:

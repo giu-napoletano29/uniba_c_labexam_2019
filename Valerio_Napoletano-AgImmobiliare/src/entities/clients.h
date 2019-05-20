@@ -29,5 +29,9 @@ void saveLocalDate(clients *client);
 void showClientType();
 void showPropertyType();
 void showClientData(clients *cl);
+int showAllClients();
+
+// Functions for modifying data
+int deleteClient();
 
 #endif /* CLIENTS_H_ */
