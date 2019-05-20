@@ -10,10 +10,10 @@
 
 #include "menus.h"
 #include "utils.h"
-#include "fileop.h"
 
 #include "entities/clients.h"
 #include "entities/pros.h"
+#include "entities/properties.h"
 
 void mainMenu() {
 	short int choice;

@@ -5,8 +5,8 @@
  *      Author: Giuseppe Napoletano
  */
 
-#ifndef FILEUTILS_H_
-#define FILEUTILS_H_
+#ifndef FILE_UTILS_H_
+#define FILE_UTILS_H_
 
 #include <stdio.h>
 #include "datatypes.h"
@@ -18,4 +18,4 @@ void readFilePro(FILE *fp_build, int rows, professionals *p);
 int countRows(FILE *fp_build);
 void copyFile(FILE *fp_from, FILE *fp_to, int choice);
 
-#endif /* FILEUTILS_H_ */
+#endif /* FILE_UTILS_H_ */

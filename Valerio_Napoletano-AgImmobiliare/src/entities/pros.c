@@ -11,7 +11,7 @@
 #include "../utils.h"
 #include "../datatypes.h"
 #include "../consts.h"
-#include "../fileutils.h"
+#include "../file_utils.h"
 
 int loadProFile() {
 	int rows = 0;
