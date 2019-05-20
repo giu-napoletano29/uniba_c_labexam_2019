@@ -78,9 +78,7 @@ int clientsMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Aggiungi un cliente");
-		puts("2. Modifica un cliente");
-		puts("3. Cerca un cliente");
-		puts("4. Torna indietro");
+		puts("2. Torna indietro");
 
 		newLine();
 
@@ -92,12 +90,6 @@ int clientsMenu() {
 			choice = addClient();
 			break;
 		case 2:
-			//choice = editClient();
-			break;
-		case 3:
-			//choice = searchClientMenu();
-			break;
-		case 4:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
 			choice = -1;
