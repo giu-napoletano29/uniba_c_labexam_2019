@@ -23,7 +23,16 @@ int main(void) {
 	result += loadBuiFile();
 	result += loadCliFile();
 
-	mainMenu();
+	if(result >= 0){
+		mainMenu();
+	}
+	else{
+		printf("\n------------------------ ATTENZIONE ------------------------");
+		printf("\nErrore: I controlli iniziali sui file sono risultati in un errore.");
+		printf("\nControlla il tuo file system e riprova.\n");
+	}
+
+	newLine();
 
 	system("pause");
 	return EXIT_SUCCESS;
