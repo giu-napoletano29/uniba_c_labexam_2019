@@ -131,8 +131,8 @@ int professMenu() {
 		newLine();
 
 		puts("Scegli un'operazione:");
-		puts("1. Aggiungi un professionista");
-    puts("2. Modifica un professionista");
+		//puts("1. Aggiungi un professionista");
+		puts("2. Modifica un professionista");
 		puts("3. Torna indietro");
 
 		newLine();
@@ -141,9 +141,9 @@ int professMenu() {
 		scanf("%hu", &choice);
 
 		switch (choice) {
-		case 1:
+		/*case 1:
 			choice = addPro();
-			break;
+			break;*/
 		case 2:
 			choice = editPro();
 			break;

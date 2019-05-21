@@ -11,6 +11,8 @@
 //Operazioni su immobili
 int addBuild();
 int editBuild();
+int loadBuiFile();
+void readFileBui(FILE *fp_build, professionals *p);
 int removeBuild();
 
 void infoBuild(FILE *fp_build);

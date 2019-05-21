@@ -12,8 +12,15 @@
 #include "menus.h"
 #include "utils.h"
 #include "datatypes.h"
+#include "entities/pros.h"
+#include "entities/properties.h"
 
 int main(void) {
+	int result = 0;
+
+	result += loadProFile();
+	result += loadBuiFile();
+
 	mainMenu();
 
 	system("pause");

@@ -83,6 +83,7 @@ void infoPro(FILE *fp_pro) {
 
 int loadProFile() {
 	int rows = 0;
+	int result = 0; //detects the failure or success of the function
 	FILE *fp_pro;
 	fp_pro = fopen("professionals.csv", "r");
 	checkFile(fp_pro);
@@ -92,9 +93,12 @@ int loadProFile() {
 		professionals p[rows];
 		readFilePro(fp_pro, p);
 	}
+	else{
+		result = -1;
+	}
 
 	fclose(fp_pro);
-	return -1;
+	return result;
 }
 
 int updProFile() {
