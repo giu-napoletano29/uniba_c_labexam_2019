@@ -28,8 +28,6 @@ void readFilePro(FILE *fp_pro, int rows, professionals *p) {
 		token = strtok(line, ",");
 
 		while (token != NULL) {
-			printf("\n %s\n", token);
-
 			switch (prop_c) {
 			case 0:
 				strcpy(p[c].id, token);
@@ -56,6 +54,7 @@ void readFilePro(FILE *fp_pro, int rows, professionals *p) {
 		printf("\nCOMP: %s\n", p[c].competence_area);
 		printf("\nSOLD: %d\n", p[c].n_sold);
 
+		newLine();
 		system("pause");
 	}
 }

@@ -37,7 +37,7 @@ int countRows(FILE *fp_build) {
 		count++;
 	}
 
-	printf("Number of rows: %d", count);
+	printf("\nRecord trovati nel file %d\n", count);
 
 	return count;
 }
