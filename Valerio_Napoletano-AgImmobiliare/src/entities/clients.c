@@ -79,7 +79,7 @@ void showClientData(clients *cl) {
 	}
 	printf("Budget in euro: %d euro \n", cl->budget);
 	printf("Tipologia immobile da cercare: ");
-	showPropertyType(cl->pr_search_type);
+	showPropertyType(cl->building_type);
 	printf("Data di registrazione: %hd/%hd/%hd \n", cl->reg_date.day,
 			cl->reg_date.month, cl->reg_date.year);
 
@@ -263,12 +263,12 @@ void reqPropertyType(clients *client) {
 		}
 
 		printf("Inserisci il numero che identifica la tipologia: ");
-		scanf("%u", &client->pr_search_type);
+		scanf("%u", &client->building_type);
 
-		if (client->pr_search_type < 1 || client->pr_search_type > 5) {
+		if (client->building_type < 1 || client->building_type > 5) {
 			error = true;
 		}
-	} while (client->pr_search_type < 1 || client->pr_search_type > 5);
+	} while (client->building_type < 1 || client->building_type > 5);
 
 	clearScr();
 }
