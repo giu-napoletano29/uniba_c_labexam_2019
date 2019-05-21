@@ -9,11 +9,12 @@
 #include <stdbool.h>
 
 #include "menus.h"
+
+#include "entities/buildings.h"
 #include "utils.h"
 
 #include "entities/clients.h"
 #include "entities/pros.h"
-#include "entities/properties.h"
 
 void mainMenu() {
 	short int choice;

@@ -10,7 +10,7 @@
 #include "datatypes.h"
 
 //TODO: Refer to line 54, should be removed
-#include "entities/properties.h"
+#include "entities/buildings.h"
 
 int checkFile(FILE *fp_build) {
 	int res = 0;
