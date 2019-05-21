@@ -8,6 +8,12 @@
 #ifndef PROS_H_
 #define PROS_H_
 
+int addPro();
+int loadProFile();
+int updProFile();
+int editPro();
 
+void infoPro(FILE *fp_pro);
+void readFilePro(FILE *fp_build, professionals *p);
 
 #endif /* PROS_H_ */
