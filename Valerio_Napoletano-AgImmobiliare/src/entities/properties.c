@@ -33,7 +33,7 @@ void infoBuild(FILE *fp_build) {
 
 int addBuild() {
 	FILE *fp_build;
-	fp_build = fopen("buildings.dat", "a+b");
+	fp_build = fopen("buildings.csv", "a+b");
 
 	checkFile(fp_build);
 	if (fp_build != NULL) {
@@ -51,16 +51,16 @@ int editBuild() {
 	FILE *fp_build;
 	FILE *fp_temp;
 
-	fp_build = fopen("buildings.dat", "rb");
+	fp_build = fopen("buildings.csv", "rb");
 	checkFile(fp_build);
 	if (fp_build != NULL) {
 		count = countRows(fp_build);
 		fclose(fp_build);
 
-		fp_build = fopen("buildings.dat", "rb");
+		fp_build = fopen("buildings.csv", "rb");
 		checkFile(fp_build);
 
-		fp_temp = fopen("temp_build.dat", "w+b");
+		fp_temp = fopen("temp_build.csv", "w+b");
 		stop = checkFile(fp_temp);
 
 		if (count > 0 && stop == 0) {
@@ -75,8 +75,8 @@ int editBuild() {
 					fclose(fp_temp);
 					fclose(fp_build);
 
-					fp_build = fopen("buildings.dat", "w+b");
-					fp_temp = fopen("temp_build.dat", "rb");
+					fp_build = fopen("buildings.csv", "w+b");
+					fp_temp = fopen("temp_build.csv", "rb");
 
 					copyFile(fp_temp, fp_build, 0);
 
@@ -93,7 +93,7 @@ int editBuild() {
 
 		fclose(fp_temp);
 		fclose(fp_build);
-		remove("temp_building.dat");
+		remove("temp_building.csv");
 	}
 	return -1;
 }
@@ -104,14 +104,14 @@ int removeBuild() {
 	FILE *fp_build;
 	FILE *fp_temp;
 
-	fp_build = fopen("buildings.dat", "rb");
+	fp_build = fopen("buildings.csv", "rb");
 	checkFile(fp_build);
 	if (fp_build != NULL) {
 		count = countRows(fp_build);
 		fclose(fp_build);
-		fp_build = fopen("buildings.dat", "rb");
+		fp_build = fopen("buildings.csv", "rb");
 		checkFile(fp_build);
-		fp_temp = fopen("temp_build.dat", "w+b");
+		fp_temp = fopen("temp_build.csv", "w+b");
 		stop = checkFile(fp_temp);
 		//UNUSED
 		//char line[400];
@@ -126,8 +126,8 @@ int removeBuild() {
 
 					fclose(fp_temp);
 					fclose(fp_build);
-					fp_build = fopen("buildings.dat", "w+b");
-					fp_temp = fopen("temp_build.dat", "rb");
+					fp_build = fopen("buildings.csv", "w+b");
+					fp_temp = fopen("temp_build.csv", "rb");
 
 					copyFile(fp_temp, fp_build, 0);
 
@@ -141,7 +141,7 @@ int removeBuild() {
 	}
 	fclose(fp_temp);
 	fclose(fp_build);
-	remove("temp_building.dat");
+	remove("temp_building.csv");
 
 	return -1;
 }
