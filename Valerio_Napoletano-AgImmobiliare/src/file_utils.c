@@ -56,7 +56,7 @@ void copyFile(FILE *fp_from, FILE *fp_to, int choice) {
 		} else if (choice > 0) {
 			if (choice == count) {
 				// TODO: This should not be here, the function should be "object" agnostic
-				infoBuild(fp_to);
+				infoBuilding(fp_to);
 			} else {
 				fputs(line, fp_to);
 			}

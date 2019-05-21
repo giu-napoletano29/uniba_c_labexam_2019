@@ -8,11 +8,10 @@
 #ifndef BUILDINGS_H_
 #define BUILDINGS_H_
 
-//Operazioni su immobili
-int addBuild();
-int editBuild();
-int removeBuild();
+int addBuilding();
+int editBuilding();
+int removeBuilding();
 
-void infoBuild(FILE *fp_build);
+void infoBuilding(FILE *fp_build);
 
 #endif /* BUILDINGS_H_ */

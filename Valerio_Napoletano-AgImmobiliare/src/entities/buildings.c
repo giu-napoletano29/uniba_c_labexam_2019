@@ -1,11 +1,10 @@
 /*
- * properties.c
+ * buildings.c
  *
  *  Created on: 11 mag 2019
  *      Author: Giuseppe Napoletano
  */
 
-//Operazioni su immobili
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -13,7 +12,7 @@
 #include "../file_utils.h"
 #include "../datatypes.h"
 
-void infoBuild(FILE *fp_build) {
+void infoBuilding(FILE *fp_build) {
 	property p;
 	//TODO: need to handle escape characters
 	printf("Inserisci l'ID dell'immobile: \n");
@@ -31,20 +30,20 @@ void infoBuild(FILE *fp_build) {
 			p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
 }
 
-int addBuild() {
+int addBuilding() {
 	FILE *fp_build;
 	fp_build = fopen("buildings.csv", "a+b");
 
 	checkFile(fp_build);
 	if (fp_build != NULL) {
-		infoBuild(fp_build);
+		infoBuilding(fp_build);
 	}
 
 	fclose(fp_build);
 
 	return -1;
 }
-int editBuild() {
+int editBuilding() {
 	int count = 0; //File rows counter
 	int stop = 0; //Valid choice controller
 	int choice = 0;
@@ -97,7 +96,7 @@ int editBuild() {
 	}
 	return -1;
 }
-int removeBuild() {
+int removeBuilding() {
 	int count = 0; //File rows counter
 	int stop = 0; //Valid choice controller
 	int choice = 0;
