@@ -32,12 +32,14 @@ int countRows(FILE *fp_build) {
 	char line[400];
 	while (fgets(line, sizeof line, fp_build) != NULL) /* read a line */
 	{
+		// Testing
 		//printf("%d. ", count + 1);
 		//fputs(line, stdout); /* write the line */
 		count++;
 	}
 
-	printf("\nRecord trovati nel file %d\n", count);
+	// Testing
+	//printf("\nRecord trovati nel file: %d\n", count);
 
 	return count;
 }

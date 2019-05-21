@@ -14,45 +14,52 @@
 #include "../consts.h"
 #include "../file_utils.h"
 
-void readFilePro(FILE *fp_pro, int rows, professionals *p) {
+void readFilePro(FILE *fp_pro, professionals *pro) {
 	char line[400];
 	char *token;
-	int c = 0;
-	// Property counter
-	int prop_c = 0;
+
+	int field;
+	// Professional nums counter
+	int p_num = 0;
 
 	while (fgets(line, sizeof line, fp_pro) != NULL) /* read a line */
 	{
+		// Fields counter (ID, name, etc..)
+		field = 0;
+
 		/* Tokenize and load in the internal struct */
 		// Get first token
 		token = strtok(line, ",");
 
 		while (token != NULL) {
-			switch (prop_c) {
+			switch (field) {
 			case 0:
-				strcpy(p[c].id, token);
+				strcpy(pro[p_num].id, token);
 				break;
 			case 1:
-				strcpy(p[c].name, token);
+				strcpy(pro[p_num].name, token);
 				break;
 			case 2:
-				strcpy(p[c].competence_area, token);
+				strcpy(pro[p_num].competence_area, token);
 				break;
 			case 3:
-				p[c].n_sold = atoi(token);
+				pro[p_num].n_sold = atoi(token);
 				break;
 			}
 
+			// Read the other tokens
 			token = strtok(NULL, ",");
 
-			prop_c++;
+			field++;
 		}
 
-		puts("\n--- RIEPILOGO STAMPA DI TEST ---");
-		printf("\nID: %s\n", p[c].id);
-		printf("\nNAME: %s\n", p[c].name);
-		printf("\nCOMP: %s\n", p[c].competence_area);
-		printf("\nSOLD: %d\n", p[c].n_sold);
+		printf("\n--- UTENTE %d ---\n", p_num + 1);
+		printf("\nID: %s\n", pro[p_num].id);
+		printf("\nNAME: %s\n", pro[p_num].name);
+		printf("\nCOMP: %s\n", pro[p_num].competence_area);
+		printf("\nSOLD: %d\n", pro[p_num].n_sold);
+
+		p_num++;
 
 		newLine();
 		system("pause");
@@ -83,7 +90,7 @@ int loadProFile() {
 		rows = countRows(fp_pro);
 		rewind(fp_pro);
 		professionals p[rows];
-		readFilePro(fp_pro, rows, p);
+		readFilePro(fp_pro, p);
 	}
 
 	fclose(fp_pro);
