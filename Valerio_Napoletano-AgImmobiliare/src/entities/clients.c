@@ -10,9 +10,14 @@
 // Boolean (introduced in C99)
 #include <stdbool.h>
 
+// For getting local time on Windows (SYSTEMTIME struct and GetLocalTime() function)
+#include <windows.h>
+
 #include "../utils.h"
 #include "../datatypes.h"
 #include "../consts.h"
+
+#include <stdlib.h>
 
 void showPropertyType(int type) {
 	switch (type) {
@@ -75,16 +80,59 @@ void showClientData(clients *cl) {
 	printf("Budget in euro: %d euro \n", cl->budget);
 	printf("Tipologia immobile da cercare: ");
 	showPropertyType(cl->pr_search_type);
+	printf("Data di registrazione: %hd/%hd/%hd \n", cl->reg_date.day,
+			cl->reg_date.month, cl->reg_date.year);
+
+	system("pause");
+}
+
+int showAllClients() {
+	clearScr();
+	puts("--- LISTA CLIENTI ---");
+
+	system("PAUSE");
+	return -1;
 }
 
 void reqID(clients *client) {
-	bool error = false;
+	str_result value;
+	bool error;
 
-	//TODO: Validate codice fiscale.(regex + length validation?)
 	do {
-		printf("Codice fiscale: ");
-		// "Codice fiscale" can have numbers, numCheck is false
-		error = readString(client->id, false);
+		if (error) {
+			puts("\nInserisci un valore corretto. \n");
+		}
+		// Reset "error" value
+		error = false;
+
+		//TODO: Move these requests and checks to custom functions
+
+		// Client type is "company"
+		if (client->cl_type == 3) {
+			printf("Partita IVA: ");
+			// "VAT number" can only have numbers, numCheck is true
+			// Italian PIVA is 11 digit
+			// https://it.wikipedia.org/wiki/Partita_IVA
+			value = readString(false);
+
+			// Validate P.IVA length
+			if (strlen(value.val) != 11) {
+				error = true;
+			}
+		} else {
+			printf("Codice fiscale: ");
+			// "Codice fiscale" can have numbers, numCheck is false
+			// https://it.wikipedia.org/wiki/Codice_fiscale
+			value = readString(false);
+
+			// Validate CF length
+			if (strlen(value.val) != 16) {
+				error = true;
+			}
+
+			//error = value.error;
+		}
+		strcpy(client->id, value.val);
 	} while (error == true);
 
 	clearScr();
@@ -96,16 +144,24 @@ void reqName(clients *client) {
 	/// NAME
 	do {
 		printf("Nome: ");
-		error = readString(client->name, true);
+		str_result value = readString(true);
+		strcpy(client->name, value.val);
+		error = value.error;
 	} while (error == true);
 
 	clearScr();
 }
 
 void reqSurname(clients *client) {
+	bool error = false;
+
 	// SURNAME
-	printf("Cognome: ");
-	readString(client->name, true);
+	do {
+		printf("Cognome: ");
+		str_result value = readString(true);
+		strcpy(client->surname, value.val);
+		error = value.error;
+	} while (error == true);
 
 	clearScr();
 }
@@ -148,7 +204,7 @@ void reqCompanyName(clients *client) {
 		newLine();
 		printf("Nome azienda: ");
 		// numCheck is false because a company name can have numbers
-		readString(client->company_name, false);
+		strcpy(client->company_name, readString(false).val);
 	} else {
 		strcpy(client->company_name, "");
 	}
@@ -164,16 +220,19 @@ void reqBudget(clients *client) {
 	// BUDGET
 	do {
 		if (error) {
-			puts("Inserisci un valore in euro tra 100 e 1 000 000 000 euro. \n");
+			puts(
+					"Inserisci un valore in euro tra 100 e 1 000 000 000 euro. \n");
 		}
 
 		printf("Budget in euro: ");
-		scanf("%d", &client->budget);
+		client->budget = readInteger().val;
 
-		if (client->budget < MIN_USER_BUDGET || client->cl_type > MAX_USER_BUDGET) {
+		if (client->budget < MIN_USER_BUDGET
+				|| client->cl_type > MAX_USER_BUDGET) {
 			error = true;
 		}
-	} while (client->budget < MIN_USER_BUDGET || client->cl_type > MAX_USER_BUDGET);
+	} while (client->budget < MIN_USER_BUDGET
+			|| client->cl_type > MAX_USER_BUDGET);
 
 	clearScr();
 }
@@ -214,6 +273,33 @@ void reqPropertyType(clients *client) {
 	clearScr();
 }
 
+// Get local system date and save in the related struct (only for Windows)
+void saveLocalDate(clients *client) {
+	// https://docs.microsoft.com/it-it/windows/desktop/api/minwinbase/ns-minwinbase-systemtime
+	SYSTEMTIME t;
+
+	// https://docs.microsoft.com/en-us/windows/desktop/api/sysinfoapi/nf-sysinfoapi-getlocaltime
+	GetLocalTime(&t); // Fill out the struct so that it can be used
+
+	// Save local system date to the struct
+	client->reg_date.day = t.wDay;
+	client->reg_date.month = t.wMonth;
+	client->reg_date.year = t.wYear;
+}
+
+int deleteClient() {
+	clearScr();
+
+	puts("--- ELIMINAZIONE CLIENTI --- ");
+
+	// TODO: Add check for deleting old users (I think that one 6 months should be enough).
+
+	// TODO: Ask for the client ID in order to delete the specific one.
+
+	system("pause");
+	return -1;
+}
+
 int addClient() {
 	clients client;
 
@@ -222,19 +308,21 @@ int addClient() {
 
 	puts("--- AGGIUNTA CLIENTE --- ");
 
-	reqID(&client);
-
 	reqName(&client);
 
 	reqSurname(&client);
 
 	reqType(&client);
 
+	reqID(&client);
+
 	reqCompanyName(&client);
 
 	reqBudget(&client);
 
 	reqPropertyType(&client);
+
+	saveLocalDate(&client);
 
 	showClientData(&client);
 

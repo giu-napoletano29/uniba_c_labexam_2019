@@ -8,6 +8,9 @@
 #ifndef CONSTS_H
 #define CONSTS_H
 
+// Max string size
+#define STRING_SIZE 50
+
 // User budget limits (in euro)
 #define MIN_USER_BUDGET 100
 // One bilion

@@ -78,9 +78,9 @@ int clientsMenu() {
 		newLine();
 
 		puts("Scegli un'operazione:");
-		puts("1. Aggiungi un cliente");
-		puts("2. Modifica un cliente");
-		puts("3. Cerca un cliente");
+		puts("1. Visualizza tutti i clienti");
+		puts("2. Aggiungi un cliente");
+		puts("3. Cancella clienti");
 		puts("4. Torna indietro");
 
 		newLine();
@@ -90,13 +90,13 @@ int clientsMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = addClient();
+			choice = showAllClients();
 			break;
 		case 2:
-			//choice = editClient();
+			choice = addClient();
 			break;
 		case 3:
-			//choice = searchClientMenu();
+			choice = deleteClient();
 			break;
 		case 4:
 			// This is used as a flag for the "go back" choice
@@ -110,7 +110,8 @@ int clientsMenu() {
 		}
 	} while (error == true);
 
-	return choice;
+	// Go back
+	return -1;
 }
 
 int professMenu() {
@@ -131,9 +132,8 @@ int professMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Aggiungi un professionista");
-		puts("2. Modifica un professionista");
-		puts("3. Cerca un professionista");
-		puts("4. Torna indietro");
+    puts("2. Modifica un professionista");
+		puts("3. Torna indietro");
 
 		newLine();
 
@@ -148,9 +148,6 @@ int professMenu() {
 			choice = editPro();
 			break;
 		case 3:
-			//choice = propertyMenu();
-			break;
-		case 4:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
 			choice = -1;

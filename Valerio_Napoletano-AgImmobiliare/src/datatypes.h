@@ -8,7 +8,7 @@
 #ifndef DATATYPES_H
 #define DATATYPES_H
 
-#define STRING_SIZE 50
+#include "consts.h"
 
 typedef struct {
 	short int day;
@@ -46,6 +46,8 @@ typedef struct {
 	// Company name (if type is company)
 	char company_name[STRING_SIZE];
 	int budget;
+	// Registration date
+	date reg_date;
 	// Type of the property that needs to be searched
 	property_type pr_search_type;
 } clients;
@@ -68,5 +70,18 @@ typedef struct {
 	char locality[STRING_SIZE];
 	char type[STRING_SIZE];
 } property;
+
+// -- UTILS --
+// readInteger result struct
+typedef struct {
+	bool error;
+	int val;
+} int_result;
+
+// readString result struct
+typedef struct {
+	bool error;
+	char val[STRING_SIZE];
+} str_result;
 
 #endif
