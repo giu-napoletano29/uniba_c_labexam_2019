@@ -14,12 +14,14 @@
 #include "datatypes.h"
 #include "entities/pros.h"
 #include "entities/properties.h"
+#include "entities/clients.h"
 
 int main(void) {
 	int result = 0;
 
 	result += loadProFile();
 	result += loadBuiFile();
+	result += loadCliFile();
 
 	mainMenu();
 

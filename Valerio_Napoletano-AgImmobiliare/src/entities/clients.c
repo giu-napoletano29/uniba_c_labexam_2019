@@ -16,8 +16,112 @@
 #include "../utils.h"
 #include "../datatypes.h"
 #include "../consts.h"
+#include "../file_utils.h"
 
 #include <stdlib.h>
+
+void readFileCli(FILE *fp_build, clients *pro) {
+	char line[400];
+	char *token;
+	char *dtoken;
+	char date[10];
+
+	int field;
+	int dfield = 0;
+	// Professional nums counter
+	int b_num = 0;
+
+	while (fgets(line, sizeof line, fp_build) != NULL) /* read a line */
+	{
+		// Fields counter
+		field = 0;
+
+		/* Tokenize and load in the internal struct */
+		// Get first token
+		token = strtok(line, ",");
+
+		while (token != NULL) {
+			switch (field) {
+			case 0:
+				strcpy(pro[b_num].id, token);
+				break;
+			case 1:
+				strcpy(pro[b_num].name, token);
+				break;
+			case 2:
+				strcpy(pro[b_num].surname, token);
+				break;
+			case 3:
+				strcpy(pro[b_num].company_name, token);
+				break;
+			case 4:
+				pro[b_num].budget = atoi(token);
+				break;
+			case 5:
+				strcpy(date, token);
+				dfield = 0;
+				dtoken = strtok(date, "/");
+
+				while( dtoken != NULL ) {
+					switch (dfield) {
+					case 0:
+						pro[b_num].reg_date.day = atoi(dtoken);
+						break;
+					case 1:
+						pro[b_num].reg_date.month = atoi(dtoken);
+						break;
+					case 2:
+						pro[b_num].reg_date.year = atoi(dtoken);
+						break;
+					}
+
+				   dtoken = strtok(NULL, "/");
+
+				   dfield++;
+				}
+				break;
+			}
+
+			// Read the other tokens
+			token = strtok(NULL, ",");
+
+			field++;
+		}
+
+		printf("\n--- CLIENTE %d ---\n", b_num + 1);
+		printf("\nID: %s\n", pro[b_num].id);
+		printf("\nNAME: %s\n", pro[b_num].name);
+		printf("\nSURNAME: %s\n", pro[b_num].surname);
+		printf("\nC_NAME: %s\n", pro[b_num].company_name);
+		printf("\nDATE: %d/%d/%d\n", pro[b_num].reg_date.day, pro[b_num].reg_date.month, pro[b_num].reg_date.year);
+
+		b_num++;
+
+		newLine();
+		system("pause");
+	}
+}
+
+int loadCliFile() {
+	int rows = 0;
+	int result = 0; //detects the failure or success of the function
+	FILE *fp_cli;
+	fp_cli = fopen("clients.csv", "a+");
+	checkFile(fp_cli);
+	if (fp_cli != NULL) {
+		rows = countRows(fp_cli);
+		rewind(fp_cli);
+		clients p[rows];
+		readFileCli(fp_cli, p);
+	}
+	else{
+		result = -1;
+	}
+
+	fclose(fp_cli);
+	return result;
+}
+
 
 void showPropertyType(int type) {
 	switch (type) {

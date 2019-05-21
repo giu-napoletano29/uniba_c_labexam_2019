@@ -12,7 +12,7 @@
 int addBuild();
 int editBuild();
 int loadBuiFile();
-void readFileBui(FILE *fp_build, professionals *p);
+void readFileBui(FILE *fp_build, property *p);
 int removeBuild();
 
 void infoBuild(FILE *fp_build);

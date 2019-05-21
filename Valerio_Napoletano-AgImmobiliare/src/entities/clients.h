@@ -12,6 +12,8 @@
 
 // "main" function
 int addClient();
+int loadCliFile();
+void readFileCli(FILE *fp_cli, clients *p);
 
 // Functions for asking data to the user
 void reqID(clients *client);
