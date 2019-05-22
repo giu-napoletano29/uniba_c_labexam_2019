@@ -12,7 +12,10 @@
 #include "utils.h"
 
 #include "entities/buildings.h"
-#include "entities/clients.h"
+#include "entities/clients/misc.h"
+#include "entities/clients/req.h"
+#include "entities/clients/show.h"
+
 #include "entities/pros.h"
 
 void mainMenu() {
