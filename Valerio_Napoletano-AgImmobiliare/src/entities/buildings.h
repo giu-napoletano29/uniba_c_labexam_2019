@@ -14,4 +14,7 @@ int removeBuilding();
 
 void infoBuilding(FILE *fp_build);
 
+int loadBuiFile();
+void readFileBui(FILE *fp_build, property *p);
+
 #endif /* BUILDINGS_H_ */

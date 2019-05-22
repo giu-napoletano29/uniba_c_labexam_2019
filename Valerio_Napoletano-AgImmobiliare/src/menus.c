@@ -141,9 +141,9 @@ int professMenu() {
 		scanf("%hu", &choice);
 
 		switch (choice) {
-		case 1:
-			choice = addPro();
-			break;
+		/*case 1:
+		 choice = addPro();
+		 break;*/
 		case 2:
 			choice = editPro();
 			break;
