@@ -132,7 +132,11 @@ int professMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Aggiungi un professionista");
+<<<<<<< HEAD
 		puts("2. Modifica un professionista");
+=======
+    puts("2. Modifica un professionista");
+>>>>>>> parent of 2faecbe... Added reading file at startup function for properties and professionals
 		puts("3. Torna indietro");
 
 		newLine();
@@ -141,9 +145,15 @@ int professMenu() {
 		scanf("%hu", &choice);
 
 		switch (choice) {
+<<<<<<< HEAD
 		/*case 1:
 		 choice = addPro();
 		 break;*/
+=======
+		case 1:
+			choice = addPro();
+			break;
+>>>>>>> parent of 2faecbe... Added reading file at startup function for properties and professionals
 		case 2:
 			choice = editPro();
 			break;

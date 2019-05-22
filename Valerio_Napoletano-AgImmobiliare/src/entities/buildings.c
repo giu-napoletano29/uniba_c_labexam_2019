@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "../utils.h"
 #include "../file_utils.h"
@@ -31,6 +30,7 @@ void infoBuilding(FILE *fp_build) {
 			p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
 }
 
+<<<<<<< HEAD:Valerio_Napoletano-AgImmobiliare/src/entities/buildings.c
 void readFileBui(FILE *fp_build, property *pro) {
 	char line[400];
 	char *token;
@@ -131,6 +131,9 @@ int loadBuiFile() {
 }
 
 int addBuilding() {
+=======
+int addBuild() {
+>>>>>>> parent of 2faecbe... Added reading file at startup function for properties and professionals:Valerio_Napoletano-AgImmobiliare/src/entities/properties.c
 	FILE *fp_build;
 	fp_build = fopen("buildings.csv", "a+b");
 
