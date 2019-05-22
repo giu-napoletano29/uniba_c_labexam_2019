@@ -17,16 +17,15 @@
 #include "entities/clients.h"
 
 int main(void) {
-	int result = 0;
+	short int result = 0;
 
 	result += loadProFile();
 	result += loadBuiFile();
 	result += loadCliFile();
 
-	if(result >= 0){
+	if (result >= 0) {
 		mainMenu();
-	}
-	else{
+	} else {
 		printf("\n------------------------ ATTENZIONE ------------------------");
 		printf("\nErrore: I controlli iniziali sui file sono risultati in un errore.");
 		printf("\nControlla il tuo file system e riprova.\n");
@@ -35,8 +34,7 @@ int main(void) {
 	newLine();
 
 	system("pause");
+
 	return EXIT_SUCCESS;
 }
-
-
 

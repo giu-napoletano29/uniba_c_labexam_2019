@@ -85,7 +85,7 @@ int loadProFile() {
 	int rows = 0;
 	int result = 0; //detects the failure or success of the function
 	FILE *fp_pro;
-	fp_pro = fopen("professionals.csv", "r");
+	fp_pro = fopen("professionals.csv", "a+");
 	checkFile(fp_pro);
 	if (fp_pro != NULL) {
 		rows = countRows(fp_pro);

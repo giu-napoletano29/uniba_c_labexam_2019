@@ -114,7 +114,7 @@ int loadBuiFile() {
 	int rows = 0;
 	int result = 0; //detects the failure or success of the function
 	FILE *fp_build;
-	fp_build = fopen("buildings.dat", "a+");
+	fp_build = fopen("buildings.csv", "a+");
 	checkFile(fp_build);
 	if (fp_build != NULL) {
 		rows = countRows(fp_build);
