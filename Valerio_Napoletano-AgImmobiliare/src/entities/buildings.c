@@ -30,7 +30,6 @@ void infoBuilding(FILE *fp_build) {
 			p.price, p.reg_date.day, p.reg_date.month, p.reg_date.year);
 }
 
-<<<<<<< HEAD:Valerio_Napoletano-AgImmobiliare/src/entities/buildings.c
 void readFileBui(FILE *fp_build, property *pro) {
 	char line[400];
 	char *token;
@@ -70,7 +69,7 @@ void readFileBui(FILE *fp_build, property *pro) {
 				dfield = 0;
 				dtoken = strtok(date, "/");
 
-				while( dtoken != NULL ) {
+				while (dtoken != NULL) {
 					switch (dfield) {
 					case 0:
 						pro[b_num].reg_date.day = atoi(dtoken);
@@ -83,9 +82,9 @@ void readFileBui(FILE *fp_build, property *pro) {
 						break;
 					}
 
-				   dtoken = strtok(NULL, "/");
+					dtoken = strtok(NULL, "/");
 
-				   dfield++;
+					dfield++;
 				}
 				break;
 			}
@@ -101,7 +100,8 @@ void readFileBui(FILE *fp_build, property *pro) {
 		printf("\nNAME: %s\n", pro[b_num].name);
 		printf("\nLOCALITY: %s\n", pro[b_num].locality);
 		printf("\nPRICE: %d\n", pro[b_num].price);
-		printf("\nDATE: %d/%d/%d\n", pro[b_num].reg_date.day, pro[b_num].reg_date.month, pro[b_num].reg_date.year);
+		printf("\nDATE: %d/%d/%d\n", pro[b_num].reg_date.day,
+				pro[b_num].reg_date.month, pro[b_num].reg_date.year);
 
 		b_num++;
 
@@ -121,8 +121,7 @@ int loadBuiFile() {
 		rewind(fp_build);
 		property p[rows];
 		readFileBui(fp_build, p);
-	}
-	else{
+	} else {
 		result = -1;
 	}
 
@@ -131,9 +130,6 @@ int loadBuiFile() {
 }
 
 int addBuilding() {
-=======
-int addBuild() {
->>>>>>> parent of 2faecbe... Added reading file at startup function for properties and professionals:Valerio_Napoletano-AgImmobiliare/src/entities/properties.c
 	FILE *fp_build;
 	fp_build = fopen("buildings.csv", "a+b");
 
@@ -146,6 +142,7 @@ int addBuild() {
 
 	return -1;
 }
+
 int editBuilding() {
 	int count = 0; //File rows counter
 	int stop = 0; //Valid choice controller
