@@ -1,11 +1,10 @@
 /*
- * properties.c
+ * buildings.c
  *
  *  Created on: 11 mag 2019
  *      Author: Giuseppe Napoletano
  */
 
-//Operazioni su immobili
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,7 +13,7 @@
 #include "../file_utils.h"
 #include "../datatypes.h"
 
-void infoBuild(FILE *fp_build) {
+void infoBuilding(FILE *fp_build) {
 	property p;
 	//TODO: need to handle escape characters
 	printf("Inserisci l'ID dell'immobile: \n");
@@ -131,36 +130,36 @@ int loadBuiFile() {
 	return result;
 }
 
-int addBuild() {
+int addBuilding() {
 	FILE *fp_build;
-	fp_build = fopen("buildings.dat", "a+b");
+	fp_build = fopen("buildings.csv", "a+b");
 
 	checkFile(fp_build);
 	if (fp_build != NULL) {
-		infoBuild(fp_build);
+		infoBuilding(fp_build);
 	}
 
 	fclose(fp_build);
 
 	return -1;
 }
-int editBuild() {
+int editBuilding() {
 	int count = 0; //File rows counter
 	int stop = 0; //Valid choice controller
 	int choice = 0;
 	FILE *fp_build;
 	FILE *fp_temp;
 
-	fp_build = fopen("buildings.dat", "rb");
+	fp_build = fopen("buildings.csv", "rb");
 	checkFile(fp_build);
 	if (fp_build != NULL) {
 		count = countRows(fp_build);
 		fclose(fp_build);
 
-		fp_build = fopen("buildings.dat", "rb");
+		fp_build = fopen("buildings.csv", "rb");
 		checkFile(fp_build);
 
-		fp_temp = fopen("temp_build.dat", "w+b");
+		fp_temp = fopen("temp_build.csv", "w+b");
 		stop = checkFile(fp_temp);
 
 		if (count > 0 && stop == 0) {
@@ -175,8 +174,8 @@ int editBuild() {
 					fclose(fp_temp);
 					fclose(fp_build);
 
-					fp_build = fopen("buildings.dat", "w+b");
-					fp_temp = fopen("temp_build.dat", "rb");
+					fp_build = fopen("buildings.csv", "w+b");
+					fp_temp = fopen("temp_build.csv", "rb");
 
 					copyFile(fp_temp, fp_build, 0);
 
@@ -193,25 +192,25 @@ int editBuild() {
 
 		fclose(fp_temp);
 		fclose(fp_build);
-		remove("temp_building.dat");
+		remove("temp_building.csv");
 	}
 	return -1;
 }
-int removeBuild() {
+int removeBuilding() {
 	int count = 0; //File rows counter
 	int stop = 0; //Valid choice controller
 	int choice = 0;
 	FILE *fp_build;
 	FILE *fp_temp;
 
-	fp_build = fopen("buildings.dat", "rb");
+	fp_build = fopen("buildings.csv", "rb");
 	checkFile(fp_build);
 	if (fp_build != NULL) {
 		count = countRows(fp_build);
 		fclose(fp_build);
-		fp_build = fopen("buildings.dat", "rb");
+		fp_build = fopen("buildings.csv", "rb");
 		checkFile(fp_build);
-		fp_temp = fopen("temp_build.dat", "w+b");
+		fp_temp = fopen("temp_build.csv", "w+b");
 		stop = checkFile(fp_temp);
 		//UNUSED
 		//char line[400];
@@ -226,8 +225,8 @@ int removeBuild() {
 
 					fclose(fp_temp);
 					fclose(fp_build);
-					fp_build = fopen("buildings.dat", "w+b");
-					fp_temp = fopen("temp_build.dat", "rb");
+					fp_build = fopen("buildings.csv", "w+b");
+					fp_temp = fopen("temp_build.csv", "rb");
 
 					copyFile(fp_temp, fp_build, 0);
 
@@ -241,7 +240,7 @@ int removeBuild() {
 	}
 	fclose(fp_temp);
 	fclose(fp_build);
-	remove("temp_building.dat");
+	remove("temp_building.csv");
 
 	return -1;
 }

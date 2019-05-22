@@ -13,7 +13,7 @@
 #include "utils.h"
 #include "datatypes.h"
 #include "entities/pros.h"
-#include "entities/properties.h"
+#include "entities/buildings.h"
 #include "entities/clients.h"
 
 int main(void) {

@@ -11,9 +11,9 @@
 #include "menus.h"
 #include "utils.h"
 
+#include "entities/buildings.h"
 #include "entities/clients.h"
 #include "entities/pros.h"
-#include "entities/properties.h"
 
 void mainMenu() {
 	short int choice;
@@ -52,7 +52,7 @@ void mainMenu() {
 			choice = professMenu();
 			break;
 		case 3:
-			choice = propertyMenu();
+			choice = buildingsMenu();
 			break;
 		default:
 			error = true;
@@ -131,7 +131,7 @@ int professMenu() {
 		newLine();
 
 		puts("Scegli un'operazione:");
-		//puts("1. Aggiungi un professionista");
+		puts("1. Aggiungi un professionista");
 		puts("2. Modifica un professionista");
 		puts("3. Torna indietro");
 
@@ -142,8 +142,8 @@ int professMenu() {
 
 		switch (choice) {
 		/*case 1:
-			choice = addPro();
-			break;*/
+		 choice = addPro();
+		 break;*/
 		case 2:
 			choice = editPro();
 			break;
@@ -162,7 +162,7 @@ int professMenu() {
 	return choice;
 }
 
-int propertyMenu() {
+int buildingsMenu() {
 	short int choice;
 	bool error = false;
 
@@ -192,15 +192,18 @@ int propertyMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = addBuild();
+			choice = addBuilding();
 			break;
 		case 2:
-			choice = editBuild();
+			choice = editBuilding();
 			break;
 		case 3:
-			choice = removeBuild();
+			choice = removeBuilding();
 			break;
 		case 4:
+			//choice = searchBuilding();
+			break;
+		case 5:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
 			choice = -1;

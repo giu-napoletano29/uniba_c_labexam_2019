@@ -43,7 +43,7 @@ void readFilePro(FILE *fp_pro, professionals *pro) {
 				strcpy(pro[p_num].competence_area, token);
 				break;
 			case 3:
-				pro[p_num].n_sold = atoi(token);
+				pro[p_num].buildings_sold = atoi(token);
 				break;
 			}
 
@@ -57,7 +57,7 @@ void readFilePro(FILE *fp_pro, professionals *pro) {
 		printf("\nID: %s\n", pro[p_num].id);
 		printf("\nNAME: %s\n", pro[p_num].name);
 		printf("\nCOMP: %s\n", pro[p_num].competence_area);
-		printf("\nSOLD: %d\n", pro[p_num].n_sold);
+		printf("\nSOLD: %d\n", pro[p_num].buildings_sold);
 
 		p_num++;
 
@@ -76,9 +76,9 @@ void infoPro(FILE *fp_pro) {
 	printf("Inserisci l'area di competenza: \n");
 	scanf("%s", p.competence_area);
 	printf("Inserisci il numero di immobili venduti: \n");
-	scanf("%d", &p.n_sold);
+	scanf("%d", &p.buildings_sold);
 
-	fprintf(fp_pro, "%s,%s,%s,%d\n", p.id, p.name, p.competence_area, p.n_sold);
+	fprintf(fp_pro, "%s,%s,%s,%d\n", p.id, p.name, p.competence_area, p.buildings_sold);
 }
 
 int loadProFile() {

@@ -1,8 +1,8 @@
-/*
- * datatypes.h
- *
- *  Created on: 9 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file datatypes.h
+ * @author Saverio Valerio
+ * @date 9 May 2019
+ * @brief File containing all the used datatypes.
  */
 
 #ifndef DATATYPES_H
@@ -10,55 +10,58 @@
 
 #include "consts.h"
 
+/**
+ * @brief Struct for handling a date (made up by day, month and year)
+ */
 typedef struct {
 	short int day;
 	short int month;
 	short int year;
 } date;
 
+/**
+ * @brief Struct for handling the client type
+ */
 typedef enum {
-	family, single, company, government
+	/** Famiglia */
+	family,
+	/** Persona fisica celibe/nubile */
+	single,
+	/** Azienda */
+	company,
+	/** Stato */
+	government
 } client_type;
 
 typedef enum {
-	// Appartamento
+	/** Appartamento */
 	flat,
-	/*
-	 Alloggio su due piani sovrapposti
-	 in cui la «zona notte» e la «zona giorno» sono collegate mediante una scala interna.
-	 */
+	/** Alloggio su due piani sovrapposti dove la "zona notte" e la "zona giorno" sono collegate mediante una scala interna. */
 	duplex,
-	// Villa
+	/** Villa */
 	house,
-	// Casale
+	/** Casale */
 	farmhouse,
-	// Attico
+	/** Attico */
 	attic
-} property_type;
+} building_type;
 
 typedef struct {
-	// "Codice Fiscale" in Italy
-	char id[STRING_SIZE];
+	char id[STRING_SIZE]; /**< "Codice Fiscale" in Italy */
 	char name[STRING_SIZE];
 	char surname[STRING_SIZE];
-	// Client type (company, private, etc..)
-	client_type cl_type;
-	// Company name (if type is company)
-	char company_name[STRING_SIZE];
+	client_type cl_type; /**< Client type (company, private, etc..) */
+	char company_name[STRING_SIZE]; /**< Company name (if type is company) */
 	int budget;
-	// Registration date
-	date reg_date;
-	// Type of the property that needs to be searched
-	property_type pr_search_type;
+	date reg_date; /**< Registration date */
+	building_type building_type; /**< Type of the property that needs to be searched */
 } clients;
 
 typedef struct {
-	// "Codice Fiscale" in Italy
-	char id[STRING_SIZE];
+	char id[STRING_SIZE]; /**< "Codice Fiscale" in Italy */
 	char name[STRING_SIZE];
-	char competence_area[STRING_SIZE];
-	//number of sold house
-	int n_sold;
+	char competence_area[STRING_SIZE]; /**< Area of "competence" */
+	int buildings_sold; /**< Number of buildings that this professional has sold */
 } professionals;
 
 typedef struct {

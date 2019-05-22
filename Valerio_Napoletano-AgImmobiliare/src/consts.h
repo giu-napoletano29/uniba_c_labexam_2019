@@ -1,19 +1,18 @@
-/*
- * consts.h
+/**
+ * @file consts.h
+ * @author Saverio Valerio
+ * @date 13 May 2019
+ * @brief File containing general constants available to the program.
  *
- *  Created on: 13 mag 2019
- *      Author: Saverio Valerio
  */
 
 #ifndef CONSTS_H
 #define CONSTS_H
 
-// Max string size
-#define STRING_SIZE 50
+#define STRING_SIZE 50 /**< Max string size */
 
-// User budget limits (in euro)
-#define MIN_USER_BUDGET 100
-// One bilion
-#define MAX_USER_BUDGET 1000000000
+#define MIN_USER_BUDGET 100 /**< User budget limits (in euro) */
+
+#define MAX_USER_BUDGET 1000000000 /**< One bilion */
 
 #endif /* CONSTS_H */
