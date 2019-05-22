@@ -12,9 +12,11 @@
 #include "utils.h"
 
 #include "entities/buildings.h"
+
 #include "entities/clients/misc.h"
 #include "entities/clients/req.h"
 #include "entities/clients/show.h"
+#include "entities/clients/files.h"
 
 #include "entities/pros.h"
 
@@ -93,7 +95,7 @@ int clientsMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = showAllClients();
+			choice = loadClientFile();
 			break;
 		case 2:
 			choice = addClient();

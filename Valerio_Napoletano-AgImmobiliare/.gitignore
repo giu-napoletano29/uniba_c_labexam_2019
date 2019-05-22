@@ -1,2 +1,3 @@
-/Debug/
+/Debug/src/*
+/Debug/*.exe
 /doxygen_docs/*

@@ -8,6 +8,7 @@
 #ifndef ENTITIES_CLIENTS_FILES_H_
 #define ENTITIES_CLIENTS_FILES_H_
 
-
+int loadClientFile();
+void readClientFile(FILE *filePtr, clients *cl);
 
 #endif /* ENTITIES_CLIENTS_FILES_H_ */

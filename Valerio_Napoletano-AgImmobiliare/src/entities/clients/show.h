@@ -12,6 +12,6 @@
 void showClientType();
 void showPropertyType();
 void showClientData(clients *cl);
-int showAllClients();
+int showAllClients(clients *cl, int num_clients);
 
 #endif /* ENTITIES_CLIENTS_SHOW_H_ */

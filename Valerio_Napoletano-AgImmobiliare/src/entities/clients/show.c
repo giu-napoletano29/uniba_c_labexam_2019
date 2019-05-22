@@ -58,7 +58,7 @@ void showClientType(int type) {
 }
 
 void showClientData(clients *cl) {
-	puts("--- RIEPILOGO ---");
+	//puts("--- RIEPILOGO ---");
 	printf("Codice fiscale: %s \n", cl->id);
 	printf("Nome: %s \n", cl->name);
 	printf("Cognome: %s \n", cl->surname);
@@ -74,13 +74,19 @@ void showClientData(clients *cl) {
 	printf("Data di registrazione: %hd/%hd/%hd \n", cl->reg_date.day,
 			cl->reg_date.month, cl->reg_date.year);
 
+	newLine();
 	system("pause");
 }
 
-int showAllClients() {
+int showAllClients(clients *cl, int num_clients) {
+	int i;
+
 	clearScr();
 	puts("--- LISTA CLIENTI ---");
+	for (i = 0; i < num_clients; i++) {
+		printf("\n-- CLIENTE %d --\n", i + 1);
+		showClientData(cl+i);
+	}
 
-	system("PAUSE");
 	return -1;
 }
