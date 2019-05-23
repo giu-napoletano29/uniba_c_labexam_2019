@@ -54,7 +54,7 @@ typedef struct {
 	char company_name[STRING_SIZE]; /**< Company name (if type is company) */
 	int budget;
 	date reg_date; /**< Registration date */
-	building_type building_type; /**< Type of the property that needs to be searched */
+	building_type building_type; /**< Type of building that needs to be searched */
 } clients;
 
 typedef struct {
@@ -65,14 +65,19 @@ typedef struct {
 } professionals;
 
 typedef struct {
-	int id;
-	char name[STRING_SIZE];
+	char id[STRING_SIZE];
+	char street[STRING_SIZE];
+	short int civic;
+	char city[STRING_SIZE];
+	char province[STRING_SIZE];
 	// Registration date
 	date reg_date;
 	int price;
-	char locality[STRING_SIZE];
-	char type[STRING_SIZE];
-} property;
+	char owner[STRING_SIZE];
+	// Owner phone number
+	char phone[STRING_SIZE];
+	building_type b_type;
+} building;
 
 // -- UTILS --
 // readInteger result struct

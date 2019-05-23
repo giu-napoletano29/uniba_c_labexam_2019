@@ -10,7 +10,7 @@
 #include "datatypes.h"
 
 //TODO: Refer to line 54, should be removed
-#include "entities/buildings.h"
+//#include "entities/buildings.h"
 
 int checkFile(FILE *fp_build) {
 	int res = 0;
@@ -44,11 +44,14 @@ int countRows(FILE *fp_build) {
 	return count;
 }
 
+
+/*
 void copyFile(FILE *fp_from, FILE *fp_to, int choice) {
 	char line[400];
 	unsigned int Uchoice = -choice;
 	int count = 0;
-	while (fgets(line, sizeof line, fp_from) != NULL) /* read a line */
+	// Read a line
+	while (fgets(line, sizeof line, fp_from) != NULL)
 	{
 		count++;
 		if (choice == 0) {
@@ -67,3 +70,4 @@ void copyFile(FILE *fp_from, FILE *fp_to, int choice) {
 		}
 	}
 }
+*/

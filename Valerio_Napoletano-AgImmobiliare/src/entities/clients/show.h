@@ -10,7 +10,6 @@
 
 // Functions for showing data to the user
 void showClientType();
-void showPropertyType();
 void showClientData(clients *cl);
 int showAllClients(clients *cl, int num_clients);
 
