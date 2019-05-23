@@ -16,8 +16,7 @@
 #include "entities/clients/files.h"
 
 #include "entities/buildings/files.h"
-
-#include "entities/pros.h"
+#include "entities/pros/files.h"
 
 int clientsMenu() {
 	short int choice;
@@ -89,9 +88,10 @@ int professMenu() {
 		newLine();
 
 		puts("Scegli un'operazione:");
-		puts("1. Aggiungi un professionista");
-		puts("2. Modifica un professionista");
-		puts("3. Torna indietro");
+		puts("1. Mostra tutti i professionisti");
+		puts("2. Aggiungi un professionista");
+		puts("3. Modifica un professionista");
+		puts("4. Torna indietro");
 
 		newLine();
 
@@ -100,12 +100,15 @@ int professMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = addPro();
+			choice = loadProsFile();
 			break;
 		case 2:
-			choice = editPro();
+			//choice = addPro();
 			break;
 		case 3:
+			//choice = editPro();
+			break;
+		case 4:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
 			choice = -1;
@@ -116,7 +119,7 @@ int professMenu() {
 			break;
 		}
 
-	} while (error == true || choice == -2);
+	} while (error == true || choice == -1);
 	return choice;
 }
 

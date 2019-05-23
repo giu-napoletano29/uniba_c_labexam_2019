@@ -60,7 +60,13 @@ typedef struct {
 typedef struct {
 	char id[STRING_SIZE]; /**< "Codice Fiscale" in Italy */
 	char name[STRING_SIZE];
-	char competence_area[STRING_SIZE]; /**< Area of "competence" */
+	char surname[STRING_SIZE];
+	char area[STRING_SIZE]; /**< Area of "competence" */
+	// Phone number
+	char phone[STRING_SIZE];
+	// Email address
+	char email[STRING_SIZE];
+	date reg_date;
 	int buildings_sold; /**< Number of buildings that this professional has sold */
 } professionals;
 

@@ -20,7 +20,7 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 	char *token;
 
 	int field;
-	// Client counter
+	// Buildings counter
 	int bl_num = 0;
 
 	// Temp var for string to integer conversion (enum)
