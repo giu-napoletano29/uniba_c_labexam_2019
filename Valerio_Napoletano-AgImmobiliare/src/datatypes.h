@@ -71,6 +71,11 @@ typedef struct {
 } professionals;
 
 typedef struct {
+	char id[STRING_SIZE]; /**< "Codice Fiscale" in Italy */
+	char content[STRING_SIZE];
+} potential;
+
+typedef struct {
 	char id[STRING_SIZE];
 	char street[STRING_SIZE];
 	short int civic;
