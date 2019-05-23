@@ -15,24 +15,6 @@
 #include "../../utils.h"
 #include "show.h"
 
-
-int loadProsFile() {
-	int rows = 0;
-	FILE *filePtr;
-	filePtr = fopen("professionals.csv", "a+");
-	// Maybe this is not needed because the file will automatically be created
-	//checkFile(filePtr);
-	if (filePtr != NULL) {
-		rows = countRows(filePtr);
-		rewind(filePtr);
-		professionals pr[rows];
-		readProsFile(filePtr, pr);
-	}
-
-	fclose(filePtr);
-	return -1;
-}
-
 void readProsFile(FILE *filePtr, professionals *pr) {
 	char line[400];
 	char *token;
@@ -94,4 +76,22 @@ void readProsFile(FILE *filePtr, professionals *pr) {
 	}
 
 	showAllPros(pr, pr_num);
+}
+
+
+int loadProsFile() {
+	int rows = 0;
+	FILE *filePtr;
+	filePtr = fopen("professionals.csv", "a+");
+	// Maybe this is not needed because the file will automatically be created
+	//checkFile(filePtr);
+	if (filePtr != NULL) {
+		rows = countRows(filePtr);
+		rewind(filePtr);
+		professionals pr[rows];
+		readProsFile(filePtr, pr);
+	}
+
+	fclose(filePtr);
+	return -1;
 }
