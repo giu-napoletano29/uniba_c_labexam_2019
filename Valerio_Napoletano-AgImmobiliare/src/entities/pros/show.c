@@ -22,6 +22,7 @@ void showProData(professionals *pr) {
 			pr->reg_date.month, pr->reg_date.year);
 	printf("Immobili venduti: %d \n", pr->buildings_sold);
 
+	loadPotFile(pr->id);
 	newLine();
 	system("pause");
 }
