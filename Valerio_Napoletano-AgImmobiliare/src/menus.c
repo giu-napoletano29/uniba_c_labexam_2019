@@ -36,8 +36,9 @@ int clientsMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Visualizza tutti i clienti");
+		//TODO: This does not save on file for now
 		puts("2. Aggiungi un cliente");
-		puts("3. Cancella clienti");
+		//puts("3. Cancella clienti");
 		puts("4. Torna indietro");
 
 		newLine();
@@ -53,7 +54,7 @@ int clientsMenu() {
 			choice = addClient();
 			break;
 		case 3:
-			choice = deleteClient();
+			//choice = deleteClient();
 			break;
 		case 4:
 			// This is used as a flag for the "go back" choice
@@ -89,8 +90,8 @@ int professMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Mostra tutti i professionisti");
-		puts("2. Aggiungi un professionista");
-		puts("3. Modifica un professionista");
+		//puts("2. Aggiungi un professionista");
+		//puts("3. Modifica un professionista");
 		puts("4. Torna indietro");
 
 		newLine();
@@ -119,7 +120,7 @@ int professMenu() {
 			break;
 		}
 
-	} while (error == true || choice == -1);
+	} while (error == true);
 	return choice;
 }
 
@@ -141,10 +142,10 @@ int buildingsMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Visualizza tutti gli immobili");
-		puts("2. Aggiungi un immobile");
-		puts("3. Modifica un immobile");
-		puts("4. Cancella un immobile");
-		puts("5. Cerca un immobile");
+		//puts("2. Aggiungi un immobile");
+		//puts("3. Modifica un immobile");
+		//puts("4. Cancella un immobile");
+		//puts("5. Cerca un immobile");
 		puts("6. Torna indietro");
 
 		newLine();
