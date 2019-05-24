@@ -15,4 +15,8 @@
 
 #define MAX_USER_BUDGET 1000000000 /**< One bilion */
 
+#define DAY_IN_SECONDS 86400
+
+#define CLIENT_EXPIRE_DAYS 30 /**< How many days until the programm will prompt the user to delete a client */
+
 #endif /* CONSTS_H */

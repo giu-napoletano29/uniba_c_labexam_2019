@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h> /**< strcmp */
 
 #include "../../utils.h"
 #include "../buildings/show.h"
@@ -34,6 +35,45 @@ void showClientType(int type) {
 	printf("\n");
 }
 
+void checkIfUserExpired(time_t epochTime) {
+	/**
+	 * Array of 2 positions for keeping the newline "\n"
+	 */
+	char deleteChoice[1];
+
+	/**
+	 * Temp "tm" struct required for parsing the date properly from the file
+	 */
+	struct tm temp_date = { 0 };
+
+	/**
+	 * tm_mon is defined as a range between 0 to 11.
+	 * tm_year starts from 1900.
+	 *
+	 * @see http://www.cplusplus.com/reference/ctime/tm/
+	 */
+	temp_date.tm_mon -= 1;
+	temp_date.tm_year -= 1900;
+
+	/**
+	 * Calculate how many days the client registration expired.
+	 */
+	int diffDays = difftime(time(NULL), epochTime) / DAY_IN_SECONDS;
+
+	/**
+	 * const.h CLIENT_EXPIRE_DAYS is 30 (days)
+	 */
+	if (diffDays > CLIENT_EXPIRE_DAYS) {
+		printf("\n\nIl cliente risulta registrato da piu' di 30 giorni.\nVuoi eliminarlo? (s/n): ");
+		scanf("%s", deleteChoice);
+
+		if (strcmp(deleteChoice, "s") == 0) {
+			//TODO: Add delete client from file logic
+			puts("Eliminato! (test)");
+		}
+	}
+}
+
 void showClientData(clients *cl) {
 	//puts("--- RIEPILOGO ---");
 	printf("Codice fiscale: %s \n", cl->id);
@@ -51,6 +91,8 @@ void showClientData(clients *cl) {
 
 	printf("Data di registrazione: ");
 	printFormattedDate(cl->reg_date);
+
+	checkIfUserExpired(cl->reg_date);
 
 	newLine();
 	system("pause");
