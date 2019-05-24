@@ -36,7 +36,6 @@ int clientsMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Visualizza tutti i clienti");
-		//TODO: This does not save on file for now
 		puts("2. Aggiungi un cliente");
 		//puts("3. Cancella clienti");
 		puts("4. Torna indietro");
