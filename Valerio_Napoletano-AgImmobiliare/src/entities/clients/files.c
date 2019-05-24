@@ -99,3 +99,25 @@ int loadClientFile() {
 	fclose(filePtr);
 	return -1;
 }
+
+/*
+ * Append a new client to the clients file
+ * @return success
+ */
+int saveClientToFile(clients *cl) {
+	int i = 0;
+	FILE *filePtr;
+	filePtr = fopen("clients.csv", "a+");
+	checkFile(filePtr);
+	if (filePtr != NULL) {
+		fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%u/%u/%u,%d\n", cl[i].id,
+				cl[i].name, cl[i].surname, cl[i].cl_type, cl[i].company_name,
+				cl[i].budget, cl[i].reg_date.day, cl[i].reg_date.month,
+				cl[i].reg_date.year, cl[i].building_type);
+
+	}
+
+	fclose(filePtr);
+	return -1;
+}
+

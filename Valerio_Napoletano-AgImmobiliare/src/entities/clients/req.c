@@ -128,7 +128,7 @@ void reqCompanyName(clients *client) {
 		// numCheck is false because a company name can have numbers
 		strcpy(client->company_name, readString(false).val);
 	} else {
-		strcpy(client->company_name, "");
+		strcpy(client->company_name, "-");
 	}
 
 	//TODO: Maybe add another field for saving the "state" name if the user selects type 4

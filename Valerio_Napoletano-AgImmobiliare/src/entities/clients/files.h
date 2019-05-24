@@ -10,5 +10,6 @@
 
 int loadClientFile();
 void readClientFile(FILE *filePtr, clients *cl);
+int saveClientToFile(clients *cl);
 
 #endif /* ENTITIES_CLIENTS_FILES_H_ */

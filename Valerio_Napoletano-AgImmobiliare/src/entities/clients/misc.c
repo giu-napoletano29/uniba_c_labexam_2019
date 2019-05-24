@@ -56,5 +56,7 @@ int addClient() {
 
 	showClientData(&client);
 
+	saveClientToFile(&client);
+
 	return 0;
 }
