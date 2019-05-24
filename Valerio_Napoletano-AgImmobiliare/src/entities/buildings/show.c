@@ -41,8 +41,8 @@ void showBuildingData(building *bl) {
 	printf("Numero civico: %d \n", bl->civic);
 	printf("Citta: %s \n", bl->city);
 	printf("Provincia: %s \n", bl->province);
-	printf("Data di registrazione: %hd/%hd/%hd \n", bl->reg_date.day,
-			bl->reg_date.month, bl->reg_date.year);
+	printf("Data di registrazione: ");
+	printFormattedDate(bl->reg_date);
 	printf("Prezzo: %d euro \n", bl->price);
 	printf("Venditore: %s \n", bl->owner);
 	printf("Numero di telefono venditore: %s \n", bl->phone);

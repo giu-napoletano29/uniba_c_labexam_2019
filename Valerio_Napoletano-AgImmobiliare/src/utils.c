@@ -5,12 +5,12 @@
  *      Author: Saverio Valerio
  */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h> /** For printFormattedDate() */
 
 // Only for getting STRING_SIZE constant
 #include "datatypes.h"
@@ -24,15 +24,14 @@ void newLine() {
 void clearScr() {
 	// Macros from https://sourceforge.net/p/predef/wiki/OperatingSystems/
 	// "defined": http://port70.net/~nsz/c/c11/n1570.html#6.10.1p1
-	#if defined(_WIN32)
-		// Windows
-		system("cls");
-	#elif defined(__unix__) || defined(__APPLE__) && defined(__MACH__)
+#if defined(_WIN32)
+	// Windows
+	system("cls");
+#elif defined(__unix__) || defined(__APPLE__) && defined(__MACH__)
 		// Unix based systems (GNU/Linux, macOS, etc..)
 		system("clear");
 	#endif
 }
-
 
 // Check if there is any number in the string
 bool isNumber(char *str) {
@@ -59,7 +58,7 @@ str_result readString(bool numCheck) {
 	// TODO: Handle spaces.
 	// STRING_SIZE is 50, then limit scanf to 50 characters
 	scanf("%50s", readValue.val);
-  
+
 	// Check if there are any numbers in the string
 	// Only if the flag numCheck is active
 	if (numCheck && isNumber(readValue.val)) {
@@ -111,4 +110,33 @@ int_result readInteger() {
 	}
 
 	return readValue;
+}
+
+/*
+ * Print date formatted in day/month/year.
+ *
+ * @param time_t epochTime
+ */
+void printFormattedDate(time_t epochTime) {
+	/**
+	 * Pointer to time struct for handling Epoch time
+	 */
+	struct tm *clDate;
+
+	/**
+	 * Buffer for printing out the date (required by strftime)
+	 *  day/month/year (eg. 22/05/2019)
+	 */
+	char dateBuffer[11];
+
+	/**
+	 *  Fill time struct getting date/time info from the Epoch time
+	 */
+	clDate = localtime(&epochTime);
+
+	/**
+	 * Format date and put in dateBuffer for printing out
+	 */
+	strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
+	puts(dateBuffer);
 }

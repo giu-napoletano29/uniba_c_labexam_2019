@@ -15,5 +15,7 @@ void clearScr();
 bool isNumber(char *str);
 bool isChar(char *str);
 
+void printFormattedDate(time_t epochTime);
+
 str_result readString(bool numCheck);
 int_result readInteger();

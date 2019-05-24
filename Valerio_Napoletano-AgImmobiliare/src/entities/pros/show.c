@@ -18,8 +18,8 @@ void showProData(professionals *pr) {
 	printf("Area di competenza: %s \n", pr->area);
 	printf("Numero di telefono: %s \n", pr->phone);
 	printf("Indirizzo e-mail: %s \n", pr->email);
-	printf("Data di registrazione: %hd/%hd/%hd \n", pr->reg_date.day,
-			pr->reg_date.month, pr->reg_date.year);
+	printf("Data di registrazione: ");
+	printFormattedDate(pr->reg_date);
 	printf("Immobili venduti: %d \n", pr->buildings_sold);
 
 	loadPotFile(pr->id);

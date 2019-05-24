@@ -36,11 +36,6 @@ void readClientFile(FILE *filePtr, clients *cl) {
 		// Get first token
 		token = strtok(line, ",");
 
-		/*
-		 * Temp "tm" struct required for parsing the date properly from the file
-		 */
-		struct tm temp_date = { 0 };
-
 		while (token != NULL) {
 			switch (field) {
 			case 0:
@@ -63,27 +58,10 @@ void readClientFile(FILE *filePtr, clients *cl) {
 				cl[cl_num].budget = atoi(token);
 				break;
 			case 6:
-				/**
-				 * Parse date in Italian format (day/month/year)
-				 */
-
-				sscanf(token, "%d/%d/%d", &temp_date.tm_mday, &temp_date.tm_mon,
-						&temp_date.tm_year);
-
-				/*
-				 * tm_mon is defined as a range between 0 to 11.
-				 * tm_year starts from 1900.
-				 *
-				 * @see http://www.cplusplus.com/reference/ctime/tm/
-				 */
-				temp_date.tm_mon -= 1;
-				temp_date.tm_year -= 1900;
-
 				/*
 				 *  Save parsed Epoch time into clients struct
 				 */
-				cl[cl_num].reg_date = mktime(&temp_date);
-
+				cl[cl_num].reg_date = parseDateInFile(token);
 				break;
 			case 7:
 				enum_tmp = atoi(token);

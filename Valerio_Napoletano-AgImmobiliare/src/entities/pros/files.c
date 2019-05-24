@@ -53,11 +53,10 @@ void readProsFile(FILE *filePtr, professionals *pr) {
 				strcpy(pr[pr_num].email, token);
 				break;
 			case 6:
-				/**
-				 * Parse date in Italian format (day/month/year)
+				/*
+				 *  Save parsed Epoch time into clients struct
 				 */
-				sscanf(token, "%hu/%hu/%hu", &pr[pr_num].reg_date.day,
-						&pr[pr_num].reg_date.month, &pr[pr_num].reg_date.year);
+				pr[pr_num].reg_date = parseDateInFile(token);
 				break;
 			case 7:
 				pr[pr_num].buildings_sold = atoi(token);
@@ -135,7 +134,6 @@ int loadPotFile(char id[]) {
 	int rows = 0;
 	FILE *fp_pot;
 	fp_pot = fopen("potential.csv", "r");
-	// Maybe this is not needed because the file will automatically be created
 	checkFile(fp_pot);
 	if (fp_pot != NULL) {
 		rows = countRows(fp_pot);

@@ -35,13 +35,6 @@ void showClientType(int type) {
 }
 
 void showClientData(clients *cl) {
-	// Pointer to time struct for handling Epoch time
-	struct tm *clDate;
-
-	// Buffer for printing out the date (required by strftime)
-	// day/month/year (eg. 22/05/2019)
-	char dateBuffer[11];
-
 	//puts("--- RIEPILOGO ---");
 	printf("Codice fiscale: %s \n", cl->id);
 	printf("Nome: %s \n", cl->name);
@@ -57,13 +50,7 @@ void showClientData(clients *cl) {
 	showBuildingType(cl->building_type);
 
 	printf("Data di registrazione: ");
-
-	// Fill time struct getting date/time info from the Epoch time
-	clDate = localtime(&cl->reg_date);
-
-	// Format date and put in dateBuffer for printing out.
-	strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
-	puts(dateBuffer);
+	printFormattedDate(cl->reg_date);
 
 	newLine();
 	system("pause");

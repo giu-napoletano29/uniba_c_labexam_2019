@@ -53,11 +53,10 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 				strcpy(bl[bl_num].province, token);
 				break;
 			case 5:
-				/**
-				 * Parse date in Italian format (day/month/year)
+				/*
+				 *  Save parsed Epoch time into clients struct
 				 */
-				sscanf(token, "%hu/%hu/%hu", &bl[bl_num].reg_date.day,
-						&bl[bl_num].reg_date.month, &bl[bl_num].reg_date.year);
+				bl[bl_num].reg_date = parseDateInFile(token);
 				break;
 			case 6:
 				bl[bl_num].price = atoi(token);

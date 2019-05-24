@@ -53,7 +53,6 @@ typedef struct {
 	client_type cl_type; /**< Client type (company, private, etc..) */
 	char company_name[STRING_SIZE]; /**< Company name (if type is company) */
 	int budget;
-	//struct tm *reg_date; /**< Registration date */
 	time_t reg_date; /**< Registration date in Epoch time */
 	building_type building_type; /**< Type of building that needs to be searched */
 } clients;
@@ -67,7 +66,7 @@ typedef struct {
 	char phone[STRING_SIZE];
 	// Email address
 	char email[STRING_SIZE];
-	date reg_date;
+	time_t reg_date; /**< Registration date in Epoch time */
 	int buildings_sold; /**< Number of buildings that this professional has sold */
 } professionals;
 
@@ -82,8 +81,7 @@ typedef struct {
 	short int civic;
 	char city[STRING_SIZE];
 	char province[STRING_SIZE];
-	// Registration date
-	date reg_date;
+	time_t reg_date; /**< Registration date in Epoch time */
 	int price;
 	char owner[STRING_SIZE];
 	// Owner phone number

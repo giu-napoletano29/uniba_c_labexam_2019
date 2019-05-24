@@ -14,5 +14,6 @@
 int checkFile(FILE *fp_build);
 int countRows(FILE *fp_build);
 void copyFile(FILE *fp_from, FILE *fp_to, int choice);
+time_t parseDateInFile(char token[STRING_SIZE]);
 
 #endif /* FILE_UTILS_H_ */
