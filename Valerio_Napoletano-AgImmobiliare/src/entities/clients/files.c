@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include "../../datatypes.h"
 #include "../../file_utils.h"
@@ -35,6 +36,11 @@ void readClientFile(FILE *filePtr, clients *cl) {
 		// Get first token
 		token = strtok(line, ",");
 
+		/*
+		 * Temp "tm" struct required for parsing the date properly from the file
+		 */
+		struct tm temp_date = { 0 };
+
 		while (token != NULL) {
 			switch (field) {
 			case 0:
@@ -60,8 +66,24 @@ void readClientFile(FILE *filePtr, clients *cl) {
 				/**
 				 * Parse date in Italian format (day/month/year)
 				 */
-				sscanf(token, "%hu/%hu/%hu", &cl[cl_num].reg_date.day,
-						&cl[cl_num].reg_date.month, &cl[cl_num].reg_date.year);
+
+				sscanf(token, "%d/%d/%d", &temp_date.tm_mday, &temp_date.tm_mon,
+						&temp_date.tm_year);
+
+				/*
+				 * tm_mon is defined as a range between 0 to 11.
+				 * tm_year starts from 1900.
+				 *
+				 * @see http://www.cplusplus.com/reference/ctime/tm/
+				 */
+				temp_date.tm_mon -= 1;
+				temp_date.tm_year -= 1900;
+
+				/*
+				 *  Save parsed Epoch time into clients struct
+				 */
+				cl[cl_num].reg_date = mktime(&temp_date);
+
 				break;
 			case 7:
 				enum_tmp = atoi(token);
@@ -105,16 +127,29 @@ int loadClientFile() {
  * @return success
  */
 int saveClientToFile(clients *cl) {
-	int i = 0;
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "a+");
 	checkFile(filePtr);
 	if (filePtr != NULL) {
-		fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%u/%u/%u,%d\n", cl[i].id,
-				cl[i].name, cl[i].surname, cl[i].cl_type, cl[i].company_name,
-				cl[i].budget, cl[i].reg_date.day, cl[i].reg_date.month,
-				cl[i].reg_date.year, cl[i].building_type);
+		// --- These variables are only needed if the file is available. ---
 
+		// Clients counter
+		int i = 0;
+
+		// Buffer for printing out the date (required by strftime)
+		// day/month/year (eg. 22/05/2019)
+		char dateBuffer[11];
+
+		// Pointer to time struct for handling Epoch time
+		// Fill time struct getting date/time info from the Epoch time
+		struct tm *clDate = localtime(&cl->reg_date);
+
+		// Get formatted date
+		strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
+
+		fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl[i].id, cl[i].name,
+				cl[i].surname, cl[i].cl_type, cl[i].company_name, cl[i].budget,
+				dateBuffer, cl[i].building_type);
 	}
 
 	fclose(filePtr);

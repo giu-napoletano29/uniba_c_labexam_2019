@@ -53,7 +53,8 @@ typedef struct {
 	client_type cl_type; /**< Client type (company, private, etc..) */
 	char company_name[STRING_SIZE]; /**< Company name (if type is company) */
 	int budget;
-	date reg_date; /**< Registration date */
+	//struct tm *reg_date; /**< Registration date */
+	time_t reg_date; /**< Registration date in Epoch time */
 	building_type building_type; /**< Type of building that needs to be searched */
 } clients;
 

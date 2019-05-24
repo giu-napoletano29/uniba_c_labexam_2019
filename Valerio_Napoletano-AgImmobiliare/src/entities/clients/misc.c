@@ -8,26 +8,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// For getting local time on Windows (SYSTEMTIME struct and GetLocalTime() function)
-#include <windows.h>
+#include <time.h>
 
 #include "../../utils.h"
 #include "req.h"
 #include "show.h"
 #include "files.h"
 
-// Get local system date and save in the related struct (only for Windows)
+/**
+ * Get current system date and save the Epoch time value.
+ *
+ * @see https://en.wikipedia.org/wiki/Unix_time
+ * @param client
+ */
 void saveLocalDate(clients *client) {
-	// https://docs.microsoft.com/it-it/windows/desktop/api/minwinbase/ns-minwinbase-systemtime
-	SYSTEMTIME t;
+	time_t timeRightNow;
 
-	// https://docs.microsoft.com/en-us/windows/desktop/api/sysinfoapi/nf-sysinfoapi-getlocaltime
-	GetLocalTime(&t); // Fill out the struct so that it can be used
-
-	// Save local system date to the struct
-	client->reg_date.day = t.wDay;
-	client->reg_date.month = t.wMonth;
-	client->reg_date.year = t.wYear;
+	// time function returns the current Epoch time (time_t)
+	client->reg_date = time(&timeRightNow);
 }
 
 int addClient() {
