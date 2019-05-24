@@ -79,12 +79,47 @@ void readProsFile(FILE *filePtr, professionals *pr) {
 }
 
 
+void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows){
+	char line[400];
+	char *token;
+
+	int field;
+	// Pros counter
+	int pr_num = 0;
+
+	while (fgets(line, sizeof line, fp_pot) != NULL) /* read a line */
+	{
+		// Fields counter (ID, name, etc..)
+		field = 0;
+
+		/* Tokenize and load in the internal struct */
+		// Get first token
+		token = strtok(line, ",");
+
+		while (token != NULL) {
+			switch (field) {
+			case 0:
+				strcpy(pr[pr_num].id, token);
+				break;
+			case 1:
+				strcpy(pr[pr_num].content, token);
+				break;
+			}
+			// Read the other tokens
+			token = strtok(NULL, ",");
+			field++;
+		}
+		pr_num++;
+	}
+	findPot(id, pr, rows);
+}
+
 int loadProsFile() {
 	int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "a+");
 	// Maybe this is not needed because the file will automatically be created
-	//checkFile(filePtr);
+	checkFile(filePtr);
 	if (filePtr != NULL) {
 		rows = countRows(filePtr);
 		rewind(filePtr);
@@ -94,4 +129,28 @@ int loadProsFile() {
 
 	fclose(filePtr);
 	return -1;
+}
+
+int loadPotFile(char id[]) {
+	int rows = 0;
+	FILE *fp_pot;
+	fp_pot = fopen("potential.csv", "r");
+	// Maybe this is not needed because the file will automatically be created
+	checkFile(fp_pot);
+	if (fp_pot != NULL) {
+		rows = countRows(fp_pot);
+		rewind(fp_pot);
+		potential pr[rows];
+		readPotFile(fp_pot, pr, id, rows);
+	}
+	fclose(fp_pot);
+	return -1;
+}
+
+void findPot(char id[], potential *pr, int rows){
+	for(int i=0; i < rows; i++){
+		if(strcmp(id, pr[i].id) == 0){
+			printf("\nPotenziale: %s\n", pr[i].content);
+		}
+	}
 }
