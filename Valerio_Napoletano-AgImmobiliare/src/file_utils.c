@@ -42,6 +42,7 @@ bool checkFile(FILE *filePtr) {
 		system("pause");
 	}
 
+	rewind(filePtr);
 	return error;
 }
 
