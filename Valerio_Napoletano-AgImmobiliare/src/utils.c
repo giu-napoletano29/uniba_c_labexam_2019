@@ -140,3 +140,18 @@ void printFormattedDate(time_t epochTime) {
 	strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
 	puts(dateBuffer);
 }
+
+/**
+ * Colors util functions
+ */
+void setRedColor() {
+	printf("\033[1;31m");
+}
+
+void setYellowColor() {
+	printf("\033[1;33m");
+}
+
+void resetColor() {
+	printf("\033[0m");
+}

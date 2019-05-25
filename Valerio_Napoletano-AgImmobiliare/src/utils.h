@@ -19,3 +19,8 @@ void printFormattedDate(time_t epochTime);
 
 str_result readString(bool numCheck);
 int_result readInteger();
+
+//Color functions
+void setRedColor();
+void setYellowColor();
+void resetColor();

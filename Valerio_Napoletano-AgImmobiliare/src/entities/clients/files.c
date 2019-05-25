@@ -16,7 +16,7 @@
 #include "../../utils.h"
 #include "show.h"
 
-void readClientFile(FILE *filePtr, clients *cl) {
+void parseClientFile(FILE *filePtr, clients *cl) {
 	char line[400];
 	char *token;
 
@@ -87,13 +87,12 @@ int loadClientFile() {
 	int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "a+");
-	// Maybe this is not needed because the file will automatically be created
-	//checkFile(filePtr);
+	checkFile(filePtr);
 	if (filePtr != NULL) {
 		rows = countRows(filePtr);
 		rewind(filePtr);
 		clients cl[rows];
-		readClientFile(filePtr, cl);
+		parseClientFile(filePtr, cl);
 	}
 
 	fclose(filePtr);

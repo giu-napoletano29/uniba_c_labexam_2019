@@ -91,8 +91,7 @@ int loadBuildingsFile() {
 	int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("buildings.csv", "a+");
-	// Maybe this is not needed because the file will automatically be created
-	//checkFile(filePtr);
+	checkFile(filePtr);
 	if (filePtr != NULL) {
 		rows = countRows(filePtr);
 		rewind(filePtr);

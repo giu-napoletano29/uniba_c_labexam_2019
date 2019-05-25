@@ -9,7 +9,7 @@
 #define ENTITIES_CLIENTS_FILES_H_
 
 int loadClientFile();
-void readClientFile(FILE *filePtr, clients *cl);
+void parseClientFile(FILE *filePtr, clients *cl);
 int saveClientToFile(clients *cl);
 
 #endif /* ENTITIES_CLIENTS_FILES_H_ */

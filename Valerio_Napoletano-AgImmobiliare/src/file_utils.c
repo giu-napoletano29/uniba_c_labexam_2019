@@ -9,31 +9,49 @@
 #include <time.h> /** For parseDateInFile() */
 
 #include "utils.h"
+#include "file_utils.h"
 #include "datatypes.h"
 
 //TODO: Refer to line 54, should be removed
 //#include "entities/buildings.h"
 
-int checkFile(FILE *fp_build) {
+/**
+ * Check if the file can be written and if it's empty
+ * @param filePtr
+ * @return
+ */
+int checkFile(FILE *filePtr) {
 	int res = 0;
+	int rows = 0;
 
-	if (fp_build == NULL) {
-		printf(
-				"\n------------------------ ATTENZIONE ------------------------");
-		perror("\nErrore: ");
+	rows = countRows(filePtr);
+
+	if (filePtr == NULL) {
+		setRedColor();
+		perror("\nERRORE: ");
+		resetColor();
 		printf("\nControlla il tuo file system e riprova.\n");
 		res = 1;
-		fclose(fp_build);
+		system("pause");
+	}
+
+	// Check if the file is empty
+	if (rows == 0) {
+		setRedColor();
+		printf("\nERRORE: Nessun record presente nel database.\n\n");
+		resetColor();
+		res = 1;
+		fclose(filePtr);
 		system("pause");
 	}
 
 	return res;
 }
 
-int countRows(FILE *fp_build) {
+int countRows(FILE *filePtr) {
 	int count = 0;
 	char line[400];
-	while (fgets(line, sizeof line, fp_build) != NULL) /* read a line */
+	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
 		// Testing
 		//printf("%d. ", count + 1);

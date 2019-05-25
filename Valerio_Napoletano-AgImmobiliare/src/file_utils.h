@@ -9,10 +9,12 @@
 #define FILE_UTILS_H_
 
 #include <stdio.h>
+#include <stdbool.h>
+
 #include "datatypes.h"
 
-int checkFile(FILE *fp_build);
-int countRows(FILE *fp_build);
+int checkFile(FILE *filePtr);
+int countRows(FILE *filePtr);
 void copyFile(FILE *fp_from, FILE *fp_to, int choice);
 time_t parseDateInFile(char token[STRING_SIZE]);
 

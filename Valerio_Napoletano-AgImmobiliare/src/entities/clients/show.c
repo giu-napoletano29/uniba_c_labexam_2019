@@ -67,7 +67,7 @@ void checkIfUserExpired(time_t epochTime, char id[]) {
 		printf("\n\nIl cliente risulta registrato da piu' di 30 giorni.\nVuoi eliminarlo? (s/n): ");
 		scanf("%s", deleteChoice);
 
-		if (strcmp(deleteChoice, "s") == 0) {
+		if (strcmp(deleteChoice, "s") == 0 || strcmp(deleteChoice, "y") == 0) {
 			//TODO: Add delete client from file logic
 			printf("\nUtente con ID %s eliminato! (test)\n", id);
 		}

@@ -117,7 +117,6 @@ int loadProsFile() {
 	int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "a+");
-	// Maybe this is not needed because the file will automatically be created
 	checkFile(filePtr);
 	if (filePtr != NULL) {
 		rows = countRows(filePtr);
