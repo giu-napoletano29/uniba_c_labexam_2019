@@ -132,6 +132,10 @@ int professMenu() {
 
 int buildingsMenu() {
 	short int choice;
+
+	int buildingsNum = getBuildingsNumber();
+	building allbuildings[buildingsNum];
+
 	bool error = false;
 
 	do {
@@ -151,7 +155,7 @@ int buildingsMenu() {
 		//puts("2. Aggiungi un immobile");
 		//puts("3. Modifica un immobile");
 		//puts("4. Cancella un immobile");
-		//puts("5. Cerca un immobile");
+		puts("5. Cerca un immobile");
 		puts("6. Torna indietro");
 
 		newLine();
@@ -161,7 +165,8 @@ int buildingsMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = loadBuildingsFile();
+			choice = loadBuildingsFile(allbuildings);
+			showAllBuildings(allbuildings, buildingsNum);
 			break;
 		case 2:
 			//choice = addBuilding();
@@ -173,7 +178,8 @@ int buildingsMenu() {
 			//choice = removeBuilding();
 			break;
 		case 5:
-			//choice = searchBuilding();
+			choice = loadBuildingsFile(allbuildings);
+			searchBuilding(allbuildings, buildingsNum);
 			break;
 		case 6:
 			// This is used as a flag for the "go back" choice

@@ -8,7 +8,9 @@
 #ifndef ENTITIES_CLIENTS_FILES_H_
 #define ENTITIES_CLIENTS_FILES_H_
 
-int loadBuildingsFile();
-void readBuildingsFile(FILE *filePtr, clients *cl);
+int loadBuildingsFile(building *bl);
+void readBuildingsFile(FILE *filePtr, building *cl);
+void searchBuilding(building *bl, int n_bui);
+int getbuildingsNumber();
 
 #endif /* ENTITIES_CLIENTS_FILES_H_ */

@@ -84,21 +84,64 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 		newLine();
 	}
 
-	showAllBuildings(bl, bl_num);
+	//showAllBuildings(bl, bl_num);
 }
 
-int loadBuildingsFile() {
-	int rows = 0;
+int loadBuildingsFile(building *bl) {
 	FILE *filePtr;
 	filePtr = fopen("buildings.csv", "a+");
-	//checkFile(filePtr);
+	checkFile(filePtr);
 	if (filePtr != NULL) {
-		rows = countRows(filePtr);
 		rewind(filePtr);
-		building bl[rows];
 		readBuildingsFile(filePtr, bl);
 	}
 
 	fclose(filePtr);
 	return -1;
+}
+
+int getBuildingsNumber(){
+	FILE *filePtr;
+	int rows = 0;
+	// Read only
+	filePtr = fopen("buildings.csv", "r");
+	//TODO: Makes the program crash
+	//if (!checkFile(filePtr)) {
+	checkFile(filePtr);
+	if (filePtr != NULL) {
+		rewind(filePtr);
+		rows = countRows(filePtr);
+	}
+	fclose(filePtr);
+	return rows;
+}
+
+
+void searchBuilding(building *bl, int n_bui){
+	short int choice = 0;
+	int price = 0;
+
+	puts("--- RICERCA IMMOBILI ---");
+	newLine();
+
+	puts("Scegli un'operazione:");
+	puts("1. Prezzo");
+
+	newLine();
+	printf("Operazione: ");
+	scanf("%hu", &choice);
+
+	switch(choice){
+		case 1:	printf("\ninserisci il prezzo massimo dell'immobile: ");
+				scanf("%d", &price);
+
+				for(int i = 0; i<n_bui; i++){
+					if(bl[i].price < price){
+						showBuildingData(bl + i);
+					}
+				}
+				break;
+		default: break;
+	}
+	system("pause");
 }
