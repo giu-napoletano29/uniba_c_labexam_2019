@@ -11,15 +11,6 @@
 #include "consts.h"
 
 /**
- * @brief Struct for handling a date (made up by day, month and year)
- */
-typedef struct {
-	short int day;
-	short int month;
-	short int year;
-} date;
-
-/**
  * @brief Struct for handling the client type
  */
 typedef enum {
