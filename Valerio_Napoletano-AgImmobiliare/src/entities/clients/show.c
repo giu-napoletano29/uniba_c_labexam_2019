@@ -35,7 +35,7 @@ void showClientType(int type) {
 	printf("\n");
 }
 
-void checkIfUserExpired(time_t epochTime) {
+void checkIfUserExpired(time_t epochTime, char id[]) {
 	/**
 	 * Array of 2 positions for keeping the newline "\n"
 	 */
@@ -69,7 +69,7 @@ void checkIfUserExpired(time_t epochTime) {
 
 		if (strcmp(deleteChoice, "s") == 0) {
 			//TODO: Add delete client from file logic
-			puts("Eliminato! (test)");
+			printf("\nUtente con ID %s eliminato! (test)\n", id);
 		}
 	}
 }
@@ -92,7 +92,7 @@ void showClientData(clients *cl) {
 	printf("Data di registrazione: ");
 	printFormattedDate(cl->reg_date);
 
-	checkIfUserExpired(cl->reg_date);
+	checkIfUserExpired(cl->reg_date, cl->id);
 
 	newLine();
 	system("pause");

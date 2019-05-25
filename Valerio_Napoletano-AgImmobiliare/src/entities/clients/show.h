@@ -13,6 +13,6 @@ void showClientType();
 void showClientData(clients *cl);
 int showAllClients(clients *cl, int num_clients);
 
-void checkIfUserExpired(time_t epochTime);
+void checkIfUserExpired(time_t epochTime, char id[]);
 
 #endif /* ENTITIES_CLIENTS_SHOW_H_ */
