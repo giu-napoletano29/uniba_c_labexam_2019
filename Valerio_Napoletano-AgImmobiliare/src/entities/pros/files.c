@@ -77,8 +77,15 @@ void readProsFile(FILE *filePtr, professionals *pr) {
 	showAllPros(pr, pr_num);
 }
 
+void findPot(char id[], potential *pr, int rows) {
+	for (int i = 0; i < rows; i++) {
+		if (strcmp(id, pr[i].id) == 0) {
+			printf("\nPotenziale: %s\n", pr[i].content);
+		}
+	}
+}
 
-void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows){
+void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 	char line[400];
 	char *token;
 
@@ -142,12 +149,4 @@ int loadPotFile(char id[]) {
 	}
 	fclose(fp_pot);
 	return -1;
-}
-
-void findPot(char id[], potential *pr, int rows){
-	for(int i=0; i < rows; i++){
-		if(strcmp(id, pr[i].id) == 0){
-			printf("\nPotenziale: %s\n", pr[i].content);
-		}
-	}
 }
