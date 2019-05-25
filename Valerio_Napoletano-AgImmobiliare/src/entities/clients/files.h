@@ -8,8 +8,11 @@
 #ifndef ENTITIES_CLIENTS_FILES_H_
 #define ENTITIES_CLIENTS_FILES_H_
 
-int loadClientFile();
+int loadClientFile(clients *cl);
 void parseClientFile(FILE *filePtr, clients *cl);
-int saveClientToFile(clients *cl);
+int rewriteClientsToFile(clients *cl, int rows);
+int appendClientToFile(clients *cl);
+
+int getClientsNumber();
 
 #endif /* ENTITIES_CLIENTS_FILES_H_ */

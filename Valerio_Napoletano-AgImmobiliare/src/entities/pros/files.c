@@ -117,7 +117,7 @@ int loadProsFile() {
 	int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "a+");
-	checkFile(filePtr);
+	//checkFile(filePtr);
 	if (filePtr != NULL) {
 		rows = countRows(filePtr);
 		rewind(filePtr);
@@ -133,7 +133,7 @@ int loadPotFile(char id[]) {
 	int rows = 0;
 	FILE *fp_pot;
 	fp_pot = fopen("potential.csv", "r");
-	checkFile(fp_pot);
+	//checkFile(fp_pot);
 	if (fp_pot != NULL) {
 		rows = countRows(fp_pot);
 		rewind(fp_pot);

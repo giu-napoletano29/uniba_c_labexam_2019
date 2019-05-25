@@ -19,7 +19,4 @@ void reqCompanyName(clients *client);
 void reqBudget(clients *client);
 void reqPropertyType(clients *client);
 
-// Functions for modifying data
-int deleteClient();
-
 #endif /* ENTITIES_CLIENTS_REQ_H_ */

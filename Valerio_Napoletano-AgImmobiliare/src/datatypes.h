@@ -55,6 +55,7 @@ typedef struct {
 	int budget;
 	time_t reg_date; /**< Registration date in Epoch time */
 	building_type building_type; /**< Type of building that needs to be searched */
+	bool toDelete; /**< If true this client won't be saved in the file */
 } clients;
 
 typedef struct {

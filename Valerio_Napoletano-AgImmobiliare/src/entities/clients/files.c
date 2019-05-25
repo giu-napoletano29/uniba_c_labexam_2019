@@ -79,21 +79,47 @@ void parseClientFile(FILE *filePtr, clients *cl) {
 
 		newLine();
 	}
-
-	showAllClients(cl, cl_num);
 }
 
-int loadClientFile() {
-	int rows = 0;
+/*
+ * Overwrite the client file with the data loaded in memory.
+ * Useful for deleting a client.
+ * @return success
+ */
+int rewriteClientsToFile(clients *cl, int rows) {
 	FILE *filePtr;
-	filePtr = fopen("clients.csv", "a+");
-	//TODO: Makes the program crash
-	//if (!checkFile(filePtr)) {
-		rows = countRows(filePtr);
-		rewind(filePtr);
-		clients cl[rows];
-		parseClientFile(filePtr, cl);
-	//}
+	filePtr = fopen("clients.csv", "w+");
+	//checkFile(filePtr);
+
+	if (filePtr != NULL) {
+		// --- These variables are only needed if the file is available. ---
+
+		// Buffer for printing out the date (required by strftime)
+		// day/month/year (eg. 22/05/2019)
+		char dateBuffer[11];
+
+		// Pointer to time struct for handling Epoch time
+		struct tm *clDate;
+
+		for (int i = 0; i < rows; i++) {
+			// Fill time struct getting date/time info from the Epoch time
+			clDate = localtime(&cl[i].reg_date);
+
+			// Get formatted date
+			strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
+
+			printf("INDEX: %d\nID: %s\nTODELETE: %d \n\n", i, cl[i].id,
+					cl[i].toDelete);
+
+			// Save client to file only if the client is not marked for deletion
+			if (!cl[i].toDelete) {
+				fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl[i].id,
+						cl[i].name, cl[i].surname, cl[i].cl_type,
+						cl[i].company_name, cl[i].budget, dateBuffer,
+						cl[i].building_type);
+			}
+		}
+	}
 
 	fclose(filePtr);
 	return -1;
@@ -103,16 +129,12 @@ int loadClientFile() {
  * Append a new client to the clients file
  * @return success
  */
-int saveClientToFile(clients *cl) {
+int appendClientToFile(clients *cl) {
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "a+");
-	checkFile(filePtr);
+	//checkFile(filePtr);
 	if (filePtr != NULL) {
 		// --- These variables are only needed if the file is available. ---
-
-		// Clients counter
-		int i = 0;
-
 		// Buffer for printing out the date (required by strftime)
 		// day/month/year (eg. 22/05/2019)
 		char dateBuffer[11];
@@ -124,12 +146,46 @@ int saveClientToFile(clients *cl) {
 		// Get formatted date
 		strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
 
-		fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl[i].id, cl[i].name,
-				cl[i].surname, cl[i].cl_type, cl[i].company_name, cl[i].budget,
-				dateBuffer, cl[i].building_type);
+		// Save to file only if the client is not marked for deletion
+		if (!cl->toDelete) {
+			fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl->id, cl->name,
+					cl->surname, cl->cl_type, cl->company_name, cl->budget,
+					dateBuffer, cl->building_type);
+		}
 	}
 
 	fclose(filePtr);
 	return -1;
 }
 
+/**
+ * Get how many clients are saved in the file.
+ * @return Number of clients. (integer)
+ */
+int getClientsNumber() {
+	FILE *filePtr;
+	int rows = 0;
+	// Read only
+	filePtr = fopen("clients.csv", "r");
+	//TODO: Makes the program crash
+	//if (!checkFile(filePtr)) {
+	rows = countRows(filePtr);
+	fclose(filePtr);
+	//}
+	return rows;
+}
+
+/**
+ * Load "clients.csv" internal file and run the parsing function
+ */
+int loadClientFile(clients *cl) {
+	FILE *filePtr;
+	// Read only
+	filePtr = fopen("clients.csv", "r");
+	//TODO: Makes the program crash
+	//if (!checkFile(filePtr)) {
+	parseClientFile(filePtr, cl);
+	fclose(filePtr);
+	//}
+	return -1;
+}

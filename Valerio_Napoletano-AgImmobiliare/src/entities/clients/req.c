@@ -194,16 +194,3 @@ void reqPropertyType(clients *client) {
 
 	clearScr();
 }
-
-int deleteClient() {
-	clearScr();
-
-	puts("--- ELIMINAZIONE CLIENTI --- ");
-
-	// TODO: Add check for deleting old users (I think that one 6 months should be enough).
-
-	// TODO: Ask for the client ID in order to delete the specific one.
-
-	system("pause");
-	return -1;
-}
