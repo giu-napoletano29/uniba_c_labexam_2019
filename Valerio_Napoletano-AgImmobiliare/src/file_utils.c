@@ -18,10 +18,10 @@
 /**
  * Check if the file can be written and if it's empty
  * @param filePtr
- * @return
+ * @return bool error
  */
-int checkFile(FILE *filePtr) {
-	int res = 0;
+bool checkFile(FILE *filePtr) {
+	bool error = false;
 	int rows = 0;
 
 	rows = countRows(filePtr);
@@ -31,7 +31,7 @@ int checkFile(FILE *filePtr) {
 		perror("\nERRORE: ");
 		resetColor();
 		printf("\nControlla il tuo file system e riprova.\n");
-		res = 1;
+		error = true;
 		system("pause");
 	}
 
@@ -40,12 +40,12 @@ int checkFile(FILE *filePtr) {
 		setRedColor();
 		printf("\nERRORE: Nessun record presente nel database.\n\n");
 		resetColor();
-		res = 1;
+		error = true;
 		fclose(filePtr);
 		system("pause");
 	}
 
-	return res;
+	return error;
 }
 
 int countRows(FILE *filePtr) {
@@ -61,6 +61,7 @@ int countRows(FILE *filePtr) {
 
 	// Testing
 	//printf("\nRecord trovati nel file: %d\n", count);
+	//system("pause");
 
 	return count;
 }

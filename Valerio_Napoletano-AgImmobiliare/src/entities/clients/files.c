@@ -87,13 +87,13 @@ int loadClientFile() {
 	int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "a+");
-	checkFile(filePtr);
-	if (filePtr != NULL) {
+	//TODO: Makes the program crash
+	//if (!checkFile(filePtr)) {
 		rows = countRows(filePtr);
 		rewind(filePtr);
 		clients cl[rows];
 		parseClientFile(filePtr, cl);
-	}
+	//}
 
 	fclose(filePtr);
 	return -1;

@@ -13,7 +13,7 @@
 
 #include "datatypes.h"
 
-int checkFile(FILE *filePtr);
+bool checkFile(FILE *filePtr);
 int countRows(FILE *filePtr);
 void copyFile(FILE *fp_from, FILE *fp_to, int choice);
 time_t parseDateInFile(char token[STRING_SIZE]);
