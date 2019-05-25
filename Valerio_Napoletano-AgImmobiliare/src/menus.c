@@ -17,6 +17,7 @@
 
 #include "entities/buildings/files.h"
 #include "entities/pros/files.h"
+#include "agency.h"
 
 int clientsMenu() {
 	short int choice;
@@ -156,7 +157,8 @@ int buildingsMenu() {
 		//puts("3. Modifica un immobile");
 		//puts("4. Cancella un immobile");
 		puts("5. Cerca un immobile");
-		puts("6. Torna indietro");
+		puts("6. Risultati agenzia");
+		puts("7. Torna indietro");
 
 		newLine();
 
@@ -182,6 +184,10 @@ int buildingsMenu() {
 			searchBuilding(allbuildings, buildingsNum);
 			break;
 		case 6:
+			choice = loadBuildingsFile(allbuildings);
+			resultAg(allbuildings, buildingsNum);
+			break;
+		case 7:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
 			choice = -1;

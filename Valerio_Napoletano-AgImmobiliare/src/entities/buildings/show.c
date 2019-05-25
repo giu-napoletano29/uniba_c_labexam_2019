@@ -51,7 +51,7 @@ void showBuildingData(building *bl) {
 	showBuildingType(bl->b_type);
 
 	newLine();
-	system("pause");
+	//system("pause");
 }
 
 int showAllBuildings(building *bl, int num_buildings) {
