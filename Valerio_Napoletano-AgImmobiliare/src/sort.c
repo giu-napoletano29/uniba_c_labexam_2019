@@ -16,7 +16,48 @@
 #include "utils.h"
 
 void sortFilePro(professionals *pr, int rows){
+	professionals cmp;
 
+	for(int j = 0; j<rows; j++){
+		for(int i = 0; i<rows; i++){
+			if(strcmp(pr[j].surname, pr[i].surname)<0){
+				cmp.buildings_sold = pr[i].buildings_sold;
+				pr[i].buildings_sold = pr[j].buildings_sold;
+				pr[j].buildings_sold = cmp.buildings_sold;
+
+				cmp.reg_date = pr[i].reg_date;
+				pr[i].reg_date = pr[j].reg_date;
+				pr[j].reg_date = cmp.reg_date;
+
+				strcpy(cmp.name, pr[i].name);
+				strcpy(pr[i].name, pr[j].name);
+				strcpy(pr[j].name, cmp.name);
+
+				strcpy(cmp.id, pr[i].id);
+				strcpy(pr[i].id, pr[j].id);
+				strcpy(pr[j].id, cmp.id);
+
+				strcpy(cmp.surname, pr[i].surname);
+				strcpy(pr[i].surname, pr[j].surname);
+				strcpy(pr[j].surname, cmp.surname);
+
+				strcpy(cmp.area, pr[i].area);
+				strcpy(pr[i].area, pr[j].area);
+				strcpy(pr[j].area, cmp.area);
+
+				strcpy(cmp.phone, pr[i].phone);
+				strcpy(pr[i].phone, pr[j].phone);
+				strcpy(pr[j].phone, cmp.phone);
+
+				strcpy(cmp.email, pr[i].email);
+				strcpy(pr[i].email, pr[j].email);
+				strcpy(pr[j].email, cmp.email);
+
+			}
+		}
+	}
+	/*showAllPros(pr, rows);
+	system("pause");*/
 }
 
 void sortFileCli(clients *cl, int rows){
@@ -64,8 +105,8 @@ void sortFileCli(clients *cl, int rows){
 			}
 		}
 	}
-	showAllClients(cl, rows);
-	system("pause");
+	/*showAllClients(cl, rows);
+	system("pause");*/
 }
 void sortFileBui(building *bl, int rows){
 	building cmp;
@@ -115,6 +156,6 @@ void sortFileBui(building *bl, int rows){
 			}
 		}
 	}
-	showAllBuildings(bl, rows);
-	system("pause");
+	/*showAllBuildings(bl, rows);
+	system("pause");*/
 }

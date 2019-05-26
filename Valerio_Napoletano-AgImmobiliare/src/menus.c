@@ -85,6 +85,9 @@ int professMenu() {
 	short int choice;
 	bool error = false;
 
+	int professionalsNum = getProfessionalsNumber();
+	professionals allprofessionals[professionalsNum];
+
 	do {
 		clearScr();
 
@@ -110,7 +113,10 @@ int professMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = loadProsFile();
+			choice = loadProsFile(allprofessionals);
+			showAllPros(allprofessionals, professionalsNum);
+			sortFilePro(allprofessionals, professionalsNum);
+			rewriteProfessionalsToFile(allprofessionals, professionalsNum);
 			break;
 		case 2:
 			//choice = addPro();
