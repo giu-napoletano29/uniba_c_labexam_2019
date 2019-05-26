@@ -48,6 +48,7 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 				break;
 			case 3:
 				strcpy(bl[bl_num].city, token);
+				convertToUpperCase(bl[bl_num].city);
 				break;
 			case 4:
 				strcpy(bl[bl_num].province, token);
@@ -121,12 +122,14 @@ int getBuildingsNumber(){
 void searchBuilding(building *bl, int n_bui){
 	short int choice = 0;
 	int price = 0;
+	char city[STRING_SIZE];
 
 	puts("--- RICERCA IMMOBILI ---");
 	newLine();
 
 	puts("Scegli un'operazione:");
 	puts("1. Prezzo");
+	puts("2. Localita'");
 
 	newLine();
 	printf("Operazione: ");
@@ -139,6 +142,16 @@ void searchBuilding(building *bl, int n_bui){
 				for(int i = 0; i<n_bui; i++){
 					if(bl[i].price < price){
 						showBuildingData(bl + i);
+					}
+				}
+				break;
+		case 2:	printf("\nInserisci la localita' dell'immobile: ");
+				scanf("%s", city);
+				convertToUpperCase(city);
+
+				for(int i=0; i<n_bui; i++){
+					if(strstr(bl[i].city, city) != NULL) {
+					    showBuildingData(bl + i);
 					}
 				}
 				break;
