@@ -56,6 +56,7 @@ int clientsMenu() {
 			choice = loadClientFile(allClients);
 			showAllClients(allClients, clientsNum);
 			//TODO: Optimize: run only if some clients needs to be deleted
+			sortFileCli(allClients, clientsNum);
 			rewriteClientsToFile(allClients, clientsNum);
 			break;
 		case 2:

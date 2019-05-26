@@ -43,9 +43,11 @@ void parseClientFile(FILE *filePtr, clients *cl) {
 				break;
 			case 1:
 				strcpy(cl[cl_num].name, token);
+				convertToUpperCase(cl[cl_num].name);
 				break;
 			case 2:
 				strcpy(cl[cl_num].surname, token);
+				convertToUpperCase(cl[cl_num].surname);
 				break;
 			case 3:
 				enum_tmp = atoi(token);

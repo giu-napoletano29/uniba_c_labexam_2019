@@ -20,7 +20,52 @@ void sortFilePro(professionals *pr, int rows){
 }
 
 void sortFileCli(clients *cl, int rows){
+	clients cmp;
 
+	for(int j = 0; j<rows; j++){
+		for(int i = 0; i<rows; i++){
+			if(strcmp(cl[j].surname, cl[i].surname)<0){
+				cmp.budget = cl[i].budget;
+				cl[i].budget = cl[j].budget;
+				cl[j].budget = cmp.budget;
+
+				cmp.cl_type = cl[i].cl_type;
+				cl[i].cl_type = cl[j].cl_type;
+				cl[j].cl_type = cmp.cl_type;
+
+				cmp.toDelete = cl[i].toDelete;
+				cl[i].toDelete = cl[j].toDelete;
+				cl[j].toDelete = cmp.toDelete;
+
+				cmp.building_type = cl[i].building_type;
+				cl[i].building_type = cl[j].building_type;
+				cl[j].building_type = cmp.building_type;
+
+				cmp.reg_date = cl[i].reg_date;
+				cl[i].reg_date = cl[j].reg_date;
+				cl[j].reg_date = cmp.reg_date;
+
+				strcpy(cmp.name, cl[i].name);
+				strcpy(cl[i].name, cl[j].name);
+				strcpy(cl[j].name, cmp.name);
+
+				strcpy(cmp.id, cl[i].id);
+				strcpy(cl[i].id, cl[j].id);
+				strcpy(cl[j].id, cmp.id);
+
+				strcpy(cmp.surname, cl[i].surname);
+				strcpy(cl[i].surname, cl[j].surname);
+				strcpy(cl[j].surname, cmp.surname);
+
+				strcpy(cmp.company_name, cl[i].company_name);
+				strcpy(cl[i].company_name, cl[j].company_name);
+				strcpy(cl[j].company_name, cmp.company_name);
+
+			}
+		}
+	}
+	showAllClients(cl, rows);
+	system("pause");
 }
 void sortFileBui(building *bl, int rows){
 	building cmp;
