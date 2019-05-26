@@ -24,3 +24,4 @@ int_result readInteger();
 void setRedColor();
 void setYellowColor();
 void resetColor();
+void convertToUpperCase(char *s);

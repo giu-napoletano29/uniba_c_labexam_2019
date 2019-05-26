@@ -63,6 +63,7 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 				break;
 			case 7:
 				strcpy(bl[bl_num].owner, token);
+				convertToUpperCase(bl[bl_num].owner);
 				break;
 			case 8:
 				strcpy(bl[bl_num].phone, token);
@@ -144,4 +145,38 @@ void searchBuilding(building *bl, int n_bui){
 		default: break;
 	}
 	system("pause");
+}
+
+int rewritebuildingsToFile(building *bl, int rows) {
+	FILE *filePtr;
+	filePtr = fopen("buildings.csv", "w+");
+	//checkFile(filePtr);
+
+	if (filePtr != NULL) {
+		rewind(filePtr);
+		// --- These variables are only needed if the file is available. ---
+
+		// Buffer for printing out the date (required by strftime)
+		// day/month/year (eg. 22/05/2019)
+		char dateBuffer[11];
+
+		// Pointer to time struct for handling Epoch time
+		struct tm *clDate;
+
+		for (int i = 0; i < rows; i++) {
+			// Fill time struct getting date/time info from the Epoch time
+			clDate = localtime(&bl[i].reg_date);
+
+			// Get formatted date
+			strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
+
+			fprintf(filePtr, "%s,%s,%d,%s,%s,%s,%d,%s,%s,%d\n", bl[i].id,
+					bl[i].street, bl[i].civic, bl[i].city,
+					bl[i].province, dateBuffer,bl[i].price,
+					bl[i].owner, bl[i].phone, bl[i].b_type);
+		}
+	}
+
+	fclose(filePtr);
+	return -1;
 }

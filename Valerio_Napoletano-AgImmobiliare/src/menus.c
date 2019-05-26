@@ -18,6 +18,7 @@
 #include "entities/buildings/files.h"
 #include "entities/pros/files.h"
 #include "agency.h"
+#include "sort.h"
 
 int clientsMenu() {
 	short int choice;
@@ -169,6 +170,8 @@ int buildingsMenu() {
 		case 1:
 			choice = loadBuildingsFile(allbuildings);
 			showAllBuildings(allbuildings, buildingsNum);
+			sortFileBui(allbuildings, buildingsNum);
+			rewritebuildingsToFile(allbuildings, buildingsNum);
 			break;
 		case 2:
 			//choice = addBuilding();

@@ -63,6 +63,6 @@ int showAllBuildings(building *bl, int num_buildings) {
 		printf("\n-- IMMOBILE %d --\n", i + 1);
 		showBuildingData(bl + i);
 	}
-
+	system("pause");
 	return -1;
 }

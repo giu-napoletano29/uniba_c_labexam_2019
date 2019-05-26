@@ -155,3 +155,11 @@ void setYellowColor() {
 void resetColor() {
 	printf("\033[0m");
 }
+
+void convertToUpperCase(char *s){
+	int len = strlen(s);
+	//while(*s != '\0'){
+	for(int i = 0; i<len; i++){
+	  s[i] = toupper(s[i]);
+	}
+}
