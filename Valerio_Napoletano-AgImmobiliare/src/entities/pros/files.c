@@ -193,7 +193,7 @@ int rewriteProfessionalsToFile(professionals *pr, int rows) {
 			// Get formatted date
 			strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
 
-			fprintf(filePtr, "%s,%s,%s,%s,%s,%s,%d,%d\n", pr[i].id,
+			fprintf(filePtr, "%s,%s,%s,%s,%s,%s,%s,%d\n", pr[i].id,
 					pr[i].name, pr[i].surname, pr[i].area,
 					pr[i].phone, pr[i].email, dateBuffer,
 					pr[i].buildings_sold);
