@@ -88,6 +88,7 @@ int clientsMenu() {
 
 int professMenu() {
 	short int choice;
+	short int resDup = 0;
 	bool error = false;
 
 	int professionalsNum = getProfessionalsNumber();
@@ -119,9 +120,12 @@ int professMenu() {
 		switch (choice) {
 		case 1:
 			choice = loadProsFile(allprofessionals);
+			resDup = checkDuplicatePro(allprofessionals, professionalsNum);
+			if(resDup != -1){
 			showAllPros(allprofessionals, professionalsNum);
 			sortFilePro(allprofessionals, professionalsNum);
 			rewriteProfessionalsToFile(allprofessionals, professionalsNum);
+			}
 			break;
 		case 2:
 			//choice = addPro();
