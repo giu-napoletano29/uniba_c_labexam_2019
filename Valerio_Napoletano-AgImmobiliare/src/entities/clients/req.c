@@ -16,8 +16,9 @@
 
 #include <stdlib.h>
 
-void reqID(clients *client) {
+void reqID(clients *client, int rows) {
 	str_result value;
+	short int res=0;
 	bool error;
 
 	do {
@@ -54,6 +55,7 @@ void reqID(clients *client) {
 
 			//error = value.error;
 		}
+
 		strcpy(client->id, value.val);
 	} while (error == true);
 

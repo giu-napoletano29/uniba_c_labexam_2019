@@ -12,6 +12,7 @@ int loadClientFile(clients *cl);
 void parseClientFile(FILE *filePtr, clients *cl);
 int rewriteClientsToFile(clients *cl, int rows);
 int appendClientToFile(clients *cl);
+int checkDuplicateClients(clients *cl, int rows);
 
 int getClientsNumber();
 

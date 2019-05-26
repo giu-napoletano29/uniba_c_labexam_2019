@@ -191,3 +191,46 @@ int loadClientFile(clients *cl) {
 	//}
 	return -1;
 }
+
+int checkDuplicateClients(clients *cl, int rows){
+	short int resDup = 0;
+	short int choice = 0;
+	char id[STRING_SIZE];
+
+	for(int i=0; i<rows; i++){
+		for(int j=i+1; j<rows; j++){
+			if(strcmp(cl[i].id, cl[j].id) == 0){
+				printf("\nERRORE: ");
+				printf("\nIl database contiene degli ID duplicati");
+				newLine();
+				printf("\n1-");
+				showClientData(cl+i);
+				printf("\n2-");
+				showClientData(cl+j);
+				/*
+				do{
+					printf("\nScegli quale record modificare (1-2): ");
+					scanf("%d", &choice);
+					newLine();
+					printf("Inserisci il nuovo ID: ");
+					scanf("%s", id);
+					convertToUpperCase(id);
+					switch(choice){
+						case 1: strcpy(bl[i].id, id);
+								break;
+						case 2:	strcpy(bl[j].id, id);
+								break;
+						default: break;
+					}
+				}while(choice > 2 || choice < 1);*/
+				printf("\nControlla il tuo file e riprova\n");
+				i=rows;//0;
+				j=rows;//i+1;
+				resDup=-1;
+				system("pause");
+			}
+		}
+	}
+	//rewritebuildingsToFile(bl, rows);
+	return resDup;
+}

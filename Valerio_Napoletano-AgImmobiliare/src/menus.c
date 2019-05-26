@@ -22,6 +22,7 @@
 
 int clientsMenu() {
 	short int choice;
+	short int resDup = 0;
 	bool error = false;
 
 	// INITIALIZE clients array of structs
@@ -54,13 +55,17 @@ int clientsMenu() {
 		switch (choice) {
 		case 1:
 			choice = loadClientFile(allClients);
-			showAllClients(allClients, clientsNum);
-			//TODO: Optimize: run only if some clients needs to be deleted
-			sortFileCli(allClients, clientsNum);
-			rewriteClientsToFile(allClients, clientsNum);
+			resDup = checkDuplicateClients(allClients, clientsNum);
+			if(resDup != -1){
+				showAllClients(allClients, clientsNum);
+				//TODO: Optimize: run only if some clients needs to be deleted
+				sortFileCli(allClients, clientsNum);
+				rewriteClientsToFile(allClients, clientsNum);
+			}
 			break;
 		case 2:
 			choice = addClient();
+			resDup = checkDuplicateClients(allClients, clientsNum);
 			break;
 		case 3:
 			//choice = deleteClient();
