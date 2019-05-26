@@ -54,13 +54,13 @@ void showClientData(clients *cl) {
 	printf("Data di registrazione: ");
 	printFormattedDate(cl->reg_date);
 
+	newLine();
+	system("pause");
+
 	if (checkIfUserExpired(cl->reg_date, cl->id)) {
 		// Set toDelete flag
 		cl->toDelete = true;
 	}
-
-	newLine();
-	system("pause");
 }
 
 int showAllClients(clients *cl, int num_clients) {
