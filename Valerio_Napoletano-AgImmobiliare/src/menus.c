@@ -141,6 +141,7 @@ int professMenu() {
 
 int buildingsMenu() {
 	short int choice;
+	short int resDup = 0; //check for duplicate id
 
 	int buildingsNum = getBuildingsNumber();
 	building allbuildings[buildingsNum];
@@ -176,9 +177,13 @@ int buildingsMenu() {
 		switch (choice) {
 		case 1:
 			choice = loadBuildingsFile(allbuildings);
-			showAllBuildings(allbuildings, buildingsNum);
-			sortFileBui(allbuildings, buildingsNum);
-			rewritebuildingsToFile(allbuildings, buildingsNum);
+			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
+			if(resDup != -1){
+				showAllBuildings(allbuildings, buildingsNum);
+				sortFileBui(allbuildings, buildingsNum);
+				rewritebuildingsToFile(allbuildings, buildingsNum);
+			}
+
 			break;
 		case 2:
 			//choice = addBuilding();
@@ -191,11 +196,17 @@ int buildingsMenu() {
 			break;
 		case 5:
 			choice = loadBuildingsFile(allbuildings);
+			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
+			if(resDup != -1){
 			searchBuilding(allbuildings, buildingsNum);
+			}
 			break;
 		case 6:
 			choice = loadBuildingsFile(allbuildings);
+			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
+			if(resDup != -1){
 			resultAg(allbuildings, buildingsNum);
+			}
 			break;
 		case 7:
 			// This is used as a flag for the "go back" choice
