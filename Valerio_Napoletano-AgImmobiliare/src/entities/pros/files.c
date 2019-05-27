@@ -79,14 +79,6 @@ void readProsFile(FILE *filePtr, professionals *pr) {
 	//showAllPros(pr, pr_num);
 }
 
-void findPot(char id[], potential *pr, int rows) {
-	for (int i = 0; i < rows; i++) {
-		if (strcmp(id, pr[i].id) == 0) {
-			printf("\nPotenziale: %s\n", pr[i].content);
-		}
-	}
-}
-
 void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 	char line[400];
 	char *token;
@@ -137,7 +129,7 @@ int loadProsFile(professionals *pr) {
 	return -1;
 }
 
-int getProfessionalsNumber(){
+int getProfessionalsNumber() {
 	FILE *filePtr;
 	int rows = 0;
 	// Read only
@@ -167,9 +159,9 @@ int loadPotFile(char id[]) {
 	return -1;
 }
 
-void findPot(char id[], potential *pr, int rows){
-	for(int i=0; i < rows; i++){
-		if(strcmp(id, pr[i].id) == 0){
+void findPot(char id[], potential *pr, int rows) {
+	for (int i = 0; i < rows; i++) {
+		if (strcmp(id, pr[i].id) == 0) {
 			printf("\nPotenziale: %s\n", pr[i].content);
 		}
 	}
@@ -198,10 +190,9 @@ int rewriteProfessionalsToFile(professionals *pr, int rows) {
 			// Get formatted date
 			strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
 
-			fprintf(filePtr, "%s,%s,%s,%s,%s,%s,%s,%d\n", pr[i].id,
-					pr[i].name, pr[i].surname, pr[i].area,
-					pr[i].phone, pr[i].email, dateBuffer,
-					pr[i].buildings_sold);
+			fprintf(filePtr, "%s,%s,%s,%s,%s,%s,%s,%d\n", pr[i].id, pr[i].name,
+					pr[i].surname, pr[i].area, pr[i].phone, pr[i].email,
+					dateBuffer, pr[i].buildings_sold);
 		}
 	}
 
@@ -209,42 +200,45 @@ int rewriteProfessionalsToFile(professionals *pr, int rows) {
 	return -1;
 }
 
-int checkDuplicatePro(professionals *pr, int rows){
+int checkDuplicatePro(professionals *pr, int rows) {
 	short int resDup = 0;
 	short int choice = 0;
 	//int j=0;
 	char id[STRING_SIZE];
 
-	for(int i=0; i<rows; i++){
-		for(int j=i+1; j<rows; j++){
-			if(strcmp(pr[i].id, pr[j].id) == 0){
+	for (int i = 0; i < rows; i++) {
+		for (int j = i + 1; j < rows; j++) {
+			if (strcmp(pr[i].id, pr[j].id) == 0) {
 				printf("\nERRORE: ");
 				printf("\nIl database contiene degli ID duplicati");
 				newLine();
 				printf("\n1-");
-				showProData(pr+i);
+				showProData(pr + i);
 				printf("\n2-");
-				showProData(pr+j);
+				showProData(pr + j);
 				newLine();
 
-				do{
+				do {
 					printf("\nScegli quale record modificare (1-2): ");
 					scanf("%hu", &choice);
 					newLine();
 					printf("Inserisci il nuovo ID: ");
 					scanf("%s", id);
 					convertToUpperCase(id);
-					switch(choice){
-						case 1: strcpy(pr[i].id, id);
-								break;
-						case 2:	strcpy(pr[j].id, id);
-								break;
-						default: break;
+					switch (choice) {
+					case 1:
+						strcpy(pr[i].id, id);
+						break;
+					case 2:
+						strcpy(pr[j].id, id);
+						break;
+					default:
+						break;
 					}
-				}while(choice > 2 || choice < 1);
-				i=0;
-				j=i+1;
-				resDup=-1;
+				} while (choice > 2 || choice < 1);
+				i = 0;
+				j = i + 1;
+				resDup = -1;
 				system("pause");
 			}
 		}
