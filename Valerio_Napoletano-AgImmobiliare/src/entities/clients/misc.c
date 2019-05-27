@@ -29,7 +29,7 @@ void saveLocalDate(clients *client) {
 	client->reg_date = time(&timeRightNow);
 }
 
-int addClient(int rows) {
+int addClient() {
 	clients client;
 
 	clearScr();

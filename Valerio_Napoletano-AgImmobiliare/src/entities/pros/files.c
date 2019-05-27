@@ -206,9 +206,9 @@ int rewriteProfessionalsToFile(professionals *pr, int rows) {
 
 int checkDuplicatePro(professionals *pr, int rows){
 	short int resDup = 0;
-	/*
 	short int choice = 0;
-	char id[STRING_SIZE];*/
+	//int j=0;
+	char id[STRING_SIZE];
 
 	for(int i=0; i<rows; i++){
 		for(int j=i+1; j<rows; j++){
@@ -220,31 +220,31 @@ int checkDuplicatePro(professionals *pr, int rows){
 				showProData(pr+i);
 				printf("\n2-");
 				showProData(pr+j);
-				/*
+				newLine();
+
 				do{
 					printf("\nScegli quale record modificare (1-2): ");
-					scanf("%d", &choice);
+					scanf("%hu", &choice);
 					newLine();
 					printf("Inserisci il nuovo ID: ");
 					scanf("%s", id);
 					convertToUpperCase(id);
 					switch(choice){
-						case 1: strcpy(bl[i].id, id);
+						case 1: strcpy(pr[i].id, id);
 								break;
-						case 2:	strcpy(bl[j].id, id);
+						case 2:	strcpy(pr[j].id, id);
 								break;
 						default: break;
 					}
-				}while(choice > 2 || choice < 1);*/
-				printf("\nControlla il tuo file e riprova\n");
-				i=rows;//0;
-				j=rows;//i+1;
+				}while(choice > 2 || choice < 1);
+				i=0;
+				j=i+1;
 				resDup=-1;
 				system("pause");
 			}
 		}
 	}
-	//rewritebuildingsToFile(bl, rows);
+	rewriteProfessionalsToFile(pr, rows);
 	return resDup;
 }
 

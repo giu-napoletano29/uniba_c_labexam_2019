@@ -105,10 +105,11 @@ int loadBuildingsFile(building *bl) {
 int checkDuplicateBuildings(building *bl, int rows){
 	short int resDup = 0;
 	short int choice = 0;
+	int j=0;
 	char id[STRING_SIZE];
 
 	for(int i=0; i<rows; i++){
-		for(int j=i+1; j<rows; j++){
+		for(j=i+1; j<rows; j++){
 			if(strcmp(bl[i].id, bl[j].id) == 0){
 				printf("\nERRORE: ");
 				printf("\nIl database contiene degli ID duplicati");
@@ -117,10 +118,11 @@ int checkDuplicateBuildings(building *bl, int rows){
 				showBuildingData(bl+i);
 				printf("\n2-");
 				showBuildingData(bl+j);
-				/*
+				newLine();
+
 				do{
 					printf("\nScegli quale record modificare (1-2): ");
-					scanf("%d", &choice);
+					scanf("%hu", &choice);
 					newLine();
 					printf("Inserisci il nuovo ID: ");
 					scanf("%s", id);
@@ -132,16 +134,15 @@ int checkDuplicateBuildings(building *bl, int rows){
 								break;
 						default: break;
 					}
-				}while(choice > 2 || choice < 1);*/
-				printf("\nControlla il tuo file e riprova\n");
-				i=rows;//0;
-				j=rows;//i+1;
+				}while(choice > 2 || choice < 1);
+				i=0;
+				j=i+1;
 				resDup=-1;
 				system("pause");
 			}
 		}
 	}
-	//rewritebuildingsToFile(bl, rows);
+	rewritebuildingsToFile(bl, rows);
 	return resDup;
 }
 

@@ -207,30 +207,30 @@ int checkDuplicateClients(clients *cl, int rows){
 				showClientData(cl+i);
 				printf("\n2-");
 				showClientData(cl+j);
-				/*
+				newLine();
+
 				do{
 					printf("\nScegli quale record modificare (1-2): ");
-					scanf("%d", &choice);
+					scanf("%hu", &choice);
 					newLine();
 					printf("Inserisci il nuovo ID: ");
 					scanf("%s", id);
 					convertToUpperCase(id);
 					switch(choice){
-						case 1: strcpy(bl[i].id, id);
+						case 1: strcpy(cl[i].id, id);
 								break;
-						case 2:	strcpy(bl[j].id, id);
+						case 2:	strcpy(cl[j].id, id);
 								break;
 						default: break;
 					}
-				}while(choice > 2 || choice < 1);*/
-				printf("\nControlla il tuo file e riprova\n");
-				i=rows;//0;
-				j=rows;//i+1;
+				}while(choice > 2 || choice < 1);
+				i=0;
+				j=i+1;
 				resDup=-1;
 				system("pause");
 			}
 		}
 	}
-	//rewritebuildingsToFile(bl, rows);
+	rewriteClientsToFile(cl, rows);
 	return resDup;
 }

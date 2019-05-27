@@ -60,7 +60,7 @@ void showClientData(clients *cl) {
 	}
 
 	newLine();
-	system("pause");
+
 }
 
 int showAllClients(clients *cl, int num_clients) {
@@ -72,6 +72,6 @@ int showAllClients(clients *cl, int num_clients) {
 		printf("\n-- CLIENTE %d --\n", i + 1);
 		showClientData(cl + i);
 	}
-
+	system("pause");
 	return -1;
 }

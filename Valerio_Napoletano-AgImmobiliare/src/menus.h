@@ -6,7 +6,7 @@
  */
 
 void mainMenu();
-int clientsMenu();
+int clientsMenu(int jump);
 int professMenu();
 int buildingsMenu();
 

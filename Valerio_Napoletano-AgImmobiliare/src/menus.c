@@ -20,7 +20,7 @@
 #include "agency.h"
 #include "sort.h"
 
-int clientsMenu() {
+int clientsMenu(int jump) {
 	short int choice;
 	short int resDup = 0;
 	bool error = false;
@@ -38,19 +38,24 @@ int clientsMenu() {
 			puts("Tipologia non trovata, per favore riprova. \n");
 		}
 
-		puts("--- CLIENTI ---");
-		newLine();
+		if(jump == 0){
+			puts("--- CLIENTI ---");
+			newLine();
 
-		puts("Scegli un'operazione:");
-		puts("1. Visualizza tutti i clienti");
-		puts("2. Aggiungi un cliente");
-		//puts("3. Cancella clienti");
-		puts("4. Torna indietro");
+			puts("Scegli un'operazione:");
+			puts("1. Visualizza tutti i clienti");
+			puts("2. Aggiungi un cliente");
+			//puts("3. Cancella clienti");
+			puts("4. Torna indietro");
 
-		newLine();
+			newLine();
 
-		printf("Operazione: ");
-		scanf("%hu", &choice);
+			printf("Operazione: ");
+			scanf("%hu", &choice);
+		}
+		else{
+			choice = jump;
+		}
 
 		switch (choice) {
 		case 1:
@@ -65,7 +70,7 @@ int clientsMenu() {
 			break;
 		case 2:
 			choice = addClient();
-			resDup = checkDuplicateClients(allClients, clientsNum);
+			resDup = clientsMenu(1);
 			break;
 		case 3:
 			//choice = deleteClient();
@@ -263,7 +268,7 @@ void mainMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = clientsMenu();
+			choice = clientsMenu(0);
 			break;
 		case 2:
 			choice = professMenu();
