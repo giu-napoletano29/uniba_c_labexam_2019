@@ -9,7 +9,7 @@
 #define DATATYPES_H
 
 #include "consts.h"
-
+#include "time.h"
 /**
  * @brief Struct for handling the client type
  */
