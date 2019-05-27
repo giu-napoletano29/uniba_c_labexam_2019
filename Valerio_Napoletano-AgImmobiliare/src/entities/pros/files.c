@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include "../../datatypes.h"
 #include "../../file_utils.h"
@@ -77,6 +78,14 @@ void readProsFile(FILE *filePtr, professionals *pr) {
 	}
 
 	//showAllPros(pr, pr_num);
+}
+
+void findPot(char id[], potential *pr, int rows) {
+	for (int i = 0; i < rows; i++) {
+		if (strcmp(id, pr[i].id) == 0) {
+			printf("\nPotenziale: %s\n", pr[i].content);
+		}
+	}
 }
 
 void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
@@ -157,14 +166,6 @@ int loadPotFile(char id[]) {
 	}
 	fclose(fp_pot);
 	return -1;
-}
-
-void findPot(char id[], potential *pr, int rows) {
-	for (int i = 0; i < rows; i++) {
-		if (strcmp(id, pr[i].id) == 0) {
-			printf("\nPotenziale: %s\n", pr[i].content);
-		}
-	}
 }
 
 int rewriteProfessionalsToFile(professionals *pr, int rows) {

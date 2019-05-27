@@ -18,7 +18,6 @@
 
 void reqID(clients *client) {
 	str_result value;
-	short int res=0;
 	bool error;
 
 	do {

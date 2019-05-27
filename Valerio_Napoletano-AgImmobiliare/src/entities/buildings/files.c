@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include "../../datatypes.h"
 #include "../../file_utils.h"
@@ -93,7 +94,6 @@ int loadBuildingsFile(building *bl) {
 	FILE *filePtr;
 	filePtr = fopen("buildings.csv", "a+");
 	if (!checkFile(filePtr)) {
-		rows = countRows(filePtr);
 		rewind(filePtr);
 		readBuildingsFile(filePtr, bl);
 	}
@@ -102,109 +102,7 @@ int loadBuildingsFile(building *bl) {
 	return -1;
 }
 
-int checkDuplicateBuildings(building *bl, int rows){
-	short int resDup = 0;
-	short int choice = 0;
-	int j=0;
-	char id[STRING_SIZE];
-
-	for(int i=0; i<rows; i++){
-		for(j=i+1; j<rows; j++){
-			if(strcmp(bl[i].id, bl[j].id) == 0){
-				printf("\nERRORE: ");
-				printf("\nIl database contiene degli ID duplicati");
-				newLine();
-				printf("\n1-");
-				showBuildingData(bl+i);
-				printf("\n2-");
-				showBuildingData(bl+j);
-				newLine();
-
-				do{
-					printf("\nScegli quale record modificare (1-2): ");
-					scanf("%hu", &choice);
-					newLine();
-					printf("Inserisci il nuovo ID: ");
-					scanf("%s", id);
-					convertToUpperCase(id);
-					switch(choice){
-						case 1: strcpy(bl[i].id, id);
-								break;
-						case 2:	strcpy(bl[j].id, id);
-								break;
-						default: break;
-					}
-				}while(choice > 2 || choice < 1);
-				i=0;
-				j=i+1;
-				resDup=-1;
-				system("pause");
-			}
-		}
-	}
-	rewritebuildingsToFile(bl, rows);
-	return resDup;
-}
-
-int getBuildingsNumber(){
-	FILE *filePtr;
-	int rows = 0;
-	// Read only
-	filePtr = fopen("buildings.csv", "r");
-	//TODO: Makes the program crash
-	//if (!checkFile(filePtr)) {
-	checkFile(filePtr);
-	if (filePtr != NULL) {
-		rewind(filePtr);
-		rows = countRows(filePtr);
-	}
-	fclose(filePtr);
-	return rows;
-}
-
-
-void searchBuilding(building *bl, int n_bui){
-	short int choice = 0;
-	int price = 0;
-	char city[STRING_SIZE];
-
-	puts("--- RICERCA IMMOBILI ---");
-	newLine();
-
-	puts("Scegli un'operazione:");
-	puts("1. Prezzo");
-	puts("2. Localita'");
-
-	newLine();
-	printf("Operazione: ");
-	scanf("%hu", &choice);
-
-	switch(choice){
-		case 1:	printf("\ninserisci il prezzo massimo dell'immobile: ");
-				scanf("%d", &price);
-
-				for(int i = 0; i<n_bui; i++){
-					if(bl[i].price < price){
-						showBuildingData(bl + i);
-					}
-				}
-				break;
-		case 2:	printf("\nInserisci la localita' dell'immobile: ");
-				scanf("%s", city);
-				convertToUpperCase(city);
-
-				for(int i=0; i<n_bui; i++){
-					if(strstr(bl[i].city, city) != NULL) {
-					    showBuildingData(bl + i);
-					}
-				}
-				break;
-		default: break;
-	}
-	system("pause");
-}
-
-int rewritebuildingsToFile(building *bl, int rows) {
+int rewriteBuildingsToFile(building *bl, int rows) {
 	FILE *filePtr;
 	filePtr = fopen("buildings.csv", "w+");
 	//checkFile(filePtr);
@@ -228,12 +126,119 @@ int rewritebuildingsToFile(building *bl, int rows) {
 			strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
 
 			fprintf(filePtr, "%s,%s,%d,%s,%s,%s,%d,%s,%s,%d\n", bl[i].id,
-					bl[i].street, bl[i].civic, bl[i].city,
-					bl[i].province, dateBuffer,bl[i].price,
-					bl[i].owner, bl[i].phone, bl[i].b_type);
+					bl[i].street, bl[i].civic, bl[i].city, bl[i].province,
+					dateBuffer, bl[i].price, bl[i].owner, bl[i].phone,
+					bl[i].b_type);
 		}
 	}
 
 	fclose(filePtr);
 	return -1;
+}
+
+int checkDuplicateBuildings(building *bl, int rows) {
+	short int resDup = 0;
+	short int choice = 0;
+	int j = 0;
+	char id[STRING_SIZE];
+
+	for (int i = 0; i < rows; i++) {
+		for (j = i + 1; j < rows; j++) {
+			if (strcmp(bl[i].id, bl[j].id) == 0) {
+				printf("\nERRORE: ");
+				printf("\nIl database contiene degli ID duplicati");
+				newLine();
+				printf("\n1-");
+				showBuildingData(bl + i);
+				printf("\n2-");
+				showBuildingData(bl + j);
+				newLine();
+
+				do {
+					printf("\nScegli quale record modificare (1-2): ");
+					scanf("%hu", &choice);
+					newLine();
+					printf("Inserisci il nuovo ID: ");
+					scanf("%s", id);
+					convertToUpperCase(id);
+					switch (choice) {
+					case 1:
+						strcpy(bl[i].id, id);
+						break;
+					case 2:
+						strcpy(bl[j].id, id);
+						break;
+					default:
+						break;
+					}
+				} while (choice > 2 || choice < 1);
+				i = 0;
+				j = i + 1;
+				resDup = -1;
+				system("pause");
+			}
+		}
+	}
+	rewriteBuildingsToFile(bl, rows);
+	return resDup;
+}
+
+int getBuildingsNumber() {
+	FILE *filePtr;
+	int rows = 0;
+	// Read only
+	filePtr = fopen("buildings.csv", "r");
+	//TODO: Makes the program crash
+	//if (!checkFile(filePtr)) {
+	checkFile(filePtr);
+	if (filePtr != NULL) {
+		rewind(filePtr);
+		rows = countRows(filePtr);
+	}
+	fclose(filePtr);
+	return rows;
+}
+
+void searchBuilding(building *bl, int n_bui) {
+	short int choice = 0;
+	int price = 0;
+	char city[STRING_SIZE];
+
+	puts("--- RICERCA IMMOBILI ---");
+	newLine();
+
+	puts("Scegli un'operazione:");
+	puts("1. Prezzo");
+	puts("2. Localita'");
+
+	newLine();
+	printf("Operazione: ");
+	scanf("%hu", &choice);
+
+	switch (choice) {
+	case 1:
+		printf("\ninserisci il prezzo massimo dell'immobile: ");
+		scanf("%d", &price);
+
+		for (int i = 0; i < n_bui; i++) {
+			if (bl[i].price < price) {
+				showBuildingData(bl + i);
+			}
+		}
+		break;
+	case 2:
+		printf("\nInserisci la localita' dell'immobile: ");
+		scanf("%s", city);
+		convertToUpperCase(city);
+
+		for (int i = 0; i < n_bui; i++) {
+			if (strstr(bl[i].city, city) != NULL) {
+				showBuildingData(bl + i);
+			}
+		}
+		break;
+	default:
+		break;
+	}
+	system("pause");
 }

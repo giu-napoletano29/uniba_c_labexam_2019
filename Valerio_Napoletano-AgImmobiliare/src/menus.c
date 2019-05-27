@@ -16,7 +16,11 @@
 #include "entities/clients/files.h"
 
 #include "entities/buildings/files.h"
+#include "entities/buildings/show.h"
+
 #include "entities/pros/files.h"
+#include "entities/pros/show.h"
+
 #include "agency.h"
 #include "sort.h"
 
@@ -38,7 +42,7 @@ int clientsMenu(int jump) {
 			puts("Tipologia non trovata, per favore riprova. \n");
 		}
 
-		if(jump == 0){
+		if (jump == 0) {
 			puts("--- CLIENTI ---");
 			newLine();
 
@@ -52,8 +56,7 @@ int clientsMenu(int jump) {
 
 			printf("Operazione: ");
 			scanf("%hu", &choice);
-		}
-		else{
+		} else {
 			choice = jump;
 		}
 
@@ -61,7 +64,7 @@ int clientsMenu(int jump) {
 		case 1:
 			choice = loadClientFile(allClients);
 			resDup = checkDuplicateClients(allClients, clientsNum);
-			if(resDup != -1){
+			if (resDup != -1) {
 				showAllClients(allClients, clientsNum);
 				//TODO: Optimize: run only if some clients needs to be deleted
 				sortFileCli(allClients, clientsNum);
@@ -126,10 +129,10 @@ int professMenu() {
 		case 1:
 			choice = loadProsFile(allprofessionals);
 			resDup = checkDuplicatePro(allprofessionals, professionalsNum);
-			if(resDup != -1){
-			showAllPros(allprofessionals, professionalsNum);
-			sortFilePro(allprofessionals, professionalsNum);
-			rewriteProfessionalsToFile(allprofessionals, professionalsNum);
+			if (resDup != -1) {
+				showAllPros(allprofessionals, professionalsNum);
+				sortFilePro(allprofessionals, professionalsNum);
+				rewriteProfessionalsToFile(allprofessionals, professionalsNum);
 			}
 			break;
 		case 2:
@@ -192,10 +195,10 @@ int buildingsMenu() {
 		case 1:
 			choice = loadBuildingsFile(allbuildings);
 			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
-			if(resDup != -1){
+			if (resDup != -1) {
 				showAllBuildings(allbuildings, buildingsNum);
 				sortFileBui(allbuildings, buildingsNum);
-				rewritebuildingsToFile(allbuildings, buildingsNum);
+				rewriteBuildingsToFile(allbuildings, buildingsNum);
 			}
 
 			break;
@@ -211,15 +214,15 @@ int buildingsMenu() {
 		case 5:
 			choice = loadBuildingsFile(allbuildings);
 			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
-			if(resDup != -1){
-			searchBuilding(allbuildings, buildingsNum);
+			if (resDup != -1) {
+				searchBuilding(allbuildings, buildingsNum);
 			}
 			break;
 		case 6:
 			choice = loadBuildingsFile(allbuildings);
 			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
-			if(resDup != -1){
-			resultAg(allbuildings, buildingsNum);
+			if (resDup != -1) {
+				resultAg(allbuildings, buildingsNum);
 			}
 			break;
 		case 7:

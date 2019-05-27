@@ -10,8 +10,10 @@
 #include <time.h> /** For parseDateInFile() */
 
 #include "utils.h"
+#include "file_utils.h"
 #include "datatypes.h"
 #include "entities/buildings/files.h"
+#include "entities/buildings/show.h"
 
 int resultAg(building *bl, int n_bui){
 	char date1[10];
