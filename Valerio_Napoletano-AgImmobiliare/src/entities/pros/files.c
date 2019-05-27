@@ -79,8 +79,15 @@ void readProsFile(FILE *filePtr, professionals *pr) {
 	//showAllPros(pr, pr_num);
 }
 
+void findPot(char id[], potential *pr, int rows) {
+	for (int i = 0; i < rows; i++) {
+		if (strcmp(id, pr[i].id) == 0) {
+			printf("\nPotenziale: %s\n", pr[i].content);
+		}
+	}
+}
 
-void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows){
+void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 	char line[400];
 	char *token;
 
@@ -119,8 +126,7 @@ int loadProsFile(professionals *pr) {
 	//int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "a+");
-	checkFile(filePtr);
-	if (filePtr != NULL) {
+	if (!checkFile(filePtr)) {
 		//rows = countRows(filePtr);
 		rewind(filePtr);
 		//professionals pr[rows];
@@ -151,8 +157,7 @@ int loadPotFile(char id[]) {
 	int rows = 0;
 	FILE *fp_pot;
 	fp_pot = fopen("potential.csv", "r");
-	//checkFile(fp_pot);
-	if (fp_pot != NULL) {
+	if (!checkFile(fp_pot)) {
 		rows = countRows(fp_pot);
 		rewind(fp_pot);
 		potential pr[rows];
@@ -247,4 +252,3 @@ int checkDuplicatePro(professionals *pr, int rows){
 	rewriteProfessionalsToFile(pr, rows);
 	return resDup;
 }
-

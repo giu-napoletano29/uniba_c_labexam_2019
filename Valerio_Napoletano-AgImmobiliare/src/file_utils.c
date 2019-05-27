@@ -12,9 +12,6 @@
 #include "file_utils.h"
 #include "datatypes.h"
 
-//TODO: Refer to line 54, should be removed
-//#include "entities/buildings.h"
-
 /**
  * Check if the file can be written and if it's empty
  * @param filePtr
@@ -45,6 +42,7 @@ bool checkFile(FILE *filePtr) {
 		system("pause");
 	}
 
+	rewind(filePtr);
 	return error;
 }
 
@@ -90,30 +88,3 @@ time_t parseDateInFile(char token[STRING_SIZE]) {
 
 	return mktime(&temp_date);
 }
-
-/*
- void copyFile(FILE *fp_from, FILE *fp_to, int choice) {
- char line[400];
- unsigned int Uchoice = -choice;
- int count = 0;
- // Read a line
- while (fgets(line, sizeof line, fp_from) != NULL)
- {
- count++;
- if (choice == 0) {
- fputs(line, fp_to);
- } else if (choice > 0) {
- if (choice == count) {
- // TODO: This should not be here, the function should be "object" agnostic
- infoBuilding(fp_to);
- } else {
- fputs(line, fp_to);
- }
- } else {
- if (Uchoice != count) {
- fputs(line, fp_to);
- }
- }
- }
- }
- */

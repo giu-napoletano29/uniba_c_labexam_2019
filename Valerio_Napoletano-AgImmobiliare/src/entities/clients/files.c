@@ -91,9 +91,8 @@ void parseClientFile(FILE *filePtr, clients *cl) {
 int rewriteClientsToFile(clients *cl, int rows) {
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "w+");
-	//checkFile(filePtr);
-
-	if (filePtr != NULL) {
+	//TODO: Handle file "empty"
+	//if (!checkFile(filePtr)) {
 		// --- These variables are only needed if the file is available. ---
 
 		// Buffer for printing out the date (required by strftime)
@@ -121,7 +120,7 @@ int rewriteClientsToFile(clients *cl, int rows) {
 						cl[i].building_type);
 			}
 		}
-	}
+	//}
 
 	fclose(filePtr);
 	return -1;
@@ -134,8 +133,7 @@ int rewriteClientsToFile(clients *cl, int rows) {
 int appendClientToFile(clients *cl) {
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "a+");
-	//checkFile(filePtr);
-	if (filePtr != NULL) {
+	if (!checkFile(filePtr)) {
 		// --- These variables are only needed if the file is available. ---
 		// Buffer for printing out the date (required by strftime)
 		// day/month/year (eg. 22/05/2019)
@@ -169,11 +167,10 @@ int getClientsNumber() {
 	int rows = 0;
 	// Read only
 	filePtr = fopen("clients.csv", "r");
-	//TODO: Makes the program crash
-	//if (!checkFile(filePtr)) {
-	rows = countRows(filePtr);
-	fclose(filePtr);
-	//}
+	if (!checkFile(filePtr)) {
+		rows = countRows(filePtr);
+		fclose(filePtr);
+	}
 	return rows;
 }
 
@@ -184,11 +181,10 @@ int loadClientFile(clients *cl) {
 	FILE *filePtr;
 	// Read only
 	filePtr = fopen("clients.csv", "r");
-	//TODO: Makes the program crash
-	//if (!checkFile(filePtr)) {
-	parseClientFile(filePtr, cl);
-	fclose(filePtr);
-	//}
+	if (!checkFile(filePtr)) {
+		parseClientFile(filePtr, cl);
+		fclose(filePtr);
+	}
 	return -1;
 }
 
