@@ -17,9 +17,12 @@
 
 #include "entities/buildings/files.h"
 #include "entities/pros/files.h"
+#include "agency.h"
+#include "sort.h"
 
-int clientsMenu() {
+int clientsMenu(int jump) {
 	short int choice;
+	short int resDup = 0;
 	bool error = false;
 
 	// INITIALIZE clients array of structs
@@ -35,29 +38,39 @@ int clientsMenu() {
 			puts("Tipologia non trovata, per favore riprova. \n");
 		}
 
-		puts("--- CLIENTI ---");
-		newLine();
+		if(jump == 0){
+			puts("--- CLIENTI ---");
+			newLine();
 
-		puts("Scegli un'operazione:");
-		puts("1. Visualizza tutti i clienti");
-		puts("2. Aggiungi un cliente");
-		//puts("3. Cancella clienti");
-		puts("4. Torna indietro");
+			puts("Scegli un'operazione:");
+			puts("1. Visualizza tutti i clienti");
+			puts("2. Aggiungi un cliente");
+			//puts("3. Cancella clienti");
+			puts("4. Torna indietro");
 
-		newLine();
+			newLine();
 
-		printf("Operazione: ");
-		scanf("%hu", &choice);
+			printf("Operazione: ");
+			scanf("%hu", &choice);
+		}
+		else{
+			choice = jump;
+		}
 
 		switch (choice) {
 		case 1:
 			choice = loadClientFile(allClients);
-			showAllClients(allClients, clientsNum);
-			//TODO: Optimize: run only if some clients needs to be deleted
-			rewriteClientsToFile(allClients, clientsNum);
+			resDup = checkDuplicateClients(allClients, clientsNum);
+			if(resDup != -1){
+				showAllClients(allClients, clientsNum);
+				//TODO: Optimize: run only if some clients needs to be deleted
+				sortFileCli(allClients, clientsNum);
+				rewriteClientsToFile(allClients, clientsNum);
+			}
 			break;
 		case 2:
 			choice = addClient();
+			resDup = clientsMenu(1);
 			break;
 		case 3:
 			//choice = deleteClient();
@@ -80,7 +93,11 @@ int clientsMenu() {
 
 int professMenu() {
 	short int choice;
+	short int resDup = 0;
 	bool error = false;
+
+	int professionalsNum = getProfessionalsNumber();
+	professionals allprofessionals[professionalsNum];
 
 	do {
 		clearScr();
@@ -107,7 +124,13 @@ int professMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = loadProsFile();
+			choice = loadProsFile(allprofessionals);
+			resDup = checkDuplicatePro(allprofessionals, professionalsNum);
+			if(resDup != -1){
+			showAllPros(allprofessionals, professionalsNum);
+			sortFilePro(allprofessionals, professionalsNum);
+			rewriteProfessionalsToFile(allprofessionals, professionalsNum);
+			}
 			break;
 		case 2:
 			//choice = addPro();
@@ -132,6 +155,11 @@ int professMenu() {
 
 int buildingsMenu() {
 	short int choice;
+	short int resDup = 0; //check for duplicate id
+
+	int buildingsNum = getBuildingsNumber();
+	building allbuildings[buildingsNum];
+
 	bool error = false;
 
 	do {
@@ -151,8 +179,9 @@ int buildingsMenu() {
 		//puts("2. Aggiungi un immobile");
 		//puts("3. Modifica un immobile");
 		//puts("4. Cancella un immobile");
-		//puts("5. Cerca un immobile");
-		puts("6. Torna indietro");
+		puts("5. Cerca un immobile");
+		puts("6. Risultati agenzia");
+		puts("7. Torna indietro");
 
 		newLine();
 
@@ -161,7 +190,14 @@ int buildingsMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = loadBuildingsFile();
+			choice = loadBuildingsFile(allbuildings);
+			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
+			if(resDup != -1){
+				showAllBuildings(allbuildings, buildingsNum);
+				sortFileBui(allbuildings, buildingsNum);
+				rewritebuildingsToFile(allbuildings, buildingsNum);
+			}
+
 			break;
 		case 2:
 			//choice = addBuilding();
@@ -173,9 +209,20 @@ int buildingsMenu() {
 			//choice = removeBuilding();
 			break;
 		case 5:
-			//choice = searchBuilding();
+			choice = loadBuildingsFile(allbuildings);
+			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
+			if(resDup != -1){
+			searchBuilding(allbuildings, buildingsNum);
+			}
 			break;
 		case 6:
+			choice = loadBuildingsFile(allbuildings);
+			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
+			if(resDup != -1){
+			resultAg(allbuildings, buildingsNum);
+			}
+			break;
+		case 7:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
 			choice = -1;
@@ -221,7 +268,7 @@ void mainMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = clientsMenu();
+			choice = clientsMenu(0);
 			break;
 		case 2:
 			choice = professMenu();

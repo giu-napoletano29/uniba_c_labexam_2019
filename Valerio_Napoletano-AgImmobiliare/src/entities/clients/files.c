@@ -43,9 +43,11 @@ void parseClientFile(FILE *filePtr, clients *cl) {
 				break;
 			case 1:
 				strcpy(cl[cl_num].name, token);
+				convertToUpperCase(cl[cl_num].name);
 				break;
 			case 2:
 				strcpy(cl[cl_num].surname, token);
+				convertToUpperCase(cl[cl_num].surname);
 				break;
 			case 3:
 				enum_tmp = atoi(token);
@@ -184,4 +186,47 @@ int loadClientFile(clients *cl) {
 		fclose(filePtr);
 	}
 	return -1;
+}
+
+int checkDuplicateClients(clients *cl, int rows){
+	short int resDup = 0;
+	short int choice = 0;
+	char id[STRING_SIZE];
+
+	for(int i=0; i<rows; i++){
+		for(int j=i+1; j<rows; j++){
+			if(strcmp(cl[i].id, cl[j].id) == 0){
+				printf("\nERRORE: ");
+				printf("\nIl database contiene degli ID duplicati");
+				newLine();
+				printf("\n1-");
+				showClientData(cl+i);
+				printf("\n2-");
+				showClientData(cl+j);
+				newLine();
+
+				do{
+					printf("\nScegli quale record modificare (1-2): ");
+					scanf("%hu", &choice);
+					newLine();
+					printf("Inserisci il nuovo ID: ");
+					scanf("%s", id);
+					convertToUpperCase(id);
+					switch(choice){
+						case 1: strcpy(cl[i].id, id);
+								break;
+						case 2:	strcpy(cl[j].id, id);
+								break;
+						default: break;
+					}
+				}while(choice > 2 || choice < 1);
+				i=0;
+				j=i+1;
+				resDup=-1;
+				system("pause");
+			}
+		}
+	}
+	rewriteClientsToFile(cl, rows);
+	return resDup;
 }

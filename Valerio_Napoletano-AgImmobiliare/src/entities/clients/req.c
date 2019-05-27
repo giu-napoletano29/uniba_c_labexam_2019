@@ -18,6 +18,7 @@
 
 void reqID(clients *client) {
 	str_result value;
+	short int res=0;
 	bool error;
 
 	do {
@@ -54,6 +55,7 @@ void reqID(clients *client) {
 
 			//error = value.error;
 		}
+
 		strcpy(client->id, value.val);
 	} while (error == true);
 

@@ -61,6 +61,8 @@ void showClientData(clients *cl) {
 		// Set toDelete flag
 		cl->toDelete = true;
 	}
+
+	newLine();
 }
 
 int showAllClients(clients *cl, int num_clients) {
@@ -72,6 +74,6 @@ int showAllClients(clients *cl, int num_clients) {
 		printf("\n-- CLIENTE %d --\n", i + 1);
 		showClientData(cl + i);
 	}
-
+	system("pause");
 	return -1;
 }

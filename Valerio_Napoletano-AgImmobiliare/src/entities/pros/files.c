@@ -39,9 +39,11 @@ void readProsFile(FILE *filePtr, professionals *pr) {
 				break;
 			case 1:
 				strcpy(pr[pr_num].name, token);
+				convertToUpperCase(pr[pr_num].name);
 				break;
 			case 2:
 				strcpy(pr[pr_num].surname, token);
+				convertToUpperCase(pr[pr_num].surname);
 				break;
 			case 3:
 				strcpy(pr[pr_num].area, token);
@@ -74,7 +76,7 @@ void readProsFile(FILE *filePtr, professionals *pr) {
 		newLine();
 	}
 
-	showAllPros(pr, pr_num);
+	//showAllPros(pr, pr_num);
 }
 
 void findPot(char id[], potential *pr, int rows) {
@@ -120,19 +122,35 @@ void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 	findPot(id, pr, rows);
 }
 
-int loadProsFile() {
-	int rows = 0;
+int loadProsFile(professionals *pr) {
+	//int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "a+");
 	if (!checkFile(filePtr)) {
-		rows = countRows(filePtr);
+		//rows = countRows(filePtr);
 		rewind(filePtr);
-		professionals pr[rows];
+		//professionals pr[rows];
 		readProsFile(filePtr, pr);
 	}
 
 	fclose(filePtr);
 	return -1;
+}
+
+int getProfessionalsNumber(){
+	FILE *filePtr;
+	int rows = 0;
+	// Read only
+	filePtr = fopen("professionals.csv", "r");
+	//TODO: Makes the program crash
+	//if (!checkFile(filePtr)) {
+	checkFile(filePtr);
+	if (filePtr != NULL) {
+		rewind(filePtr);
+		rows = countRows(filePtr);
+	}
+	fclose(filePtr);
+	return rows;
 }
 
 int loadPotFile(char id[]) {
@@ -147,4 +165,90 @@ int loadPotFile(char id[]) {
 	}
 	fclose(fp_pot);
 	return -1;
+}
+
+void findPot(char id[], potential *pr, int rows){
+	for(int i=0; i < rows; i++){
+		if(strcmp(id, pr[i].id) == 0){
+			printf("\nPotenziale: %s\n", pr[i].content);
+		}
+	}
+}
+
+int rewriteProfessionalsToFile(professionals *pr, int rows) {
+	FILE *filePtr;
+	filePtr = fopen("professionals.csv", "w+");
+	//checkFile(filePtr);
+
+	if (filePtr != NULL) {
+		rewind(filePtr);
+		// --- These variables are only needed if the file is available. ---
+
+		// Buffer for printing out the date (required by strftime)
+		// day/month/year (eg. 22/05/2019)
+		char dateBuffer[11];
+
+		// Pointer to time struct for handling Epoch time
+		struct tm *clDate;
+
+		for (int i = 0; i < rows; i++) {
+			// Fill time struct getting date/time info from the Epoch time
+			clDate = localtime(&pr[i].reg_date);
+
+			// Get formatted date
+			strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
+
+			fprintf(filePtr, "%s,%s,%s,%s,%s,%s,%s,%d\n", pr[i].id,
+					pr[i].name, pr[i].surname, pr[i].area,
+					pr[i].phone, pr[i].email, dateBuffer,
+					pr[i].buildings_sold);
+		}
+	}
+
+	fclose(filePtr);
+	return -1;
+}
+
+int checkDuplicatePro(professionals *pr, int rows){
+	short int resDup = 0;
+	short int choice = 0;
+	//int j=0;
+	char id[STRING_SIZE];
+
+	for(int i=0; i<rows; i++){
+		for(int j=i+1; j<rows; j++){
+			if(strcmp(pr[i].id, pr[j].id) == 0){
+				printf("\nERRORE: ");
+				printf("\nIl database contiene degli ID duplicati");
+				newLine();
+				printf("\n1-");
+				showProData(pr+i);
+				printf("\n2-");
+				showProData(pr+j);
+				newLine();
+
+				do{
+					printf("\nScegli quale record modificare (1-2): ");
+					scanf("%hu", &choice);
+					newLine();
+					printf("Inserisci il nuovo ID: ");
+					scanf("%s", id);
+					convertToUpperCase(id);
+					switch(choice){
+						case 1: strcpy(pr[i].id, id);
+								break;
+						case 2:	strcpy(pr[j].id, id);
+								break;
+						default: break;
+					}
+				}while(choice > 2 || choice < 1);
+				i=0;
+				j=i+1;
+				resDup=-1;
+				system("pause");
+			}
+		}
+	}
+	rewriteProfessionalsToFile(pr, rows);
+	return resDup;
 }

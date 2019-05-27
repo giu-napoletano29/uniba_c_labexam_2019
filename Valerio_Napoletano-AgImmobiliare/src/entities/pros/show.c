@@ -25,7 +25,7 @@ void showProData(professionals *pr) {
 
 	loadPotFile(pr->id);
 	newLine();
-	system("pause");
+	//system("pause");
 }
 
 int showAllPros(professionals *pr, int num_pros) {
@@ -37,6 +37,6 @@ int showAllPros(professionals *pr, int num_pros) {
 		printf("\n-- PROFESSIONISTA %d --\n", i + 1);
 		showProData(pr+i);
 	}
-
+	system("pause");
 	return -1;
 }
