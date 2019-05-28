@@ -29,9 +29,9 @@ int clientsMenu(int jump) {
 	short int resDup = 0;
 	bool error = false;
 
-	// INITIALIZE clients array of structs
+	// INITIALIZE client array of structs
 	int clientsNum = getClientsNumber();
-	clients allClients[clientsNum];
+	client allClients[clientsNum];
 
 	do {
 		clearScr();
@@ -100,7 +100,7 @@ int professMenu() {
 	bool error = false;
 
 	int professionalsNum = getProfessionalsNumber();
-	professionals allprofessionals[professionalsNum];
+	professional allProfessionals[professionalsNum];
 
 	do {
 		clearScr();
@@ -127,12 +127,12 @@ int professMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = loadProsFile(allprofessionals);
-			resDup = checkDuplicatePro(allprofessionals, professionalsNum);
+			choice = loadProsFile(allProfessionals);
+			resDup = checkDuplicatePro(allProfessionals, professionalsNum);
 			if (resDup != -1) {
-				showAllPros(allprofessionals, professionalsNum);
-				sortFilePro(allprofessionals, professionalsNum);
-				rewriteProfessionalsToFile(allprofessionals, professionalsNum);
+				showAllPros(allProfessionals, professionalsNum);
+				sortFilePro(allProfessionals, professionalsNum);
+				rewriteProfessionalsToFile(allProfessionals, professionalsNum);
 			}
 			break;
 		case 2:
@@ -161,7 +161,7 @@ int buildingsMenu() {
 	short int resDup = 0; //check for duplicate id
 
 	int buildingsNum = getBuildingsNumber();
-	building allbuildings[buildingsNum];
+	building allBuildings[buildingsNum];
 
 	bool error = false;
 
@@ -193,12 +193,12 @@ int buildingsMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = loadBuildingsFile(allbuildings);
-			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
+			choice = loadBuildingsFile(allBuildings);
+			resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
 			if (resDup != -1) {
-				showAllBuildings(allbuildings, buildingsNum);
-				sortFileBui(allbuildings, buildingsNum);
-				rewriteBuildingsToFile(allbuildings, buildingsNum);
+				showAllBuildings(allBuildings, buildingsNum);
+				sortFileBui(allBuildings, buildingsNum);
+				rewriteBuildingsToFile(allBuildings, buildingsNum);
 			}
 
 			break;
@@ -212,17 +212,17 @@ int buildingsMenu() {
 			//choice = removeBuilding();
 			break;
 		case 5:
-			choice = loadBuildingsFile(allbuildings);
-			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
+			choice = loadBuildingsFile(allBuildings);
+			resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
 			if (resDup != -1) {
-				searchBuilding(allbuildings, buildingsNum);
+				searchBuilding(allBuildings, buildingsNum);
 			}
 			break;
 		case 6:
-			choice = loadBuildingsFile(allbuildings);
-			resDup = checkDuplicateBuildings(allbuildings, buildingsNum);
+			choice = loadBuildingsFile(allBuildings);
+			resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
 			if (resDup != -1) {
-				resultAg(allbuildings, buildingsNum);
+				resultAg(allBuildings, buildingsNum);
 			}
 			break;
 		case 7:

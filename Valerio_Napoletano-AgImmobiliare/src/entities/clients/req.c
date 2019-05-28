@@ -16,7 +16,7 @@
 
 #include <stdlib.h>
 
-void reqID(clients *client) {
+void reqID(client *cl) {
 	str_result value;
 	bool error;
 
@@ -30,7 +30,7 @@ void reqID(clients *client) {
 		//TODO: Move these requests and checks to custom functions
 
 		// Client type is "company"
-		if (client->cl_type == 3) {
+		if (cl->cl_type == 3) {
 			printf("Partita IVA: ");
 			// "VAT number" can only have numbers, numCheck is true
 			// Italian PIVA is 11 digit
@@ -55,41 +55,41 @@ void reqID(clients *client) {
 			//error = value.error;
 		}
 
-		strcpy(client->id, value.val);
+		strcpy(cl->id, value.val);
 	} while (error == true);
 
 	clearScr();
 }
 
-void reqName(clients *client) {
+void reqName(client *cl) {
 	bool error = false;
 
 	/// NAME
 	do {
 		printf("Nome: ");
 		str_result value = readString(true);
-		strcpy(client->name, value.val);
+		strcpy(cl->name, value.val);
 		error = value.error;
 	} while (error == true);
 
 	clearScr();
 }
 
-void reqSurname(clients *client) {
+void reqSurname(client *cl) {
 	bool error = false;
 
 	// SURNAME
 	do {
 		printf("Cognome: ");
 		str_result value = readString(true);
-		strcpy(client->surname, value.val);
+		strcpy(cl->surname, value.val);
 		error = value.error;
 	} while (error == true);
 
 	clearScr();
 }
 
-void reqType(clients *client) {
+void reqType(client *cl) {
 	bool error = false;
 
 	// TYPE
@@ -110,26 +110,26 @@ void reqType(clients *client) {
 		// %u placeholders for enums
 		// "Normally, the type is unsigned int if there are no negative values in the enumeration, otherwise int."
 		// http://gcc.gnu.org/onlinedocs/gcc/Structures-unions-enumerations-and-bit_002dfields-implementation.html
-		scanf("%u", &client->cl_type);
+		scanf("%u", &cl->cl_type);
 
-		if (client->cl_type < 1 || client->cl_type > 4) {
+		if (cl->cl_type < 1 || cl->cl_type > 4) {
 			error = true;
 		}
-	} while (client->cl_type < 1 || client->cl_type > 4);
+	} while (cl->cl_type < 1 || cl->cl_type > 4);
 
 	clearScr();
 }
 
-void reqCompanyName(clients *client) {
+void reqCompanyName(client *cl) {
 	// COMPANY NAME
 	// Ask for the company name if the user selected the company
-	if (client->cl_type == 3) {
+	if (cl->cl_type == 3) {
 		newLine();
 		printf("Nome azienda: ");
 		// numCheck is false because a company name can have numbers
-		strcpy(client->company_name, readString(false).val);
+		strcpy(cl->company_name, readString(false).val);
 	} else {
-		strcpy(client->company_name, "-");
+		strcpy(cl->company_name, "-");
 	}
 
 	//TODO: Maybe add another field for saving the "state" name if the user selects type 4
@@ -137,7 +137,7 @@ void reqCompanyName(clients *client) {
 	clearScr();
 }
 
-void reqBudget(clients *client) {
+void reqBudget(client *cl) {
 	bool error = false;
 
 	// BUDGET
@@ -148,19 +148,17 @@ void reqBudget(clients *client) {
 		}
 
 		printf("Budget in euro: ");
-		client->budget = readInteger().val;
+		cl->budget = readInteger().val;
 
-		if (client->budget < MIN_USER_BUDGET
-				|| client->cl_type > MAX_USER_BUDGET) {
+		if (cl->budget < MIN_USER_BUDGET || cl->cl_type > MAX_USER_BUDGET) {
 			error = true;
 		}
-	} while (client->budget < MIN_USER_BUDGET
-			|| client->cl_type > MAX_USER_BUDGET);
+	} while (cl->budget < MIN_USER_BUDGET || cl->cl_type > MAX_USER_BUDGET);
 
 	clearScr();
 }
 
-void reqPropertyType(clients *client) {
+void reqPropertyType(client *cl) {
 	bool error = false;
 
 	// TYPE PROPERTY
@@ -186,12 +184,12 @@ void reqPropertyType(clients *client) {
 		}
 
 		printf("Inserisci il numero che identifica la tipologia: ");
-		scanf("%u", &client->building_type);
+		scanf("%u", &cl->building_type);
 
-		if (client->building_type < 1 || client->building_type > 5) {
+		if (cl->building_type < 1 || cl->building_type > 5) {
 			error = true;
 		}
-	} while (client->building_type < 1 || client->building_type > 5);
+	} while (cl->building_type < 1 || cl->building_type > 5);
 
 	clearScr();
 }

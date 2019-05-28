@@ -8,11 +8,11 @@
 #ifndef ENTITIES_CLIENTS_FILES_H_
 #define ENTITIES_CLIENTS_FILES_H_
 
-int loadClientFile(clients *cl);
-void parseClientFile(FILE *filePtr, clients *cl);
-int rewriteClientsToFile(clients *cl, int rows);
-int appendClientToFile(clients *cl);
-int checkDuplicateClients(clients *cl, int rows);
+int loadClientFile(client *cl);
+void parseClientFile(FILE *filePtr, client *cl);
+int rewriteClientsToFile(client *cl, int rows);
+int appendClientToFile(client *cl);
+int checkDuplicateClients(client *cl, int rows);
 
 int getClientsNumber();
 

@@ -10,7 +10,7 @@
 
 // Functions for showing data to the user
 void showClientType();
-void showClientData(clients *cl);
-int showAllClients(clients *cl, int num_clients);
+void showClientData(client *cl);
+int showAllClients(client *cl, int num_clients);
 
 #endif /* ENTITIES_CLIENTS_SHOW_H_ */

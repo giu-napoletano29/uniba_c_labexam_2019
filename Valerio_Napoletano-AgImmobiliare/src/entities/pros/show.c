@@ -11,7 +11,7 @@
 #include "../../utils.h"
 #include "files.h"
 
-void showProData(professionals *pr) {
+void showProData(professional *pr) {
 	//puts("--- RIEPILOGO ---");
 	printf("Codice fiscale: %s \n", pr->id);
 	printf("Nome: %s \n", pr->name);
@@ -28,14 +28,14 @@ void showProData(professionals *pr) {
 	//system("pause");
 }
 
-int showAllPros(professionals *pr, int num_pros) {
+int showAllPros(professional *pros, int num_pros) {
 	int i;
 
 	clearScr();
 	puts("--- LISTA PROFESSIONISTI ---");
 	for (i = 0; i < num_pros; i++) {
 		printf("\n-- PROFESSIONISTA %d --\n", i + 1);
-		showProData(pr + i);
+		showProData(pros + i);
 	}
 	system("pause");
 	return -1;

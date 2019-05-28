@@ -22,40 +22,40 @@
  * @see https://en.wikipedia.org/wiki/Unix_time
  * @param client
  */
-void saveLocalDate(clients *client) {
+void saveLocalDate(client *cl) {
 	time_t timeRightNow;
 
 	// time function returns the current Epoch time (time_t)
-	client->reg_date = time(&timeRightNow);
+	cl->reg_date = time(&timeRightNow);
 }
 
 int addClient() {
-	clients client;
+	client cl;
 
 	clearScr();
 	newLine();
 
 	puts("--- AGGIUNTA CLIENTE --- ");
 
-	reqName(&client);
+	reqName(&cl);
 
-	reqSurname(&client);
+	reqSurname(&cl);
 
-	reqType(&client);
+	reqType(&cl);
 
-	reqID(&client);
+	reqID(&cl);
 
-	reqCompanyName(&client);
+	reqCompanyName(&cl);
 
-	reqBudget(&client);
+	reqBudget(&cl);
 
-	reqPropertyType(&client);
+	reqPropertyType(&cl);
 
-	saveLocalDate(&client);
+	saveLocalDate(&cl);
 
-	showClientData(&client);
+	showClientData(&cl);
 
-	appendClientToFile(&client);
+	appendClientToFile(&cl);
 
 	return 0;
 }

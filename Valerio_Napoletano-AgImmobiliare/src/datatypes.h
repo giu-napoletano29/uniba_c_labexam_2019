@@ -8,8 +8,11 @@
 #ifndef DATATYPES_H
 #define DATATYPES_H
 
+#include <stdbool.h>
+
 #include "consts.h"
 #include "time.h"
+
 /**
  * @brief Struct for handling the client type
  */
@@ -41,13 +44,13 @@ typedef struct {
 	char id[STRING_SIZE]; /**< "Codice Fiscale" in Italy */
 	char name[STRING_SIZE];
 	char surname[STRING_SIZE];
-	client_type cl_type; /**< Client type (company, private, etc..) */
+	client_type cl_type; /**< Client type */
 	char company_name[STRING_SIZE]; /**< Company name (if type is company) */
 	int budget;
 	time_t reg_date; /**< Registration date in Epoch time */
 	building_type building_type; /**< Type of building that needs to be searched */
 	bool toDelete; /**< If true this client won't be saved in the file */
-} clients;
+} client;
 
 typedef struct {
 	char id[STRING_SIZE]; /**< "Codice Fiscale" in Italy */
@@ -60,7 +63,7 @@ typedef struct {
 	char email[STRING_SIZE];
 	time_t reg_date; /**< Registration date in Epoch time */
 	int buildings_sold; /**< Number of buildings that this professional has sold */
-} professionals;
+} professional;
 
 typedef struct {
 	char id[STRING_SIZE]; /**< "Codice Fiscale" in Italy */

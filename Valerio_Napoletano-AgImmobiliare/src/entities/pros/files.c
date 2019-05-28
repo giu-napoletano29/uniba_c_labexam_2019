@@ -15,8 +15,9 @@
 #include "../../file_utils.h"
 #include "../../utils.h"
 #include "show.h"
+#include "misc.h"
 
-void readProsFile(FILE *filePtr, professionals *pr) {
+void readProsFile(FILE *filePtr, professional *pr) {
 	char line[400];
 	char *token;
 
@@ -123,7 +124,7 @@ void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 	findPot(id, pr, rows);
 }
 
-int loadProsFile(professionals *pr) {
+int loadProsFile(professional *pr) {
 	//int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "a+");
@@ -161,14 +162,17 @@ int loadPotFile(char id[]) {
 	if (!checkFile(fp_pot)) {
 		rows = countRows(fp_pot);
 		rewind(fp_pot);
+
 		potential pr[rows];
+		initPotentialStruct(pr, rows);
+
 		readPotFile(fp_pot, pr, id, rows);
 	}
 	fclose(fp_pot);
 	return -1;
 }
 
-int rewriteProfessionalsToFile(professionals *pr, int rows) {
+int rewriteProfessionalsToFile(professional *pr, int rows) {
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "w+");
 	//checkFile(filePtr);
@@ -201,7 +205,7 @@ int rewriteProfessionalsToFile(professionals *pr, int rows) {
 	return -1;
 }
 
-int checkDuplicatePro(professionals *pr, int rows) {
+int checkDuplicatePro(professional *pr, int rows) {
 	short int resDup = 0;
 	short int choice = 0;
 	//int j=0;

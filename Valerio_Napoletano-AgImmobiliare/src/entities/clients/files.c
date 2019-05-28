@@ -16,7 +16,7 @@
 #include "../../utils.h"
 #include "show.h"
 
-void parseClientFile(FILE *filePtr, clients *cl) {
+void parseClientFile(FILE *filePtr, client *cl) {
 	char line[400];
 	char *token;
 
@@ -88,7 +88,7 @@ void parseClientFile(FILE *filePtr, clients *cl) {
  * Useful for deleting a client.
  * @return success
  */
-int rewriteClientsToFile(clients *cl, int rows) {
+int rewriteClientsToFile(client *cl, int rows) {
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "w+");
 	//TODO: Handle file "empty"
@@ -129,7 +129,7 @@ int rewriteClientsToFile(clients *cl, int rows) {
  * Append a new client to the clients file
  * @return success
  */
-int appendClientToFile(clients *cl) {
+int appendClientToFile(client *cl) {
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "a+");
 	if (!checkFile(filePtr)) {
@@ -176,7 +176,7 @@ int getClientsNumber() {
 /**
  * Load "clients.csv" internal file and run the parsing function
  */
-int loadClientFile(clients *cl) {
+int loadClientFile(client *cl) {
 	FILE *filePtr;
 	// Read only
 	filePtr = fopen("clients.csv", "r");
@@ -187,7 +187,7 @@ int loadClientFile(clients *cl) {
 	return -1;
 }
 
-int checkDuplicateClients(clients *cl, int rows) {
+int checkDuplicateClients(client *cl, int rows) {
 	short int resDup = 0;
 	short int choice = 0;
 	char id[STRING_SIZE];

@@ -14,8 +14,8 @@
 #include "file_utils.h"
 #include "utils.h"
 
-void sortFilePro(professionals *pr, int rows) {
-	professionals cmp;
+void sortFilePro(professional *pr, int rows) {
+	professional cmp;
 
 	for (int j = 0; j < rows; j++) {
 		for (int i = 0; i < rows; i++) {
@@ -59,8 +59,8 @@ void sortFilePro(professionals *pr, int rows) {
 	 system("pause");*/
 }
 
-void sortFileCli(clients *cl, int rows) {
-	clients cmp;
+void sortFileCli(client *cl, int rows) {
+	client cmp;
 
 	for (int j = 0; j < rows; j++) {
 		for (int i = 0; i < rows; i++) {
@@ -155,6 +155,6 @@ void sortFileBui(building *bl, int rows) {
 			}
 		}
 	}
-	/*showAllBuildings(bl, rows);
+	/*showallBuildings(bl, rows);
 	 system("pause");*/
 }

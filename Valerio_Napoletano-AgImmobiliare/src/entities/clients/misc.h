@@ -12,7 +12,7 @@
 int addClient();
 
 // Get local system date and save in the related struct (only for Windows)
-void saveLocalDate(clients *client);
+void saveLocalDate(client *cl);
 
 bool checkIfUserExpired(time_t epochTime, char id[]);
 

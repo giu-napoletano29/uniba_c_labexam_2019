@@ -36,7 +36,7 @@ void showClientType(int type) {
 	printf("\n");
 }
 
-void showClientData(clients *cl) {
+void showClientData(client *cl) {
 	//puts("--- RIEPILOGO ---");
 	printf("Codice fiscale: %s \n", cl->id);
 	printf("Nome: %s \n", cl->name);
@@ -65,7 +65,7 @@ void showClientData(clients *cl) {
 	newLine();
 }
 
-int showAllClients(clients *cl, int num_clients) {
+int showAllClients(client *cl, int num_clients) {
 	int i;
 
 	clearScr();

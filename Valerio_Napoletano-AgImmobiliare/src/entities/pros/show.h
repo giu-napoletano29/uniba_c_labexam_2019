@@ -9,7 +9,7 @@
 #define ENTITIES_PROS_SHOW_H_
 
 // Functions for showing data to the user
-void showProData(professionals *pr);
-int showAllPros(professionals *pr, int num_pros);
+void showProData(professional *pr);
+int showAllPros(professional *pros, int num_pros);
 
 #endif /* ENTITIES_PROS_SHOW_H_ */
