@@ -35,7 +35,7 @@ int showAllPros(professionals *pr, int num_pros) {
 	puts("--- LISTA PROFESSIONISTI ---");
 	for (i = 0; i < num_pros; i++) {
 		printf("\n-- PROFESSIONISTA %d --\n", i + 1);
-		showProData(pr+i);
+		showProData(pr + i);
 	}
 	system("pause");
 	return -1;

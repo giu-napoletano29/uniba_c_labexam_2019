@@ -15,7 +15,7 @@
 #include "entities/buildings/files.h"
 #include "entities/buildings/show.h"
 
-int resultAg(building *bl, int n_bui){
+int resultAg(building *bl, int n_bui) {
 	char date1[10];
 	char date2[10];
 	time_t reg_date1;
@@ -29,16 +29,15 @@ int resultAg(building *bl, int n_bui){
 	scanf("%s", date2);
 	reg_date2 = parseDateInFile(date2);
 
-	if(reg_date1 < reg_date2){
-		for(int i = 0; i<n_bui; i++){
-			if(bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2){
+	if (reg_date1 < reg_date2) {
+		for (int i = 0; i < n_bui; i++) {
+			if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2) {
 				/*printf("\nEdificio: %s %s - %ld", bl[i].id, bl[i].owner, bl[i].reg_date);
-				printf("%s", asctime(gmtime(&bl[i].reg_date)));*/
+				 printf("%s", asctime(gmtime(&bl[i].reg_date)));*/
 				showBuildingData(bl + i);
 			}
 		}
-	}
-	else{
+	} else {
 		printf("\nE' stato inserito un intervallo errato.\n");
 	}
 	system("pause");

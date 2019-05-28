@@ -93,33 +93,32 @@ int rewriteClientsToFile(clients *cl, int rows) {
 	filePtr = fopen("clients.csv", "w+");
 	//TODO: Handle file "empty"
 	//if (!checkFile(filePtr)) {
-		// --- These variables are only needed if the file is available. ---
+	// --- These variables are only needed if the file is available. ---
 
-		// Buffer for printing out the date (required by strftime)
-		// day/month/year (eg. 22/05/2019)
-		char dateBuffer[11];
+	// Buffer for printing out the date (required by strftime)
+	// day/month/year (eg. 22/05/2019)
+	char dateBuffer[11];
 
-		// Pointer to time struct for handling Epoch time
-		struct tm *clDate;
+	// Pointer to time struct for handling Epoch time
+	struct tm *clDate;
 
-		for (int i = 0; i < rows; i++) {
-			// Fill time struct getting date/time info from the Epoch time
-			clDate = localtime(&cl[i].reg_date);
+	for (int i = 0; i < rows; i++) {
+		// Fill time struct getting date/time info from the Epoch time
+		clDate = localtime(&cl[i].reg_date);
 
-			// Get formatted date
-			strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
+		// Get formatted date
+		strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
 
-			printf("INDEX: %d\nID: %s\nTODELETE: %d \n\n", i, cl[i].id,
-					cl[i].toDelete);
+		printf("INDEX: %d\nID: %s\nTODELETE: %d \n\n", i, cl[i].id,
+				cl[i].toDelete);
 
-			// Save client to file only if the client is not marked for deletion
-			if (!cl[i].toDelete) {
-				fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl[i].id,
-						cl[i].name, cl[i].surname, cl[i].cl_type,
-						cl[i].company_name, cl[i].budget, dateBuffer,
-						cl[i].building_type);
-			}
+		// Save client to file only if the client is not marked for deletion
+		if (!cl[i].toDelete) {
+			fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl[i].id, cl[i].name,
+					cl[i].surname, cl[i].cl_type, cl[i].company_name,
+					cl[i].budget, dateBuffer, cl[i].building_type);
 		}
+	}
 	//}
 
 	fclose(filePtr);
@@ -188,41 +187,44 @@ int loadClientFile(clients *cl) {
 	return -1;
 }
 
-int checkDuplicateClients(clients *cl, int rows){
+int checkDuplicateClients(clients *cl, int rows) {
 	short int resDup = 0;
 	short int choice = 0;
 	char id[STRING_SIZE];
 
-	for(int i=0; i<rows; i++){
-		for(int j=i+1; j<rows; j++){
-			if(strcmp(cl[i].id, cl[j].id) == 0){
+	for (int i = 0; i < rows; i++) {
+		for (int j = i + 1; j < rows; j++) {
+			if (strcmp(cl[i].id, cl[j].id) == 0) {
 				printf("\nERRORE: ");
 				printf("\nIl database contiene degli ID duplicati");
 				newLine();
 				printf("\n1-");
-				showClientData(cl+i);
+				showClientData(cl + i);
 				printf("\n2-");
-				showClientData(cl+j);
+				showClientData(cl + j);
 				newLine();
 
-				do{
+				do {
 					printf("\nScegli quale record modificare (1-2): ");
 					scanf("%hu", &choice);
 					newLine();
 					printf("Inserisci il nuovo ID: ");
 					scanf("%s", id);
 					convertToUpperCase(id);
-					switch(choice){
-						case 1: strcpy(cl[i].id, id);
-								break;
-						case 2:	strcpy(cl[j].id, id);
-								break;
-						default: break;
+					switch (choice) {
+					case 1:
+						strcpy(cl[i].id, id);
+						break;
+					case 2:
+						strcpy(cl[j].id, id);
+						break;
+					default:
+						break;
 					}
-				}while(choice > 2 || choice < 1);
-				i=0;
-				j=i+1;
-				resDup=-1;
+				} while (choice > 2 || choice < 1);
+				i = 0;
+				j = i + 1;
+				resDup = -1;
 				system("pause");
 			}
 		}

@@ -5,7 +5,6 @@
  *      Author: Giuseppe
  */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,12 +14,12 @@
 #include "file_utils.h"
 #include "utils.h"
 
-void sortFilePro(professionals *pr, int rows){
+void sortFilePro(professionals *pr, int rows) {
 	professionals cmp;
 
-	for(int j = 0; j<rows; j++){
-		for(int i = 0; i<rows; i++){
-			if(strcmp(pr[j].surname, pr[i].surname)<0){
+	for (int j = 0; j < rows; j++) {
+		for (int i = 0; i < rows; i++) {
+			if (strcmp(pr[j].surname, pr[i].surname) < 0) {
 				cmp.buildings_sold = pr[i].buildings_sold;
 				pr[i].buildings_sold = pr[j].buildings_sold;
 				pr[j].buildings_sold = cmp.buildings_sold;
@@ -57,15 +56,15 @@ void sortFilePro(professionals *pr, int rows){
 		}
 	}
 	/*showAllPros(pr, rows);
-	system("pause");*/
+	 system("pause");*/
 }
 
-void sortFileCli(clients *cl, int rows){
+void sortFileCli(clients *cl, int rows) {
 	clients cmp;
 
-	for(int j = 0; j<rows; j++){
-		for(int i = 0; i<rows; i++){
-			if(strcmp(cl[j].surname, cl[i].surname)<0){
+	for (int j = 0; j < rows; j++) {
+		for (int i = 0; i < rows; i++) {
+			if (strcmp(cl[j].surname, cl[i].surname) < 0) {
 				cmp.budget = cl[i].budget;
 				cl[i].budget = cl[j].budget;
 				cl[j].budget = cmp.budget;
@@ -106,14 +105,14 @@ void sortFileCli(clients *cl, int rows){
 		}
 	}
 	/*showAllClients(cl, rows);
-	system("pause");*/
+	 system("pause");*/
 }
-void sortFileBui(building *bl, int rows){
+void sortFileBui(building *bl, int rows) {
 	building cmp;
 
-	for(int j = 0; j<rows; j++){
-		for(int i = 0; i<rows; i++){
-			if(strcmp(bl[j].owner, bl[i].owner)<0){
+	for (int j = 0; j < rows; j++) {
+		for (int i = 0; i < rows; i++) {
+			if (strcmp(bl[j].owner, bl[i].owner) < 0) {
 				cmp.civic = bl[i].civic;
 				bl[i].civic = bl[j].civic;
 				bl[j].civic = cmp.civic;
@@ -157,5 +156,5 @@ void sortFileBui(building *bl, int rows){
 		}
 	}
 	/*showAllBuildings(bl, rows);
-	system("pause");*/
+	 system("pause");*/
 }

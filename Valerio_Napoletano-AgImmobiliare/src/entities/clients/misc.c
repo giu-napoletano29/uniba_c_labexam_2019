@@ -87,7 +87,8 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 
 	/** const.h CLIENT_EXPIRE_DAYS is 30 (days) */
 	if (diffDays > CLIENT_EXPIRE_DAYS) {
-		printf("\n\nIl cliente risulta registrato da piu' di 30 giorni.\nVuoi eliminarlo? (s/n): ");
+		printf(
+				"\n\nIl cliente risulta registrato da piu' di 30 giorni.\nVuoi eliminarlo? (s/n): ");
 		scanf("%s", deleteChoice);
 
 		if (strcmp(deleteChoice, "s") == 0 || strcmp(deleteChoice, "y") == 0) {
