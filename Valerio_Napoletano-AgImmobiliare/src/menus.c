@@ -20,6 +20,7 @@
 
 #include "entities/pros/files.h"
 #include "entities/pros/show.h"
+#include "entities/pros/misc.h"
 
 #include "agency.h"
 #include "sort.h"
@@ -100,7 +101,9 @@ int professMenu() {
 	bool error = false;
 
 	int professionalsNum = getProfessionalsNumber();
+
 	professional allProfessionals[professionalsNum];
+	initProsStruct(allProfessionals, professionalsNum);
 
 	do {
 		clearScr();

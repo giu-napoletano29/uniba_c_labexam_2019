@@ -17,8 +17,8 @@
  */
 void initPotentialStruct(potential *po, int size) {
 	for (int i = 0; i < size; i++) {
-		strcpy("", po[i].id);
-		strcpy("", po[i].content);
+		strcpy(po[i].id, "");
+		strcpy(po[i].content, "");
 	}
 }
 
@@ -29,12 +29,12 @@ void initPotentialStruct(potential *po, int size) {
  */
 void initProsStruct(professional *pro, int size) {
 	for (int i = 0; i < size; i++) {
-		strcpy("", pro[i].id);
-		strcpy("", pro[i].name);
-		strcpy("", pro[i].surname);
-		strcpy("", pro[i].area);
-		strcpy("", pro[i].phone);
-		strcpy("", pro[i].email);
+		strcpy(pro[i].id, "");
+		strcpy(pro[i].name, "");
+		strcpy(pro[i].surname, "");
+		strcpy(pro[i].area, "");
+		strcpy(pro[i].phone, "");
+		strcpy(pro[i].email, "");
 		pro[i].reg_date = 0;
 		pro[i].buildings_sold = 0;
 	}
