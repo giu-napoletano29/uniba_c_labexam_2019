@@ -55,6 +55,7 @@ void parseClientFile(FILE *filePtr, client *cl) {
 				break;
 			case 4:
 				strcpy(cl[cl_num].company_name, token);
+				convertToUpperCase(cl[cl_num].company_name);
 				break;
 			case 5:
 				cl[cl_num].budget = atoi(token);
