@@ -1,16 +1,17 @@
-/*
- * clients_misc.c
- *
- *  Created on: 22 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file misc.c
+ * @author Saverio Valerio
+ * @date 22 May 2019
+ * @brief File containing misc functions used by the "client" entity.
  */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h> /**< strcmp */
-
 #include <time.h>
+#include <stdbool.h>
 
+#include "../../datatypes.h"
 #include "../../utils.h"
 #include "req.h"
 #include "show.h"
@@ -98,4 +99,23 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 	}
 
 	return delete;
+}
+
+/**
+ * Initialize an array of structs of clients.
+ * @param cl "client" type struct.
+ * @param size How many elements the array of struct will keep.
+ */
+void initClientsArray(client *cl, int size) {
+	for (int i = 0; i < size; i++) {
+		strcpy(cl[i].id, "");
+		strcpy(cl[i].name, "");
+		strcpy(cl[i].surname, "");
+		cl[i].cl_type = single;
+		strcpy(cl[i].company_name, "");
+		cl[i].budget = 0;
+		cl[i].reg_date = 0;
+		cl[i].building_type = flat;
+		cl[i].toDelete = false;
+	}
 }

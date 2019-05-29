@@ -17,6 +17,7 @@
 
 #include "entities/buildings/files.h"
 #include "entities/buildings/show.h"
+#include "entities/buildings/misc.h"
 
 #include "entities/pros/files.h"
 #include "entities/pros/show.h"
@@ -33,6 +34,7 @@ int clientsMenu(int jump) {
 	// INITIALIZE client array of structs
 	int clientsNum = getClientsNumber();
 	client allClients[clientsNum];
+	initClientsArray(allClients, clientsNum);
 
 	do {
 		clearScr();
@@ -67,8 +69,8 @@ int clientsMenu(int jump) {
 			resDup = checkDuplicateClients(allClients, clientsNum);
 			if (resDup != -1) {
 				showAllClients(allClients, clientsNum);
-				//TODO: Optimize: run only if some clients needs to be deleted
 				sortFileCli(allClients, clientsNum);
+				//TODO: Optimize: run only if some clients needs to be deleted
 				rewriteClientsToFile(allClients, clientsNum);
 			}
 			break;
@@ -103,7 +105,7 @@ int professMenu() {
 	int professionalsNum = getProfessionalsNumber();
 
 	professional allProfessionals[professionalsNum];
-	initProsStruct(allProfessionals, professionalsNum);
+	initProsArray(allProfessionals, professionalsNum);
 
 	do {
 		clearScr();
@@ -165,6 +167,7 @@ int buildingsMenu() {
 
 	int buildingsNum = getBuildingsNumber();
 	building allBuildings[buildingsNum];
+	initBuildingsArray(allBuildings, buildingsNum);
 
 	bool error = false;
 

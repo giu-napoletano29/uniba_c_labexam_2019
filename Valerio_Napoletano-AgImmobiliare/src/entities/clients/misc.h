@@ -16,4 +16,6 @@ void saveLocalDate(client *cl);
 
 bool checkIfUserExpired(time_t epochTime, char id[]);
 
+void initClientsArray(client *cl, int size);
+
 #endif /* ENTITIES_CLIENTS_MISC_H_ */

@@ -164,7 +164,7 @@ int loadPotFile(char id[]) {
 		rewind(fp_pot);
 
 		potential pr[rows];
-		initPotentialStruct(pr, rows);
+		initPotentialsArray(pr, rows);
 
 		readPotFile(fp_pot, pr, id, rows);
 	}
