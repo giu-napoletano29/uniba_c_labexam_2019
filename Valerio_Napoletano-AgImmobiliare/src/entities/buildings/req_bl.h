@@ -5,11 +5,11 @@
  *      Author: Saverio Valerio
  */
 
-#ifndef ENTITIES_BUILDINGS_REQ_H_
-#define ENTITIES_BUILDINGS_REQ_H_
+#ifndef ENTITIES_BUILDINGS_REQ_BL_H_
+#define ENTITIES_BUILDINGS_REQ_BL_H_
 
 #include "../../datatypes.h"
 
 //TODO: Complete
 
-#endif /* ENTITIES_BUILDINGS_REQ_H_ */
+#endif /* ENTITIES_BUILDINGS_REQ_BL_H_ */

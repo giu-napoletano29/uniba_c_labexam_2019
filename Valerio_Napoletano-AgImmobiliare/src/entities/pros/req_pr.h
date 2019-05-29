@@ -5,9 +5,9 @@
  *      Author: Saverio Valerio
  */
 
-#ifndef ENTITIES_PROS_REQ_H_
-#define ENTITIES_PROS_REQ_H_
+#ifndef ENTITIES_PROS_REQ_PR_H_
+#define ENTITIES_PROS_REQ_PR_H_
 
 #include "../../datatypes.h"
 
-#endif /* ENTITIES_PROS_REQ_H_ */
+#endif /* ENTITIES_PROS_REQ_PR_H_ */

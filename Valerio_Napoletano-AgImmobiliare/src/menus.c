@@ -10,20 +10,17 @@
 
 #include "utils.h"
 
-#include "entities/clients/misc.h"
-#include "entities/clients/req.h"
-#include "entities/clients/show.h"
-#include "entities/clients/files.h"
-
-#include "entities/buildings/files.h"
-#include "entities/buildings/show.h"
-#include "entities/buildings/misc.h"
-
-#include "entities/pros/files.h"
-#include "entities/pros/show.h"
-#include "entities/pros/misc.h"
-
 #include "agency.h"
+#include "entities/buildings/files_bl.h"
+#include "entities/buildings/misc_bl.h"
+#include "entities/buildings/show_bl.h"
+#include "entities/clients/files_cl.h"
+#include "entities/clients/misc_cl.h"
+#include "entities/clients/req_cl.h"
+#include "entities/clients/show_cl.h"
+#include "entities/pros/files_pr.h"
+#include "entities/pros/misc_pr.h"
+#include "entities/pros/show_pr.h"
 #include "sort.h"
 
 int clientsMenu(int jump) {

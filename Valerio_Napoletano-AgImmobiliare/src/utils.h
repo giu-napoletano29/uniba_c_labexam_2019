@@ -28,6 +28,11 @@ void setRedColor();
 void setYellowColor();
 void setGreenColor();
 void setCyanColor();
+void setMagentaColor();
 
 void pause();
 void notFoundError();
+
+void printSectionName(char *headerString);
+bool strCompare(char *from, char *to);
+bool askConfirm();

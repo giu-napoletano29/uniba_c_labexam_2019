@@ -1,5 +1,5 @@
 /**
- * @file misc.c
+ * @file misc_cl.c
  * @author Saverio Valerio
  * @date 22 May 2019
  * @brief File containing misc functions used by the "client" entity.
@@ -13,9 +13,9 @@
 
 #include "../../datatypes.h"
 #include "../../utils.h"
-#include "req.h"
-#include "show.h"
-#include "files.h"
+#include "files_cl.h"
+#include "req_cl.h"
+#include "show_cl.h"
 
 /**
  * Get current system date and save the Epoch time value.
@@ -65,9 +65,6 @@ int addClient() {
  * Check if user expired and delete it, if the user confirms.
  */
 bool checkIfUserExpired(time_t epochTime, char id[]) {
-	/** Array of 2 positions for keeping the newline "\n" */
-	char deleteChoice[1];
-
 	/** Temp "tm" struct required for parsing the date properly from the file */
 	struct tm temp_date = { 0 };
 
@@ -88,15 +85,20 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 
 	/** const.h CLIENT_EXPIRE_DAYS is 30 (days) */
 	if (diffDays > CLIENT_EXPIRE_DAYS) {
+
 		setYellowColor();
 		printf(
 				"\nIl cliente risulta registrato da piu' di 30 giorni.\nVuoi eliminarlo? (s/n): ");
 		resetColor();
-		scanf("%s", deleteChoice);
 
-		if (strcmp(deleteChoice, "s") == 0 || strcmp(deleteChoice, "y") == 0) {
-			delete = true;
-			printf("\nUtente con ID %s in eliminazione!\n", id);
+		if (askConfirm()) {
+			setYellowColor();
+			printf("\nCliente con ID %s pronto per l'eliminazione!\n", id);
+			printf(
+					"Non chiudere il software prima dello scorrimento completo della lista.\n");
+			resetColor();
+			newLine();
+			pause();
 		}
 	}
 

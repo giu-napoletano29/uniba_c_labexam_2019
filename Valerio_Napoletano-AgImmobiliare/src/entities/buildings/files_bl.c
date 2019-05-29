@@ -14,7 +14,7 @@
 #include "../../datatypes.h"
 #include "../../file_utils.h"
 #include "../../utils.h"
-#include "show.h"
+#include "show_bl.h"
 
 void readBuildingsFile(FILE *filePtr, building *bl) {
 	char line[400];

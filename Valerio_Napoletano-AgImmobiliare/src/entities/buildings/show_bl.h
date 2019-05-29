@@ -5,12 +5,12 @@
  *      Author: Saverio Valerio
  */
 
-#ifndef ENTITIES_BUILDINGS_SHOW_H_
-#define ENTITIES_BUILDINGS_SHOW_H_
+#ifndef ENTITIES_BUILDINGS_SHOW_BL_H_
+#define ENTITIES_BUILDINGS_SHOW_BL_H_
 
 // Functions for showing data to the user
 void showBuildingType();
 void showBuildingData(building *bl);
 int showAllBuildings(building *bl, int num_buildings);
 
-#endif /* ENTITIES_BUILDINGS_SHOW_H_ */
+#endif /* ENTITIES_BUILDINGS_SHOW_BL_H_ */

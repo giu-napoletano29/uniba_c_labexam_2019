@@ -5,8 +5,8 @@
  *      Author: Saverio Valerio
  */
 
-#ifndef ENTITIES_PROS_FILES_H_
-#define ENTITIES_PROS_FILES_H_
+#ifndef ENTITIES_PROS_FILES_PR_H_
+#define ENTITIES_PROS_FILES_PR_H_
 
 int loadProsFile(professional *pr);
 int getProfessionalsNumber();
@@ -17,4 +17,4 @@ void findPot(char id[], potential *pr, int rows);
 int loadPotFile(char id[]);
 int checkDuplicatePro(professional *pr, int rows);
 
-#endif /* ENTITIES_PROS_FILES_H_ */
+#endif /* ENTITIES_PROS_FILES_PR_H_ */

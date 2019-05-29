@@ -5,8 +5,8 @@
  *      Author: Saverio Valerio
  */
 
-#ifndef ENTITIES_BUILDINGS_FILES_H_
-#define ENTITIES_BUILDINGS_FILES_H_
+#ifndef ENTITIES_BUILDINGS_FILES_BL_H_
+#define ENTITIES_BUILDINGS_FILES_BL_H_
 
 int loadBuildingsFile(building *bl);
 void readBuildingsFile(FILE *filePtr, building *cl);
@@ -15,4 +15,4 @@ int getBuildingsNumber();
 int rewriteBuildingsToFile(building *bl, int rows);
 int checkDuplicateBuildings(building *bl, int rows);
 
-#endif /* ENTITIES_BUILDINGS_FILES_H_ */
+#endif /* ENTITIES_BUILDINGS_FILES_BL_H_ */

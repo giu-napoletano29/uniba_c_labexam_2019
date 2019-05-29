@@ -5,8 +5,8 @@
  *      Author: Saverio Valerio
  */
 
-#ifndef ENTITIES_CLIENTS_FILES_H_
-#define ENTITIES_CLIENTS_FILES_H_
+#ifndef ENTITIES_CLIENTS_FILES_CL_H_
+#define ENTITIES_CLIENTS_FILES_CL_H_
 
 int loadClientFile(client *cl);
 void parseClientFile(FILE *filePtr, client *cl);
@@ -16,4 +16,4 @@ int checkDuplicateClients(client *cl, int rows);
 
 int getClientsNumber();
 
-#endif /* ENTITIES_CLIENTS_FILES_H_ */
+#endif /* ENTITIES_CLIENTS_FILES_CL_H_ */

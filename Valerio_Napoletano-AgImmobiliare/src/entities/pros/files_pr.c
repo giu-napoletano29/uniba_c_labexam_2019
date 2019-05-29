@@ -14,8 +14,8 @@
 #include "../../datatypes.h"
 #include "../../file_utils.h"
 #include "../../utils.h"
-#include "show.h"
-#include "misc.h"
+#include "misc_pr.h"
+#include "show_pr.h"
 
 void readProsFile(FILE *filePtr, professional *pr) {
 	char line[400];
