@@ -126,7 +126,7 @@ int loadProsFile(professional *pr) {
 	//int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "a+");
-	if (!checkFile(filePtr)) {
+	if (!checkFile(filePtr, true)) {
 		//rows = countRows(filePtr);
 		rewind(filePtr);
 		//professionals pr[rows];
@@ -144,7 +144,7 @@ int getProfessionalsNumber() {
 	filePtr = fopen("professionals.csv", "r");
 	//TODO: Makes the program crash
 	//if (!checkFile(filePtr)) {
-	checkFile(filePtr);
+	checkFile(filePtr, true);
 	if (filePtr != NULL) {
 		rewind(filePtr);
 		rows = countRows(filePtr);
@@ -157,7 +157,7 @@ int loadPotFile(char id[]) {
 	int rows = 0;
 	FILE *fp_pot;
 	fp_pot = fopen("potential.csv", "a+");
-	if (!checkFile(fp_pot)) {
+	if (!checkFile(fp_pot, true)) {
 		rows = countRows(fp_pot);
 		rewind(fp_pot);
 

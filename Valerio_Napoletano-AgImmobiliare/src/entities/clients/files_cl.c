@@ -130,7 +130,7 @@ int rewriteClientsToFile(client *cl, int rows) {
 int appendClientToFile(client *cl) {
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "a+");
-	if (!checkFile(filePtr)) {
+	if (!checkFile(filePtr, true)) {
 		// --- These variables are only needed if the file is available. ---
 		// Buffer for printing out the date (required by strftime)
 		// day/month/year (eg. 22/05/2019)
@@ -164,7 +164,7 @@ int getClientsNumber() {
 	int rows = 0;
 	// Read only
 	filePtr = fopen("clients.csv", "r");
-	if (!checkFile(filePtr)) {
+	if (!checkFile(filePtr, true)) {
 		rows = countRows(filePtr);
 		fclose(filePtr);
 	}
@@ -178,7 +178,7 @@ int loadClientFile(client *cl) {
 	FILE *filePtr;
 	// Read only
 	filePtr = fopen("clients.csv", "r");
-	if (!checkFile(filePtr)) {
+	if (!checkFile(filePtr, true)) {
 		parseClientFile(filePtr, cl);
 		fclose(filePtr);
 	}
