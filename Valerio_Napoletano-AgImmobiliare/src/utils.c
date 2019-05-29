@@ -207,3 +207,52 @@ void printSectionName(char *string) {
 	printf(" |||");
 	newLine();
 }
+
+/**
+ * Prettier and easy to use wrapper for string comparison.
+ * @param from First string to compare
+ * @param to Second string to compare
+ * @return true string is equal, false string is not equal
+ */
+bool strCompare(char *from, char *to) {
+	bool result = false;
+
+	if (strcmp(from, to) == 0) {
+		result = true;
+	} else {
+		result = false;
+	}
+
+	return result;
+}
+
+/**
+ * Ask user for yes or no confirmation.
+ * @return true if user confirmed the choice, false the user refused
+ */
+bool askConfirm() {
+	/** Array of 2 positions for keeping the newline "\n" */
+	char usrInput[1];
+
+	bool choice = false;
+	bool error = false;
+
+	do {
+		scanf("%s", usrInput);
+
+		if (strCompare(usrInput, "s") || strCompare(usrInput, "y")) {
+			choice = true;
+			error = false;
+		} else if (!strCompare(usrInput, "n")) {
+			/** Set error bool on true if user did not select s or n */
+			error = true;
+
+			setYellowColor();
+			printf(
+					"\nScelta non valida.\nInserisci una scelta corretta (s o n) e premi Invio: ");
+			resetColor();
+		}
+	} while (error == true);
+
+	return choice;
+}

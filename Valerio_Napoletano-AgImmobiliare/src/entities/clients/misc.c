@@ -65,9 +65,6 @@ int addClient() {
  * Check if user expired and delete it, if the user confirms.
  */
 bool checkIfUserExpired(time_t epochTime, char id[]) {
-	/** Array of 2 positions for keeping the newline "\n" */
-	char deleteChoice[1];
-
 	/** Temp "tm" struct required for parsing the date properly from the file */
 	struct tm temp_date = { 0 };
 
@@ -88,15 +85,20 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 
 	/** const.h CLIENT_EXPIRE_DAYS is 30 (days) */
 	if (diffDays > CLIENT_EXPIRE_DAYS) {
+
 		setYellowColor();
 		printf(
 				"\nIl cliente risulta registrato da piu' di 30 giorni.\nVuoi eliminarlo? (s/n): ");
 		resetColor();
-		scanf("%s", deleteChoice);
 
-		if (strcmp(deleteChoice, "s") == 0 || strcmp(deleteChoice, "y") == 0) {
-			delete = true;
-			printf("\nUtente con ID %s in eliminazione!\n", id);
+		if (askConfirm()) {
+			setYellowColor();
+			printf("\nCliente con ID %s pronto per l'eliminazione!\n", id);
+			printf(
+					"Non chiudere il software prima dello scorrimento completo della lista.\n");
+			resetColor();
+			newLine();
+			pause();
 		}
 	}
 

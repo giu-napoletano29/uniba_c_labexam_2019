@@ -34,4 +34,5 @@ void pause();
 void notFoundError();
 
 void printSectionName(char *headerString);
-
+bool strCompare(char *from, char *to);
+bool askConfirm();
