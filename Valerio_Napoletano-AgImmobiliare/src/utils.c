@@ -16,7 +16,7 @@
 #include "datatypes.h"
 
 /**
- * Just print a new line to the console
+ * @brief Just print a new line to the console
  */
 void newLine() {
 	printf("\n");
@@ -144,7 +144,7 @@ int_result readInteger() {
 }
 
 /**
- * Print date formatted in day/month/year.
+ * @brief Print date formatted in day/month/year.
  *
  * @param time_t epochTime
  */
@@ -173,7 +173,7 @@ void printFormattedDate(time_t epochTime) {
 }
 
 /**
- * Convert every char in the string to uppercase
+ * @brief Convert every char in the string to uppercase
  *
  * @param str String to convert to uppercase.
  */
@@ -185,7 +185,7 @@ void convertToUpperCase(char *str) {
 }
 
 /**
- * Set custom colors to stdout using ANSI escape codes.
+ * @brief Reset custom color on stdout to its default using ANSI escape codes.
  *
  * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
  */
@@ -193,28 +193,53 @@ void resetColor() {
 	printf("\033[0m");
 }
 
+/**
+ * @brief Set red color to stdout using ANSI escape codes.
+ *
+ * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+ */
 void setRedColor() {
 	printf("\033[1;31m");
 }
 
+/**
+ * @brief Set yellow color to stdout using ANSI escape codes.
+ *
+ * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+ */
 void setYellowColor() {
 	printf("\033[01;33m");
 }
 
+/**
+ * @brief Set cyan color to stdout using ANSI escape codes.
+ *
+ * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+ */
 void setCyanColor() {
 	printf("\033[1;36m");
 }
 
+/**
+ * @brief Set green color to stdout using ANSI escape codes.
+ *
+ * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+ */
 void setGreenColor() {
 	printf("\033[0;32m");
 }
 
+/**
+ * @brief Set magenta color to stdout using ANSI escape codes.
+ *
+ * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+ */
 void setMagentaColor() {
 	printf("\033[1;35m");
 }
 
 /**
- * System pause highlighted in yellow.
+ * @brief System pause highlighted in yellow.
  */
 void pause() {
 	setYellowColor();
@@ -223,7 +248,7 @@ void pause() {
 }
 
 /**
- * Show "not found" error highlighted in red.
+ * @brief Show "not found" error highlighted in red.
  */
 void notFoundError() {
 	setRedColor();
@@ -232,7 +257,8 @@ void notFoundError() {
 }
 
 /**
- * Print in the console the formatted "section name"
+ * @brief Print in the console the formatted "section name".
+ *
  * @param string Section name to display.
  */
 void printSectionName(char *string) {
@@ -245,7 +271,8 @@ void printSectionName(char *string) {
 }
 
 /**
- * Prettier and easy to use wrapper for string comparison.
+ * @brief Prettier and easy to use wrapper for string comparison.
+ *
  * @param from First string to compare
  * @param to Second string to compare
  * @return true bool string is equal, false bool string is not equal
@@ -263,8 +290,9 @@ bool strCompare(char *from, char *to) {
 }
 
 /**
- * Ask user for yes or no confirmation.
- * @return true if user confirmed the choice, false the user refused
+ * @brief Ask user for yes or no confirmation.
+ *
+ * @return true if user confirmed the choice, false the user refused.
  */
 bool askConfirm() {
 	/** Array of 2 positions for keeping the newline "\n" */
