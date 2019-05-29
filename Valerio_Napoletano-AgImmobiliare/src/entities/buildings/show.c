@@ -35,34 +35,82 @@ void showBuildingType(int type) {
 	printf("\n");
 }
 
+/**
+ * Print every field present in a building struct.
+ * @param bl building type struct
+ */
 void showBuildingData(building *bl) {
-	printf("Identificativo: %s \n", bl->id);
-	printf("Indirizzo: %s \n", bl->street);
-	printf("Numero civico: %d \n", bl->civic);
-	printf("Citta: %s \n", bl->city);
-	printf("Provincia: %s \n", bl->province);
+	setCyanColor();
+	printf("Identificativo: ");
+	resetColor();
+	printf("%s \n", bl->id);
+
+	setCyanColor();
+	printf("Indirizzo: ");
+	resetColor();
+	printf("%s \n", bl->street);
+
+	setCyanColor();
+	printf("Numero civico: ");
+	resetColor();
+	printf("%d \n", bl->civic);
+
+	setCyanColor();
+	printf("Citta': ");
+	resetColor();
+	printf("%s \n", bl->city);
+
+	setCyanColor();
+	printf("Provincia: ");
+	resetColor();
+	printf("%s \n", bl->province);
+
+	setCyanColor();
 	printf("Data di registrazione: ");
+	resetColor();
 	printFormattedDate(bl->reg_date);
-	printf("Prezzo: %d euro \n", bl->price);
-	printf("Venditore: %s \n", bl->owner);
-	printf("Numero di telefono venditore: %s \n", bl->phone);
+
+	setCyanColor();
+	printf("Prezzo: ");
+	resetColor();
+	printf("%d euro \n", bl->price);
+
+	setCyanColor();
+	printf("Venditore: ");
+	resetColor();
+	printf("%s \n", bl->owner);
+
+	setCyanColor();
+	printf("Numero di telefono venditore: ");
+	resetColor();
+	printf("%s \n", bl->phone);
+
+	setCyanColor();
 	printf("Tipologia: ");
-
+	resetColor();
 	showBuildingType(bl->b_type);
-
-	newLine();
-	//pause();
 }
 
+/**
+ * Print every building available in the array of structs.
+ * Iterates on num_buildings calling the showBuildingData() function.
+ * @param bl Array of structs (building type)
+ * @param num_buildings Number of items (buildings) saved in the array.
+ * @return Value for returning back to the menu (-1)
+ */
 int showAllBuildings(building *bl, int num_buildings) {
 	int i;
 
 	clearScr();
-	puts("--- LISTA IMMOBILI ---");
+	printSectionName("LISTA IMMOBILI");
+
 	for (i = 0; i < num_buildings; i++) {
+		setCyanColor();
 		printf("\n-- IMMOBILE %d --\n", i + 1);
+		resetColor();
 		showBuildingData(bl + i);
 	}
+	newLine();
 	pause();
 	return -1;
 }

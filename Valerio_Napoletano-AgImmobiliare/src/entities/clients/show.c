@@ -63,15 +63,15 @@ int showAllClients(client *cl, int num_clients) {
 	int i;
 
 	clearScr();
-	setGreenColor();
-	puts("--- LISTA CLIENTI ---");
-	resetColor();
+	printSectionName("LISTA CLIENTI");
+
 	for (i = 0; i < num_clients; i++) {
 		setCyanColor();
 		printf("\n-- CLIENTE %d --\n", i + 1);
 		resetColor();
 		showClientData(cl + i);
 	}
+
 	newLine();
 	pause();
 	return -1;

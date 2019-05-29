@@ -143,8 +143,10 @@ void reqBudget(client *cl) {
 	// BUDGET
 	do {
 		if (error) {
+			setRedColor();
 			puts(
 					"Inserisci un valore in euro tra 100 e 1 000 000 000 euro. \n");
+			resetColor();
 		}
 
 		printf("Budget in euro: ");

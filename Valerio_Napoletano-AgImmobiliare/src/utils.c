@@ -173,6 +173,10 @@ void setGreenColor() {
 	printf("\033[0;32m");
 }
 
+void setMagentaColor() {
+	printf("\033[1;35m");
+}
+
 /**
  * System pause highlighted in yellow.
  */
@@ -189,4 +193,17 @@ void notFoundError() {
 	setRedColor();
 	puts("Tipologia non trovata, per favore riprova. \n");
 	resetColor();
+}
+
+/**
+ * Print in the console the formatted "section name"
+ * @param string Section name to display.
+ */
+void printSectionName(char *string) {
+	printf("||| ");
+	setGreenColor();
+	printf("%s", string);
+	resetColor();
+	printf(" |||");
+	newLine();
 }
