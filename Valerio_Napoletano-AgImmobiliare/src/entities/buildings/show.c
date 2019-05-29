@@ -1,8 +1,8 @@
-/*
- * buildings/show.c
- *
- *  Created on: 22 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file show.c
+ * @author Saverio Valerio
+ * @date 22 May 2019
+ * @brief Functions for "showing" data to the user related to the buildings.
  */
 
 #include <stdio.h>
@@ -10,6 +10,12 @@
 
 #include "../../utils.h"
 
+/**
+ * Print out a string with the building type.
+ * Check out the "building_type" datatypes.h
+ *
+ * @param type Integer that represents the building type.
+ */
 void showBuildingType(int type) {
 	switch (type) {
 	case 1:
@@ -37,6 +43,7 @@ void showBuildingType(int type) {
 
 /**
  * Print every field present in a building struct.
+ *
  * @param bl building type struct
  */
 void showBuildingData(building *bl) {
@@ -94,6 +101,7 @@ void showBuildingData(building *bl) {
 /**
  * Print every building available in the array of structs.
  * Iterates on num_buildings calling the showBuildingData() function.
+ *
  * @param bl Array of structs (building type)
  * @param num_buildings Number of items (buildings) saved in the array.
  * @return Value for returning back to the menu (-1)
