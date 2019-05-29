@@ -141,25 +141,52 @@ void printFormattedDate(time_t epochTime) {
 	puts(dateBuffer);
 }
 
-/**
- * Colors util functions
- */
-void setRedColor() {
-	printf("\033[1;31m");
-}
-
-void setYellowColor() {
-	printf("\033[1;33m");
-}
-
-void resetColor() {
-	printf("\033[0m");
-}
-
 void convertToUpperCase(char *s) {
 	int len = strlen(s);
 	//while(*s != '\0'){
 	for (int i = 0; i < len; i++) {
 		s[i] = toupper(s[i]);
 	}
+}
+
+/**
+ * Set custom colors to stdout using ANSI escape codes
+ * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+ */
+void resetColor() {
+	printf("\033[0m");
+}
+
+void setRedColor() {
+	printf("\033[1;31m");
+}
+
+void setYellowColor() {
+	printf("\033[01;33m");
+}
+
+void setCyanColor() {
+	printf("\033[1;36m");
+}
+
+void setGreenColor() {
+	printf("\033[0;32m");
+}
+
+/**
+ * System pause highlighted in yellow.
+ */
+void pause() {
+	setYellowColor();
+	system("PAUSE");
+	resetColor();
+}
+
+/**
+ * Show "not found" error highlighted in red.
+ */
+void notFoundError() {
+	setRedColor();
+	puts("Tipologia non trovata, per favore riprova. \n");
+	resetColor();
 }

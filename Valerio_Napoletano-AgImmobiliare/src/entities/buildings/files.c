@@ -175,7 +175,7 @@ int checkDuplicateBuildings(building *bl, int rows) {
 				i = 0;
 				j = i + 1;
 				resDup = -1;
-				system("pause");
+				pause();
 			}
 		}
 	}
@@ -240,5 +240,5 @@ void searchBuilding(building *bl, int n_bui) {
 	default:
 		break;
 	}
-	system("pause");
+	pause();
 }

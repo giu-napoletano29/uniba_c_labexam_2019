@@ -29,7 +29,7 @@ bool checkFile(FILE *filePtr) {
 		resetColor();
 		printf("\nControlla il tuo file system e riprova.\n");
 		error = true;
-		system("pause");
+		pause();
 	}
 
 	// Check if the file is empty
@@ -39,7 +39,7 @@ bool checkFile(FILE *filePtr) {
 		resetColor();
 		error = true;
 		fclose(filePtr);
-		system("pause");
+		pause();
 	}
 
 	rewind(filePtr);
@@ -59,7 +59,7 @@ int countRows(FILE *filePtr) {
 
 	// Testing
 	//printf("\nRecord trovati nel file: %d\n", count);
-	//system("pause");
+	//pause();
 
 	return count;
 }

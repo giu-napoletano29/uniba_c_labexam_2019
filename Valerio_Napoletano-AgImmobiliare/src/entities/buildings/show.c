@@ -51,7 +51,7 @@ void showBuildingData(building *bl) {
 	showBuildingType(bl->b_type);
 
 	newLine();
-	//system("pause");
+	//pause();
 }
 
 int showAllBuildings(building *bl, int num_buildings) {
@@ -63,6 +63,6 @@ int showAllBuildings(building *bl, int num_buildings) {
 		printf("\n-- IMMOBILE %d --\n", i + 1);
 		showBuildingData(bl + i);
 	}
-	system("pause");
+	pause();
 	return -1;
 }

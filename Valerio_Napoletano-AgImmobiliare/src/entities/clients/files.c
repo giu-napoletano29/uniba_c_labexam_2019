@@ -110,9 +110,6 @@ int rewriteClientsToFile(client *cl, int rows) {
 		// Get formatted date
 		strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
 
-		printf("INDEX: %d\nID: %s\nTODELETE: %d \n\n", i, cl[i].id,
-				cl[i].toDelete);
-
 		// Save client to file only if the client is not marked for deletion
 		if (!cl[i].toDelete) {
 			fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl[i].id, cl[i].name,
@@ -226,7 +223,7 @@ int checkDuplicateClients(client *cl, int rows) {
 				i = 0;
 				j = i + 1;
 				resDup = -1;
-				system("pause");
+				pause();
 			}
 		}
 	}

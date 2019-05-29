@@ -103,7 +103,7 @@ void reqType(client *cl) {
 		newLine();
 
 		if (error) {
-			puts("Tipologia non trovata, per favore riprova. \n");
+			notFoundError();
 		}
 
 		printf("Inserisci il numero che identifica la tipologia: ");
@@ -180,7 +180,7 @@ void reqPropertyType(client *cl) {
 		newLine();
 
 		if (error) {
-			puts("Tipologia non trovata, per favore riprova. \n");
+			notFoundError();
 		}
 
 		printf("Inserisci il numero che identifica la tipologia: ");

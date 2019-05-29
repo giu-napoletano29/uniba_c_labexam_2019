@@ -37,7 +37,6 @@ void showClientType(int type) {
 }
 
 void showClientData(client *cl) {
-	//puts("--- RIEPILOGO ---");
 	printf("Codice fiscale: %s \n", cl->id);
 	printf("Nome: %s \n", cl->name);
 	printf("Cognome: %s \n", cl->surname);
@@ -54,26 +53,26 @@ void showClientData(client *cl) {
 	printf("Data di registrazione: ");
 	printFormattedDate(cl->reg_date);
 
-	newLine();
-	system("pause");
-
 	if (checkIfUserExpired(cl->reg_date, cl->id)) {
 		// Set toDelete flag
 		cl->toDelete = true;
 	}
-
-	newLine();
 }
 
 int showAllClients(client *cl, int num_clients) {
 	int i;
 
 	clearScr();
+	setGreenColor();
 	puts("--- LISTA CLIENTI ---");
+	resetColor();
 	for (i = 0; i < num_clients; i++) {
+		setCyanColor();
 		printf("\n-- CLIENTE %d --\n", i + 1);
+		resetColor();
 		showClientData(cl + i);
 	}
-	system("pause");
+	newLine();
+	pause();
 	return -1;
 }

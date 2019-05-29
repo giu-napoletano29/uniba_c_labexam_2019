@@ -20,8 +20,14 @@ void printFormattedDate(time_t epochTime);
 str_result readString(bool numCheck);
 int_result readInteger();
 
+void convertToUpperCase(char *s);
+
 //Color functions
+void resetColor();
 void setRedColor();
 void setYellowColor();
-void resetColor();
-void convertToUpperCase(char *s);
+void setGreenColor();
+void setCyanColor();
+
+void pause();
+void notFoundError();

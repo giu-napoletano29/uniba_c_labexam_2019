@@ -244,7 +244,7 @@ int checkDuplicatePro(professional *pr, int rows) {
 				i = 0;
 				j = i + 1;
 				resDup = -1;
-				system("pause");
+				pause();
 			}
 		}
 	}

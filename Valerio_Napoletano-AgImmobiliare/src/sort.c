@@ -56,7 +56,7 @@ void sortFilePro(professional *pr, int rows) {
 		}
 	}
 	/*showAllPros(pr, rows);
-	 system("pause");*/
+	 pause();*/
 }
 
 void sortFileCli(client *cl, int rows) {
@@ -105,7 +105,7 @@ void sortFileCli(client *cl, int rows) {
 		}
 	}
 	/*showAllClients(cl, rows);
-	 system("pause");*/
+	 pause();*/
 }
 void sortFileBui(building *bl, int rows) {
 	building cmp;
@@ -156,5 +156,5 @@ void sortFileBui(building *bl, int rows) {
 		}
 	}
 	/*showallBuildings(bl, rows);
-	 system("pause");*/
+	 pause();*/
 }

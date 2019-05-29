@@ -40,7 +40,7 @@ int resultAg(building *bl, int n_bui) {
 	} else {
 		printf("\nE' stato inserito un intervallo errato.\n");
 	}
-	system("pause");
+	pause();
 
 	return -1;
 }
