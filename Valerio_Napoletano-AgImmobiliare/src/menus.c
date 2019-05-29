@@ -144,12 +144,12 @@ int professMenu() {
 				rewriteProfessionalsToFile(allProfessionals, professionalsNum);
 			}
 			break;
-		case 2:
+		/*case 2:
 			//choice = addPro();
 			break;
 		case 3:
 			//choice = editPro();
-			break;
+			break;*/
 		case 4:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
@@ -214,7 +214,7 @@ int buildingsMenu() {
 			}
 
 			break;
-		case 2:
+		/*case 2:
 			//choice = addBuilding();
 			break;
 		case 3:
@@ -222,7 +222,7 @@ int buildingsMenu() {
 			break;
 		case 4:
 			//choice = removeBuilding();
-			break;
+			break;*/
 		case 5:
 			choice = loadBuildingsFile(allBuildings);
 			resDup = checkDuplicateBuildings(allBuildings, buildingsNum);

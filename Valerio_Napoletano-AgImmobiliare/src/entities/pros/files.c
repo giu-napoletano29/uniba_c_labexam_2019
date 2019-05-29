@@ -77,8 +77,6 @@ void readProsFile(FILE *filePtr, professional *pr) {
 
 		newLine();
 	}
-
-	//showAllPros(pr, pr_num);
 }
 
 void findPot(char id[], potential *pr, int rows) {
@@ -158,7 +156,7 @@ int getProfessionalsNumber() {
 int loadPotFile(char id[]) {
 	int rows = 0;
 	FILE *fp_pot;
-	fp_pot = fopen("potential.csv", "r");
+	fp_pot = fopen("potential.csv", "a+");
 	if (!checkFile(fp_pot)) {
 		rows = countRows(fp_pot);
 		rewind(fp_pot);

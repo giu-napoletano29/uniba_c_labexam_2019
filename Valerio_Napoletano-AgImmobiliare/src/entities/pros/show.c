@@ -23,6 +23,7 @@ void showProData(professional *pr) {
 	printFormattedDate(pr->reg_date);
 	printf("Immobili venduti: %d \n", pr->buildings_sold);
 
+	printf("\nPotenziale di %s:\n", pr->name);
 	loadPotFile(pr->id);
 	newLine();
 	//pause();
