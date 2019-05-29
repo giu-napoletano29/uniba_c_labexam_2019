@@ -2,7 +2,7 @@
  * @file datatypes.h
  * @author Saverio Valerio
  * @date 9 May 2019
- * @brief File containing all the used datatypes.
+ * @brief Header file containing all datatypes in use.
  */
 
 #ifndef DATATYPES_H

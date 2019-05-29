@@ -1,8 +1,8 @@
-/*
- * utils.c
- *
- *  Created on: 9 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file utils.h
+ * @author Saverio Valerio
+ * @date 9 May 2019
+ * @brief Contains general purpose functions that can be useful in various sections of the software.
  */
 
 #include <stdio.h>
@@ -12,32 +12,44 @@
 #include <stdbool.h>
 #include <time.h> /** For printFormattedDate() */
 
-// Only for getting STRING_SIZE constant
+/** Only for getting STRING_SIZE constant */
 #include "datatypes.h"
 
-// Just print a new line to the console
+/**
+ * Just print a new line to the console
+ */
 void newLine() {
 	printf("\n");
 }
 
-// Clear the console emulator screen (multiplatform)
+/**
+ * @brief Clear the console emulator screen (multiplatform)
+ *
+ * This function is able to "clean" the console buffer.
+ * It's compatible with Windows and Unix based operating systems (GNU/Linux, macOS, etc..)
+ * thanks to the usage of the Pre-defined Compiler Macros.
+ *
+ * @see https://sourceforge.net/p/predef/wiki/OperatingSystems/
+ * @see http://port70.net/~nsz/c/c11/n1570.html#6.10.1p1
+ */
 void clearScr() {
-	// Macros from https://sourceforge.net/p/predef/wiki/OperatingSystems/
-	// "defined": http://port70.net/~nsz/c/c11/n1570.html#6.10.1p1
 #if defined(_WIN32)
-	// Windows
 	system("cls");
 #elif defined(__unix__) || defined(__APPLE__) && defined(__MACH__)
-		// Unix based systems (GNU/Linux, macOS, etc..)
 		system("clear");
-	#endif
+#endif
 }
 
-// Check if there is any number in the string
+/**
+ * @brief Check if the string has any number.
+ *
+ * @param str String to check
+ * @return true has a number or false does not have a number.
+ */
 bool isNumber(char *str) {
 	bool numFound = false;
 	for (int i = 0; i < strlen(str); i++) {
-		//isdigit: Non-zero value if the character is a numeric character, zero otherwise.
+		/** isdigit: Non-zero value if the character is a numeric character, zero otherwise. */
 		if (isdigit(str[i]) != 0) {
 			numFound = true;
 		}
@@ -45,22 +57,31 @@ bool isNumber(char *str) {
 	return numFound;
 }
 
-// Read a string from stdin with input checks
+/**
+ * @brief Read a string from stdin with input checks.
+ *
+ * @param numCheck If true makes sure that the string does not have any numbers in it (input validation)
+ * @return str_result Result struct with value and error (check out datatypes.h)
+ */
 str_result readString(bool numCheck) {
-	// Struct for handling errors and the inserted value
+	/** Struct for handling errors and the inserted value */
 	str_result readValue;
 
-	// Boolean for detecting if string is correct
-	// false = string is correct
-	// true = string is not correct, ask again the user
+	/**
+	 * Boolean for detecting if string is correct
+	 * false = string is correct
+	 * true = string is not correct, ask again the user
+	 */
 	readValue.error = false;
 
 	// TODO: Handle spaces.
 	// STRING_SIZE is 50, then limit scanf to 50 characters
 	scanf("%50s", readValue.val);
 
-	// Check if there are any numbers in the string
-	// Only if the flag numCheck is active
+	/**
+	 * Check if any number can be found in the string.
+	 * Only if numCheck bool is true.
+	 */
 	if (numCheck && isNumber(readValue.val)) {
 		puts("\nInserisci una stringa corretta. \n");
 		readValue.error = true;
@@ -69,11 +90,16 @@ str_result readString(bool numCheck) {
 	return readValue;
 }
 
-// Check if there is any characters in the string
+/**
+ * @brief Check if any character can be found in the string.
+ *
+ * @param str String to check.
+ * @return true if char has been found in the string, otherwise return false.
+ */
 bool isChar(char *str) {
 	bool charFound = false;
 	for (int i = 0; i < strlen(str); i++) {
-		//isalpha: Non-zero value if the character is a numeric character, zero otherwise.
+		/** isalpha: Non-zero value if the character is a numeric character, zero otherwise. */
 		if (isalpha(str[i]) != 0) {
 			charFound = true;
 		}
@@ -81,38 +107,43 @@ bool isChar(char *str) {
 	return charFound;
 }
 
-// Read an integer from stdin with input checks
+/**
+ * @brief Read a string from stdin (with input checks) and convert to an integer.
+ *
+ * @return int_result Result struct with value and error (check out datatypes.h)
+ */
 int_result readInteger() {
-	// Struct for handling errors and the inserted value
+	/** Struct for handling errors and the inserted value */
 	int_result readValue;
 
-	// Boolean for detecting if number is correct
-	// false = string is correct
-	// true = string is not correct, ask again the user
+	/**
+	 * Boolean for detecting if string is correct
+	 * false = string is correct
+	 * true = string is not correct, ask again the user
+	 */
 	readValue.error = false;
 
-	// Internal string buffer
+	/**	Internal string buffer */
 	char buffer[STRING_SIZE];
 
-	// Read from stdin (as a string)
+	/** Read from stdin (as a string) */
 	scanf("%s", buffer);
 
-	// Check if there are any numbers in the string
-	// Only if the flag numCheck is active
+	/** Check if there are any numbers in the string. */
 	if (isChar(buffer)) {
 		puts("\nInserisci un numero corretto. \n");
 		readValue.error = true;
 	}
 
 	if (!readValue.error) {
-		// If no errors are found, convert to integer.
+		/** If no errors are found, convert to integer. */
 		readValue.val = atoi(buffer);
 	}
 
 	return readValue;
 }
 
-/*
+/**
  * Print date formatted in day/month/year.
  *
  * @param time_t epochTime
@@ -141,16 +172,21 @@ void printFormattedDate(time_t epochTime) {
 	puts(dateBuffer);
 }
 
-void convertToUpperCase(char *s) {
-	int len = strlen(s);
-	//while(*s != '\0'){
+/**
+ * Convert every char in the string to uppercase
+ *
+ * @param str String to convert to uppercase.
+ */
+void convertToUpperCase(char *str) {
+	int len = strlen(str);
 	for (int i = 0; i < len; i++) {
-		s[i] = toupper(s[i]);
+		str[i] = toupper(str[i]);
 	}
 }
 
 /**
- * Set custom colors to stdout using ANSI escape codes
+ * Set custom colors to stdout using ANSI escape codes.
+ *
  * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
  */
 void resetColor() {
@@ -212,16 +248,16 @@ void printSectionName(char *string) {
  * Prettier and easy to use wrapper for string comparison.
  * @param from First string to compare
  * @param to Second string to compare
- * @return true string is equal, false string is not equal
+ * @return true bool string is equal, false bool string is not equal
  */
 bool strCompare(char *from, char *to) {
 	bool result = false;
 
-	if (strcmp(from, to) == 0) {
-		result = true;
-	} else {
-		result = false;
-	}
+	/**
+	 * Using the conditional operator
+	 * @see https://en.wikipedia.org/wiki/%3F:#C
+	 */
+	result = strcmp(from, to) == 0 ? true : false;
 
 	return result;
 }
@@ -238,7 +274,7 @@ bool askConfirm() {
 	bool error = false;
 
 	do {
-		scanf("%s", usrInput);
+		scanf("%1s", usrInput);
 
 		if (strCompare(usrInput, "s") || strCompare(usrInput, "y")) {
 			choice = true;

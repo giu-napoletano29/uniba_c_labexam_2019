@@ -1,8 +1,8 @@
-/*
- * utils.h
- *
- *  Created on: 9 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file utils.h
+ * @author Saverio Valerio
+ * @date 9 May 2019
+ * @brief Header file containing prototypes related to the "utils" functions.
  */
 
 #include <stdbool.h>
@@ -11,18 +11,19 @@
 void newLine();
 void clearScr();
 
-// Utils functions used by readString and readInteger for input checks
 bool isNumber(char *str);
 bool isChar(char *str);
 
 void printFormattedDate(time_t epochTime);
+void printSectionName(char *headerString);
+void convertToUpperCase(char *s);
 
 str_result readString(bool numCheck);
 int_result readInteger();
 
-void convertToUpperCase(char *s);
+bool strCompare(char *from, char *to);
+bool askConfirm();
 
-//Color functions
 void resetColor();
 void setRedColor();
 void setYellowColor();
@@ -33,6 +34,3 @@ void setMagentaColor();
 void pause();
 void notFoundError();
 
-void printSectionName(char *headerString);
-bool strCompare(char *from, char *to);
-bool askConfirm();
