@@ -5,8 +5,8 @@
  *      Author: Saverio Valerio
  */
 
-#ifndef ENTITIES_CLIENTS_REQ_H_
-#define ENTITIES_CLIENTS_REQ_H_
+#ifndef ENTITIES_CLIENTS_REQ_CL_H_
+#define ENTITIES_CLIENTS_REQ_CL_H_
 
 #include "../../datatypes.h"
 
@@ -19,4 +19,4 @@ void reqCompanyName(client *cl);
 void reqBudget(client *cl);
 void reqPropertyType(client *cl);
 
-#endif /* ENTITIES_CLIENTS_REQ_H_ */
+#endif /* ENTITIES_CLIENTS_REQ_CL_H_ */

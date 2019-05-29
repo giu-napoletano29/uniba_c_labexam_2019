@@ -12,8 +12,8 @@
 #include "utils.h"
 #include "file_utils.h"
 #include "datatypes.h"
-#include "entities/buildings/files.h"
-#include "entities/buildings/show.h"
+#include "entities/buildings/files_bl.h"
+#include "entities/buildings/show_bl.h"
 
 int resultAg(building *bl, int n_bui) {
 	char date1[10];

@@ -1,5 +1,5 @@
 /**
- * @file misc.c
+ * @file misc_cl.c
  * @author Saverio Valerio
  * @date 22 May 2019
  * @brief File containing misc functions used by the "client" entity.
@@ -13,9 +13,9 @@
 
 #include "../../datatypes.h"
 #include "../../utils.h"
-#include "req.h"
-#include "show.h"
-#include "files.h"
+#include "files_cl.h"
+#include "req_cl.h"
+#include "show_cl.h"
 
 /**
  * Get current system date and save the Epoch time value.

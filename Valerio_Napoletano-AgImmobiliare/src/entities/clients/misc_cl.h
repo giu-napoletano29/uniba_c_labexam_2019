@@ -5,8 +5,8 @@
  *      Author: Saverio Valerio
  */
 
-#ifndef ENTITIES_CLIENTS_MISC_H_
-#define ENTITIES_CLIENTS_MISC_H_
+#ifndef ENTITIES_CLIENTS_MISC_CL_H_
+#define ENTITIES_CLIENTS_MISC_CL_H_
 
 // "main" function
 int addClient();
@@ -18,4 +18,4 @@ bool checkIfUserExpired(time_t epochTime, char id[]);
 
 void initClientsArray(client *cl, int size);
 
-#endif /* ENTITIES_CLIENTS_MISC_H_ */
+#endif /* ENTITIES_CLIENTS_MISC_CL_H_ */

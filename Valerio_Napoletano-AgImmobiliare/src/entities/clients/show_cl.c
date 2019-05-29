@@ -1,5 +1,5 @@
 /**
- * @file show.c
+ * @file show_cl.c
  * @author Saverio Valerio
  * @date 22 May 2019
  * @brief Functions for "showing" data to the user related to the clients.
@@ -11,8 +11,8 @@
 #include <string.h> /**< strcmp */
 
 #include "../../utils.h"
-#include "../buildings/show.h"
-#include "misc.h" /**< For checkIfUserExpired */
+#include "../buildings/show_bl.h"
+#include "misc_cl.h" /**< For checkIfUserExpired */
 
 /**
  * Print out a string with the client type.

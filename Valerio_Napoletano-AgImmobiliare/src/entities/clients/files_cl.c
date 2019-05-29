@@ -14,7 +14,7 @@
 #include "../../datatypes.h"
 #include "../../file_utils.h"
 #include "../../utils.h"
-#include "show.h"
+#include "show_cl.h"
 
 void parseClientFile(FILE *filePtr, client *cl) {
 	char line[400];
