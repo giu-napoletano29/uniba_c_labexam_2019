@@ -17,7 +17,7 @@
  * @param filePtr
  * @return bool error
  */
-bool checkFile(FILE *filePtr) {
+bool checkFile(FILE *filePtr, bool rowsCheck) {
 	bool error = false;
 	int rows = 0;
 
@@ -33,13 +33,17 @@ bool checkFile(FILE *filePtr) {
 	}
 
 	// Check if the file is empty
-	if (rows == 0) {
-		setRedColor();
-		printf("\nERRORE: Nessun record presente nel database.\n\n");
-		resetColor();
-		error = true;
-		fclose(filePtr);
-		pause();
+	//printf("\nbool: %d", rowsCheck);
+	//pause();
+	if (rowsCheck == true) {
+		if (rows == 0) {
+			setRedColor();
+			printf("\nERRORE: Nessun record presente nel database.\n\n");
+			resetColor();
+			error = true;
+			fclose(filePtr);
+			pause();
+		}
 	}
 
 	rewind(filePtr);

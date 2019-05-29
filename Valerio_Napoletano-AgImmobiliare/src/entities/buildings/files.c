@@ -93,7 +93,7 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 int loadBuildingsFile(building *bl) {
 	FILE *filePtr;
 	filePtr = fopen("buildings.csv", "a+");
-	if (!checkFile(filePtr)) {
+	if (!checkFile(filePtr, true)) {
 		rewind(filePtr);
 		readBuildingsFile(filePtr, bl);
 	}
@@ -104,8 +104,10 @@ int loadBuildingsFile(building *bl) {
 
 int rewriteBuildingsToFile(building *bl, int rows) {
 	FILE *filePtr;
+	//TODO: find a good solution to prevent data loss when file is opened in w+
 	filePtr = fopen("buildings.csv", "w+");
-	//checkFile(filePtr);
+	checkFile(filePtr, false);
+	//pause();
 
 	if (filePtr != NULL) {
 		rewind(filePtr);
@@ -189,8 +191,7 @@ int getBuildingsNumber() {
 	// Read only
 	filePtr = fopen("buildings.csv", "r");
 	//TODO: Makes the program crash
-	//if (!checkFile(filePtr)) {
-	checkFile(filePtr);
+	//checkFile(filePtr);
 	if (filePtr != NULL) {
 		rewind(filePtr);
 		rows = countRows(filePtr);
