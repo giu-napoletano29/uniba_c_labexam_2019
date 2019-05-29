@@ -12,7 +12,7 @@
 
 /**
  * Print out a string with the building type.
- * Check out the "building_type" datatypes.h
+ * Check out the "building_type" in datatypes.h
  *
  * @param type Integer that represents the building type.
  */

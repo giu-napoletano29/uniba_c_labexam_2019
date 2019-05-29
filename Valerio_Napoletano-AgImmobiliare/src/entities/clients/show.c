@@ -1,8 +1,8 @@
-/*
- * clients_show.c
- *
- *  Created on: 22 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file show.c
+ * @author Saverio Valerio
+ * @date 22 May 2019
+ * @brief Functions for "showing" data to the user related to the clients.
  */
 
 #include <stdio.h>
@@ -14,6 +14,12 @@
 #include "../buildings/show.h"
 #include "misc.h" /**< For checkIfUserExpired */
 
+/**
+ * Print out a string with the client type.
+ * Check out the "client_type" in datatypes.h
+ *
+ * @param type Integer that represents the client type.
+ */
 void showClientType(int type) {
 	switch (type) {
 	case 1:
@@ -36,21 +42,53 @@ void showClientType(int type) {
 	printf("\n");
 }
 
+/**
+ * Print every field available in a client struct.
+ *
+ * @param cl client type struct
+ */
 void showClientData(client *cl) {
-	printf("Codice fiscale: %s \n", cl->id);
-	printf("Nome: %s \n", cl->name);
-	printf("Cognome: %s \n", cl->surname);
+	setCyanColor();
+	printf("Codice fiscale: ");
+	resetColor();
+	printf("%s \n", cl->id);
+
+	setCyanColor();
+	printf("Nome: ");
+	resetColor();
+	printf("%s \n", cl->name);
+
+	setCyanColor();
+	printf("Cognome: ");
+	resetColor();
+	printf("%s \n", cl->surname);
+
+	setCyanColor();
 	printf("Tipo cliente: ");
+	resetColor();
 	showClientType(cl->cl_type);
-	// Show company name only if registered
+
+	/** Show company name only if registered */
 	if (cl->cl_type == 3) {
-		printf("Nome azienda: %s \n", cl->company_name);
+		setCyanColor();
+		printf("Nome azienda: ");
+		resetColor();
+		printf("%s \n", cl->company_name);
 	}
-	printf("Budget in euro: %d euro \n", cl->budget);
+
+	setCyanColor();
+	printf("Budget in euro: ");
+	resetColor();
+	printf("%d euro \n", cl->budget);
+
+	setCyanColor();
 	printf("Tipologia immobile da cercare: ");
+	resetColor();
 	showBuildingType(cl->building_type);
 
+	setCyanColor();
 	printf("Data di registrazione: ");
+	resetColor();
 	printFormattedDate(cl->reg_date);
 
 	if (checkIfUserExpired(cl->reg_date, cl->id)) {
@@ -59,6 +97,14 @@ void showClientData(client *cl) {
 	}
 }
 
+/**
+ * Print every client available in the array of structs.
+ * Iterates on num_clients calling the showClientData() function.
+ *
+ * @param cl Array of structs (building type)
+ * @param num_clients Number of items (clients) saved in the array.
+ * @return Value for returning back to the menu (-1)
+ */
 int showAllClients(client *cl, int num_clients) {
 	int i;
 
