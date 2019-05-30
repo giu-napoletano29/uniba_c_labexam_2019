@@ -185,48 +185,65 @@ int loadClientFile(client *cl) {
 	return -1;
 }
 
-int checkDuplicateClients(client *cl, int rows) {
-	short int resDup = 0;
+bool checkDuplicateClients(client *cl, int rows) {
+	bool result = false;
+	bool error = false;
 	short int choice = 0;
 	char id[STRING_SIZE];
 
 	for (int i = 0; i < rows; i++) {
 		for (int j = i + 1; j < rows; j++) {
-			if (strcmp(cl[i].id, cl[j].id) == 0) {
-				printf("\nERRORE: ");
-				printf("\nIl database contiene degli ID duplicati");
-				newLine();
-				printf("\n1-");
+			if (strCompare(cl[i].id, cl[j].id)) {
+				clearScr();
+				setRedColor();
+				printf(
+						"\nERRORE: Il database contiene degli utenti con ID identico.\n");
+				resetColor();
+
+				setCyanColor();
+				printf("\n--- CLIENTE 1 ---\n");
+				resetColor();
 				showClientData(cl + i);
-				printf("\n2-");
+
+				setCyanColor();
+				printf("\n--- CLIENTE 2 ---\n");
+				resetColor();
 				showClientData(cl + j);
-				newLine();
 
 				do {
-					printf("\nScegli quale record modificare (1-2): ");
-					choice = readInteger();
-					newLine();
-					printf("Inserisci il nuovo ID: ");
-					readString(id, false);
-					convertToUpperCase(id);
-					switch (choice) {
-					case 1:
-						strcpy(cl[i].id, id);
-						break;
-					case 2:
-						strcpy(cl[j].id, id);
-						break;
-					default:
-						break;
+					if (error) {
+						setRedColor();
+						puts("\nScelta errata.");
+						resetColor();
 					}
-				} while (choice > 2 || choice < 1);
+
+					printf("\nScegli quale cliente modificare (1/2): ");
+					choice = readInteger();
+
+					error = choice == 2 || choice == 1 ? false : true;
+				} while (error == true);
+
+				newLine();
+				printf("Inserisci il nuovo ID: ");
+				readString(id, false);
+				convertToUpperCase(id);
+				switch (choice) {
+				case 1:
+					strcpy(cl[i].id, id);
+					break;
+				case 2:
+					strcpy(cl[j].id, id);
+					break;
+				default:
+					break;
+				}
 				i = 0;
 				j = i + 1;
-				resDup = -1;
+				result = true;
 				pause();
 			}
 		}
 	}
 	rewriteClientsToFile(cl, rows);
-	return resDup;
+	return result;
 }

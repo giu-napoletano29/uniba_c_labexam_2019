@@ -1,8 +1,8 @@
-/*
- * menus.c
- *
- *  Created on: 9 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file menus.c
+ * @author Saverio Valerio
+ * @date 9 May 2019
+ * @brief Various menus for linking together program's modules.
  */
 
 #include <stdio.h>
@@ -23,12 +23,18 @@
 #include "entities/pros/show_pr.h"
 #include "sort.h"
 
+/**
+ * @brief Show the "clients" menu.
+ *
+ * @param jump
+ * @return
+ */
 int clientsMenu(int jump) {
 	short int choice;
-	short int resDup = 0;
+	bool anyDuplicate = false;
 	bool error = false;
 
-	// INITIALIZE client array of structs
+	/** Declare and initialize the array of structs, "client" type */
 	int clientsNum = getClientsNumber();
 	client allClients[clientsNum];
 	initClientsArray(allClients, clientsNum);
@@ -51,8 +57,7 @@ int clientsMenu(int jump) {
 			puts("Scegli un'operazione:");
 			puts("1. Visualizza tutti i clienti");
 			puts("2. Aggiungi un cliente");
-			//puts("3. Cancella clienti");
-			puts("4. Torna indietro");
+			puts("3. Torna indietro");
 
 			newLine();
 
@@ -65,8 +70,8 @@ int clientsMenu(int jump) {
 		switch (choice) {
 		case 1:
 			choice = loadClientFile(allClients);
-			resDup = checkDuplicateClients(allClients, clientsNum);
-			if (resDup != -1) {
+			anyDuplicate = checkDuplicateClients(allClients, clientsNum);
+			if (!anyDuplicate) {
 				showAllClients(allClients, clientsNum);
 				sortFileCli(allClients, clientsNum);
 				//TODO: Optimize: run only if some clients needs to be deleted
@@ -75,12 +80,9 @@ int clientsMenu(int jump) {
 			break;
 		case 2:
 			choice = addClient();
-			resDup = clientsMenu(1);
+			anyDuplicate = clientsMenu(1);
 			break;
-			/*case 3:
-			 //choice = deleteClient();
-			 break;*/
-		case 4:
+		case 3:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
 			choice = -1;
@@ -92,7 +94,7 @@ int clientsMenu(int jump) {
 		}
 	} while (error == true);
 
-	// Go back
+	// -1 for going back to the
 	return -1;
 }
 
@@ -122,8 +124,8 @@ int professMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Mostra tutti i professionisti");
-		//puts("2. Aggiungi un professionista");
-		//puts("3. Modifica un professionista");
+//puts("2. Aggiungi un professionista");
+//puts("3. Modifica un professionista");
 		puts("4. Torna indietro");
 
 		newLine();
@@ -188,9 +190,9 @@ int buildingsMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Visualizza tutti gli immobili");
-		//puts("2. Aggiungi un immobile");
-		//puts("3. Modifica un immobile");
-		//puts("4. Cancella un immobile");
+//puts("2. Aggiungi un immobile");
+//puts("3. Modifica un immobile");
+//puts("4. Cancella un immobile");
 		puts("5. Cerca un immobile");
 		puts("6. Risultati agenzia");
 		puts("7. Torna indietro");

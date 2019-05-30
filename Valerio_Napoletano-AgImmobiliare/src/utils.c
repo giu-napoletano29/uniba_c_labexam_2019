@@ -1,5 +1,5 @@
 /**
- * @file utils.h
+ * @file utils.c
  * @author Saverio Valerio
  * @date 9 May 2019
  * @brief Contains general purpose functions that can be useful in various sections of the software.
@@ -10,9 +10,9 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdbool.h>
-#include <time.h> /** For printFormattedDate() */
+#include <time.h> // For printFormattedDate()
 
-/** Only for getting STRING_SIZE constant */
+// Only for getting STRING_SIZE constant
 #include "datatypes.h"
 
 /**
@@ -100,12 +100,13 @@ void setMagentaColor() {
  * or a lowercase letter (abcdefghijklmnopqrstuvwxyz)
  *
  * @param str String to check
- * @return true string is only made up by alphabetic characters, false otherwise.
+ * @return true if string is only made up by alphabetic characters, false otherwise.
  */
 bool isOnlyAlpha(char *str) {
 	bool result = false;
 	for (int i = 0; i < strlen(str); i++) {
-		/** isalpha: Non-zero value if the character is a numeric character, zero otherwise. */
+		/*! isalpha: Non-zero value if the character is a numeric character
+		 *  zero otherwise. */
 		if (isalpha(str[i]) == 0) {
 			result = true;
 		}
@@ -179,10 +180,9 @@ bool anyChar(char *str) {
 int readInteger() {
 	bool error = false;
 
-	/**	Internal string buffer */
+	/**	Define an internal string buffer. */
 	char buffer[STRING_SIZE];
-	/** Integer value
-	 *  Initialize to -1 for representing a possible error state. */
+	/**  Initialize value to -1 for representing a possible error state. */
 	int value = -1;
 
 	do {
@@ -217,18 +217,18 @@ int readInteger() {
  */
 void printFormattedDate(time_t epochTime) {
 	/**
-	 * Pointer to time struct for handling Epoch time
+	 * Declare pointer to time struct for handling UNIX Epoch time
 	 */
 	struct tm *clDate;
 
 	/**
-	 * Buffer for printing out the date (required by strftime)
+	 * Declare buffer for printing out the date (required by strftime)
 	 *  day/month/year (eg. 22/05/2019)
 	 */
 	char dateBuffer[11];
 
 	/**
-	 *  Fill time struct getting date/time info from the Epoch time
+	 *  Fill time struct getting date/time info from the UNIX Epoch time
 	 */
 	clDate = localtime(&epochTime);
 
@@ -294,7 +294,7 @@ bool strCompare(char *from, char *to) {
 	bool result = false;
 
 	/**
-	 * Using the conditional operator
+	 * Using the conditional operator.
 	 * @see https://en.wikipedia.org/wiki/%3F:#C
 	 */
 	result = strcmp(from, to) == 0 ? true : false;
@@ -308,7 +308,7 @@ bool strCompare(char *from, char *to) {
  * @return true if user confirmed the choice, false the user refused.
  */
 bool askConfirm() {
-	/** Array of 2 positions for keeping the newline "\n" */
+	/** Declare array of 2 positions for keeping the newline "\n" */
 	char usrInput[1];
 
 	bool choice = false;
