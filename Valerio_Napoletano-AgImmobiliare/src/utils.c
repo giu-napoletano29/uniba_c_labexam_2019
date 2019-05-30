@@ -212,7 +212,8 @@ int readInteger() {
 /**
  * @brief Print date formatted in day/month/year.
  *
- * @param time_t epochTime
+ * @param epochTime UNIX Epoch Time value
+ * @see https://en.wikipedia.org/wiki/Unix_time
  */
 void printFormattedDate(time_t epochTime) {
 	/**
