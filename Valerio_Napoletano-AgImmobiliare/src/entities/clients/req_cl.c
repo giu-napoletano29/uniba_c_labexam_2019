@@ -16,75 +16,88 @@
 
 #include <stdlib.h>
 
-void reqID(client *cl) {
-	str_result value;
-	bool error;
+/**
+ * @brief Request the company "VAT number" to the user.
+ *
+ * Called by reqID() only if the client type is company.
+ * The Italian VAT number (Partita IVA) is 11 digits (only numbers).
+ * @see https://it.wikipedia.org/wiki/Partita_IVA
+ * @param cl "client" type struct
+ */
+void reqPIVA(client *cl) {
+	bool error = false;
 
 	do {
 		if (error) {
-			puts("\nInserisci un valore corretto. \n");
+			setYellowColor();
+			puts(
+					"\nInserisci un valore corretto.\nLa partita IVA e' composta da 11 cifre.\n");
+			resetColor();
 		}
-		// Reset "error" value
-		error = false;
 
-		//TODO: Move these requests and checks to custom functions
+		printf("Partita IVA: ");
 
-		// Client type is "company"
-		if (cl->cl_type == 3) {
-			printf("Partita IVA: ");
-			// "VAT number" can only have numbers, numCheck is true
-			// Italian PIVA is 11 digit
-			// https://it.wikipedia.org/wiki/Partita_IVA
-			value = readString(false);
-
-			// Validate P.IVA length
-			if (strlen(value.val) != 11) {
-				error = true;
-			}
+		/** Validate P.IVA length */
+		//TODO: Add P.IVA only numbers validation
+		if (strlen(cl->id) != 11) {
+			error = true;
 		} else {
-			printf("Codice fiscale: ");
-			// "Codice fiscale" can have numbers, numCheck is false
-			// https://it.wikipedia.org/wiki/Codice_fiscale
-			value = readString(false);
+			error = false;
+		}
+	} while (error == true);
+}
 
-			// Validate CF length
-			if (strlen(value.val) != 16) {
-				error = true;
-			}
+/**
+ * @brief Request the Codice Fiscale to the user.
+ *
+ * Called by reqID() only if the client type is NOT company.
+ * "Codice fiscale" has also numbers, hence onlyAlpha is false.
+ * @see https://it.wikipedia.org/wiki/Codice_fiscale
+ * @param cl "client" type struct
+ */
+void reqCF(client *cl) {
+	bool error = false;
 
-			//error = value.error;
+	do {
+		if (error) {
+			setYellowColor();
+			puts(
+					"\nInserisci un valore corretto.\nIl codice fiscale e' composto da 16 lettere e cifre.\n");
+			resetColor();
 		}
 
-		strcpy(cl->id, value.val);
-	} while (error == true);
+		printf("Codice fiscale: ");
 
+		/** Validate CF length */
+		if (readString(cl->id, false) != 16) {
+			error = true;
+		} else {
+			error = false;
+		}
+	} while (error == true);
+}
+
+void reqID(client *cl) {
+	if (cl->cl_type == 3) {
+		reqPIVA(cl);
+	} else {
+		reqCF(cl);
+	}
 	clearScr();
 }
 
 void reqName(client *cl) {
-	bool error = false;
-
-	/// NAME
-	do {
-		printf("Nome: ");
-		str_result value = readString(true);
-		strcpy(cl->name, value.val);
-		error = value.error;
-	} while (error == true);
+/// NAME
+	printf("Nome: ");
+	readString(cl->name, true);
 
 	clearScr();
 }
 
 void reqSurname(client *cl) {
-	bool error = false;
-
-	// SURNAME
-	do {
-		printf("Cognome: ");
-		str_result value = readString(true);
-		strcpy(cl->surname, value.val);
-		error = value.error;
-	} while (error == true);
+// SURNAME
+	printf("Cognome: ");
+	readString(cl->surname, true);
 
 	clearScr();
 }
@@ -92,7 +105,7 @@ void reqSurname(client *cl) {
 void reqType(client *cl) {
 	bool error = false;
 
-	// TYPE
+// TYPE
 	puts("--- Tipo ---");
 	printf("1. Famiglia \n");
 	printf("2. Single \n");
@@ -107,10 +120,7 @@ void reqType(client *cl) {
 		}
 
 		printf("Inserisci il numero che identifica la tipologia: ");
-		// %u placeholders for enums
-		// "Normally, the type is unsigned int if there are no negative values in the enumeration, otherwise int."
-		// http://gcc.gnu.org/onlinedocs/gcc/Structures-unions-enumerations-and-bit_002dfields-implementation.html
-		scanf("%u", &cl->cl_type);
+		cl->cl_type = readInteger();
 
 		if (cl->cl_type < 1 || cl->cl_type > 4) {
 			error = true;
@@ -121,18 +131,18 @@ void reqType(client *cl) {
 }
 
 void reqCompanyName(client *cl) {
-	// COMPANY NAME
-	// Ask for the company name if the user selected the company
+// COMPANY NAME
+// Ask for the company name if the user selected the company
 	if (cl->cl_type == 3) {
 		newLine();
 		printf("Nome azienda: ");
 		// numCheck is false because a company name can have numbers
-		strcpy(cl->company_name, readString(false).val);
+		readString(cl->company_name, false);
 	} else {
 		strcpy(cl->company_name, "-");
 	}
 
-	//TODO: Maybe add another field for saving the "state" name if the user selects type 4
+//TODO: Maybe add another field for saving the "state" name if the user selects type 4
 
 	clearScr();
 }
@@ -140,7 +150,7 @@ void reqCompanyName(client *cl) {
 void reqBudget(client *cl) {
 	bool error = false;
 
-	// BUDGET
+// BUDGET
 	do {
 		if (error) {
 			setRedColor();
@@ -150,7 +160,7 @@ void reqBudget(client *cl) {
 		}
 
 		printf("Budget in euro: ");
-		cl->budget = readInteger().val;
+		cl->budget = readInteger();
 
 		if (cl->budget < MIN_USER_BUDGET || cl->cl_type > MAX_USER_BUDGET) {
 			error = true;
@@ -163,7 +173,7 @@ void reqBudget(client *cl) {
 void reqPropertyType(client *cl) {
 	bool error = false;
 
-	// TYPE PROPERTY
+// TYPE PROPERTY
 	printf("Tipologia immobile da cercare: ");
 	newLine();
 	printf("1. Appartamento");
@@ -186,7 +196,7 @@ void reqPropertyType(client *cl) {
 		}
 
 		printf("Inserisci il numero che identifica la tipologia: ");
-		scanf("%u", &cl->building_type);
+		cl->building_type = readInteger();
 
 		if (cl->building_type < 1 || cl->building_type > 5) {
 			error = true;
@@ -195,3 +205,4 @@ void reqPropertyType(client *cl) {
 
 	clearScr();
 }
+

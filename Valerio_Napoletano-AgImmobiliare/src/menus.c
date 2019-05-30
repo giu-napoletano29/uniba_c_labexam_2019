@@ -57,7 +57,7 @@ int clientsMenu(int jump) {
 			newLine();
 
 			printf("Operazione: ");
-			scanf("%hu", &choice);
+			choice = readInteger();
 		} else {
 			choice = jump;
 		}
@@ -129,7 +129,7 @@ int professMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		scanf("%hu", &choice);
+		choice = readInteger();
 
 		switch (choice) {
 		case 1:
@@ -198,7 +198,7 @@ int buildingsMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		scanf("%hu", &choice);
+		choice = readInteger();
 
 		switch (choice) {
 		case 1:
@@ -278,9 +278,7 @@ void mainMenu() {
 		newLine();
 
 		printf("Operazione: ");
-		// short integer placeholder is %hu
-		// ISO/IEC 9899:201x - 7.21.6.1-7
-		scanf("%hu", &choice);
+		choice = readInteger();
 
 		switch (choice) {
 		case 1:

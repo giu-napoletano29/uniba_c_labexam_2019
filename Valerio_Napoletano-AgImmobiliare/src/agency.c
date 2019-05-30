@@ -22,11 +22,11 @@ int resultAg(building *bl, int n_bui) {
 	time_t reg_date2;
 
 	printf("\nInserisci primo intervallo di data: ");
-	scanf("%s", date1);
+	readString(date1, false);
 	reg_date1 = parseDateInFile(date1);
 
 	printf("\nInserisci secondo intervallo di data: ");
-	scanf("%s", date2);
+	readString(date2, false);
 	reg_date2 = parseDateInFile(date2);
 
 	if (reg_date1 < reg_date2) {

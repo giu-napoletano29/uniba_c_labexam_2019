@@ -223,10 +223,10 @@ int checkDuplicatePro(professional *pr, int rows) {
 
 				do {
 					printf("\nScegli quale record modificare (1-2): ");
-					scanf("%hu", &choice);
+					choice = readInteger();
 					newLine();
 					printf("Inserisci il nuovo ID: ");
-					scanf("%s", id);
+					readString(id, false);
 					convertToUpperCase(id);
 					switch (choice) {
 					case 1:

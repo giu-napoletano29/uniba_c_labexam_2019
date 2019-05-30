@@ -158,10 +158,10 @@ int checkDuplicateBuildings(building *bl, int rows) {
 
 				do {
 					printf("\nScegli quale record modificare (1-2): ");
-					scanf("%hu", &choice);
+					choice = readInteger();
 					newLine();
 					printf("Inserisci il nuovo ID: ");
-					scanf("%s", id);
+					readString(id, false);
 					convertToUpperCase(id);
 					switch (choice) {
 					case 1:
@@ -214,12 +214,12 @@ void searchBuilding(building *bl, int n_bui) {
 
 	newLine();
 	printf("Operazione: ");
-	scanf("%hu", &choice);
+	choice = readInteger();
 
 	switch (choice) {
 	case 1:
-		printf("\ninserisci il prezzo massimo dell'immobile: ");
-		scanf("%d", &price);
+		printf("\nInserisci il prezzo massimo dell'immobile: ");
+		price = readInteger();
 
 		for (int i = 0; i < n_bui; i++) {
 			if (bl[i].price < price) {
@@ -229,7 +229,7 @@ void searchBuilding(building *bl, int n_bui) {
 		break;
 	case 2:
 		printf("\nInserisci la localita' dell'immobile: ");
-		scanf("%s", city);
+		readString(city, false);
 		convertToUpperCase(city);
 
 		for (int i = 0; i < n_bui; i++) {

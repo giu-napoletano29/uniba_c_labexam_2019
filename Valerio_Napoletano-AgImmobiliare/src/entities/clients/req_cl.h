@@ -12,6 +12,8 @@
 
 // Functions for asking data to the user
 void reqID(client *cl);
+void reqCF(client *cl);
+void reqPIVA(client *cl);
 void reqName(client *cl);
 void reqSurname(client *cl);
 void reqType(client *cl);

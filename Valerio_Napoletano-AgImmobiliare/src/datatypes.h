@@ -84,17 +84,4 @@ typedef struct {
 	building_type b_type;
 } building;
 
-// -- UTILS --
-// readInteger result struct
-typedef struct {
-	bool error;
-	int val;
-} int_result;
-
-// readString result struct
-typedef struct {
-	bool error;
-	char val[STRING_SIZE];
-} str_result;
-
 #endif

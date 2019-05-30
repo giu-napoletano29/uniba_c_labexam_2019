@@ -41,150 +41,6 @@ void clearScr() {
 }
 
 /**
- * @brief Check if the string has any number.
- *
- * @param str String to check
- * @return true has a number or false does not have a number.
- */
-bool isNumber(char *str) {
-	bool numFound = false;
-	for (int i = 0; i < strlen(str); i++) {
-		/** isdigit: Non-zero value if the character is a numeric character, zero otherwise. */
-		if (isdigit(str[i]) != 0) {
-			numFound = true;
-		}
-	}
-	return numFound;
-}
-
-/**
- * @brief Read a string from stdin with input checks.
- *
- * @param numCheck If true makes sure that the string does not have any numbers in it (input validation)
- * @return str_result Result struct with value and error (check out datatypes.h)
- */
-str_result readString(bool numCheck) {
-	/** Struct for handling errors and the inserted value */
-	str_result readValue;
-
-	/**
-	 * Boolean for detecting if string is correct
-	 * false = string is correct
-	 * true = string is not correct, ask again the user
-	 */
-	readValue.error = false;
-
-	// TODO: Handle spaces.
-	// STRING_SIZE is 50, then limit scanf to 50 characters
-	scanf("%50s", readValue.val);
-
-	/**
-	 * Check if any number can be found in the string.
-	 * Only if numCheck bool is true.
-	 */
-	if (numCheck && isNumber(readValue.val)) {
-		puts("\nInserisci una stringa corretta. \n");
-		readValue.error = true;
-	}
-
-	return readValue;
-}
-
-/**
- * @brief Check if any character can be found in the string.
- *
- * @param str String to check.
- * @return true if char has been found in the string, otherwise return false.
- */
-bool isChar(char *str) {
-	bool charFound = false;
-	for (int i = 0; i < strlen(str); i++) {
-		/** isalpha: Non-zero value if the character is a numeric character, zero otherwise. */
-		if (isalpha(str[i]) != 0) {
-			charFound = true;
-		}
-	}
-	return charFound;
-}
-
-/**
- * @brief Read a string from stdin (with input checks) and convert to an integer.
- *
- * @return int_result Result struct with value and error (check out datatypes.h)
- */
-int_result readInteger() {
-	/** Struct for handling errors and the inserted value */
-	int_result readValue;
-
-	/**
-	 * Boolean for detecting if string is correct
-	 * false = string is correct
-	 * true = string is not correct, ask again the user
-	 */
-	readValue.error = false;
-
-	/**	Internal string buffer */
-	char buffer[STRING_SIZE];
-
-	/** Read from stdin (as a string) */
-	scanf("%s", buffer);
-
-	/** Check if there are any numbers in the string. */
-	if (isChar(buffer)) {
-		puts("\nInserisci un numero corretto. \n");
-		readValue.error = true;
-	}
-
-	if (!readValue.error) {
-		/** If no errors are found, convert to integer. */
-		readValue.val = atoi(buffer);
-	}
-
-	return readValue;
-}
-
-/**
- * @brief Print date formatted in day/month/year.
- *
- * @param time_t epochTime
- */
-void printFormattedDate(time_t epochTime) {
-	/**
-	 * Pointer to time struct for handling Epoch time
-	 */
-	struct tm *clDate;
-
-	/**
-	 * Buffer for printing out the date (required by strftime)
-	 *  day/month/year (eg. 22/05/2019)
-	 */
-	char dateBuffer[11];
-
-	/**
-	 *  Fill time struct getting date/time info from the Epoch time
-	 */
-	clDate = localtime(&epochTime);
-
-	/**
-	 * Format date and put in dateBuffer for printing out
-	 */
-	strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
-	puts(dateBuffer);
-}
-
-/**
- * @brief Convert every char in the string to uppercase
- *
- * @param str String to convert to uppercase.
- */
-void convertToUpperCase(char *str) {
-	int len = strlen(str);
-	for (int i = 0; i < len; i++) {
-		str[i] = toupper(str[i]);
-	}
-}
-
-/**
  * @brief Reset custom color on stdout to its default using ANSI escape codes.
  *
  * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
@@ -236,6 +92,162 @@ void setGreenColor() {
  */
 void setMagentaColor() {
 	printf("\033[1;35m");
+}
+
+/**
+ * @brief Check if the string has only alphabetic characters.
+ * i.e either an uppercase letter (ABCDEFGHIJKLMNOPQRSTUVWXYZ)
+ * or a lowercase letter (abcdefghijklmnopqrstuvwxyz)
+ *
+ * @param str String to check
+ * @return true string is only made up by alphabetic characters, false otherwise.
+ */
+bool isOnlyAlpha(char *str) {
+	bool result = false;
+	for (int i = 0; i < strlen(str); i++) {
+		/** isalpha: Non-zero value if the character is a numeric character, zero otherwise. */
+		if (isalpha(str[i]) == 0) {
+			result = true;
+		}
+	}
+	return result;
+}
+
+/**
+ * @brief Read a string from stdin with input checks.
+ *
+ * @param value Value from stdin to store in memory, after input checks.
+ * @param onlyAlpha If true makes sure that the string does not have any numbers in it (input validation)
+ * @return int String length. If returned int is -1 , then it's an error.
+ */
+int readString(char *value, bool onlyAlpha) {
+	bool error = false;
+	char inputVal[STRING_SIZE];
+
+	do {
+		/**
+		 * Limit dynamically the scanf using some constants tricks.
+		 * Check out consts.h.
+		 *
+		 * TODO: Handle spaces.
+		 */
+		scanf("%" STR(STRING_SIZE) "s", inputVal);
+
+		/**
+		 * Check if the string has only alphabetic characters.
+		 * Only if onlyAlpha bool is true.
+		 * Ask again the value to the user if needed.
+		 */
+		if (onlyAlpha && isOnlyAlpha(inputVal)) {
+			error = true;
+			setYellowColor();
+			puts(
+					"\nValore errato.\nInserisci una stringa corretta e premi Invio: ");
+			resetColor();
+		} else {
+			error = false;
+		}
+	} while (error == true);
+
+	value = inputVal;
+
+	return strlen(inputVal);
+}
+
+/**
+ * @brief Check if any character can be found in the string.
+ *
+ * @param str String to check.
+ * @return true if char has been found in the string, otherwise return false.
+ */
+bool anyChar(char *str) {
+	bool charFound = false;
+	for (int i = 0; i < strlen(str); i++) {
+		/** isalpha: Non-zero value if the character is a numeric character, zero otherwise. */
+		if (isalpha(str[i]) != 0) {
+			charFound = true;
+		}
+	}
+	return charFound;
+}
+
+/**
+ * @brief Read a string from stdin with input checks and convert to an integer.
+ *
+ * @return int Integer from stdin. -1 if an unrecoverable error is detected.
+ */
+int readInteger() {
+	bool error = false;
+
+	/**	Internal string buffer */
+	char buffer[STRING_SIZE];
+	/** Integer value
+	 *  Initialize to -1 for representing a possible error state. */
+	int value = -1;
+
+	do {
+		/**
+		 * Read from stdin (as a string
+		 * Limit dynamically the scanf using some constants tricks.
+		 * Check out consts.h.
+		 */
+		scanf("%" STR(STRING_SIZE) "s", buffer);
+
+		/** Check if there are any numbers in the string. */
+		if (anyChar(buffer)) {
+			error = true;
+			setYellowColor();
+			puts("\nInserisci un numero corretto e premi Invio: ");
+			resetColor();
+		} else {
+			/** If no errors are found, convert to integer. */
+			value = atoi(buffer);
+			error = false;
+		}
+	} while (error == true);
+
+	return value;
+}
+
+/**
+ * @brief Print date formatted in day/month/year.
+ *
+ * @param time_t epochTime
+ */
+void printFormattedDate(time_t epochTime) {
+	/**
+	 * Pointer to time struct for handling Epoch time
+	 */
+	struct tm *clDate;
+
+	/**
+	 * Buffer for printing out the date (required by strftime)
+	 *  day/month/year (eg. 22/05/2019)
+	 */
+	char dateBuffer[11];
+
+	/**
+	 *  Fill time struct getting date/time info from the Epoch time
+	 */
+	clDate = localtime(&epochTime);
+
+	/**
+	 * Format date and put in dateBuffer for printing out
+	 */
+	strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
+	puts(dateBuffer);
+}
+
+/**
+ * @brief Convert every char in the string to uppercase
+ *
+ * @param str String to convert to uppercase.
+ */
+void convertToUpperCase(char *str) {
+	int len = strlen(str);
+	for (int i = 0; i < len; i++) {
+		str[i] = toupper(str[i]);
+	}
 }
 
 /**
