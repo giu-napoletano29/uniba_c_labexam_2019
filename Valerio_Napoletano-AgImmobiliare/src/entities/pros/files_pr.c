@@ -188,10 +188,9 @@ int getProfessionalsNumber() {
 /**
  * @brief Initialize potential array of structs and parse professionals' potential file.
  *
- * @param id
- * @return
+ * @param id ID of the professional connected to a specific potential record.
  */
-int loadPotFile(char id[]) {
+void loadPotFile(char id[]) {
 	int rows = 0;
 	FILE *fp_pot;
 	fp_pot = fopen("potential.csv", "a+");
@@ -205,10 +204,16 @@ int loadPotFile(char id[]) {
 		readPotFile(fp_pot, pr, id, rows);
 	}
 	fclose(fp_pot);
-	return -1;
 }
 
-int rewriteProfessionalsToFile(professional *pr, int rows) {
+/**
+ * @brief Replace professionals file contents with the data saved in the array of structs.
+ * Can be useful for deleting/update data from the file.
+ *
+ * @param pr Professional array of structs where the data is stored
+ * @param rows How many professionals are registered
+ */
+void rewriteProfessionalsToFile(professional *pr, int rows) {
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "w+");
 	//checkFile(filePtr);
@@ -238,13 +243,19 @@ int rewriteProfessionalsToFile(professional *pr, int rows) {
 	}
 
 	fclose(filePtr);
-	return -1;
 }
 
+/**
+ * @brief Check for duplicates in the file.
+ * If so ask the user to change one of the IDs.
+ *
+ * @param pr Professional array of structs where the data is stored
+ * @param rows How many professionals are registered
+ * @return -1 if duplicates are found.
+ */
 int checkDuplicatePro(professional *pr, int rows) {
 	short int resDup = 0;
 	short int choice = 0;
-	//int j=0;
 	char id[STRING_SIZE];
 
 	for (int i = 0; i < rows; i++) {
