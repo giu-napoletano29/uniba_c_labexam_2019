@@ -26,11 +26,6 @@
 /**
  * @brief Initialize the main allClients data structure and show the "clients" menu.
  *
- * - Declares and initialises the array of structs, "client" type.
- * - Load client file and stores the parsed data in the memory.
- * - Checks if any duplicate is found in the file.
- * - Shows the main clients menu asking the user what wants to do.
- *
  * @param reloadFile If true this function is called back again "recursively" for loading the updated data.
  * @return -1 for going back to the main menu.
  */
@@ -38,16 +33,16 @@ int clientsMenu(bool reloadFile) {
 	short int choice;
 	bool error = false;
 
-	/** Declare and initialize the array of structs, "client" type */
+	/** - Declare and initialize the array of structs, "client" type */
 	int clientsNum = getClientsNumber();
 	client allClients[clientsNum];
 	initClientsArray(allClients, clientsNum);
 
-	/** Load and parse client file */
+	/** - Load client file and stores the parsed data in the memory. */
 	loadClientFile(allClients);
 
 	/**
-	 Check if there's any client with duplicated IDs
+	 - Check if there's any client with duplicated IDs
 	 If so asks the user to change it. */
 	checkDuplicateClients(allClients, clientsNum);
 
@@ -60,6 +55,7 @@ int clientsMenu(bool reloadFile) {
 			notFoundError();
 		}
 
+		/** - Shows the main clients menu asking the user	 what wants	to do. */
 		if (!reloadFile) {
 			setGreenColor();
 			puts("--- CLIENTI ---");
