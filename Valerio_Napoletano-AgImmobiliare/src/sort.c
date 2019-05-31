@@ -59,7 +59,7 @@ void sortFilePro(professional *pr, int rows) {
 	 pause();*/
 }
 
-void sortFileCli(client *cl, int rows) {
+int sortFileCli(client *cl, int rows) {
 	client cmp;
 
 	for (int j = 0; j < rows; j++) {
@@ -104,8 +104,7 @@ void sortFileCli(client *cl, int rows) {
 			}
 		}
 	}
-	/*showAllClients(cl, rows);
-	 pause();*/
+	return -1;
 }
 void sortFileBui(building *bl, int rows) {
 	building cmp;

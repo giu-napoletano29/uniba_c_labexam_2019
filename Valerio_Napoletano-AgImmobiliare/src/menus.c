@@ -41,6 +41,14 @@ int clientsMenu(bool reloadFile) {
 	client allClients[clientsNum];
 	initClientsArray(allClients, clientsNum);
 
+	/** Load and parse client file */
+	loadClientFile(allClients);
+
+	/**
+	 Check if there's any client with duplicated IDs
+	 If so asks the user to change it. */
+	checkDuplicateClients(allClients, clientsNum);
+
 	do {
 		clearScr();
 
@@ -72,19 +80,12 @@ int clientsMenu(bool reloadFile) {
 
 		switch (choice) {
 		case 1:
-			// Load and parse all clients from the file
-			choice = loadClientFile(allClients);
-
-			// Check if there's any client with duplicated IDs
-			// If so asks the user to change it.
-			checkDuplicateClients(allClients, clientsNum);
-
 			// Sort clients in the file
-			sortFileCli(allClients, clientsNum);
+			choice = sortFileCli(allClients, clientsNum);
 
 			// Show all clients only if it's explicitly asked by the user.
 			if (!reloadFile) {
-				showAllClients(allClients, clientsNum);
+				choice = showAllClients(allClients, clientsNum);
 			}
 			break;
 		case 2:
@@ -103,7 +104,7 @@ int clientsMenu(bool reloadFile) {
 		}
 	} while (error == true);
 
-// -1 for going back to the
+	// -1 for going back to the
 	return -1;
 }
 
@@ -133,8 +134,8 @@ int professMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Mostra tutti i professionisti");
-//puts("2. Aggiungi un professionista");
-//puts("3. Modifica un professionista");
+		//puts("2. Aggiungi un professionista");
+		//puts("3. Modifica un professionista");
 		puts("4. Torna indietro");
 
 		newLine();
@@ -293,7 +294,7 @@ void mainMenu() {
 
 		switch (choice) {
 		case 1:
-			choice = clientsMenu(0);
+			choice = clientsMenu(false);
 			break;
 		case 2:
 			choice = professMenu();

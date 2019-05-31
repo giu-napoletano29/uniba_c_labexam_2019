@@ -227,19 +227,22 @@ bool checkDuplicateClients(client *cl, int rows) {
 
 				newLine();
 
-				// If client type is "company"
-				if (cl[i].cl_type == 3) {
-					reqPIVA(cl);
-				} else {
-					reqCF(cl);
-				}
-
 				switch (choice) {
 				case 1:
-					strcpy(cl[i].id, id);
+					// If client type is "company"
+					if (cl[i].cl_type == 3) {
+						reqPIVA(cl + i);
+					} else {
+						reqCF(cl + i);
+					}
 					break;
 				case 2:
-					strcpy(cl[j].id, id);
+					// If client type is "company"
+					if (cl[j].cl_type == 3) {
+						reqPIVA(cl + j);
+					} else {
+						reqCF(cl + j);
+					}
 					break;
 				default:
 					break;
