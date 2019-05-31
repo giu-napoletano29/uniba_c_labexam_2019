@@ -107,6 +107,10 @@ int clientsMenu(bool reloadFile) {
 	return -1;
 }
 
+/**
+ * @brief Initialize the main allProfessionals data structure and show the "professionals" menu.
+ * @return -1 for going back to the main menu.
+ */
 int professMenu() {
 	short int choice;
 	short int resDup = 0;
@@ -165,9 +169,13 @@ int professMenu() {
 	return choice;
 }
 
+/**
+ * @brief Initialize the main allBuildings data structure and show the "buildings" menu.
+ * @return -1 for going back to the main menu.
+ */
 int buildingsMenu() {
 	short int choice;
-	short int resDup = 0; //check for duplicate id
+	short int resDup = 0;
 
 	int buildingsNum = getBuildingsNumber();
 	building allBuildings[buildingsNum];
@@ -239,6 +247,9 @@ int buildingsMenu() {
 	return choice;
 }
 
+/**
+ * @brief Main menu of the software. Connects the various clients, pros and buildings submenus.
+ */
 void mainMenu() {
 	short int choice;
 	bool error = false;

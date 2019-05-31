@@ -3,7 +3,6 @@
  * @author Saverio Valerio
  * @date 9 May 2019
  * @brief Entry point for starting the main menu
- *
  */
 
 #include <stdio.h>

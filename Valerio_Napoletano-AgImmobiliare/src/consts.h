@@ -3,7 +3,6 @@
  * @author Saverio Valerio
  * @date 13 May 2019
  * @brief File containing general constants available to the program.
- *
  */
 
 #ifndef CONSTS_H
@@ -20,14 +19,18 @@
 #define STR2(x) #x
 #define STR(X) STR2(X)
 
-#define STRING_SIZE 50 /**< Max string size */
+/** Max string size */
+#define STRING_SIZE 50
 
-#define MIN_USER_BUDGET 100 /**< User budget limits (in euro) */
+/** User budget limits (in euro) */
+#define MIN_USER_BUDGET 100
 
-#define MAX_USER_BUDGET 1000000000 /**< One bilion */
+/** One bilion */
+#define MAX_USER_BUDGET 1000000000
 
 #define DAY_IN_SECONDS 86400
 
-#define CLIENT_EXPIRE_DAYS 30 /**< How many days until the programm will prompt the user to delete a client */
+/** How many days until the programm will prompt the user to delete a client */
+#define CLIENT_EXPIRE_DAYS 30
 
 #endif /* CONSTS_H */

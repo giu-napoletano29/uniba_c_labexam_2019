@@ -1,21 +1,24 @@
-/*
- * fileutils.c
- *
- *  Created on: 13 mag 2019
- *      Author: Giuseppe Napoletano
+/**
+ * @file file_utils.c
+ * @author Giuseppe Napoletano
+ * @date 13 May 2019
+ * @brief Functions for making the file usage easier and more streamlined.
  */
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h> /** For parseDateInFile() */
+#include <time.h> // For parseDateInFile()
 
 #include "utils.h"
 #include "file_utils.h"
 #include "datatypes.h"
 
 /**
- * Check if the file can be written and if it's empty
- * @param filePtr
- * @return bool error
+ * @brief Check if the file can be written and if it's empty.
+ *
+ * @param filePtr Pointer to file initialized by fopen()
+ * @param rowsCheck If enabled the function will check if the file is empty.
+ * @return true if everything is good with the file.
  */
 bool checkFile(FILE *filePtr, bool rowsCheck) {
 	bool error = false;
@@ -33,8 +36,6 @@ bool checkFile(FILE *filePtr, bool rowsCheck) {
 	}
 
 	// Check if the file is empty
-	//printf("\nbool: %d", rowsCheck);
-	//pause();
 	if (rowsCheck == true) {
 		if (rows == 0) {
 			setRedColor();
@@ -50,38 +51,37 @@ bool checkFile(FILE *filePtr, bool rowsCheck) {
 	return error;
 }
 
+/**
+ * @brief Count rows present in the file.
+ *
+ * @param filePtr Pointer to file initialized by fopen()
+ * @return Number of rows detected.
+ */
 int countRows(FILE *filePtr) {
 	int count = 0;
 	char line[400];
 	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
-		// Testing
-		//printf("%d. ", count + 1);
-		//fputs(line, stdout); /* write the line */
 		count++;
 	}
-
-	// Testing
-	//printf("\nRecord trovati nel file: %d\n", count);
-	//pause();
 
 	return count;
 }
 
-time_t parseDateInFile(char token[STRING_SIZE]) {
-	/*
-	 * Temp "tm" struct required for parsing the date properly from the file
-	 */
+/**
+ * @brief Parse date from a string formatted in day/month/year.
+ *
+ * @param string Date string to parse
+ * @return time_t value (encoded in UNIX Epoch time)
+ */
+time_t parseDateInFile(char string[STRING_SIZE]) {
+	// Temp "tm" struct required for parsing the date properly from the file
 	struct tm temp_date = { 0 };
 
-	/**
-	 * Parse date in Italian format (day/month/year)
-	 */
-
-	sscanf(token, "%d/%d/%d", &temp_date.tm_mday, &temp_date.tm_mon,
+	sscanf(string, "%d/%d/%d", &temp_date.tm_mday, &temp_date.tm_mon,
 			&temp_date.tm_year);
 
-	/*
+	/**
 	 * tm_mon is defined as a range between 0 to 11.
 	 * tm_year starts from 1900.
 	 *

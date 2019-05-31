@@ -1,8 +1,8 @@
-/*
- * fileutils.h
- *
- *  Created on: 13 mag 2019
- *      Author: Giuseppe Napoletano
+/**
+ * @file file_utils.h
+ * @author Giuseppe Napoletano
+ * @date 13 May 2019
+ * @brief Header file containing prototypes related to the "file_utils" functions.
  */
 
 #ifndef FILE_UTILS_H_
@@ -16,6 +16,6 @@
 bool checkFile(FILE *filePtr, bool rowsCheck);
 int countRows(FILE *filePtr);
 void copyFile(FILE *fp_from, FILE *fp_to, int choice);
-time_t parseDateInFile(char token[STRING_SIZE]);
+time_t parseDateInFile(char string[STRING_SIZE]);
 
 #endif /* FILE_UTILS_H_ */
