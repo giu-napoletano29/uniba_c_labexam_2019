@@ -190,7 +190,6 @@ bool checkDuplicateClients(client *cl, int rows) {
 	bool result = false;
 	bool error = false;
 	short int choice = 0;
-	char id[STRING_SIZE];
 
 	for (int i = 0; i < rows; i++) {
 		for (int j = i + 1; j < rows; j++) {

@@ -26,11 +26,13 @@
 /**
  * @brief Initialize the main allClients data structure and show the "clients" menu.
  *
- * - Declares and initialises the array of structs,"client" type.
+ * - Declares and initialises the array of structs, "client" type.
+ * - Load client file and stores the parsed data in the memory.
+ * - Checks if any duplicate is found in the file.
  * - Shows the main clients menu asking the user what wants to do.
  *
- * @param reloadFile If true
- * @return
+ * @param reloadFile If true this function is called back again "recursively" for loading the updated data.
+ * @return -1 for going back to the main menu.
  */
 int clientsMenu(bool reloadFile) {
 	short int choice;
@@ -89,7 +91,9 @@ int clientsMenu(bool reloadFile) {
 			}
 			break;
 		case 2:
+			// Append a new client to the file.
 			choice = addClient();
+			// Call again the function for loading the new updated data.
 			clientsMenu(true);
 			break;
 		case 3:
@@ -104,7 +108,6 @@ int clientsMenu(bool reloadFile) {
 		}
 	} while (error == true);
 
-	// -1 for going back to the
 	return -1;
 }
 
@@ -134,9 +137,7 @@ int professMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Mostra tutti i professionisti");
-		//puts("2. Aggiungi un professionista");
-		//puts("3. Modifica un professionista");
-		puts("4. Torna indietro");
+		puts("2. Torna indietro");
 
 		newLine();
 
@@ -153,13 +154,7 @@ int professMenu() {
 				rewriteProfessionalsToFile(allProfessionals, professionalsNum);
 			}
 			break;
-			/*case 2:
-			 //choice = addPro();
-			 break;
-			 case 3:
-			 //choice = editPro();
-			 break;*/
-		case 4:
+		case 2:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
 			choice = -1;
@@ -200,12 +195,9 @@ int buildingsMenu() {
 
 		puts("Scegli un'operazione:");
 		puts("1. Visualizza tutti gli immobili");
-//puts("2. Aggiungi un immobile");
-//puts("3. Modifica un immobile");
-//puts("4. Cancella un immobile");
-		puts("5. Cerca un immobile");
-		puts("6. Risultati agenzia");
-		puts("7. Torna indietro");
+		puts("2. Cerca un immobile");
+		puts("3. Risultati agenzia");
+		puts("4. Torna indietro");
 
 		newLine();
 
@@ -221,32 +213,22 @@ int buildingsMenu() {
 				sortFileBui(allBuildings, buildingsNum);
 				rewriteBuildingsToFile(allBuildings, buildingsNum);
 			}
-
 			break;
-			/*case 2:
-			 //choice = addBuilding();
-			 break;
-			 case 3:
-			 //choice = editBuilding();
-			 break;
-			 case 4:
-			 //choice = removeBuilding();
-			 break;*/
-		case 5:
+		case 2:
 			choice = loadBuildingsFile(allBuildings);
 			resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
 			if (resDup != -1) {
 				searchBuilding(allBuildings, buildingsNum);
 			}
 			break;
-		case 6:
+		case 3:
 			choice = loadBuildingsFile(allBuildings);
 			resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
 			if (resDup != -1) {
 				resultAg(allBuildings, buildingsNum);
 			}
 			break;
-		case 7:
+		case 4:
 			// This is used as a flag for the "go back" choice
 			// It's not that likely that an user will manually insert -1 as a choice.
 			choice = -1;
