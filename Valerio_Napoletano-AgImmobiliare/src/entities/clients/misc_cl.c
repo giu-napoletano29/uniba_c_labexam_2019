@@ -54,8 +54,6 @@ int addClient() {
 
 	saveLocalDate(&cl);
 
-	showClientData(&cl);
-
 	appendClientToFile(&cl);
 
 	return 0;

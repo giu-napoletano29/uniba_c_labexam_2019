@@ -39,7 +39,7 @@ void reqPIVA(client *cl) {
 
 		/** Validate P.IVA length */
 		//TODO: Add P.IVA only numbers validation
-		if (strlen(cl->id) != 11) {
+		if (readString(cl->id, false) != 11) {
 			error = true;
 		} else {
 			error = false;
@@ -87,7 +87,6 @@ void reqID(client *cl) {
 }
 
 void reqName(client *cl) {
-/// NAME
 	printf("Nome: ");
 	readString(cl->name, true);
 
@@ -95,7 +94,6 @@ void reqName(client *cl) {
 }
 
 void reqSurname(client *cl) {
-// SURNAME
 	printf("Cognome: ");
 	readString(cl->surname, true);
 
@@ -105,7 +103,6 @@ void reqSurname(client *cl) {
 void reqType(client *cl) {
 	bool error = false;
 
-// TYPE
 	puts("--- Tipo ---");
 	printf("1. Famiglia \n");
 	printf("2. Single \n");
@@ -131,8 +128,7 @@ void reqType(client *cl) {
 }
 
 void reqCompanyName(client *cl) {
-// COMPANY NAME
-// Ask for the company name if the user selected the company
+	// Ask for the company name if the user selected the company
 	if (cl->cl_type == 3) {
 		newLine();
 		printf("Nome azienda: ");
@@ -141,8 +137,7 @@ void reqCompanyName(client *cl) {
 	} else {
 		strcpy(cl->company_name, "-");
 	}
-
-//TODO: Maybe add another field for saving the "state" name if the user selects type 4
+	//TODO: Maybe add another field for saving the "state" name if the user selects type 4
 
 	clearScr();
 }
@@ -150,7 +145,6 @@ void reqCompanyName(client *cl) {
 void reqBudget(client *cl) {
 	bool error = false;
 
-// BUDGET
 	do {
 		if (error) {
 			setRedColor();
@@ -173,7 +167,6 @@ void reqBudget(client *cl) {
 void reqPropertyType(client *cl) {
 	bool error = false;
 
-// TYPE PROPERTY
 	printf("Tipologia immobile da cercare: ");
 	newLine();
 	printf("1. Appartamento");

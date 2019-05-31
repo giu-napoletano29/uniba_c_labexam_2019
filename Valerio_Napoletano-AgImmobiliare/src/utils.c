@@ -150,7 +150,7 @@ int readString(char *value, bool onlyAlpha) {
 		}
 	} while (error == true);
 
-	value = inputVal;
+	strcpy(value, inputVal);
 
 	return strlen(inputVal);
 }

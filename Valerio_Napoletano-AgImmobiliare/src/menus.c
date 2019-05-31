@@ -79,8 +79,12 @@ int clientsMenu(int jump) {
 			}
 			break;
 		case 2:
-			choice = addClient();
-			anyDuplicate = clientsMenu(1);
+			choice = loadClientFile(allClients);
+			anyDuplicate = checkDuplicateClients(allClients, clientsNum);
+			if (!anyDuplicate) {
+				choice = addClient();
+				anyDuplicate = clientsMenu(1);
+			}
 			break;
 		case 3:
 			// This is used as a flag for the "go back" choice

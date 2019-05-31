@@ -15,6 +15,7 @@
 #include "../../file_utils.h"
 #include "../../utils.h"
 #include "show_cl.h"
+#include "req_cl.h" // For reqID() and reqPIVA()
 
 void parseClientFile(FILE *filePtr, client *cl) {
 	char line[400];
@@ -220,13 +221,19 @@ bool checkDuplicateClients(client *cl, int rows) {
 					printf("\nScegli quale cliente modificare (1/2): ");
 					choice = readInteger();
 
+					// Set error boolean to true if choice is != 2 or != 1
 					error = choice == 2 || choice == 1 ? false : true;
 				} while (error == true);
 
 				newLine();
-				printf("Inserisci il nuovo ID: ");
-				readString(id, false);
-				convertToUpperCase(id);
+
+				// If client type is "company"
+				if (cl[i].cl_type == 3) {
+					reqPIVA(cl);
+				} else {
+					reqCF(cl);
+				}
+
 				switch (choice) {
 				case 1:
 					strcpy(cl[i].id, id);
