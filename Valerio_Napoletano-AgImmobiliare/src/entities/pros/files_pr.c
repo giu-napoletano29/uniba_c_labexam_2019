@@ -1,8 +1,8 @@
-/*
- * pros/files.c
- *
- *  Created on: 23 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file files_pr.c
+ * @author Saverio Valerio
+ * @date 23 May 2019
+ * @brief Functions for handling "professionals.csv" file.
  */
 
 #include <stdio.h>
@@ -17,6 +17,12 @@
 #include "misc_pr.h"
 #include "show_pr.h"
 
+/**
+ * Parse "professional" file (professionals.csv)
+ *
+ * @param filePtr Pointer to file initalized from fopen()
+ * @param pr Professional array of structs for storing parsed data.
+ */
 void readProsFile(FILE *filePtr, professional *pr) {
 	char line[400];
 	char *token;
@@ -79,8 +85,15 @@ void readProsFile(FILE *filePtr, professional *pr) {
 	}
 }
 
-void findPot(char id[], potential *pr, int rows) {
-	for (int i = 0; i < rows; i++) {
+/**
+ * Print professional potential
+ *
+ * @param id Professional's ID
+ * @param pr Potentials array of structs
+ * @param num_profess Professionals' number
+ */
+void findPot(char id[], potential *pr, int num_profess) {
+	for (int i = 0; i < num_profess; i++) {
 		if (strcmp(id, pr[i].id) == 0) {
 			printf("\nPotenziale: %s\n", pr[i].content);
 		}

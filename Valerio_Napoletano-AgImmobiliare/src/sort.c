@@ -1,8 +1,8 @@
-/*
- * sort.c
- *
- *  Created on: 25 mag 2019
- *      Author: Giuseppe
+/**
+ * @file sort.c
+ * @author Giuseppe Napoletano
+ * @date 25 May 2019
+ * @brief Sorting functions (with Bubble Sort) in alphabetical order by surname.
  */
 
 #include <stdio.h>
@@ -14,6 +14,12 @@
 #include "file_utils.h"
 #include "utils.h"
 
+/**
+ * Sort in alphabetical order the professional array of structs by surname.
+ *
+ * @param pr Array of structs, professional data type
+ * @param rows Numbers of records in the "pr" array of structs.
+ */
 void sortFilePro(professional *pr, int rows) {
 	professional cmp;
 
@@ -55,10 +61,14 @@ void sortFilePro(professional *pr, int rows) {
 			}
 		}
 	}
-	/*showAllPros(pr, rows);
-	 pause();*/
 }
 
+/**
+ * Sort in alphabetical order the client array of structs by surname.
+ *
+ * @param cl Array of structs, client data type
+ * @param rows Numbers of records in the "cl" array of structs.
+ */
 int sortFileCli(client *cl, int rows) {
 	client cmp;
 
@@ -106,6 +116,13 @@ int sortFileCli(client *cl, int rows) {
 	}
 	return -1;
 }
+
+/**
+ * Sort in alphabetical order the professional array of structs by owner name.
+ *
+ * @param br Array of structs, building data type
+ * @param rows Numbers of records in the "bl" array of structs.
+ */
 void sortFileBui(building *bl, int rows) {
 	building cmp;
 
@@ -154,6 +171,4 @@ void sortFileBui(building *bl, int rows) {
 			}
 		}
 	}
-	/*showallBuildings(bl, rows);
-	 pause();*/
 }

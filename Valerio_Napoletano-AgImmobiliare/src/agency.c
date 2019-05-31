@@ -7,7 +7,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h> /** For parseDateInFile() */
+// For parseDateInFile()
+#include <time.h>
 
 #include "utils.h"
 #include "file_utils.h"

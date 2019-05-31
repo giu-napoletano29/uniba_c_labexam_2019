@@ -1,10 +1,9 @@
-/*
- * sort.h
- *
- *  Created on: 25 mag 2019
- *      Author: Giuseppe
+/**
+ * @file sort.h
+ * @author Giuseppe Napoletano
+ * @date 25 May 2019
+ * @brief Header file containing prototypes related to the "sort" functions.
  */
-
 #ifndef SORT_H_
 #define SORT_H_
 
