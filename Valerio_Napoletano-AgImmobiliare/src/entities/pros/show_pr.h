@@ -1,14 +1,13 @@
-/*
- * pros/show.h
- *
- *  Created on: 23 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file show_pr.h
+ * @author Saverio Valerio
+ * @date 23 May 2019
+ * @brief Header file containing prototypes related to the "show pros" functions.
  */
 
 #ifndef ENTITIES_PROS_SHOW_PR_H_
 #define ENTITIES_PROS_SHOW_PR_H_
 
-// Functions for showing data to the user
 void showProData(professional *pr);
 int showAllPros(professional *pros, int num_pros);
 

@@ -102,7 +102,7 @@ void showClientData(client *cl) {
  * Print every client available in the array of structs.
  * Iterates on num_clients calling the showClientData() function.
  *
- * @param cl Array of structs (building type)
+ * @param allClients Array of structs (client type)
  * @param num_clients Number of items (clients) saved in the array.
  * @return Value for returning back to the menu (-1)
  */

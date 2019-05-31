@@ -1,8 +1,8 @@
-/*
- * clients_show.c
- *
- *  Created on: 22 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file show_pr.c
+ * @author Saverio Valerio
+ * @date 22 May 2019
+ * @brief Functions for printing out professionals information.
  */
 
 #include <stdio.h>
@@ -11,8 +11,12 @@
 #include "../../utils.h"
 #include "files_pr.h"
 
+/**
+ * Print every field available in a professional struct.
+ *
+ * @param pr professional type struct
+ */
 void showProData(professional *pr) {
-	//puts("--- RIEPILOGO ---");
 	printf("Codice fiscale: %s \n", pr->id);
 	printf("Nome: %s \n", pr->name);
 	printf("Cognome: %s \n", pr->surname);
@@ -26,9 +30,16 @@ void showProData(professional *pr) {
 	printf("\nPotenziale di %s:\n", pr->name);
 	loadPotFile(pr->id);
 	newLine();
-	//pause();
 }
 
+/**
+ * Print every client available in the array of structs.
+ * Iterates on num_pros calling the showProData() function.
+ *
+ * @param pros Array of structs (professional type)
+ * @param num_pros Number of items (professionals) saved in the array.
+ * @return Value for returning back to the menu (-1)
+ */
 int showAllPros(professional *pros, int num_pros) {
 	int i;
 
