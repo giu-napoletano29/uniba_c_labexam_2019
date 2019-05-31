@@ -16,7 +16,7 @@
 #include "misc_cl.h" // checkIfUserExpired()
 
 /**
- * Print out a string with the client type.
+ * @brief Print out a string with the client type.
  * Check out the "client_type" in datatypes.h
  *
  * @param type Integer that represents the client type.
@@ -44,7 +44,7 @@ void showClientType(int type) {
 }
 
 /**
- * Print every field available in a client struct.
+ * @brief Print every field available in a client struct.
  *
  * @param cl client type struct
  */
@@ -99,7 +99,7 @@ void showClientData(client *cl) {
 }
 
 /**
- * Print every client available in the array of structs.
+ * @brief Print every client available in the array of structs.
  * Iterates on num_clients calling the showClientData() function.
  *
  * @param allClients Array of structs (client type)

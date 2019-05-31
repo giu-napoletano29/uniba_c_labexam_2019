@@ -120,7 +120,7 @@ int sortFileCli(client *cl, int rows) {
 /**
  * @brief Sort in alphabetical order the professional array of structs by owner name.
  *
- * @param br Array of structs, building data type
+ * @param bl Array of structs, building data type
  * @param rows Numbers of records in the "bl" array of structs.
  */
 void sortFileBui(building *bl, int rows) {

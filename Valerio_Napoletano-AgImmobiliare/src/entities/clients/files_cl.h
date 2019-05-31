@@ -1,8 +1,8 @@
-/*
- * clients_files.h
- *
- *  Created on: 22 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file files_cl.h
+ * @author Saverio Valerio
+ * @date 22 May 2019
+ * @brief Header file containing prototypes related to the clients' file management functions.
  */
 
 #ifndef ENTITIES_CLIENTS_FILES_CL_H_

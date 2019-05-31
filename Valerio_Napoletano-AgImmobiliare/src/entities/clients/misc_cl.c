@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h> /**< strcmp */
+#include <string.h> // For using strcmp()
 #include <time.h>
 #include <stdbool.h>
 
@@ -18,10 +18,10 @@
 #include "show_cl.h"
 
 /**
- * Get current system date and save the Epoch time value.
+ * @brief Get current system date and save the UNIX Epoch time value.
  *
  * @see https://en.wikipedia.org/wiki/Unix_time
- * @param client
+ * @param cl "client" type struct
  */
 void saveLocalDate(client *cl) {
 	time_t timeRightNow;
@@ -30,8 +30,14 @@ void saveLocalDate(client *cl) {
 	cl->reg_date = time(&timeRightNow);
 }
 
+/**
+ * @brief Append an user to the user file.
+ * Initializes a client struct and calls the "req" functions for filling the latter.
+ *
+ * @return -1 for going back to the main menu.
+ */
 int addClient() {
-	client cl;
+	client cl = { "", "", "", "", "", "", "", 0, 0 };
 
 	clearScr();
 	newLine();
@@ -60,7 +66,11 @@ int addClient() {
 }
 
 /**
- * Check if user expired and delete it, if the user confirms.
+ * @brief Check if user expired and sets the delete flag, if the user confirms.
+ *
+ * @param epochTime Registration date of the user encoded in UNIX Epoch time
+ * @param id Client's ID
+ * @return true if user is expired, false otherwise
  */
 bool checkIfUserExpired(time_t epochTime, char id[]) {
 	/** Temp "tm" struct required for parsing the date properly from the file */
@@ -75,10 +85,9 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 	temp_date.tm_mon -= 1;
 	temp_date.tm_year -= 1900;
 
-	/** Delete flag */
 	bool delete = false;
 
-	/** Calculate how many days the client registration expired. */
+	/** Calculates how many days the client registration expired. */
 	int diffDays = difftime(time(NULL), epochTime) / DAY_IN_SECONDS;
 
 	/** const.h CLIENT_EXPIRE_DAYS is 30 (days) */
@@ -106,7 +115,8 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 }
 
 /**
- * Initialize an array of structs of clients.
+ * @brief Initialize an array of structs of clients.
+ *
  * @param cl "client" type struct.
  * @param size How many elements the array of struct will keep.
  */

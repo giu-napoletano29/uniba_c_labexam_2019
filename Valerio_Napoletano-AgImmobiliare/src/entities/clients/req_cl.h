@@ -1,8 +1,8 @@
-/*
- * clients_req.h
- *
- *  Created on: 11 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file req_cl.h
+ * @author Saverio Valerio
+ * @date 11 May 2019
+ * @brief Header file containing prototypes related to the "request clients' data" functions.
  */
 
 #ifndef ENTITIES_CLIENTS_REQ_CL_H_
@@ -10,7 +10,6 @@
 
 #include "../../datatypes.h"
 
-// Functions for asking data to the user
 void reqID(client *cl);
 void reqCF(client *cl);
 void reqPIVA(client *cl);

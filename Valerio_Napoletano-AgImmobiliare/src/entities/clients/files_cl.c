@@ -1,8 +1,8 @@
-/*
- * clients_files.c
- *
- *  Created on: 22 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file files_cl.c
+ * @author Saverio Valerio
+ * @date 22 May 2019
+ * @brief Functions for handling the CSV file related to the clients.
  */
 
 #include <stdio.h>
@@ -17,6 +17,12 @@
 #include "show_cl.h"
 #include "req_cl.h" // For reqID() and reqPIVA()
 
+/**
+ * @brief Parse "clients" file (professionals.csv)
+ *
+ * @param filePtr Pointer to file initalized from fopen()
+ * @param cl Client array of structs for storing parsed data.
+ */
 void parseClientFile(FILE *filePtr, client *cl) {
 	char line[400];
 	char *token;
@@ -85,10 +91,13 @@ void parseClientFile(FILE *filePtr, client *cl) {
 	}
 }
 
-/*
- * Overwrite the client file with the data loaded in memory.
- * Useful for deleting a client.
- * @return success
+/**
+ * @brief Replace clients file contents with the data saved in the array of structs.
+ * Can be useful for deleting/update data from the file.
+ *
+ * @param cl Client array of structs where the data is stored
+ * @param rows How many clients are registered
+ * @return -1 go back to main menu
  */
 int rewriteClientsToFile(client *cl, int rows) {
 	FILE *filePtr;
@@ -124,9 +133,10 @@ int rewriteClientsToFile(client *cl, int rows) {
 	return -1;
 }
 
-/*
- * Append a new client to the clients file
- * @return success
+/**
+ * Append a new client to the "clients.csv" file
+ * @param cl Client struct where the data is stored
+ * @return -1 go back to main menu
  */
 int appendClientToFile(client *cl) {
 	FILE *filePtr;
@@ -173,7 +183,9 @@ int getClientsNumber() {
 }
 
 /**
- * Load "clients.csv" internal file and run the parsing function
+ * Load the "clients.csv" file and run the parsing function
+ * @param cl Array of structs (client data type) where the data will be saved.
+ * @return
  */
 int loadClientFile(client *cl) {
 	FILE *filePtr;
@@ -186,6 +198,14 @@ int loadClientFile(client *cl) {
 	return -1;
 }
 
+/**
+ * @brief Check for duplicates in the file.
+ * If so ask the user to change one of the IDs.
+ *
+ * @param cl Clients array of structs where the data is stored
+ * @param rows How many clients are registered
+ * @return true if duplicates are found.
+ */
 bool checkDuplicateClients(client *cl, int rows) {
 	bool result = false;
 	bool error = false;

@@ -1,8 +1,8 @@
-/*
- * clients_req.c
- *
- *  Created on: 11 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file req_cl.c
+ * @author Saverio Valerio
+ * @date 11 May 2019
+ * @brief Functions file containing prototypes related to the "request clients' data" functions.
  */
 
 #include <stdio.h>
@@ -52,6 +52,7 @@ void reqPIVA(client *cl) {
  *
  * Called by reqID() only if the client type is NOT company.
  * "Codice fiscale" has also numbers, hence onlyAlpha is false.
+ *
  * @see https://it.wikipedia.org/wiki/Codice_fiscale
  * @param cl "client" type struct
  */
@@ -77,6 +78,12 @@ void reqCF(client *cl) {
 	} while (error == true);
 }
 
+/**
+ * @brief Request client's ID from stdin.
+ *
+ * Calls reqPIVA() or reqCF() based on the client type.
+ * @param cl "client" type struct
+ */
 void reqID(client *cl) {
 	if (cl->cl_type == 3) {
 		reqPIVA(cl);
@@ -86,6 +93,11 @@ void reqID(client *cl) {
 	clearScr();
 }
 
+/**
+ * @brief Request client's name from stdin.
+ *
+ * @param cl "client" type struct
+ */
 void reqName(client *cl) {
 	printf("Nome: ");
 	readString(cl->name, true);
@@ -93,6 +105,11 @@ void reqName(client *cl) {
 	clearScr();
 }
 
+/**
+ * @brief Request client's surname from stdin.
+ *
+ * @param cl "client" type struct
+ */
 void reqSurname(client *cl) {
 	printf("Cognome: ");
 	readString(cl->surname, true);
@@ -100,6 +117,11 @@ void reqSurname(client *cl) {
 	clearScr();
 }
 
+/**
+ * @brief Request client's type from stdin.
+ *
+ * @param cl "client" type struct
+ */
 void reqType(client *cl) {
 	bool error = false;
 
@@ -127,8 +149,13 @@ void reqType(client *cl) {
 	clearScr();
 }
 
+/**
+ * @brief Request client's company name from stdin.
+ * This function is called only if the user choose the client type 3 (company)
+ *
+ * @param cl "client" type struct
+ */
 void reqCompanyName(client *cl) {
-	// Ask for the company name if the user selected the company
 	if (cl->cl_type == 3) {
 		newLine();
 		printf("Nome azienda: ");
@@ -137,11 +164,15 @@ void reqCompanyName(client *cl) {
 	} else {
 		strcpy(cl->company_name, "-");
 	}
-	//TODO: Maybe add another field for saving the "state" name if the user selects type 4
 
 	clearScr();
 }
 
+/**
+ * @brief Request client's budget from stdin.
+ *
+ * @param cl "client" type struct
+ */
 void reqBudget(client *cl) {
 	bool error = false;
 
@@ -164,6 +195,11 @@ void reqBudget(client *cl) {
 	clearScr();
 }
 
+/**
+ * @brief Request client's property type.
+ *
+ * @param cl "client" type struct
+ */
 void reqPropertyType(client *cl) {
 	bool error = false;
 
