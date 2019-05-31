@@ -1,8 +1,8 @@
-/*
- * agency.h
- *
- *  Created on: 25 mag 2019
- *      Author: Giuseppe
+/**
+ * @file agency.h
+ * @author Giuseppe Napoletano
+ * @date 25 May 2019
+ * @brief Header file containing prototypes related to the "agency" functions.
  */
 
 #ifndef AGENCY_H_

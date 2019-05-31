@@ -17,6 +17,8 @@
  * @see https://stackoverflow.com/questions/25410690/scanf-variable-length-specifier
  */
 #define STR2(x) #x
+
+/** Please check out STR2(x) docs. */
 #define STR(X) STR2(X)
 
 /** Max string size */
