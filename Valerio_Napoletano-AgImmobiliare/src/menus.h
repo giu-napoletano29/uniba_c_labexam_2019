@@ -5,8 +5,10 @@
  *      Author: Saverio Valerio
  */
 
+#include <stdbool.h>
+
 void mainMenu();
-int clientsMenu(int jump); //insert the number of case you wanna just into, insert 0 for normal procedure
+int clientsMenu(bool reloadFile);
 int professMenu();
 int buildingsMenu();
 

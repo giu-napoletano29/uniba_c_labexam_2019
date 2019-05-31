@@ -90,6 +90,8 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 		resetColor();
 
 		if (askConfirm()) {
+			delete = true;
+
 			setYellowColor();
 			printf("\nCliente con ID %s pronto per l'eliminazione!\n", id);
 			printf(

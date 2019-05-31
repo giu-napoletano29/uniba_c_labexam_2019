@@ -24,14 +24,16 @@
 #include "sort.h"
 
 /**
- * @brief Show the "clients" menu.
+ * @brief Initialize the main allClients data structure and show the "clients" menu.
  *
- * @param jump
+ * - Declares and initialises the array of structs,"client" type.
+ * - Shows the main clients menu asking the user what wants to do.
+ *
+ * @param reloadFile If true
  * @return
  */
-int clientsMenu(int jump) {
+int clientsMenu(bool reloadFile) {
 	short int choice;
-	bool anyDuplicate = false;
 	bool error = false;
 
 	/** Declare and initialize the array of structs, "client" type */
@@ -48,7 +50,7 @@ int clientsMenu(int jump) {
 			notFoundError();
 		}
 
-		if (jump == 0) {
+		if (!reloadFile) {
 			setGreenColor();
 			puts("--- CLIENTI ---");
 			resetColor();
@@ -64,27 +66,30 @@ int clientsMenu(int jump) {
 			printf("Operazione: ");
 			choice = readInteger();
 		} else {
-			choice = jump;
+			// Auto "jump" to the first switch case for reloading the file and sorting it.
+			choice = 1;
 		}
 
 		switch (choice) {
 		case 1:
+			// Load and parse all clients from the file
 			choice = loadClientFile(allClients);
-			anyDuplicate = checkDuplicateClients(allClients, clientsNum);
-			if (!anyDuplicate) {
+
+			// Check if there's any client with duplicated IDs
+			// If so asks the user to change it.
+			checkDuplicateClients(allClients, clientsNum);
+
+			// Sort clients in the file
+			sortFileCli(allClients, clientsNum);
+
+			// Show all clients only if it's explicitly asked by the user.
+			if (!reloadFile) {
 				showAllClients(allClients, clientsNum);
-				sortFileCli(allClients, clientsNum);
-				//TODO: Optimize: run only if some clients needs to be deleted
-				rewriteClientsToFile(allClients, clientsNum);
 			}
 			break;
 		case 2:
-			choice = loadClientFile(allClients);
-			anyDuplicate = checkDuplicateClients(allClients, clientsNum);
-			if (!anyDuplicate) {
-				choice = addClient();
-				anyDuplicate = clientsMenu(1);
-			}
+			choice = addClient();
+			clientsMenu(true);
 			break;
 		case 3:
 			// This is used as a flag for the "go back" choice
@@ -98,7 +103,7 @@ int clientsMenu(int jump) {
 		}
 	} while (error == true);
 
-	// -1 for going back to the
+// -1 for going back to the
 	return -1;
 }
 

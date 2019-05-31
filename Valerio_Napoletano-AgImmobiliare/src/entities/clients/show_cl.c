@@ -8,11 +8,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <string.h> /**< strcmp */
+#include <string.h> // strcmp()
 
 #include "../../utils.h"
 #include "../buildings/show_bl.h"
-#include "misc_cl.h" /**< For checkIfUserExpired */
+#include "files_cl.h" // rewriteClientsToFile
+#include "misc_cl.h" // checkIfUserExpired()
 
 /**
  * Print out a string with the client type.
@@ -105,8 +106,9 @@ void showClientData(client *cl) {
  * @param num_clients Number of items (clients) saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-int showAllClients(client *cl, int num_clients) {
+int showAllClients(client *allClients, int num_clients) {
 	int i;
+	bool runRewrite = false;
 
 	clearScr();
 	printSectionName("LISTA CLIENTI");
@@ -115,7 +117,17 @@ int showAllClients(client *cl, int num_clients) {
 		setCyanColor();
 		printf("\n-- CLIENTE %d --\n", i + 1);
 		resetColor();
-		showClientData(cl + i);
+		showClientData(allClients + i);
+
+		// Check if some clients are ready for deletion.
+		if ((allClients + i)->toDelete) {
+			runRewrite = true;
+		}
+	}
+
+	// Rewrite clients file without the deleted clients, if needed.
+	if (runRewrite) {
+		rewriteClientsToFile(allClients, num_clients);
 	}
 
 	newLine();
