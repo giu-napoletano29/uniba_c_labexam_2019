@@ -2,7 +2,7 @@
  * @file files_pr.c
  * @author Saverio Valerio
  * @date 23 May 2019
- * @brief Functions for handling "professionals.csv" file.
+ * @brief Functions for handling the CSV file related to the professionals.
  */
 
 #include <stdio.h>
@@ -18,7 +18,7 @@
 #include "show_pr.h"
 
 /**
- * Parse "professional" file (professionals.csv)
+ * @brief Parse "professional" file (professionals.csv)
  *
  * @param filePtr Pointer to file initalized from fopen()
  * @param pr Professional array of structs for storing parsed data.
@@ -86,11 +86,13 @@ void readProsFile(FILE *filePtr, professional *pr) {
 }
 
 /**
- * Print professional potential
+ * @brief Print potential string of a specific professional.
+ * The "potential" of a pro is a simple string that explains what are his "strenghts".
+ * E.g. "He's able to sell quickly houses located on the beach."
  *
  * @param id Professional's ID
  * @param pr Potentials array of structs
- * @param num_profess Professionals' number
+ * @param num_profess Number of professionals registered
  */
 void findPot(char id[], potential *pr, int num_profess) {
 	for (int i = 0; i < num_profess; i++) {
@@ -100,6 +102,15 @@ void findPot(char id[], potential *pr, int num_profess) {
 	}
 }
 
+/**
+ * @brief Parse "potential" file (potentials.csv)
+ * Check out findPot() for more information about the "potential".
+ *
+ * @param fp_pot Pointer to file initalized from fopen()
+ * @param pr Professional array of structs for storing parsed data.
+ * @param id ID of the professional connected to a specific potential record.
+ * @param rows Number of professionals registered
+ */
 void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 	char line[400];
 	char *token;
@@ -135,14 +146,17 @@ void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 	findPot(id, pr, rows);
 }
 
+/**
+ * @brief Load professional.csv file to memory.
+ *
+ * @param pr Array of structs (professional datatype) where data will be stored.
+ * @return -1 for going back to the main menu.
+ */
 int loadProsFile(professional *pr) {
-	//int rows = 0;
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "a+");
 	if (!checkFile(filePtr, true)) {
-		//rows = countRows(filePtr);
 		rewind(filePtr);
-		//professionals pr[rows];
 		readProsFile(filePtr, pr);
 	}
 
@@ -150,6 +164,11 @@ int loadProsFile(professional *pr) {
 	return -1;
 }
 
+/**
+ * @brief Get how many professionals are saved in the file.
+ *
+ * @return Number of professionals. (integer)
+ */
 int getProfessionalsNumber() {
 	FILE *filePtr;
 	int rows = 0;
@@ -166,6 +185,12 @@ int getProfessionalsNumber() {
 	return rows;
 }
 
+/**
+ * @brief Initialize potential array of structs and parse professionals' potential file.
+ *
+ * @param id
+ * @return
+ */
 int loadPotFile(char id[]) {
 	int rows = 0;
 	FILE *fp_pot;

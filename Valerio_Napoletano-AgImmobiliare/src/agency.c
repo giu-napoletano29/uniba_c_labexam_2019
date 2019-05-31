@@ -17,7 +17,7 @@
 #include "entities/buildings/show_bl.h"
 
 /**
- * Show how many buildings and which ones are available in a specific date interval.
+ * @brief Show how many buildings and which ones are available in a specific date interval.
  *
  * @param bl Array of structs of available buildings.
  * @param n_bui Number of available buildings.

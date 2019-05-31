@@ -10,7 +10,7 @@
 #include "../../datatypes.h"
 
 /**
- *  Initialize an array of structs of "potentials".
+ * @brief Initialize an array of structs of "potentials".
  *
  * @param po "Potential" type struct.
  * @param size How many elements the array of struct will keep.
@@ -23,7 +23,8 @@ void initPotentialsArray(potential *po, int size) {
 }
 
 /**
- * Initialize an array of structs of professionals.
+ * @brief Initialize an array of structs of professionals.
+ *
  * @param pro "Professional" type struct.
  * @param size How many elements the array of struct will keep.
  */

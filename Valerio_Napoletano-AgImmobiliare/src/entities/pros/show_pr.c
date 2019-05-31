@@ -12,7 +12,7 @@
 #include "files_pr.h"
 
 /**
- * Print every field available in a professional struct.
+ * @brief Print every field available in a professional struct.
  *
  * @param pr professional type struct
  */
@@ -33,7 +33,7 @@ void showProData(professional *pr) {
 }
 
 /**
- * Print every client available in the array of structs.
+ * @brief Print every client available in the array of structs.
  * Iterates on num_pros calling the showProData() function.
  *
  * @param pros Array of structs (professional type)

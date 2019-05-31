@@ -1,5 +1,5 @@
 /**
- * @file misc_pr.c
+ * @file misc_pr.h
  * @author Saverio Valerio
  * @date 28 May 2019
  * @brief Header file with prototypes of misc functions used by the "professional" entity.

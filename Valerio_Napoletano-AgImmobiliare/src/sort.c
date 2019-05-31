@@ -15,7 +15,7 @@
 #include "utils.h"
 
 /**
- * Sort in alphabetical order the professional array of structs by surname.
+ * @brief Sort in alphabetical order the professional array of structs by surname.
  *
  * @param pr Array of structs, professional data type
  * @param rows Numbers of records in the "pr" array of structs.
@@ -64,7 +64,7 @@ void sortFilePro(professional *pr, int rows) {
 }
 
 /**
- * Sort in alphabetical order the client array of structs by surname.
+ * @brief Sort in alphabetical order the client array of structs by surname.
  *
  * @param cl Array of structs, client data type
  * @param rows Numbers of records in the "cl" array of structs.
@@ -118,7 +118,7 @@ int sortFileCli(client *cl, int rows) {
 }
 
 /**
- * Sort in alphabetical order the professional array of structs by owner name.
+ * @brief Sort in alphabetical order the professional array of structs by owner name.
  *
  * @param br Array of structs, building data type
  * @param rows Numbers of records in the "bl" array of structs.
