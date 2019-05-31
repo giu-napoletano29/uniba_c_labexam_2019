@@ -134,7 +134,8 @@ int rewriteClientsToFile(client *cl, int rows) {
 }
 
 /**
- * Append a new client to the "clients.csv" file
+ * @brief Append a new client to the "clients.csv" file
+ *
  * @param cl Client struct where the data is stored
  * @return -1 go back to main menu
  */
@@ -167,7 +168,8 @@ int appendClientToFile(client *cl) {
 }
 
 /**
- * Get how many clients are saved in the file.
+ * @brief Get how many clients are saved in the file.
+ *
  * @return Number of clients. (integer)
  */
 int getClientsNumber() {
@@ -183,9 +185,10 @@ int getClientsNumber() {
 }
 
 /**
- * Load the "clients.csv" file and run the parsing function
+ * @brief Load the "clients.csv" file and run the parsing function
+ *
  * @param cl Array of structs (client data type) where the data will be saved.
- * @return
+ * @return -1 going back to the menu
  */
 int loadClientFile(client *cl) {
 	FILE *filePtr;

@@ -11,7 +11,7 @@
 #include "../../utils.h"
 
 /**
- * Print out a string with the building type.
+ * @brief Print out a string with the building type.
  * Check out the "building_type" in datatypes.h
  *
  * @param type Integer that represents the building type.
@@ -42,7 +42,7 @@ void showBuildingType(int type) {
 }
 
 /**
- * Print every field present in a building struct.
+ * @brief Print every field present in a building struct.
  *
  * @param bl building type struct
  */
@@ -99,7 +99,7 @@ void showBuildingData(building *bl) {
 }
 
 /**
- * Print every building available in the array of structs.
+ * @brief Print every building available in the array of structs.
  * Iterates on num_buildings calling the showBuildingData() function.
  *
  * @param bl Array of structs (building type)

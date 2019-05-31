@@ -1,10 +1,9 @@
-/*
- * buildings/files.c
- *
- *  Created on: 22 mag 2019
- *      Author: Saverio Valerio
+/**
+ * @file files_bl.c
+ * @author Saverio Valerio
+ * @date 22 May 2019
+ * @brief Functions for handling the CSV file related to the buildings.
  */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,6 +15,12 @@
 #include "../../utils.h"
 #include "show_bl.h"
 
+/**
+ * @brief Parse "buildings" file (buildings.csv)
+ *
+ * @param filePtr Pointer to file initalized from fopen()
+ * @param bl Buildings array of structs for storing parsed data.
+ */
 void readBuildingsFile(FILE *filePtr, building *bl) {
 	char line[400];
 	char *token;
@@ -55,9 +60,7 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 				strcpy(bl[bl_num].province, token);
 				break;
 			case 5:
-				/*
-				 *  Save parsed Epoch time into clients struct
-				 */
+				// Save parsed Epoch time into clients struct
 				bl[bl_num].reg_date = parseDateInFile(token);
 				break;
 			case 6:
@@ -86,10 +89,14 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 
 		newLine();
 	}
-
-	//showAllBuildings(bl, bl_num);
 }
 
+/**
+ * @brief Load buildings.csv file to memory.
+ *
+ * @param bl Array of structs (building datatype) where data will be stored.
+ * @return -1 for going back to the main menu.
+ */
 int loadBuildingsFile(building *bl) {
 	FILE *filePtr;
 	filePtr = fopen("buildings.csv", "a+");
@@ -102,6 +109,13 @@ int loadBuildingsFile(building *bl) {
 	return -1;
 }
 
+/**
+ * @brief Replace buildings file contents with the data saved in the array of structs.
+ * Can be useful for deleting/update data from the file.
+ *
+ * @param bl Building array of structs where the data is stored
+ * @param rows How many buildings are registered
+ */
 int rewriteBuildingsToFile(building *bl, int rows) {
 	FILE *filePtr;
 	//TODO: find a good solution to prevent data loss when file is opened in w+
@@ -138,6 +152,14 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 	return -1;
 }
 
+/**
+ * @brief Check for duplicates in the file.
+ * If so ask the user to change one of the IDs.
+ *
+ * @param bl Buildings array of structs where the data is stored
+ * @param rows How many buildings are registered
+ * @return -1 if duplicates are found.
+ */
 int checkDuplicateBuildings(building *bl, int rows) {
 	short int resDup = 0;
 	short int choice = 0;
@@ -184,7 +206,11 @@ int checkDuplicateBuildings(building *bl, int rows) {
 	rewriteBuildingsToFile(bl, rows);
 	return resDup;
 }
-
+/**
+ * @brief Get how many buildings are saved in the file.
+ *
+ * @return Number of buildings. (integer)
+ */
 int getBuildingsNumber() {
 	FILE *filePtr;
 	int rows = 0;
@@ -200,6 +226,11 @@ int getBuildingsNumber() {
 	return rows;
 }
 
+/**
+ * @brief Search for a specific building using a criteria.
+ * @param bl
+ * @param n_bui
+ */
 void searchBuilding(building *bl, int n_bui) {
 	short int choice = 0;
 	int price = 0;
