@@ -37,7 +37,7 @@ void saveLocalDate(client *cl) {
  * @return -1 for going back to the main menu.
  */
 int addClient() {
-	client cl = { "", "", "", "", "", "", "", 0, 0 };
+	client cl = { "", "", "", 1, "", 0, 0, 1, false };
 
 	clearScr();
 	newLine();
