@@ -224,24 +224,13 @@ void rewriteProfessionalsToFile(professional *pr, int rows) {
 
 	if (filePtr != NULL) {
 		rewind(filePtr);
-		// --- These variables are only needed if the file is available. ---
-
-		// Buffer for printing out the date (required by strftime)
-		// day/month/year (eg. 22/05/2019)
-		char dateBuffer[11];
-
-		// Pointer to time struct for handling Epoch time
-		struct tm *clDate;
-
 		for (int i = 0; i < rows; i++) {
-			// Fill time struct getting date/time info from the Epoch time
-			clDate = localtime(&pr[i].reg_date);
+			fprintf(filePtr, "%s,%s,%s,%s,%s,%s", pr[i].id, pr[i].name, pr[i].surname, pr[i].area,
+					pr[i].phone, pr[i].email);
 
-			// Get formatted date
-			strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
+			formattedDateToFile(filePtr, &pr[i].reg_date);
 
-			fprintf(filePtr, "%s,%s,%s,%s,%s,%s,%s,%d\n", pr[i].id, pr[i].name, pr[i].surname, pr[i].area,
-					pr[i].phone, pr[i].email, dateBuffer, pr[i].buildings_sold);
+			fprintf(filePtr, "%d\n", pr[i].buildings_sold);
 		}
 	}
 

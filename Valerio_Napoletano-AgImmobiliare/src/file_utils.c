@@ -78,8 +78,7 @@ time_t parseDateInFile(char string[MAX_STRING_SIZE]) {
 	// Temp "tm" struct required for parsing the date properly from the file
 	struct tm temp_date = { 0 };
 
-	sscanf(string, "%d/%d/%d", &temp_date.tm_mday, &temp_date.tm_mon,
-			&temp_date.tm_year);
+	sscanf(string, "%d/%d/%d", &temp_date.tm_mday, &temp_date.tm_mon, &temp_date.tm_year);
 
 	/**
 	 * tm_mon is defined as a range between 0 to 11.
@@ -91,4 +90,37 @@ time_t parseDateInFile(char string[MAX_STRING_SIZE]) {
 	temp_date.tm_year -= 1900;
 
 	return mktime(&temp_date);
+}
+
+/**
+ * @brief Save formatted date in day/month/year to file.
+ *
+ * @param filePtr Pointer to file opened by fopen()
+ * @param epochTime UNIX Epoch Time value
+ * @see https://en.wikipedia.org/wiki/Unix_time
+ */
+void formattedDateToFile(FILE *filePtr, time_t *epochTime) {
+	/**
+	 * Declare pointer to time struct for handling UNIX Epoch time
+	 */
+	struct tm *clDate;
+
+	/**
+	 * Declare buffer for printing out the date (required by strftime)
+	 *  day/month/year (eg. 22/05/2019)
+	 */
+	char dateBuffer[11];
+
+	/**
+	 *  Fill time struct getting date/time info from the UNIX Epoch time
+	 */
+	clDate = localtime(epochTime);
+
+	/**
+	 * Format date and put in dateBuffer for printing out
+	 */
+	strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
+
+	// Commas are required for saving the field properly in the CSV
+	fprintf(filePtr, ",%s,", dateBuffer);
 }

@@ -104,26 +104,15 @@ int rewriteClientsToFile(client *cl, int rows) {
 	filePtr = fopen("clients.csv", "w+");
 	//TODO: Handle file "empty"
 	//if (!checkFile(filePtr)) {
-	// --- These variables are only needed if the file is available. ---
-
-	// Buffer for printing out the date (required by strftime)
-	// day/month/year (eg. 22/05/2019)
-	char dateBuffer[11];
-
-	// Pointer to time struct for handling Epoch time
-	struct tm *clDate;
-
 	for (int i = 0; i < rows; i++) {
-		// Fill time struct getting date/time info from the Epoch time
-		clDate = localtime(&cl[i].reg_date);
-
-		// Get formatted date
-		strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
-
 		// Save client to file only if the client is not marked for deletion
 		if (!cl[i].toDelete) {
-			fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl[i].id, cl[i].name, cl[i].surname, cl[i].cl_type,
-					cl[i].company_name, cl[i].budget, dateBuffer, cl[i].building_type);
+			fprintf(filePtr, "%s,%s,%s,%d,%s,%d", cl[i].id, cl[i].name, cl[i].surname, cl[i].cl_type,
+					cl[i].company_name, cl[i].budget);
+
+			formattedDateToFile(filePtr, &cl[i].reg_date);
+
+			fprintf(filePtr, "%d\n", cl[i].building_type);
 		}
 	}
 	//}
@@ -142,22 +131,14 @@ int appendClientToFile(client *cl) {
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "a+");
 	if (!checkFile(filePtr, true)) {
-		// --- These variables are only needed if the file is available. ---
-		// Buffer for printing out the date (required by strftime)
-		// day/month/year (eg. 22/05/2019)
-		char dateBuffer[11];
-
-		// Pointer to time struct for handling Epoch time
-		// Fill time struct getting date/time info from the Epoch time
-		struct tm *clDate = localtime(&cl->reg_date);
-
-		// Get formatted date
-		strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
-
 		// Save to file only if the client is not marked for deletion
 		if (!cl->toDelete) {
-			fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl->id, cl->name, cl->surname, cl->cl_type,
-					cl->company_name, cl->budget, dateBuffer, cl->building_type);
+			fprintf(filePtr, "%s,%s,%s,%d,%s,%d", cl->id, cl->name, cl->surname, cl->cl_type,
+					cl->company_name, cl->budget);
+
+			formattedDateToFile(filePtr, &cl->reg_date);
+
+			fprintf(filePtr, "%d\n", cl->building_type);
 		}
 	}
 

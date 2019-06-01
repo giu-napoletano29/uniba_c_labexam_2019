@@ -42,7 +42,8 @@ int addClient() {
 	clearScr();
 	newLine();
 
-	puts("--- AGGIUNTA CLIENTE --- ");
+	printSectionName("Aggiunta cliente");
+	newLine();
 
 	reqName(&cl);
 
