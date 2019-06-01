@@ -268,11 +268,30 @@ void notFoundError() {
 }
 
 /**
+ * Set console window title
+ * Windows only.
+ * @param string
+ */
+void setTitle(char *titleToSet) {
+	char command[MAX_TEXT_SIZE];
+	char defaultName[MAX_STRING_SIZE];
+
+	strcpy(defaultName, "Agenzia Immobiliare");
+
+	// For string concatenation
+	snprintf(command, sizeof command, "%s %s - %s", "title", titleToSet, defaultName);
+
+	system(command);
+}
+
+/**
  * @brief Print in the console the formatted "section name".
  *
  * @param string Section name to display.
  */
 void printSectionName(char *string) {
+	setTitle(string);
+
 	resetColor();
 	printf("||| ");
 
@@ -283,6 +302,7 @@ void printSectionName(char *string) {
 	printf(" |||");
 
 	newLine();
+
 }
 
 /**

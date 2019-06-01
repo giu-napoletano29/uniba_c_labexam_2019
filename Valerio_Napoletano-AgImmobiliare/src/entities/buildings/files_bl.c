@@ -250,7 +250,7 @@ void searchBuilding(building *bl, int n_bui) {
 	char city[MAX_STRING_SIZE];
 
 	clearScr();
-	printSectionName("RICERCA IMMOBILI");
+	printSectionName("Ricerca immobili");
 	newLine();
 
 	puts("Scegli un'operazione:");

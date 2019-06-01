@@ -111,7 +111,7 @@ int showAllClients(client *allClients, int num_clients) {
 	bool runRewrite = false;
 
 	clearScr();
-	printSectionName("LISTA CLIENTI");
+	printSectionName("Lista clienti");
 
 	for (i = 0; i < num_clients; i++) {
 		setCyanColor();

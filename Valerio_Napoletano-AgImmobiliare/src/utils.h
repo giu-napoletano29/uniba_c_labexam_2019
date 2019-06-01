@@ -34,3 +34,4 @@ void setMagentaColor();
 void pause();
 void notFoundError();
 
+void setTitle(char *titleToSet);

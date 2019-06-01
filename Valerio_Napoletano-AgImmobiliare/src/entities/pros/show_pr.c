@@ -73,7 +73,7 @@ int showAllPros(professional *pros, int num_pros) {
 	int i;
 
 	clearScr();
-	printSectionName("LISTA PROFESSIONISTI");
+	printSectionName("Lista professionisti");
 	for (i = 0; i < num_pros; i++) {
 		setCyanColor();
 		printf("\n-- PROFESSIONISTA %d --\n", i + 1);
