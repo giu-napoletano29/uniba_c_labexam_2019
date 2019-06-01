@@ -244,47 +244,59 @@ int getBuildingsNumber() {
  * @param bl
  * @param n_bui
  */
-void searchBuilding(building *bl, int n_bui) {
+int searchBuilding(building *bl, int n_bui) {
 	short int choice = 0;
+	bool error = false;
 	int price = 0;
 	char city[MAX_STRING_SIZE];
 
-	clearScr();
-	printSectionName("Ricerca immobili");
-	newLine();
+	do {
+		clearScr();
+		printSectionName("Ricerca immobili");
+		newLine();
 
-	puts("Scegli un'operazione:");
-	puts("1. Prezzo");
-	puts("2. Localita'");
+		puts("Scegli un'operazione:");
+		puts("1. Prezzo");
+		puts("2. Localita'");
+		puts("3. Torna indietro");
 
-	newLine();
-	printf("Operazione: ");
-	choice = readInteger();
+		newLine();
+		printf("Operazione: ");
+		choice = readInteger();
 
-	switch (choice) {
-		case 1:
-			printf("\nInserisci il prezzo massimo dell'immobile: ");
-			price = readInteger();
+		switch (choice) {
+			case 1:
+				printf("\nInserisci il prezzo massimo dell'immobile: ");
+				price = readInteger();
 
-			for (int i = 0; i < n_bui; i++) {
-				if (bl[i].price < price) {
-					showBuildingData(bl + i);
+				for (int i = 0; i < n_bui; i++) {
+					if (bl[i].price < price) {
+						showBuildingData(bl + i);
+					}
 				}
-			}
-			break;
-		case 2:
-			printf("\nInserisci la localita' dell'immobile: ");
-			readString(city, false, false);
-			convertToUpperCase(city);
+				break;
+			case 2:
+				printf("\nInserisci la localita' dell'immobile: ");
+				readString(city, false, false);
+				convertToUpperCase(city);
 
-			for (int i = 0; i < n_bui; i++) {
-				if (strstr(bl[i].city, city) != NULL) {
-					showBuildingData(bl + i);
+				for (int i = 0; i < n_bui; i++) {
+					if (strstr(bl[i].city, city) != NULL) {
+						showBuildingData(bl + i);
+					}
 				}
-			}
-			break;
-		default:
-			break;
-	}
-	pause();
+				break;
+			case 3:
+				// This is used as a flag for the "go back" choice
+				// It's not that likely that an user will manually insert -1 as a choice.
+				choice = -1;
+				error = false;
+				break;
+			default:
+				error = true;
+				break;
+		}
+	} while (error == true);
+
+	return -1;
 }

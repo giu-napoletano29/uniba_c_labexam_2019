@@ -226,7 +226,7 @@ int buildingsMenu() {
 				choice = loadBuildingsFile(allBuildings);
 				resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
 				if (resDup != -1) {
-					searchBuilding(allBuildings, buildingsNum);
+					choice = searchBuilding(allBuildings, buildingsNum);
 				}
 				break;
 			case 3:
