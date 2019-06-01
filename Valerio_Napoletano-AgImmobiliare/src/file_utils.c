@@ -74,7 +74,7 @@ int countRows(FILE *filePtr) {
  * @param string Date string to parse
  * @return time_t value (encoded in UNIX Epoch time)
  */
-time_t parseDateInFile(char string[STRING_SIZE]) {
+time_t parseDateInFile(char string[MAX_STRING_SIZE]) {
 	// Temp "tm" struct required for parsing the date properly from the file
 	struct tm temp_date = { 0 };
 

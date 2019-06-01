@@ -12,7 +12,7 @@ int loadProsFile(professional *pr);
 int getProfessionalsNumber();
 void readProsFile(FILE *filePtr, professional *pr);
 void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows);
-void findPot(char id[], potential *pr, int rows);
+void findPotential(char id[], potential *pr, int rows);
 void loadPotFile(char id[]);
 void rewriteProfessionalsToFile(professional *pr, int rows);
 int checkDuplicatePros(professional *pr, int rows);

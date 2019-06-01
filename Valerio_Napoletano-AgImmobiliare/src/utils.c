@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <time.h> // For printFormattedDate()
 
-// Only for getting STRING_SIZE constant
+// Only for getting MAX_STRING_SIZE constant
 #include "datatypes.h"
 
 /**
@@ -144,7 +144,7 @@ bool anyChar(char *str) {
  */
 int readString(char *value, bool onlyAlpha, bool onlyNumbers) {
 	bool error = false;
-	char inputVal[STRING_SIZE];
+	char inputVal[MAX_STRING_SIZE];
 
 	do {
 		// Read from stdin
@@ -181,7 +181,7 @@ int readInteger() {
 	bool error = false;
 
 	/**	Define an internal string buffer. */
-	char buffer[STRING_SIZE];
+	char buffer[MAX_STRING_SIZE];
 	/**  Initialize value to -1 for representing a possible error state. */
 	int value = -1;
 

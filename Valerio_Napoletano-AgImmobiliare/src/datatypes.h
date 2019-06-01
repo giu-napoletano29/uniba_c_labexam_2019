@@ -41,11 +41,11 @@ typedef enum {
 } building_type;
 
 typedef struct {
-	char id[STRING_SIZE]; /**< "Codice Fiscale" in Italy */
-	char name[STRING_SIZE];
-	char surname[STRING_SIZE];
+	char id[MAX_STRING_SIZE]; /**< "Codice Fiscale" in Italy */
+	char name[MAX_STRING_SIZE];
+	char surname[MAX_STRING_SIZE];
 	client_type cl_type; /**< Client type */
-	char company_name[STRING_SIZE]; /**< Company name (if type is company) */
+	char company_name[MAX_STRING_SIZE]; /**< Company name (if type is company) */
 	int budget;
 	time_t reg_date; /**< Registration date in Epoch time */
 	building_type building_type; /**< Type of building that needs to be searched */
@@ -53,34 +53,34 @@ typedef struct {
 } client;
 
 typedef struct {
-	char id[STRING_SIZE]; /**< "Codice Fiscale" in Italy */
-	char name[STRING_SIZE];
-	char surname[STRING_SIZE];
-	char area[STRING_SIZE]; /**< Area of "competence" */
+	char id[MAX_STRING_SIZE]; /**< "Codice Fiscale" in Italy */
+	char name[MAX_STRING_SIZE];
+	char surname[MAX_STRING_SIZE];
+	char area[MAX_STRING_SIZE]; /**< Area of "competence" */
 	// Phone number
-	char phone[STRING_SIZE];
+	char phone[MAX_STRING_SIZE];
 	// Email address
-	char email[STRING_SIZE];
+	char email[MAX_STRING_SIZE];
 	time_t reg_date; /**< Registration date in Epoch time */
 	int buildings_sold; /**< Number of buildings that this professional has sold */
 } professional;
 
 typedef struct {
-	char id[STRING_SIZE]; /**< "Codice Fiscale" in Italy */
-	char content[STRING_SIZE];
+	char id[MAX_STRING_SIZE]; /**< "Codice Fiscale" in Italy */
+	char content[MAX_TEXT_SIZE];
 } potential;
 
 typedef struct {
-	char id[STRING_SIZE];
-	char street[STRING_SIZE];
+	char id[MAX_STRING_SIZE];
+	char street[MAX_STRING_SIZE];
 	short int civic;
-	char city[STRING_SIZE];
-	char province[STRING_SIZE];
+	char city[MAX_STRING_SIZE];
+	char province[MAX_STRING_SIZE];
 	time_t reg_date; /**< Registration date in Epoch time */
 	int price;
-	char owner[STRING_SIZE];
+	char owner[MAX_STRING_SIZE];
 	// Owner phone number
-	char phone[STRING_SIZE];
+	char phone[MAX_STRING_SIZE];
 	building_type b_type;
 } building;
 

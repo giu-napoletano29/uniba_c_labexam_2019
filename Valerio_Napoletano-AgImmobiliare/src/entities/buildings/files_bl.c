@@ -247,7 +247,7 @@ int getBuildingsNumber() {
 void searchBuilding(building *bl, int n_bui) {
 	short int choice = 0;
 	int price = 0;
-	char city[STRING_SIZE];
+	char city[MAX_STRING_SIZE];
 
 	puts("--- RICERCA IMMOBILI ---");
 	newLine();

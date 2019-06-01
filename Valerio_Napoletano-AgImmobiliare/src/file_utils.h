@@ -16,6 +16,6 @@
 bool checkFile(FILE *filePtr, bool rowsCheck);
 int countRows(FILE *filePtr);
 void copyFile(FILE *fp_from, FILE *fp_to, int choice);
-time_t parseDateInFile(char string[STRING_SIZE]);
+time_t parseDateInFile(char string[MAX_STRING_SIZE]);
 
 #endif /* FILE_UTILS_H_ */

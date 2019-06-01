@@ -95,17 +95,17 @@ void readProsFile(FILE *filePtr, professional *pr) {
  * @param pr Potentials array of structs
  * @param num_profess Number of professionals registered
  */
-void findPot(char id[], potential *pr, int num_profess) {
+void findPotential(char id[], potential *pr, int num_profess) {
 	for (int i = 0; i < num_profess; i++) {
-		if (strcmp(id, pr[i].id) == 0) {
-			printf("\nPotenziale: %s\n", pr[i].content);
+		if (strCompare(id, pr[i].id)) {
+			printf("Potenziale: %s\n", pr[i].content);
 		}
 	}
 }
 
 /**
  * @brief Parse "potential" file (potentials.csv)
- * Check out findPot() for more information about the "potential".
+ * Check out findPotential() for more information about the "potential".
  *
  * @param fp_pot Pointer to file initalized from fopen()
  * @param pr Professional array of structs for storing parsed data.
@@ -144,7 +144,7 @@ void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 		}
 		pr_num++;
 	}
-	findPot(id, pr, rows);
+	findPotential(id, pr, rows);
 }
 
 /**
@@ -194,7 +194,7 @@ int getProfessionalsNumber() {
 void loadPotFile(char id[]) {
 	int rows = 0;
 	FILE *fp_pot;
-	fp_pot = fopen("potential.csv", "a+");
+	fp_pot = fopen("pro_potential.csv", "a+");
 	if (!checkFile(fp_pot, true)) {
 		rows = countRows(fp_pot);
 		rewind(fp_pot);

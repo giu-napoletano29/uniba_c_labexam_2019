@@ -9,7 +9,13 @@
 #define CONSTS_H
 
 /** Max string size */
-#define STRING_SIZE 50
+#define MAX_STRING_SIZE 50
+
+/**
+ * Max "text" size
+ * Useful for the "potential" content
+ */
+#define MAX_TEXT_SIZE 200
 
 /** User budget limits (in euro) */
 #define MIN_USER_BUDGET 100
