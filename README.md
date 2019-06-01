@@ -2,9 +2,9 @@
 
 **Exam**: "Laboratorio di Programmazione"
 
-**Deadline**: 01/06/2019
+**Deadline**: 17/06/2019
 
-**Oral exam:**  11/06/2019
+**Oral exam:**  26/06/2019
 
 
 
