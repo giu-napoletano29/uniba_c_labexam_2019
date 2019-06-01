@@ -14,7 +14,7 @@
  * "Codice fiscale" has also numbers, hence onlyAlpha is false.
  *
  * @see https://it.wikipedia.org/wiki/Codice_fiscale
- * @param cl "professional" type struct
+ * @param pr "professional" type struct
  */
 void reqProCF(professional *pr) {
 	bool error = false;

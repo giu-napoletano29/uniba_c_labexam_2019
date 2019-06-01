@@ -269,8 +269,8 @@ void notFoundError() {
 
 /**
  * Set console window title
- * Windows only.
- * @param string
+ * Works only on Windows
+ * @param titleToSet String to set as the console window's title.
  */
 void setTitle(char *titleToSet) {
 	char command[MAX_TEXT_SIZE];
