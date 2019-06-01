@@ -179,13 +179,20 @@ int professMenu() {
  */
 int buildingsMenu() {
 	short int choice;
-	short int resDup = 0;
+	bool error = false;
 
+	/** - Declare and initialize the array of structs, "building" type */
 	int buildingsNum = getBuildingsNumber();
 	building allBuildings[buildingsNum];
 	initBuildingsArray(allBuildings, buildingsNum);
 
-	bool error = false;
+	/** - Load buildings file and stores the parsed data in the memory. */
+	loadBuildingsFile(allBuildings);
+
+	/**
+	 - Check if there's any client with duplicated IDs
+	 If so asks the user to change it. */
+	checkDuplicateBuildings(allBuildings, buildingsNum);
 
 	do {
 		clearScr();
@@ -214,27 +221,15 @@ int buildingsMenu() {
 
 		switch (choice) {
 			case 1:
-				choice = loadBuildingsFile(allBuildings);
-				resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
-				if (resDup != -1) {
-					showAllBuildings(allBuildings, buildingsNum);
-					sortFileBui(allBuildings, buildingsNum);
-					rewriteBuildingsToFile(allBuildings, buildingsNum);
-				}
+				choice = showAllBuildings(allBuildings, buildingsNum);
+				sortFileBui(allBuildings, buildingsNum);
+				rewriteBuildingsToFile(allBuildings, buildingsNum);
 				break;
 			case 2:
-				choice = loadBuildingsFile(allBuildings);
-				resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
-				if (resDup != -1) {
-					choice = searchBuilding(allBuildings, buildingsNum);
-				}
+				choice = searchBuilding(allBuildings, buildingsNum);
 				break;
 			case 3:
-				choice = loadBuildingsFile(allBuildings);
-				resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
-				if (resDup != -1) {
-					resultAg(allBuildings, buildingsNum);
-				}
+				choice = resultAg(allBuildings, buildingsNum);
 				break;
 			case 4:
 				// This is used as a flag for the "go back" choice

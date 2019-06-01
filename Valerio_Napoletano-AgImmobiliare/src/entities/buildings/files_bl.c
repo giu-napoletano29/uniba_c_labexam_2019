@@ -247,6 +247,8 @@ int getBuildingsNumber() {
 int searchBuilding(building *bl, int n_bui) {
 	short int choice = 0;
 	bool error = false;
+	// Boolean for keeping track if at least one record has been found
+	bool found = false;
 	int price = 0;
 	char city[MAX_STRING_SIZE];
 
@@ -271,9 +273,18 @@ int searchBuilding(building *bl, int n_bui) {
 
 				for (int i = 0; i < n_bui; i++) {
 					if (bl[i].price < price) {
+						found = true;
 						showBuildingData(bl + i);
 					}
 				}
+
+				if (!found) {
+					setYellowColor();
+					printf("\nNessun record trovato.\n");
+					resetColor();
+				}
+
+				pause();
 				break;
 			case 2:
 				printf("\nInserisci la localita' dell'immobile: ");
@@ -282,9 +293,18 @@ int searchBuilding(building *bl, int n_bui) {
 
 				for (int i = 0; i < n_bui; i++) {
 					if (strstr(bl[i].city, city) != NULL) {
+						found = true;
 						showBuildingData(bl + i);
 					}
 				}
+
+				if (!found) {
+					setYellowColor();
+					printf("\nNessun record trovato.\n");
+					resetColor();
+				}
+
+				pause();
 				break;
 			case 3:
 				// This is used as a flag for the "go back" choice
