@@ -115,12 +115,32 @@ bool isOnlyAlpha(char *str) {
 }
 
 /**
+ * @brief Check if any character can be found in the string.
+ *
+ * @param str String to check.
+ * @return true if char has been found in the string, otherwise return false.
+ */
+bool anyChar(char *str) {
+	bool charFound = false;
+	for (int i = 0; i < strlen(str); i++) {
+		/** isalpha: Non-zero value if the character is a numeric character, zero otherwise. */
+		if (isalpha(str[i]) != 0) {
+			charFound = true;
+		}
+	}
+	return charFound;
+}
+
+/**
  * @brief Read a string from stdin with input checks.
  *
- * @param value Value from stdin to store in memory, after input checks.
- * @param onlyAlpha If true makes sure that the string does not have any numbers in it (input validation)
- * @param onlyNumbers  If true makes sure that the string does not have any letters in it (input validation)
- * @return int String length. If returned int is -1 , then it's an error.
+ * Parameters onlyAlpha and onlyNumbers are useful for input validation.
+ * Keep in mind that "onlyAlpha" does not allow spaces in the string.
+ *
+ * @param value Value from stdin to store in memory.
+ * @param onlyAlpha If true allows only alphabetical letters in the string.
+ * @param onlyNumbers If true allows only digits in the string.
+ * @return int String length. If returned int is -1 an error has occurred.
  */
 int readString(char *value, bool onlyAlpha, bool onlyNumbers) {
 	bool error = false;
@@ -132,11 +152,6 @@ int readString(char *value, bool onlyAlpha, bool onlyNumbers) {
 		// Format the string removing the useless \n
 		sscanf(inputVal, "%[^\n]", inputVal);
 
-		/**
-		 * Check if the string has only alphabetic characters.
-		 * Only if onlyAlpha bool is true.
-		 * Ask again the value to the user if needed.
-		 */
 		if (onlyAlpha && isOnlyAlpha(inputVal)) {
 			error = true;
 			setYellowColor();
@@ -155,23 +170,6 @@ int readString(char *value, bool onlyAlpha, bool onlyNumbers) {
 	strcpy(value, inputVal);
 
 	return strlen(inputVal);
-}
-
-/**
- * @brief Check if any character can be found in the string.
- *
- * @param str String to check.
- * @return true if char has been found in the string, otherwise return false.
- */
-bool anyChar(char *str) {
-	bool charFound = false;
-	for (int i = 0; i < strlen(str); i++) {
-		/** isalpha: Non-zero value if the character is a numeric character, zero otherwise. */
-		if (isalpha(str[i]) != 0) {
-			charFound = true;
-		}
-	}
-	return charFound;
 }
 
 /**

@@ -274,7 +274,7 @@ int checkDuplicatePro(professional *pr, int rows) {
 					choice = readInteger();
 					newLine();
 					printf("Inserisci il nuovo ID: ");
-					readString(id, false);
+					readString(id, false, false);
 					convertToUpperCase(id);
 					switch (choice) {
 						case 1:

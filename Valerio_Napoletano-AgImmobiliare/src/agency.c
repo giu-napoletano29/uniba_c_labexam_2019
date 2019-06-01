@@ -33,11 +33,11 @@ int resultAg(building *bl, int n_bui) {
 
 	clearScr();
 	printf("\nInserisci primo intervallo di data (gg/mm/aaaa): ");
-	readString(date1, false);
+	readString(date1, false, false);
 	reg_date1 = parseDateInFile(date1);
 
 	printf("\nInserisci secondo intervallo di data (gg/mm/aaaa): ");
-	readString(date2, false);
+	readString(date2, false, false);
 	reg_date2 = parseDateInFile(date2);
 
 	newLine();

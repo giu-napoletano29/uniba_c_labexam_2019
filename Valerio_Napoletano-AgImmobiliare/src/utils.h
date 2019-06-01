@@ -18,7 +18,7 @@ void printFormattedDate(time_t epochTime);
 void printSectionName(char *headerString);
 void convertToUpperCase(char *s);
 
-int readString(char *value, bool onlyAlpha);
+int readString(char *value, bool onlyAlpha, bool onlyNumbers);
 int readInteger();
 
 bool strCompare(char *from, char *to);

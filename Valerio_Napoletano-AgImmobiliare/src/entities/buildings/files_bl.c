@@ -182,7 +182,7 @@ int checkDuplicateBuildings(building *bl, int rows) {
 					choice = readInteger();
 					newLine();
 					printf("Inserisci il nuovo ID: ");
-					readString(id, false);
+					readString(id, false, false);
 					convertToUpperCase(id);
 					switch (choice) {
 						case 1:
@@ -259,7 +259,7 @@ void searchBuilding(building *bl, int n_bui) {
 			break;
 		case 2:
 			printf("\nInserisci la localita' dell'immobile: ");
-			readString(city, false);
+			readString(city, false, false);
 			convertToUpperCase(city);
 
 			for (int i = 0; i < n_bui; i++) {
