@@ -28,7 +28,8 @@ void showProData(professional *pr) {
 	printf("Immobili venduti: %d \n", pr->buildings_sold);
 
 	printf("\nPotenziale di %s:\n", pr->name);
-	loadPotFile(pr->id);
+	//TODO: Program crashes if no potentials are available for the clients
+	//loadPotFile(pr->id);
 	newLine();
 }
 

@@ -16,6 +16,7 @@
 #include "../../utils.h"
 #include "misc_pr.h"
 #include "show_pr.h"
+#include "req_pr.h"
 
 /**
  * @brief Parse "professional" file (professionals.csv)
@@ -252,48 +253,60 @@ void rewriteProfessionalsToFile(professional *pr, int rows) {
  * @param rows How many professionals are registered
  * @return -1 if duplicates are found.
  */
-int checkDuplicatePro(professional *pr, int rows) {
-	short int resDup = 0;
+int checkDuplicatePros(professional *pr, int rows) {
+	bool result = false;
+	bool error = false;
 	short int choice = 0;
-	char id[STRING_SIZE];
 
 	for (int i = 0; i < rows; i++) {
 		for (int j = i + 1; j < rows; j++) {
-			if (strcmp(pr[i].id, pr[j].id) == 0) {
-				printf("\nERRORE: ");
-				printf("\nIl database contiene degli ID duplicati");
-				newLine();
-				printf("\n1-");
+			if (strCompare(pr[i].id, pr[j].id)) {
+				clearScr();
+				setRedColor();
+				printf("\nERRORE: Il database contiene dei professionisti con ID identico.\n");
+				resetColor();
+
+				setCyanColor();
+				printf("\n--- PROFESSIONISTA 1 ---\n");
+				resetColor();
 				showProData(pr + i);
-				printf("\n2-");
+
+				setCyanColor();
+				printf("\n--- PROFESSIONISTA 2 ---\n");
+				resetColor();
 				showProData(pr + j);
-				newLine();
 
 				do {
-					printf("\nScegli quale record modificare (1-2): ");
-					choice = readInteger();
-					newLine();
-					printf("Inserisci il nuovo ID: ");
-					readString(id, false, false);
-					convertToUpperCase(id);
-					switch (choice) {
-						case 1:
-							strcpy(pr[i].id, id);
-							break;
-						case 2:
-							strcpy(pr[j].id, id);
-							break;
-						default:
-							break;
+					if (error) {
+						setRedColor();
+						puts("\nScelta errata.");
+						resetColor();
 					}
-				} while (choice > 2 || choice < 1);
+
+					printf("\nScegli quale immobile modificare (1/2): ");
+					choice = readInteger();
+
+					// Set error boolean to true if choice is != 2 or != 1
+					error = choice == 2 || choice == 1 ? false : true;
+				} while (error == true);
+
+				newLine();
+
+				switch (choice) {
+					case 1:
+						reqProCF(pr + i);
+						break;
+					case 2:
+						reqProCF(pr + j);
+						break;
+				}
 				i = 0;
 				j = i + 1;
-				resDup = -1;
+				result = true;
 				pause();
 			}
 		}
 	}
 	rewriteProfessionalsToFile(pr, rows);
-	return resDup;
+	return result;
 }

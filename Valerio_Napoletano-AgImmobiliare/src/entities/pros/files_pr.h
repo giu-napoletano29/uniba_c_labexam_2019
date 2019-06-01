@@ -15,6 +15,6 @@ void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows);
 void findPot(char id[], potential *pr, int rows);
 void loadPotFile(char id[]);
 void rewriteProfessionalsToFile(professional *pr, int rows);
-int checkDuplicatePro(professional *pr, int rows);
+int checkDuplicatePros(professional *pr, int rows);
 
 #endif /* ENTITIES_PROS_FILES_PR_H_ */

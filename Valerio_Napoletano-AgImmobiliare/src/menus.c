@@ -85,6 +85,7 @@ int clientsMenu(bool reloadFile) {
 				if (!reloadFile) {
 					choice = showAllClients(allClients, clientsNum);
 				}
+				//TODO: Add rewrite for sortFile
 				break;
 			case 2:
 				// Append a new client to the file.
@@ -113,13 +114,20 @@ int clientsMenu(bool reloadFile) {
  */
 int professMenu() {
 	short int choice;
-	short int resDup = 0;
 	bool error = false;
 
+	/** - Declare and initialize the array of structs, "professional" type */
 	int professionalsNum = getProfessionalsNumber();
-
 	professional allProfessionals[professionalsNum];
 	initProsArray(allProfessionals, professionalsNum);
+
+	/** - Load pros file and stores the parsed data in the memory. */
+	loadProsFile(allProfessionals);
+
+	/**
+	 - Check if there's any client with duplicated IDs
+	 If so asks the user to change it. */
+	checkDuplicatePros(allProfessionals, professionalsNum);
 
 	do {
 		clearScr();
@@ -146,13 +154,9 @@ int professMenu() {
 
 		switch (choice) {
 			case 1:
-				choice = loadProsFile(allProfessionals);
-				resDup = checkDuplicatePro(allProfessionals, professionalsNum);
-				if (resDup != -1) {
-					showAllPros(allProfessionals, professionalsNum);
-					sortFilePro(allProfessionals, professionalsNum);
-					rewriteProfessionalsToFile(allProfessionals, professionalsNum);
-				}
+				showAllPros(allProfessionals, professionalsNum);
+				sortFilePro(allProfessionals, professionalsNum);
+				rewriteProfessionalsToFile(allProfessionals, professionalsNum);
 				break;
 			case 2:
 				// This is used as a flag for the "go back" choice

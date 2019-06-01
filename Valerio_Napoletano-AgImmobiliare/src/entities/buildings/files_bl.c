@@ -160,50 +160,64 @@ int rewriteBuildingsToFile(building *bl, int rows) {
  * @return -1 if duplicates are found.
  */
 int checkDuplicateBuildings(building *bl, int rows) {
-	short int resDup = 0;
+	bool result = false;
+	bool error = false;
 	short int choice = 0;
-	int j = 0;
-	char id[STRING_SIZE];
 
 	for (int i = 0; i < rows; i++) {
-		for (j = i + 1; j < rows; j++) {
-			if (strcmp(bl[i].id, bl[j].id) == 0) {
-				printf("\nERRORE: ");
-				printf("\nIl database contiene degli ID duplicati");
-				newLine();
-				printf("\n1-");
+		for (int j = i + 1; j < rows; j++) {
+			if (strCompare(bl[i].id, bl[j].id)) {
+				clearScr();
+				setRedColor();
+				printf("\nERRORE: Il database contiene degli immobili con ID identico.\n");
+				resetColor();
+
+				setCyanColor();
+				printf("\n--- IMMOBILE 1 ---\n");
+				resetColor();
 				showBuildingData(bl + i);
-				printf("\n2-");
+
+				setCyanColor();
+				printf("\n--- IMMOBILE 2 ---\n");
+				resetColor();
 				showBuildingData(bl + j);
-				newLine();
 
 				do {
-					printf("\nScegli quale record modificare (1-2): ");
-					choice = readInteger();
-					newLine();
-					printf("Inserisci il nuovo ID: ");
-					readString(id, false, false);
-					convertToUpperCase(id);
-					switch (choice) {
-						case 1:
-							strcpy(bl[i].id, id);
-							break;
-						case 2:
-							strcpy(bl[j].id, id);
-							break;
-						default:
-							break;
+					if (error) {
+						setRedColor();
+						puts("\nScelta errata.");
+						resetColor();
 					}
-				} while (choice > 2 || choice < 1);
+
+					printf("\nScegli quale immobile modificare (1/2): ");
+					choice = readInteger();
+
+					// Set error boolean to true if choice is != 2 or != 1
+					error = choice == 2 || choice == 1 ? false : true;
+				} while (error == true);
+
+				newLine();
+
+				printf("Nuovo ID: ");
+				switch (choice) {
+					case 1:
+						readString((bl + i)->id, false, false);
+						break;
+					case 2:
+						readString((bl + j)->id, false, false);
+						break;
+					default:
+						break;
+				}
 				i = 0;
 				j = i + 1;
-				resDup = -1;
+				result = true;
 				pause();
 			}
 		}
 	}
 	rewriteBuildingsToFile(bl, rows);
-	return resDup;
+	return result;
 }
 /**
  * @brief Get how many buildings are saved in the file.
