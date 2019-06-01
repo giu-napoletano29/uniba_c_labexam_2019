@@ -98,7 +98,10 @@ void readProsFile(FILE *filePtr, professional *pr) {
 void findPotential(char id[], potential *pr, int num_profess) {
 	for (int i = 0; i < num_profess; i++) {
 		if (strCompare(id, pr[i].id)) {
-			printf("Potenziale: %s\n", pr[i].content);
+			setCyanColor();
+			printf("Potenziale: ");
+			resetColor();
+			printf("%s \n", pr[i].content);
 		}
 	}
 }
@@ -112,7 +115,7 @@ void findPotential(char id[], potential *pr, int num_profess) {
  * @param id ID of the professional connected to a specific potential record.
  * @param rows Number of professionals registered
  */
-void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
+void parsePotentialsFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 	char line[400];
 	char *token;
 
@@ -202,7 +205,7 @@ void loadPotFile(char id[]) {
 		potential pr[rows];
 		initPotentialsArray(pr, rows);
 
-		readPotFile(fp_pot, pr, id, rows);
+		parsePotentialsFile(fp_pot, pr, id, rows);
 	}
 	fclose(fp_pot);
 }

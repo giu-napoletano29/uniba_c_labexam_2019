@@ -17,19 +17,48 @@
  * @param pr professional type struct
  */
 void showProData(professional *pr) {
-	printf("Codice fiscale: %s \n", pr->id);
-	printf("Nome: %s \n", pr->name);
-	printf("Cognome: %s \n", pr->surname);
-	printf("Area di competenza: %s \n", pr->area);
-	printf("Numero di telefono: %s \n", pr->phone);
-	printf("Indirizzo e-mail: %s \n", pr->email);
+	setCyanColor();
+	printf("Codice fiscale: ");
+	resetColor();
+	printf("%s \n", pr->id);
+
+	setCyanColor();
+	printf("Nome: ");
+	resetColor();
+	printf("%s \n", pr->name);
+
+	setCyanColor();
+	printf("Cognome: ");
+	resetColor();
+	printf("%s \n", pr->surname);
+
+	setCyanColor();
+	printf("Area di competenza: ");
+	resetColor();
+	printf("%s \n", pr->area);
+
+	setCyanColor();
+	printf("Numero di telefono: ");
+	resetColor();
+	printf("%s \n", pr->phone);
+
+	setCyanColor();
+	printf("Indirizzo e-mail: ");
+	resetColor();
+	printf("%s \n", pr->email);
+
+	setCyanColor();
 	printf("Data di registrazione: ");
+	resetColor();
 	printFormattedDate(pr->reg_date);
-	printf("Immobili venduti: %d \n", pr->buildings_sold);
+
+	setCyanColor();
+	printf("Immobili venduti: ");
+	resetColor();
+	printf("%d \n", pr->buildings_sold);
 
 	//TODO: Program crashes if no potentials are available for the clients
 	loadPotFile(pr->id);
-	newLine();
 }
 
 /**
@@ -44,9 +73,11 @@ int showAllPros(professional *pros, int num_pros) {
 	int i;
 
 	clearScr();
-	puts("--- LISTA PROFESSIONISTI ---");
+	printSectionName("LISTA PROFESSIONISTI");
 	for (i = 0; i < num_pros; i++) {
+		setCyanColor();
 		printf("\n-- PROFESSIONISTA %d --\n", i + 1);
+		resetColor();
 		showProData(pros + i);
 	}
 	pause();

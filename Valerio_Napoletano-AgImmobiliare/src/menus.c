@@ -154,7 +154,7 @@ int professMenu() {
 
 		switch (choice) {
 			case 1:
-				showAllPros(allProfessionals, professionalsNum);
+				choice = showAllPros(allProfessionals, professionalsNum);
 				sortFilePro(allProfessionals, professionalsNum);
 				rewriteProfessionalsToFile(allProfessionals, professionalsNum);
 				break;
