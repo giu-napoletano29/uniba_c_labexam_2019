@@ -74,11 +74,16 @@ int showAllPros(professional *pros, int num_pros) {
 
 	clearScr();
 	printSectionName("Lista professionisti");
-	for (i = 0; i < num_pros; i++) {
-		setCyanColor();
-		printf("\n-- PROFESSIONISTA %d --\n", i + 1);
-		resetColor();
-		showProData(pros + i);
+
+	if (num_pros != 0) {
+		for (i = 0; i < num_pros; i++) {
+			setCyanColor();
+			printf("\n-- PROFESSIONISTA %d --\n", i + 1);
+			resetColor();
+			showProData(pros + i);
+		}
+	} else {
+		dbEmptyError();
 	}
 	pause();
 	return -1;

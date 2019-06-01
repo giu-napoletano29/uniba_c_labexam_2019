@@ -113,24 +113,28 @@ int showAllClients(client *allClients, int num_clients) {
 	clearScr();
 	printSectionName("Lista clienti");
 
-	for (i = 0; i < num_clients; i++) {
-		setCyanColor();
-		printf("\n-- CLIENTE %d --\n", i + 1);
-		resetColor();
-		showClientData(allClients + i);
+	if (num_clients != 0) {
+		for (i = 0; i < num_clients; i++) {
+			setCyanColor();
+			printf("\n-- CLIENTE %d --\n", i + 1);
+			resetColor();
+			showClientData(allClients + i);
 
-		// Check if some clients are ready for deletion.
-		if ((allClients + i)->toDelete) {
-			runRewrite = true;
+			// Check if some clients are ready for deletion.
+			if ((allClients + i)->toDelete) {
+				runRewrite = true;
+			}
 		}
-	}
 
-	// Rewrite clients file without the deleted clients, if needed.
-	if (runRewrite) {
-		rewriteClientsToFile(allClients, num_clients);
-	}
+		// Rewrite clients file without the deleted clients, if needed.
+		if (runRewrite) {
+			rewriteClientsToFile(allClients, num_clients);
+		}
+		newLine();
 
-	newLine();
+	} else {
+		dbEmptyError();
+	}
 	pause();
 	return -1;
 }

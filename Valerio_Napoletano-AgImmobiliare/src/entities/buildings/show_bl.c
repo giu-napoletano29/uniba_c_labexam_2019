@@ -110,15 +110,19 @@ int showAllBuildings(building *bl, int num_buildings) {
 	int i;
 
 	clearScr();
-	printSectionName("LISTA IMMOBILI");
+	printSectionName("Lista immobili");
 
-	for (i = 0; i < num_buildings; i++) {
-		setCyanColor();
-		printf("\n-- IMMOBILE %d --\n", i + 1);
-		resetColor();
-		showBuildingData(bl + i);
+	if (num_buildings != 0) {
+		for (i = 0; i < num_buildings; i++) {
+			setCyanColor();
+			printf("\n-- IMMOBILE %d --\n", i + 1);
+			resetColor();
+			showBuildingData(bl + i);
+		}
+		newLine();
+	} else {
+		dbEmptyError();
 	}
-	newLine();
 	pause();
 	return -1;
 }

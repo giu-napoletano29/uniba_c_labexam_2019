@@ -10,7 +10,7 @@
 
 int loadBuildingsFile(building *bl);
 void readBuildingsFile(FILE *filePtr, building *cl);
-int searchBuilding(building *bl, int n_bui);
+int searchBuilding(building *allBuildings, int num_buildings);
 int getBuildingsNumber();
 int rewriteBuildingsToFile(building *bl, int rows);
 int checkDuplicateBuildings(building *bl, int rows);

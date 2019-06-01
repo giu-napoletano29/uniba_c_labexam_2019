@@ -102,20 +102,19 @@ void parseClientFile(FILE *filePtr, client *cl) {
 int rewriteClientsToFile(client *cl, int rows) {
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "w+");
-	//TODO: Handle file "empty"
-	//if (!checkFile(filePtr)) {
-	for (int i = 0; i < rows; i++) {
-		// Save client to file only if the client is not marked for deletion
-		if (!cl[i].toDelete) {
-			fprintf(filePtr, "%s,%s,%s,%d,%s,%d", cl[i].id, cl[i].name, cl[i].surname, cl[i].cl_type,
-					cl[i].company_name, cl[i].budget);
+	if (checkFile(filePtr)) {
+		for (int i = 0; i < rows; i++) {
+			// Save client to file only if the client is not marked for deletion
+			if (!cl[i].toDelete) {
+				fprintf(filePtr, "%s,%s,%s,%d,%s,%d", cl[i].id, cl[i].name, cl[i].surname, cl[i].cl_type,
+						cl[i].company_name, cl[i].budget);
 
-			formattedDateToFile(filePtr, &cl[i].reg_date);
+				formattedDateToFile(filePtr, &cl[i].reg_date);
 
-			fprintf(filePtr, "%d\n", cl[i].building_type);
+				fprintf(filePtr, "%d\n", cl[i].building_type);
+			}
 		}
 	}
-	//}
 
 	fclose(filePtr);
 	return -1;
@@ -130,7 +129,7 @@ int rewriteClientsToFile(client *cl, int rows) {
 int appendClientToFile(client *cl) {
 	FILE *filePtr;
 	filePtr = fopen("clients.csv", "a+");
-	if (!checkFile(filePtr, true)) {
+	if (checkFile(filePtr)) {
 		// Save to file only if the client is not marked for deletion
 		if (!cl->toDelete) {
 			fprintf(filePtr, "%s,%s,%s,%d,%s,%d", cl->id, cl->name, cl->surname, cl->cl_type,
@@ -154,9 +153,8 @@ int appendClientToFile(client *cl) {
 int getClientsNumber() {
 	FILE *filePtr;
 	int rows = 0;
-	// Read only
-	filePtr = fopen("clients.csv", "r");
-	if (!checkFile(filePtr, true)) {
+	filePtr = fopen("clients.csv", "a+");
+	if (checkFile(filePtr)) {
 		rows = countRows(filePtr);
 		fclose(filePtr);
 	}
@@ -171,9 +169,8 @@ int getClientsNumber() {
  */
 int loadClientFile(client *cl) {
 	FILE *filePtr;
-	// Read only
-	filePtr = fopen("clients.csv", "r");
-	if (!checkFile(filePtr, true)) {
+	filePtr = fopen("clients.csv", "a+");
+	if (checkFile(filePtr)) {
 		parseClientFile(filePtr, cl);
 		fclose(filePtr);
 	}

@@ -8,6 +8,6 @@
 #ifndef AGENCY_H_
 #define AGENCY_H_
 
-int resultAg(building *bl, int n_bui);
+int resultsAgency(building *bl, int num_buildings);
 
 #endif /* AGENCY_H_ */

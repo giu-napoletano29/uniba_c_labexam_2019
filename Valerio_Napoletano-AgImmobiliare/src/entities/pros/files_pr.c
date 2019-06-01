@@ -159,7 +159,7 @@ void parsePotentialsFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 int loadProsFile(professional *pr) {
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "a+");
-	if (!checkFile(filePtr, true)) {
+	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		readProsFile(filePtr, pr);
 	}
@@ -176,14 +176,12 @@ int loadProsFile(professional *pr) {
 int getProfessionalsNumber() {
 	FILE *filePtr;
 	int rows = 0;
-	// Read only
-	filePtr = fopen("professionals.csv", "r");
-	//TODO: Makes the program crash
-	//if (!checkFile(filePtr)) {
-	checkFile(filePtr, true);
-	if (filePtr != NULL) {
-		rewind(filePtr);
-		rows = countRows(filePtr);
+	filePtr = fopen("professionals.csv", "a+");
+	if (checkFile(filePtr)) {
+		if (filePtr != NULL) {
+			rewind(filePtr);
+			rows = countRows(filePtr);
+		}
 	}
 	fclose(filePtr);
 	return rows;
@@ -198,7 +196,7 @@ void loadPotFile(char id[]) {
 	int rows = 0;
 	FILE *fp_pot;
 	fp_pot = fopen("pro_potential.csv", "a+");
-	if (!checkFile(fp_pot, true)) {
+	if (checkFile(fp_pot)) {
 		rows = countRows(fp_pot);
 		rewind(fp_pot);
 
@@ -220,9 +218,8 @@ void loadPotFile(char id[]) {
 void rewriteProfessionalsToFile(professional *pr, int rows) {
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "w+");
-	//checkFile(filePtr);
 
-	if (filePtr != NULL) {
+	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		for (int i = 0; i < rows; i++) {
 			fprintf(filePtr, "%s,%s,%s,%s,%s,%s", pr[i].id, pr[i].name, pr[i].surname, pr[i].area,

@@ -229,7 +229,7 @@ int buildingsMenu() {
 				choice = searchBuilding(allBuildings, buildingsNum);
 				break;
 			case 3:
-				choice = resultAg(allBuildings, buildingsNum);
+				choice = resultsAgency(allBuildings, buildingsNum);
 				break;
 			case 4:
 				// This is used as a flag for the "go back" choice

@@ -20,10 +20,10 @@
  * @brief Show how many buildings and which ones are available in a specific date interval.
  *
  * @param bl Array of structs of available buildings.
- * @param n_bui Number of available buildings.
+ * @param num_buildings Number of available buildings.
  * @return -1 for going back to the main menu
  */
-int resultAg(building *bl, int n_bui) {
+int resultsAgency(building *bl, int num_buildings) {
 	char date1[10];
 	char date2[10];
 	time_t reg_date1;
@@ -32,41 +32,47 @@ int resultAg(building *bl, int n_bui) {
 	bool error = false;
 
 	clearScr();
-	printf("\nInserisci primo intervallo di data (gg/mm/aaaa): ");
-	readString(date1, false, false);
-	reg_date1 = parseDateInFile(date1);
+	printSectionName("Risultati agenzia");
 
-	printf("\nInserisci secondo intervallo di data (gg/mm/aaaa): ");
-	readString(date2, false, false);
-	reg_date2 = parseDateInFile(date2);
+	if (num_buildings != 0) {
+		printf("\nInserisci primo intervallo di data (gg/mm/aaaa): ");
+		readString(date1, false, false);
+		reg_date1 = parseDateInFile(date1);
 
-	newLine();
+		printf("\nInserisci secondo intervallo di data (gg/mm/aaaa): ");
+		readString(date2, false, false);
+		reg_date2 = parseDateInFile(date2);
 
-	if (reg_date1 < reg_date2) {
-		for (int i = 0; i < n_bui; i++) {
-			if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2) {
-				setCyanColor();
-				printf("--- IMMOBILE %s ---", (bl + i)->id);
-				resetColor();
+		newLine();
 
-				newLine();
-				showBuildingData(bl + i);
-				newLine();
+		if (reg_date1 < reg_date2) {
+			for (int i = 0; i < num_buildings; i++) {
+				if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2) {
+					setCyanColor();
+					printf("--- IMMOBILE %s ---", (bl + i)->id);
+					resetColor();
 
-				num_bl_found++;
+					newLine();
+					showBuildingData(bl + i);
+					newLine();
+
+					num_bl_found++;
+				}
 			}
+		} else {
+			setRedColor();
+			printf("E' stato inserito un intervallo errato.\n\n");
+			error = true;
+			resetColor();
+		}
+
+		if (num_bl_found == 0 && !error) {
+			setYellowColor();
+			printf("Nessun immobile trovato con l'intervallo scelto.\n\n");
+			resetColor();
 		}
 	} else {
-		setRedColor();
-		printf("E' stato inserito un intervallo errato.\n\n");
-		error = true;
-		resetColor();
-	}
-
-	if (num_bl_found == 0 && !error) {
-		setYellowColor();
-		printf("Nessun immobile trovato con l'intervallo scelto.\n\n");
-		resetColor();
+		dbEmptyError();
 	}
 	pause();
 

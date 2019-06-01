@@ -100,7 +100,7 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 int loadBuildingsFile(building *bl) {
 	FILE *filePtr;
 	filePtr = fopen("buildings.csv", "a+");
-	if (!checkFile(filePtr, true)) {
+	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		readBuildingsFile(filePtr, bl);
 	}
@@ -120,8 +120,7 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 	FILE *filePtr;
 	//TODO: find a good solution to prevent data loss when file is opened in w+
 	filePtr = fopen("buildings.csv", "w+");
-	checkFile(filePtr, false);
-	//pause();
+	checkFile(filePtr);
 
 	if (filePtr != NULL) {
 		rewind(filePtr);
@@ -216,11 +215,8 @@ int checkDuplicateBuildings(building *bl, int rows) {
 int getBuildingsNumber() {
 	FILE *filePtr;
 	int rows = 0;
-// Read only
-	filePtr = fopen("buildings.csv", "r");
-//TODO: Makes the program crash
-//checkFile(filePtr);
-	if (filePtr != NULL) {
+	filePtr = fopen("buildings.csv", "a+");
+	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		rows = countRows(filePtr);
 	}
@@ -230,82 +226,89 @@ int getBuildingsNumber() {
 
 /**
  * @brief Search for a specific building using a criteria.
- * @param bl
- * @param n_bui
+ *
+ * @param allBuildings Array of structs of all registered buildings.
+ * @param num_buildings Number of buildings registered.
  */
-int searchBuilding(building *bl, int n_bui) {
+int searchBuilding(building *allBuildings, int num_buildings) {
 	short int choice = 0;
 	bool error = false;
-// Boolean for keeping track if at least one record has been found
+	// Boolean for keeping track if at least one record has been found
 	bool found = false;
 	int price = 0;
 	char city[MAX_STRING_SIZE];
 
-	do {
-		clearScr();
-		printSectionName("Ricerca immobili");
-		newLine();
+	clearScr();
+	printSectionName("Ricerca immobili");
 
-		puts("Scegli un'operazione:");
-		puts("1. Prezzo");
-		puts("2. Localita'");
-		puts("3. Torna indietro");
+	if (num_buildings != 0) {
+		do {
+			newLine();
 
-		newLine();
-		printf("Operazione: ");
-		choice = readInteger();
+			puts("Scegli un'operazione:");
+			puts("1. Prezzo");
+			puts("2. Localita'");
+			puts("3. Torna indietro");
 
-		switch (choice) {
-			case 1:
-				printf("\nInserisci il prezzo massimo dell'immobile: ");
-				price = readInteger();
+			newLine();
+			printf("Operazione: ");
+			choice = readInteger();
 
-				for (int i = 0; i < n_bui; i++) {
-					if (bl[i].price < price) {
-						found = true;
-						showBuildingData(bl + i);
+			switch (choice) {
+				case 1:
+					printf("\nInserisci il prezzo massimo dell'immobile: ");
+					price = readInteger();
+
+					for (int i = 0; i < num_buildings; i++) {
+						if (allBuildings[i].price < price) {
+							found = true;
+							showBuildingData(allBuildings + i);
+						}
 					}
-				}
 
-				if (!found) {
-					setYellowColor();
-					printf("\nNessun record trovato.\n");
-					resetColor();
-				}
-
-				pause();
-				break;
-			case 2:
-				printf("\nInserisci la localita' dell'immobile: ");
-				readString(city, false, false);
-				convertToUpperCase(city);
-
-				for (int i = 0; i < n_bui; i++) {
-					if (strstr(bl[i].city, city) != NULL) {
-						found = true;
-						showBuildingData(bl + i);
+					if (!found) {
+						setYellowColor();
+						printf("\nNessun record trovato.\n");
+						resetColor();
 					}
-				}
 
-				if (!found) {
-					setYellowColor();
-					printf("\nNessun record trovato.\n");
-					resetColor();
-				}
+					pause();
+					break;
+				case 2:
+					printf("\nInserisci la localita' dell'immobile: ");
+					readString(city, false, false);
+					convertToUpperCase(city);
 
-				pause();
-				break;
-			case 3:
-				// This is used as a flag for the "go back" choice
-				// It's not that likely that an user will manually insert -1 as a choice.
-				choice = -1;
-				error = false;
-				break;
-			default:
-				error = true;
-				break;
-		}
-	} while (error == true);
+					for (int i = 0; i < num_buildings; i++) {
+						if (strstr(allBuildings[i].city, city) != NULL) {
+							found = true;
+							showBuildingData(allBuildings + i);
+						}
+					}
+
+					if (!found) {
+						setYellowColor();
+						printf("\nNessun record trovato.\n");
+						resetColor();
+					}
+
+					pause();
+					break;
+				case 3:
+					// This is used as a flag for the "go back" choice
+					// It's not that likely that an user will manually insert -1 as a choice.
+					choice = -1;
+					error = false;
+					break;
+				default:
+					error = true;
+					break;
+			}
+		} while (error == true);
+	} else {
+		dbEmptyError();
+		pause();
+	}
 
 	return -1;
 }

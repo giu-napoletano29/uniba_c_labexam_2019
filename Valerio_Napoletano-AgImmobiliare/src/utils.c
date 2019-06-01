@@ -354,3 +354,13 @@ bool askConfirm() {
 
 	return choice;
 }
+
+
+/**
+ * Print DB empty error to stdout
+ */
+void dbEmptyError() {
+	setRedColor();
+	printf("\nERRORE: Nessun record presente nel database.\n\n");
+	resetColor();
+}

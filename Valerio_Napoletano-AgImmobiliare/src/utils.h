@@ -35,3 +35,4 @@ void pause();
 void notFoundError();
 
 void setTitle(char *titleToSet);
+void dbEmptyError();

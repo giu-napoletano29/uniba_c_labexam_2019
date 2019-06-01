@@ -14,41 +14,27 @@
 #include "datatypes.h"
 
 /**
- * @brief Check if the file can be written and if it's empty.
+ * @brief Check if the file can be written.
+ * This function is useful when the file is used
+ * by another process and can't be read of for permissions issue.
  *
  * @param filePtr Pointer to file initialized by fopen()
- * @param rowsCheck If enabled the function will check if the file is empty.
  * @return true if everything is good with the file.
  */
-bool checkFile(FILE *filePtr, bool rowsCheck) {
-	bool error = false;
-	int rows = 0;
-
-	rows = countRows(filePtr);
+bool checkFile(FILE *filePtr) {
+	bool status = true;
 
 	if (filePtr == NULL) {
 		setRedColor();
 		perror("\nERRORE: ");
 		resetColor();
 		printf("\nControlla il tuo file system e riprova.\n");
-		error = true;
+		status = false;
 		pause();
 	}
 
-	// Check if the file is empty
-	if (rowsCheck == true) {
-		if (rows == 0) {
-			setRedColor();
-			printf("\nERRORE: Nessun record presente nel database.\n\n");
-			resetColor();
-			error = true;
-			fclose(filePtr);
-			pause();
-		}
-	}
-
 	rewind(filePtr);
-	return error;
+	return status;
 }
 
 /**
