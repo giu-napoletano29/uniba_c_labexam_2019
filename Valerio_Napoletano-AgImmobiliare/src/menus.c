@@ -77,30 +77,30 @@ int clientsMenu(bool reloadFile) {
 		}
 
 		switch (choice) {
-		case 1:
-			// Sort clients in the file
-			choice = sortFileCli(allClients, clientsNum);
+			case 1:
+				// Sort clients in the file
+				choice = sortFileCli(allClients, clientsNum);
 
-			// Show all clients only if it's explicitly asked by the user.
-			if (!reloadFile) {
-				choice = showAllClients(allClients, clientsNum);
-			}
-			break;
-		case 2:
-			// Append a new client to the file.
-			choice = addClient();
-			// Call again the function for loading the new updated data.
-			clientsMenu(true);
-			break;
-		case 3:
-			// This is used as a flag for the "go back" choice
-			// It's not that likely that an user will manually insert -1 as a choice.
-			choice = -1;
-			error = false;
-			break;
-		default:
-			error = true;
-			break;
+				// Show all clients only if it's explicitly asked by the user.
+				if (!reloadFile) {
+					choice = showAllClients(allClients, clientsNum);
+				}
+				break;
+			case 2:
+				// Append a new client to the file.
+				choice = addClient();
+				// Call again the function for loading the new updated data.
+				clientsMenu(true);
+				break;
+			case 3:
+				// This is used as a flag for the "go back" choice
+				// It's not that likely that an user will manually insert -1 as a choice.
+				choice = -1;
+				error = false;
+				break;
+			default:
+				error = true;
+				break;
 		}
 	} while (error == true);
 
@@ -145,24 +145,24 @@ int professMenu() {
 		choice = readInteger();
 
 		switch (choice) {
-		case 1:
-			choice = loadProsFile(allProfessionals);
-			resDup = checkDuplicatePro(allProfessionals, professionalsNum);
-			if (resDup != -1) {
-				showAllPros(allProfessionals, professionalsNum);
-				sortFilePro(allProfessionals, professionalsNum);
-				rewriteProfessionalsToFile(allProfessionals, professionalsNum);
-			}
-			break;
-		case 2:
-			// This is used as a flag for the "go back" choice
-			// It's not that likely that an user will manually insert -1 as a choice.
-			choice = -1;
-			error = false;
-			break;
-		default:
-			error = true;
-			break;
+			case 1:
+				choice = loadProsFile(allProfessionals);
+				resDup = checkDuplicatePro(allProfessionals, professionalsNum);
+				if (resDup != -1) {
+					showAllPros(allProfessionals, professionalsNum);
+					sortFilePro(allProfessionals, professionalsNum);
+					rewriteProfessionalsToFile(allProfessionals, professionalsNum);
+				}
+				break;
+			case 2:
+				// This is used as a flag for the "go back" choice
+				// It's not that likely that an user will manually insert -1 as a choice.
+				choice = -1;
+				error = false;
+				break;
+			default:
+				error = true;
+				break;
 		}
 
 	} while (error == true);
@@ -209,38 +209,38 @@ int buildingsMenu() {
 		choice = readInteger();
 
 		switch (choice) {
-		case 1:
-			choice = loadBuildingsFile(allBuildings);
-			resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
-			if (resDup != -1) {
-				showAllBuildings(allBuildings, buildingsNum);
-				sortFileBui(allBuildings, buildingsNum);
-				rewriteBuildingsToFile(allBuildings, buildingsNum);
-			}
-			break;
-		case 2:
-			choice = loadBuildingsFile(allBuildings);
-			resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
-			if (resDup != -1) {
-				searchBuilding(allBuildings, buildingsNum);
-			}
-			break;
-		case 3:
-			choice = loadBuildingsFile(allBuildings);
-			resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
-			if (resDup != -1) {
-				resultAg(allBuildings, buildingsNum);
-			}
-			break;
-		case 4:
-			// This is used as a flag for the "go back" choice
-			// It's not that likely that an user will manually insert -1 as a choice.
-			choice = -1;
-			error = false;
-			break;
-		default:
-			error = true;
-			break;
+			case 1:
+				choice = loadBuildingsFile(allBuildings);
+				resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
+				if (resDup != -1) {
+					showAllBuildings(allBuildings, buildingsNum);
+					sortFileBui(allBuildings, buildingsNum);
+					rewriteBuildingsToFile(allBuildings, buildingsNum);
+				}
+				break;
+			case 2:
+				choice = loadBuildingsFile(allBuildings);
+				resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
+				if (resDup != -1) {
+					searchBuilding(allBuildings, buildingsNum);
+				}
+				break;
+			case 3:
+				choice = loadBuildingsFile(allBuildings);
+				resDup = checkDuplicateBuildings(allBuildings, buildingsNum);
+				if (resDup != -1) {
+					resultAg(allBuildings, buildingsNum);
+				}
+				break;
+			case 4:
+				// This is used as a flag for the "go back" choice
+				// It's not that likely that an user will manually insert -1 as a choice.
+				choice = -1;
+				error = false;
+				break;
+			default:
+				error = true;
+				break;
 		}
 
 	} while (error == true);
@@ -264,8 +264,7 @@ void mainMenu() {
 		}
 
 		setCyanColor();
-		puts(
-				"||| Agenzia Immobiliare di Saverio Valerio e Giuseppe Napoletano |||\n");
+		puts("||| Agenzia Immobiliare di Saverio Valerio e Giuseppe Napoletano |||\n");
 		setGreenColor();
 		puts("--- MENU PRINCIPALE ---");
 		resetColor();
@@ -282,18 +281,18 @@ void mainMenu() {
 		choice = readInteger();
 
 		switch (choice) {
-		case 1:
-			choice = clientsMenu(false);
-			break;
-		case 2:
-			choice = professMenu();
-			break;
-		case 3:
-			choice = buildingsMenu();
-			break;
-		default:
-			error = true;
-			break;
+			case 1:
+				choice = clientsMenu(false);
+				break;
+			case 2:
+				choice = professMenu();
+				break;
+			case 3:
+				choice = buildingsMenu();
+				break;
+			default:
+				error = true;
+				break;
 		}
 	} while (error == true || choice == -1);
 }

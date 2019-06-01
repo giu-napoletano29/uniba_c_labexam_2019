@@ -23,21 +23,21 @@
  */
 void showClientType(int type) {
 	switch (type) {
-	case 1:
-		printf("Famiglia");
-		break;
-	case 2:
-		printf("Single");
-		break;
-	case 3:
-		printf("Azienda");
-		break;
-	case 4:
-		printf("Pubblica amministrazione");
-		break;
-	default:
-		printf("Dato non corretto");
-		break;
+		case 1:
+			printf("Famiglia");
+			break;
+		case 2:
+			printf("Single");
+			break;
+		case 3:
+			printf("Azienda");
+			break;
+		case 4:
+			printf("Pubblica amministrazione");
+			break;
+		default:
+			printf("Dato non corretto");
+			break;
 	}
 
 	printf("\n");

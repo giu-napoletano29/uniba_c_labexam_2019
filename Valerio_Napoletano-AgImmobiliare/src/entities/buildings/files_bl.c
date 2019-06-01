@@ -43,40 +43,40 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 
 		while (token != NULL) {
 			switch (field) {
-			case 0:
-				strcpy(bl[bl_num].id, token);
-				break;
-			case 1:
-				strcpy(bl[bl_num].street, token);
-				break;
-			case 2:
-				bl[bl_num].civic = atoi(token);
-				break;
-			case 3:
-				strcpy(bl[bl_num].city, token);
-				convertToUpperCase(bl[bl_num].city);
-				break;
-			case 4:
-				strcpy(bl[bl_num].province, token);
-				break;
-			case 5:
-				// Save parsed Epoch time into clients struct
-				bl[bl_num].reg_date = parseDateInFile(token);
-				break;
-			case 6:
-				bl[bl_num].price = atoi(token);
-				break;
-			case 7:
-				strcpy(bl[bl_num].owner, token);
-				convertToUpperCase(bl[bl_num].owner);
-				break;
-			case 8:
-				strcpy(bl[bl_num].phone, token);
-				break;
-			case 9:
-				enum_tmp = atoi(token);
-				bl[bl_num].b_type = enum_tmp;
-				break;
+				case 0:
+					strcpy(bl[bl_num].id, token);
+					break;
+				case 1:
+					strcpy(bl[bl_num].street, token);
+					break;
+				case 2:
+					bl[bl_num].civic = atoi(token);
+					break;
+				case 3:
+					strcpy(bl[bl_num].city, token);
+					convertToUpperCase(bl[bl_num].city);
+					break;
+				case 4:
+					strcpy(bl[bl_num].province, token);
+					break;
+				case 5:
+					// Save parsed Epoch time into clients struct
+					bl[bl_num].reg_date = parseDateInFile(token);
+					break;
+				case 6:
+					bl[bl_num].price = atoi(token);
+					break;
+				case 7:
+					strcpy(bl[bl_num].owner, token);
+					convertToUpperCase(bl[bl_num].owner);
+					break;
+				case 8:
+					strcpy(bl[bl_num].phone, token);
+					break;
+				case 9:
+					enum_tmp = atoi(token);
+					bl[bl_num].b_type = enum_tmp;
+					break;
 			}
 
 			// Read the other tokens
@@ -141,9 +141,8 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 			// Get formatted date
 			strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
 
-			fprintf(filePtr, "%s,%s,%d,%s,%s,%s,%d,%s,%s,%d\n", bl[i].id,
-					bl[i].street, bl[i].civic, bl[i].city, bl[i].province,
-					dateBuffer, bl[i].price, bl[i].owner, bl[i].phone,
+			fprintf(filePtr, "%s,%s,%d,%s,%s,%s,%d,%s,%s,%d\n", bl[i].id, bl[i].street, bl[i].civic,
+					bl[i].city, bl[i].province, dateBuffer, bl[i].price, bl[i].owner, bl[i].phone,
 					bl[i].b_type);
 		}
 	}
@@ -186,14 +185,14 @@ int checkDuplicateBuildings(building *bl, int rows) {
 					readString(id, false);
 					convertToUpperCase(id);
 					switch (choice) {
-					case 1:
-						strcpy(bl[i].id, id);
-						break;
-					case 2:
-						strcpy(bl[j].id, id);
-						break;
-					default:
-						break;
+						case 1:
+							strcpy(bl[i].id, id);
+							break;
+						case 2:
+							strcpy(bl[j].id, id);
+							break;
+						default:
+							break;
 					}
 				} while (choice > 2 || choice < 1);
 				i = 0;
@@ -248,29 +247,29 @@ void searchBuilding(building *bl, int n_bui) {
 	choice = readInteger();
 
 	switch (choice) {
-	case 1:
-		printf("\nInserisci il prezzo massimo dell'immobile: ");
-		price = readInteger();
+		case 1:
+			printf("\nInserisci il prezzo massimo dell'immobile: ");
+			price = readInteger();
 
-		for (int i = 0; i < n_bui; i++) {
-			if (bl[i].price < price) {
-				showBuildingData(bl + i);
+			for (int i = 0; i < n_bui; i++) {
+				if (bl[i].price < price) {
+					showBuildingData(bl + i);
+				}
 			}
-		}
-		break;
-	case 2:
-		printf("\nInserisci la localita' dell'immobile: ");
-		readString(city, false);
-		convertToUpperCase(city);
+			break;
+		case 2:
+			printf("\nInserisci la localita' dell'immobile: ");
+			readString(city, false);
+			convertToUpperCase(city);
 
-		for (int i = 0; i < n_bui; i++) {
-			if (strstr(bl[i].city, city) != NULL) {
-				showBuildingData(bl + i);
+			for (int i = 0; i < n_bui; i++) {
+				if (strstr(bl[i].city, city) != NULL) {
+					showBuildingData(bl + i);
+				}
 			}
-		}
-		break;
-	default:
-		break;
+			break;
+		default:
+			break;
 	}
 	pause();
 }

@@ -45,38 +45,38 @@ void parseClientFile(FILE *filePtr, client *cl) {
 
 		while (token != NULL) {
 			switch (field) {
-			case 0:
-				strcpy(cl[cl_num].id, token);
-				break;
-			case 1:
-				strcpy(cl[cl_num].name, token);
-				convertToUpperCase(cl[cl_num].name);
-				break;
-			case 2:
-				strcpy(cl[cl_num].surname, token);
-				convertToUpperCase(cl[cl_num].surname);
-				break;
-			case 3:
-				enum_tmp = atoi(token);
-				cl[cl_num].cl_type = enum_tmp;
-				break;
-			case 4:
-				strcpy(cl[cl_num].company_name, token);
-				convertToUpperCase(cl[cl_num].company_name);
-				break;
-			case 5:
-				cl[cl_num].budget = atoi(token);
-				break;
-			case 6:
-				/*
-				 *  Save parsed Epoch time into clients struct
-				 */
-				cl[cl_num].reg_date = parseDateInFile(token);
-				break;
-			case 7:
-				enum_tmp = atoi(token);
-				cl[cl_num].building_type = enum_tmp;
-				break;
+				case 0:
+					strcpy(cl[cl_num].id, token);
+					break;
+				case 1:
+					strcpy(cl[cl_num].name, token);
+					convertToUpperCase(cl[cl_num].name);
+					break;
+				case 2:
+					strcpy(cl[cl_num].surname, token);
+					convertToUpperCase(cl[cl_num].surname);
+					break;
+				case 3:
+					enum_tmp = atoi(token);
+					cl[cl_num].cl_type = enum_tmp;
+					break;
+				case 4:
+					strcpy(cl[cl_num].company_name, token);
+					convertToUpperCase(cl[cl_num].company_name);
+					break;
+				case 5:
+					cl[cl_num].budget = atoi(token);
+					break;
+				case 6:
+					/*
+					 *  Save parsed Epoch time into clients struct
+					 */
+					cl[cl_num].reg_date = parseDateInFile(token);
+					break;
+				case 7:
+					enum_tmp = atoi(token);
+					cl[cl_num].building_type = enum_tmp;
+					break;
 			}
 
 			// Read the other tokens
@@ -122,9 +122,8 @@ int rewriteClientsToFile(client *cl, int rows) {
 
 		// Save client to file only if the client is not marked for deletion
 		if (!cl[i].toDelete) {
-			fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl[i].id, cl[i].name,
-					cl[i].surname, cl[i].cl_type, cl[i].company_name,
-					cl[i].budget, dateBuffer, cl[i].building_type);
+			fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl[i].id, cl[i].name, cl[i].surname, cl[i].cl_type,
+					cl[i].company_name, cl[i].budget, dateBuffer, cl[i].building_type);
 		}
 	}
 	//}
@@ -157,9 +156,8 @@ int appendClientToFile(client *cl) {
 
 		// Save to file only if the client is not marked for deletion
 		if (!cl->toDelete) {
-			fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl->id, cl->name,
-					cl->surname, cl->cl_type, cl->company_name, cl->budget,
-					dateBuffer, cl->building_type);
+			fprintf(filePtr, "%s,%s,%s,%d,%s,%d,%s,%d\n", cl->id, cl->name, cl->surname, cl->cl_type,
+					cl->company_name, cl->budget, dateBuffer, cl->building_type);
 		}
 	}
 
@@ -219,8 +217,7 @@ bool checkDuplicateClients(client *cl, int rows) {
 			if (strCompare(cl[i].id, cl[j].id)) {
 				clearScr();
 				setRedColor();
-				printf(
-						"\nERRORE: Il database contiene degli utenti con ID identico.\n");
+				printf("\nERRORE: Il database contiene degli utenti con ID identico.\n");
 				resetColor();
 
 				setCyanColor();
@@ -250,24 +247,24 @@ bool checkDuplicateClients(client *cl, int rows) {
 				newLine();
 
 				switch (choice) {
-				case 1:
-					// If client type is "company"
-					if (cl[i].cl_type == 3) {
-						reqPIVA(cl + i);
-					} else {
-						reqCF(cl + i);
-					}
-					break;
-				case 2:
-					// If client type is "company"
-					if (cl[j].cl_type == 3) {
-						reqPIVA(cl + j);
-					} else {
-						reqCF(cl + j);
-					}
-					break;
-				default:
-					break;
+					case 1:
+						// If client type is "company"
+						if (cl[i].cl_type == 3) {
+							reqPIVA(cl + i);
+						} else {
+							reqCF(cl + i);
+						}
+						break;
+					case 2:
+						// If client type is "company"
+						if (cl[j].cl_type == 3) {
+							reqPIVA(cl + j);
+						} else {
+							reqCF(cl + j);
+						}
+						break;
+					default:
+						break;
 				}
 				i = 0;
 				j = i + 1;

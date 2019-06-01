@@ -94,8 +94,7 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 	if (diffDays > CLIENT_EXPIRE_DAYS) {
 
 		setYellowColor();
-		printf(
-				"\nIl cliente risulta registrato da piu' di 30 giorni.\nVuoi eliminarlo? (s/n): ");
+		printf("\nIl cliente risulta registrato da piu' di 30 giorni.\nVuoi eliminarlo? (s/n): ");
 		resetColor();
 
 		if (askConfirm()) {
@@ -103,8 +102,7 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 
 			setYellowColor();
 			printf("\nCliente con ID %s pronto per l'eliminazione!\n", id);
-			printf(
-					"Non chiudere il software prima dello scorrimento completo della lista.\n");
+			printf("Non chiudere il software prima dello scorrimento completo della lista.\n");
 			resetColor();
 			newLine();
 			pause();

@@ -119,20 +119,18 @@ bool isOnlyAlpha(char *str) {
  *
  * @param value Value from stdin to store in memory, after input checks.
  * @param onlyAlpha If true makes sure that the string does not have any numbers in it (input validation)
+ * @param onlyNumbers  If true makes sure that the string does not have any letters in it (input validation)
  * @return int String length. If returned int is -1 , then it's an error.
  */
-int readString(char *value, bool onlyAlpha) {
+int readString(char *value, bool onlyAlpha, bool onlyNumbers) {
 	bool error = false;
 	char inputVal[STRING_SIZE];
 
 	do {
-		/**
-		 * Limit dynamically the scanf using some constants tricks.
-		 * Check out consts.h.
-		 *
-		 * TODO: Handle spaces.
-		 */
-		scanf("%" STR(STRING_SIZE) "s", inputVal);
+		// Read from stdin
+		fgets(inputVal, sizeof(inputVal), stdin);
+		// Format the string removing the useless \n
+		sscanf(inputVal, "%[^\n]", inputVal);
 
 		/**
 		 * Check if the string has only alphabetic characters.
@@ -142,8 +140,12 @@ int readString(char *value, bool onlyAlpha) {
 		if (onlyAlpha && isOnlyAlpha(inputVal)) {
 			error = true;
 			setYellowColor();
-			puts(
-					"\nValore errato.\nInserisci una stringa corretta e premi Invio: ");
+			puts("\nValore errato.\nInserisci una stringa corretta senza spazi e premi Invio: ");
+			resetColor();
+		} else if (onlyNumbers && anyChar(inputVal)) {
+			error = true;
+			setYellowColor();
+			puts("\nValore errato.\nInserisci solo cifre senza spazi e premi Invio: ");
 			resetColor();
 		} else {
 			error = false;
@@ -186,12 +188,10 @@ int readInteger() {
 	int value = -1;
 
 	do {
-		/**
-		 * Read from stdin (as a string
-		 * Limit dynamically the scanf using some constants tricks.
-		 * Check out consts.h.
-		 */
-		scanf("%" STR(STRING_SIZE) "s", buffer);
+// Read from stdin
+		fgets(buffer, sizeof(buffer), stdin);
+// Format the string removing the useless \n
+		sscanf(buffer, "%[^\n]", buffer);
 
 		/** Check if there are any numbers in the string. */
 		if (anyChar(buffer)) {
@@ -325,8 +325,7 @@ bool askConfirm() {
 			error = true;
 
 			setYellowColor();
-			printf(
-					"\nScelta non valida.\nInserisci una scelta corretta (s o n) e premi Invio: ");
+			printf("\nScelta non valida.\nInserisci una scelta corretta (s o n) e premi Invio: ");
 			resetColor();
 		}
 	} while (error == true);

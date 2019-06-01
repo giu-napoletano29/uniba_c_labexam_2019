@@ -30,8 +30,7 @@ void reqPIVA(client *cl) {
 	do {
 		if (error) {
 			setYellowColor();
-			puts(
-					"\nInserisci un valore corretto.\nLa partita IVA e' composta da 11 cifre.\n");
+			puts("\nInserisci un valore corretto.\nLa partita IVA e' composta da 11 cifre.\n");
 			resetColor();
 		}
 
@@ -62,8 +61,7 @@ void reqCF(client *cl) {
 	do {
 		if (error) {
 			setYellowColor();
-			puts(
-					"\nInserisci un valore corretto.\nIl codice fiscale e' composto da 16 lettere e cifre.\n");
+			puts("\nInserisci un valore corretto.\nIl codice fiscale e' composto da 16 lettere e cifre.\n");
 			resetColor();
 		}
 
@@ -179,8 +177,7 @@ void reqBudget(client *cl) {
 	do {
 		if (error) {
 			setRedColor();
-			puts(
-					"Inserisci un valore in euro tra 100 e 1 000 000 000 euro. \n");
+			puts("Inserisci un valore in euro tra 100 e 1 000 000 000 euro. \n");
 			resetColor();
 		}
 

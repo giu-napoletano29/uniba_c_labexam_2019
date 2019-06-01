@@ -42,35 +42,35 @@ void readProsFile(FILE *filePtr, professional *pr) {
 
 		while (token != NULL) {
 			switch (field) {
-			case 0:
-				strcpy(pr[pr_num].id, token);
-				break;
-			case 1:
-				strcpy(pr[pr_num].name, token);
-				convertToUpperCase(pr[pr_num].name);
-				break;
-			case 2:
-				strcpy(pr[pr_num].surname, token);
-				convertToUpperCase(pr[pr_num].surname);
-				break;
-			case 3:
-				strcpy(pr[pr_num].area, token);
-				break;
-			case 4:
-				strcpy(pr[pr_num].phone, token);
-				break;
-			case 5:
-				strcpy(pr[pr_num].email, token);
-				break;
-			case 6:
-				/*
-				 *  Save parsed Epoch time into clients struct
-				 */
-				pr[pr_num].reg_date = parseDateInFile(token);
-				break;
-			case 7:
-				pr[pr_num].buildings_sold = atoi(token);
-				break;
+				case 0:
+					strcpy(pr[pr_num].id, token);
+					break;
+				case 1:
+					strcpy(pr[pr_num].name, token);
+					convertToUpperCase(pr[pr_num].name);
+					break;
+				case 2:
+					strcpy(pr[pr_num].surname, token);
+					convertToUpperCase(pr[pr_num].surname);
+					break;
+				case 3:
+					strcpy(pr[pr_num].area, token);
+					break;
+				case 4:
+					strcpy(pr[pr_num].phone, token);
+					break;
+				case 5:
+					strcpy(pr[pr_num].email, token);
+					break;
+				case 6:
+					/*
+					 *  Save parsed Epoch time into clients struct
+					 */
+					pr[pr_num].reg_date = parseDateInFile(token);
+					break;
+				case 7:
+					pr[pr_num].buildings_sold = atoi(token);
+					break;
 			}
 
 			// Read the other tokens
@@ -130,12 +130,12 @@ void readPotFile(FILE *fp_pot, potential *pr, char id[], int rows) {
 
 		while (token != NULL) {
 			switch (field) {
-			case 0:
-				strcpy(pr[pr_num].id, token);
-				break;
-			case 1:
-				strcpy(pr[pr_num].content, token);
-				break;
+				case 0:
+					strcpy(pr[pr_num].id, token);
+					break;
+				case 1:
+					strcpy(pr[pr_num].content, token);
+					break;
 			}
 			// Read the other tokens
 			token = strtok(NULL, ",");
@@ -236,9 +236,8 @@ void rewriteProfessionalsToFile(professional *pr, int rows) {
 			// Get formatted date
 			strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
 
-			fprintf(filePtr, "%s,%s,%s,%s,%s,%s,%s,%d\n", pr[i].id, pr[i].name,
-					pr[i].surname, pr[i].area, pr[i].phone, pr[i].email,
-					dateBuffer, pr[i].buildings_sold);
+			fprintf(filePtr, "%s,%s,%s,%s,%s,%s,%s,%d\n", pr[i].id, pr[i].name, pr[i].surname, pr[i].area,
+					pr[i].phone, pr[i].email, dateBuffer, pr[i].buildings_sold);
 		}
 	}
 
@@ -278,14 +277,14 @@ int checkDuplicatePro(professional *pr, int rows) {
 					readString(id, false);
 					convertToUpperCase(id);
 					switch (choice) {
-					case 1:
-						strcpy(pr[i].id, id);
-						break;
-					case 2:
-						strcpy(pr[j].id, id);
-						break;
-					default:
-						break;
+						case 1:
+							strcpy(pr[i].id, id);
+							break;
+						case 2:
+							strcpy(pr[j].id, id);
+							break;
+						default:
+							break;
 					}
 				} while (choice > 2 || choice < 1);
 				i = 0;

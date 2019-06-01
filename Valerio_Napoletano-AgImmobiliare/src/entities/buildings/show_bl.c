@@ -18,24 +18,24 @@
  */
 void showBuildingType(int type) {
 	switch (type) {
-	case 1:
-		printf("Appartamento");
-		break;
-	case 2:
-		printf("Appartamento a due piani");
-		break;
-	case 3:
-		printf("Villa");
-		break;
-	case 4:
-		printf("Casa di campagna");
-		break;
-	case 5:
-		printf("Attico");
-		break;
-	default:
-		printf("Dato non corretto");
-		break;
+		case 1:
+			printf("Appartamento");
+			break;
+		case 2:
+			printf("Appartamento a due piani");
+			break;
+		case 3:
+			printf("Villa");
+			break;
+		case 4:
+			printf("Casa di campagna");
+			break;
+		case 5:
+			printf("Attico");
+			break;
+		default:
+			printf("Dato non corretto");
+			break;
 	}
 
 	printf("\n");

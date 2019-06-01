@@ -8,19 +8,6 @@
 #ifndef CONSTS_H
 #define CONSTS_H
 
-/**
- * It is important to specify a field width for the %s string placeholder for avoiding buffer overflows.
- * Scanf does not support any field width restriction specification using a variable.
- *
- * Therefore we are limiting the scanf here using some constants tricks and the STRING_SIZE const value.
- *
- * @see https://stackoverflow.com/questions/25410690/scanf-variable-length-specifier
- */
-#define STR2(x) #x
-
-/** Please check out STR2(x) docs. */
-#define STR(X) STR2(X)
-
 /** Max string size */
 #define STRING_SIZE 50
 
