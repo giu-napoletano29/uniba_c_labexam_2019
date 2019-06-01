@@ -273,11 +273,15 @@ void notFoundError() {
  * @param string Section name to display.
  */
 void printSectionName(char *string) {
+	resetColor();
 	printf("||| ");
+
 	setGreenColor();
 	printf("%s", string);
+
 	resetColor();
 	printf(" |||");
+
 	newLine();
 }
 

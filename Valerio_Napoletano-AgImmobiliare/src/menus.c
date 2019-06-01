@@ -55,10 +55,10 @@ int clientsMenu(bool reloadFile) {
 			notFoundError();
 		}
 
-		/** - Shows the main clients menu asking the user	 what wants	to do. */
+		/** - Shows the main clients menu asking the user what wants to do. */
 		if (!reloadFile) {
 			setGreenColor();
-			puts("--- CLIENTI ---");
+			printSectionName("CLIENTI");
 			resetColor();
 			newLine();
 
@@ -139,7 +139,7 @@ int professMenu() {
 		}
 
 		setGreenColor();
-		puts("--- PROFESSIONISTI ---");
+		printSectionName("PROFESSIONISTI");
 		resetColor();
 		newLine();
 
@@ -197,7 +197,7 @@ int buildingsMenu() {
 		}
 
 		setGreenColor();
-		puts("--- IMMOBILI ---");
+		printSectionName("IMMOBILI");
 		resetColor();
 		newLine();
 
@@ -269,9 +269,7 @@ void mainMenu() {
 
 		setCyanColor();
 		puts("||| Agenzia Immobiliare di Saverio Valerio e Giuseppe Napoletano |||\n");
-		setGreenColor();
-		puts("--- MENU PRINCIPALE ---");
-		resetColor();
+		printSectionName("MENU PRINCIPALE");
 		newLine();
 
 		puts("Scegli un'operazione:");
