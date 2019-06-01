@@ -24,7 +24,7 @@
  * @param cl Client array of structs for storing parsed data.
  */
 void parseClientFile(FILE *filePtr, client *cl) {
-	char line[400];
+	char line[MAX_TEXT_SIZE];
 	char *token;
 
 	int field;

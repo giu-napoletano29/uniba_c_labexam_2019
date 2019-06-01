@@ -59,7 +59,7 @@ bool checkFile(FILE *filePtr, bool rowsCheck) {
  */
 int countRows(FILE *filePtr) {
 	int count = 0;
-	char line[400];
+	char line[MAX_TEXT_SIZE];
 	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
 		count++;

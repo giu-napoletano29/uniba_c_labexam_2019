@@ -22,7 +22,7 @@
  * @param bl Buildings array of structs for storing parsed data.
  */
 void readBuildingsFile(FILE *filePtr, building *bl) {
-	char line[400];
+	char line[MAX_TEXT_SIZE];
 	char *token;
 
 	int field;

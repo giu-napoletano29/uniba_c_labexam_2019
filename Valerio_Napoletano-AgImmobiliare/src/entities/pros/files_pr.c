@@ -25,7 +25,7 @@
  * @param pr Professional array of structs for storing parsed data.
  */
 void readProsFile(FILE *filePtr, professional *pr) {
-	char line[400];
+	char line[MAX_TEXT_SIZE];
 	char *token;
 
 	int field;
@@ -116,7 +116,7 @@ void findPotential(char id[], potential *pr, int num_profess) {
  * @param rows Number of professionals registered
  */
 void parsePotentialsFile(FILE *fp_pot, potential *pr, char id[], int rows) {
-	char line[400];
+	char line[MAX_TEXT_SIZE];
 	char *token;
 
 	int field;
