@@ -101,7 +101,7 @@ void parseClientFile(FILE *filePtr, client *cl) {
  */
 int rewriteClientsToFile(client *cl, int rows) {
 	FILE *filePtr;
-	filePtr = fopen("clients.csv", "w+");
+	filePtr = fopen("clients.dat", "w+");
 	if (checkFile(filePtr)) {
 		for (int i = 0; i < rows; i++) {
 			// Save client to file only if the client is not marked for deletion
@@ -121,14 +121,14 @@ int rewriteClientsToFile(client *cl, int rows) {
 }
 
 /**
- * @brief Append a new client to the "clients.csv" file
+ * @brief Append a new client to the "clients.dat" file
  *
  * @param cl Client struct where the data is stored
  * @return -1 go back to main menu
  */
 int appendClientToFile(client *cl) {
 	FILE *filePtr;
-	filePtr = fopen("clients.csv", "a+");
+	filePtr = fopen("clients.dat", "a+");
 	if (checkFile(filePtr)) {
 		// Save to file only if the client is not marked for deletion
 		if (!cl->toDelete) {
@@ -153,7 +153,7 @@ int appendClientToFile(client *cl) {
 int getClientsNumber() {
 	FILE *filePtr;
 	int rows = 0;
-	filePtr = fopen("clients.csv", "a+");
+	filePtr = fopen("clients.dat", "a+");
 	if (checkFile(filePtr)) {
 		rows = countRows(filePtr);
 		fclose(filePtr);
@@ -162,14 +162,14 @@ int getClientsNumber() {
 }
 
 /**
- * @brief Load the "clients.csv" file and run the parsing function
+ * @brief Load the "clients.dat" file and run the parsing function
  *
  * @param cl Array of structs (client data type) where the data will be saved.
  * @return -1 going back to the menu
  */
 int loadClientFile(client *cl) {
 	FILE *filePtr;
-	filePtr = fopen("clients.csv", "a+");
+	filePtr = fopen("clients.dat", "a+");
 	if (checkFile(filePtr)) {
 		parseClientFile(filePtr, cl);
 		fclose(filePtr);
