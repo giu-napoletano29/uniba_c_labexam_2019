@@ -291,6 +291,9 @@ void setTitle(char *titleToSet) {
  */
 void printSectionName(char *string) {
 	setTitle(string);
+	clearScr();
+
+	newLine();
 
 	resetColor();
 	printf("||| ");
@@ -302,7 +305,6 @@ void printSectionName(char *string) {
 	printf(" |||");
 
 	newLine();
-
 }
 
 /**

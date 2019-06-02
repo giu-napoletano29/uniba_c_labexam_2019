@@ -39,11 +39,7 @@ void saveLocalDate(client *cl) {
 int addClient() {
 	client cl = { "", "", "", 1, "", 0, 0, 1, false };
 
-	clearScr();
-	newLine();
-
 	printSectionName("Aggiunta cliente");
-	newLine();
 
 	reqName(&cl);
 
@@ -64,6 +60,44 @@ int addClient() {
 	appendClientToFile(&cl);
 
 	return 0;
+}
+
+/**
+ * Delete a client identified by his ID inputted by the user.
+ *
+ * @param allClients Array of structs of all clients registered.
+ * @param num_clients Number of clients registered.
+ * @return -1 for going back to the menu
+ */
+int deleteClient(client *allClients, int num_clients) {
+	bool found = false;
+
+	printSectionName("Eliminazione cliente");
+
+	char toDeleteID[MAX_STRING_SIZE];
+	printf("\nInserisci Codice Fiscale o Partita IVA del cliente da eliminare: ");
+	readString(toDeleteID, false, false);
+
+	for (int i = 0; i < num_clients; i++) {
+		if (strCompare(toDeleteID, (allClients + i)->id)) {
+			(allClients + i)->toDelete = true;
+			found = true;
+		}
+	}
+
+	if (found) {
+		rewriteClientsToFile(allClients, num_clients);
+		setGreenColor();
+		printf("\nCliente eliminato!\n");
+		resetColor();
+	} else {
+		setRedColor();
+		printf("\nNessun cliente trovato con l'ID inserito.\n");
+		resetColor();
+	}
+	newLine();
+	pause();
+	return -1;
 }
 
 /**

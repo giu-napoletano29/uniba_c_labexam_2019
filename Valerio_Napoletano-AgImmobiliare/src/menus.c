@@ -65,7 +65,8 @@ int clientsMenu(bool reloadFile) {
 			puts("Scegli un'operazione:");
 			puts("1. Visualizza tutti i clienti");
 			puts("2. Aggiungi un cliente");
-			puts("3. Torna indietro");
+			puts("3. Elimina un cliente");
+			puts("4. Torna indietro");
 
 			newLine();
 
@@ -94,6 +95,9 @@ int clientsMenu(bool reloadFile) {
 				clientsMenu(true);
 				break;
 			case 3:
+				choice = deleteClient(allClients, clientsNum);
+				break;
+			case 4:
 				// This is used as a flag for the "go back" choice
 				// It's not that likely that an user will manually insert -1 as a choice.
 				choice = -1;
