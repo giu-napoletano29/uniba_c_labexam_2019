@@ -357,7 +357,6 @@ bool askConfirm() {
 	return choice;
 }
 
-
 /**
  * Print DB empty error to stdout
  */

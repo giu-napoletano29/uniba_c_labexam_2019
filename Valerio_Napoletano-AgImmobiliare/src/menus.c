@@ -14,10 +14,12 @@
 #include "entities/buildings/files_bl.h"
 #include "entities/buildings/misc_bl.h"
 #include "entities/buildings/show_bl.h"
+
 #include "entities/clients/files_cl.h"
 #include "entities/clients/misc_cl.h"
 #include "entities/clients/req_cl.h"
 #include "entities/clients/show_cl.h"
+
 #include "entities/pros/files_pr.h"
 #include "entities/pros/misc_pr.h"
 #include "entities/pros/show_pr.h"
@@ -215,8 +217,10 @@ int buildingsMenu() {
 		puts("Scegli un'operazione:");
 		puts("1. Visualizza tutti gli immobili");
 		puts("2. Cerca un immobile");
-		puts("3. Risultati agenzia");
-		puts("4. Torna indietro");
+		puts("3. Aggiungi un immobile");
+		puts("4. Elimina un immobile");
+		puts("5. Risultati agenzia");
+		puts("6. Torna indietro");
 
 		newLine();
 
@@ -233,9 +237,15 @@ int buildingsMenu() {
 				choice = searchBuilding(allBuildings, buildingsNum);
 				break;
 			case 3:
-				choice = resultsAgency(allBuildings, buildingsNum);
+				choice = addBuilding();
 				break;
 			case 4:
+				// Delete building
+				break;
+			case 5:
+				choice = resultsAgency(allBuildings, buildingsNum);
+				break;
+			case 6:
 				// This is used as a flag for the "go back" choice
 				// It's not that likely that an user will manually insert -1 as a choice.
 				choice = -1;

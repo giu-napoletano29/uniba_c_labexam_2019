@@ -16,7 +16,7 @@
 #include "show_bl.h"
 
 /**
- * @brief Parse "buildings" file (buildings.csv)
+ * @brief Parse "buildings" file (buildings.dat)
  *
  * @param filePtr Pointer to file initalized from fopen()
  * @param bl Buildings array of structs for storing parsed data.
@@ -44,7 +44,7 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 		while (token != NULL) {
 			switch (field) {
 				case 0:
-					strcpy(bl[bl_num].id, token);
+					bl[bl_num].id = atoi(token);
 					break;
 				case 1:
 					strcpy(bl[bl_num].street, token);
@@ -92,14 +92,14 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 }
 
 /**
- * @brief Load buildings.csv file to memory.
+ * @brief Load buildings.dat file to memory.
  *
  * @param bl Array of structs (building datatype) where data will be stored.
  * @return -1 for going back to the main menu.
  */
 int loadBuildingsFile(building *bl) {
 	FILE *filePtr;
-	filePtr = fopen("buildings.csv", "a+");
+	filePtr = fopen("buildings.dat", "a+");
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		readBuildingsFile(filePtr, bl);
@@ -119,14 +119,14 @@ int loadBuildingsFile(building *bl) {
 int rewriteBuildingsToFile(building *bl, int rows) {
 	FILE *filePtr;
 	//TODO: find a good solution to prevent data loss when file is opened in w+
-	filePtr = fopen("buildings.csv", "w+");
+	filePtr = fopen("buildings.dat", "w+");
 	checkFile(filePtr);
 
 	if (filePtr != NULL) {
 		rewind(filePtr);
 
 		for (int i = 0; i < rows; i++) {
-			fprintf(filePtr, "%s,%s,%d,%s,%s", bl[i].id, bl[i].street, bl[i].civic, bl[i].city,
+			fprintf(filePtr, "%d,%s,%d,%s,%s", bl[i].id, bl[i].street, bl[i].civic, bl[i].city,
 					bl[i].province);
 
 			formattedDateToFile(filePtr, &bl[i].reg_date);
@@ -154,7 +154,7 @@ int checkDuplicateBuildings(building *bl, int rows) {
 
 	for (int i = 0; i < rows; i++) {
 		for (int j = i + 1; j < rows; j++) {
-			if (strCompare(bl[i].id, bl[j].id)) {
+			if (bl[i].id == bl[j].id) {
 				clearScr();
 				setRedColor();
 				printf("\nERRORE: Il database contiene degli immobili con ID identico.\n");
@@ -189,10 +189,10 @@ int checkDuplicateBuildings(building *bl, int rows) {
 				printf("Nuovo ID: ");
 				switch (choice) {
 					case 1:
-						readString((bl + i)->id, false, false);
+						readInteger((bl + i)->id);
 						break;
 					case 2:
-						readString((bl + j)->id, false, false);
+						readInteger((bl + j)->id);
 						break;
 					default:
 						break;
@@ -215,7 +215,7 @@ int checkDuplicateBuildings(building *bl, int rows) {
 int getBuildingsNumber() {
 	FILE *filePtr;
 	int rows = 0;
-	filePtr = fopen("buildings.csv", "a+");
+	filePtr = fopen("buildings.dat", "a+");
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		rows = countRows(filePtr);
@@ -309,5 +309,30 @@ int searchBuilding(building *allBuildings, int num_buildings) {
 		pause();
 	}
 
+	return -1;
+}
+
+/**
+ * @brief Append a new building to the "buildings.dat" file
+ *
+ * @param cl Building struct where the data is stored
+ * @return -1 go back to main menu
+ */
+int appendBuildingToFile(building *bl) {
+	FILE *filePtr;
+	filePtr = fopen("buildings.dat", "a+");
+	if (checkFile(filePtr)) {
+		// Save to file only if the client is not marked for deletion
+		if (!bl->toDelete) {
+			fprintf(filePtr, "%d,%s,%d,%s,%s", bl->id, bl->street, bl->civic, bl->city,
+					bl->province);
+
+			formattedDateToFile(filePtr, &bl->reg_date);
+
+			fprintf(filePtr, "%d,%s,%s,%d\n", bl->price, bl->owner, bl->phone, bl->b_type);
+		}
+	}
+
+	fclose(filePtr);
 	return -1;
 }

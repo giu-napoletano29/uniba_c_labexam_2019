@@ -13,6 +13,7 @@
 #include "../../utils.h"
 #include "../../datatypes.h"
 #include "../../consts.h"
+#include "../buildings/show_bl.h" //For using printBuildingChoices()
 
 #include <stdlib.h>
 
@@ -199,17 +200,7 @@ void reqBudget(client *cl) {
 void reqPropertyType(client *cl) {
 	bool error = false;
 
-	printf("Tipologia immobile da cercare: ");
-	newLine();
-	printf("1. Appartamento");
-	newLine();
-	printf("2. Appartamento a due piani");
-	newLine();
-	printf("3. Villa");
-	newLine();
-	printf("4. Casa di campagna");
-	newLine();
-	printf("5. Attico");
+	printBuildingChoices();
 
 	newLine();
 

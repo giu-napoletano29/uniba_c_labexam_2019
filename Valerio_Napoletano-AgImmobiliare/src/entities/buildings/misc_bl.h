@@ -7,6 +7,7 @@
 #ifndef ENTITIES_BUILDINGS_MISC_BL_H_
 #define ENTITIES_BUILDINGS_MISC_BL_H_
 
+int addBuilding();
 void initBuildingsArray(building *bl, int size);
 
 #endif /* ENTITIES_BUILDINGS_MISC_BL_H_ */

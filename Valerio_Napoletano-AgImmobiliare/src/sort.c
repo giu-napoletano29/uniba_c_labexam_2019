@@ -149,6 +149,7 @@ void sortFileBui(building *bl, int rows) {
 				strcpy(bl[i].city, bl[j].city);
 				strcpy(bl[j].city, cmp.city);
 
+				//TODO: U[date
 				strcpy(cmp.id, bl[i].id);
 				strcpy(bl[i].id, bl[j].id);
 				strcpy(bl[j].id, cmp.id);
