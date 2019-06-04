@@ -126,12 +126,14 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 		rewind(filePtr);
 
 		for (int i = 0; i < rows; i++) {
-			fprintf(filePtr, "%d,%s,%d,%s,%s", bl[i].id, bl[i].street, bl[i].civic, bl[i].city,
-					bl[i].province);
+			if (!bl[i].toDelete) {
+				fprintf(filePtr, "%d,%s,%d,%s,%s", bl[i].id, bl[i].street, bl[i].civic, bl[i].city,
+						bl[i].province);
 
-			formattedDateToFile(filePtr, &bl[i].reg_date);
+				formattedDateToFile(filePtr, &bl[i].reg_date);
 
-			fprintf(filePtr, "%d,%s,%s,%d\n", bl[i].price, bl[i].owner, bl[i].phone, bl[i].b_type);
+				fprintf(filePtr, "%d,%s,%s,%d\n", bl[i].price, bl[i].owner, bl[i].phone, bl[i].b_type);
+			}
 		}
 	}
 
@@ -324,8 +326,7 @@ int appendBuildingToFile(building *bl) {
 	if (checkFile(filePtr)) {
 		// Save to file only if the client is not marked for deletion
 		if (!bl->toDelete) {
-			fprintf(filePtr, "%d,%s,%d,%s,%s", bl->id, bl->street, bl->civic, bl->city,
-					bl->province);
+			fprintf(filePtr, "%d,%s,%d,%s,%s", bl->id, bl->street, bl->civic, bl->city, bl->province);
 
 			formattedDateToFile(filePtr, &bl->reg_date);
 

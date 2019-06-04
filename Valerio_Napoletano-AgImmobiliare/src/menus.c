@@ -240,7 +240,7 @@ int buildingsMenu() {
 				choice = addBuilding();
 				break;
 			case 4:
-				// Delete building
+				choice = deleteBuilding(allBuildings, buildingsNum);
 				break;
 			case 5:
 				choice = resultsAgency(allBuildings, buildingsNum);

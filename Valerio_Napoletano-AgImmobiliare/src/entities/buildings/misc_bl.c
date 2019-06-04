@@ -10,6 +10,7 @@
 #include "../../datatypes.h"
 #include "req_bl.h"
 #include "show_bl.h"
+#include "files_bl.h"
 #include "../../utils.h"
 
 /**
@@ -77,8 +78,43 @@ int addBuilding() {
 
 	appendBuildingToFile(&bl);
 
-	showBuildingData(&bl);
-
-	return 0;
+	return -1;
 }
 
+/**
+ * Delete a building identified by his ID inputted by the user.
+ *
+ * @param allBuildings Array of structs of all buildings registered.
+ * @param num_buildings Number of buildings registered.
+ * @return -1 for going back to the menu
+ */
+int deleteBuilding(building *allBuildings, int num_buildings) {
+	bool found = false;
+
+	printSectionName("Eliminazione immobile");
+
+	int toDeleteID;
+	printf("\nInserisci identiticativo immobile da eliminare: ");
+	toDeleteID = readInteger();
+
+	for (int i = 0; i < num_buildings; i++) {
+		if (toDeleteID == (allBuildings + i)->id) {
+			(allBuildings + i)->toDelete = true;
+			found = true;
+		}
+	}
+
+	if (found) {
+		rewriteBuildingsToFile(allBuildings, num_buildings);
+		setGreenColor();
+		printf("\nImmobile eliminato!\n");
+		resetColor();
+	} else {
+		setRedColor();
+		printf("\nNessun immobile trovato con l'ID inserito.\n");
+		resetColor();
+	}
+	newLine();
+	pause();
+	return -1;
+}
