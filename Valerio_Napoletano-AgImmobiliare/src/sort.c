@@ -69,7 +69,7 @@ void sortFilePro(professional *pr, int rows) {
  * @param cl Array of structs, client data type
  * @param rows Numbers of records in the "cl" array of structs.
  */
-int sortFileCli(client *cl, int rows) {
+void sortFileCli(client *cl, int rows) {
 	client cmp;
 
 	for (int j = 0; j < rows; j++) {
@@ -114,7 +114,6 @@ int sortFileCli(client *cl, int rows) {
 			}
 		}
 	}
-	return -1;
 }
 
 /**

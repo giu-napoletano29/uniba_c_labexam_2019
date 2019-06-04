@@ -31,6 +31,7 @@ int resultsAgency(building *bl, int num_buildings) {
 	short int num_bl_found = 0;
 	bool error = false;
 
+	clearScr();
 	printSectionName("Risultati agenzia", false);
 
 	if (num_buildings != 0) {

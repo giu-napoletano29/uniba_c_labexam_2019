@@ -51,26 +51,24 @@ int clientsMenu(bool reloadFile) {
 	do {
 		clearScr();
 
-		newLine();
-
-		if (error) {
-			notFoundError();
-		}
-
 		/** - Shows the main clients menu asking the user what wants to do. */
 		if (!reloadFile) {
-			setGreenColor();
 			printSectionName("Clienti", false);
-			resetColor();
-			newLine();
 
+			newLine();
 			puts("Scegli un'operazione:");
 			puts("1. Visualizza tutti i clienti");
 			puts("2. Aggiungi un cliente");
 			puts("3. Elimina un cliente");
 			puts("4. Torna indietro");
-
 			newLine();
+
+			if (error) {
+				notFoundError();
+
+				// Reset error after showing
+				error = false;
+			}
 
 			printf("Operazione: ");
 			choice = readInteger();
@@ -82,13 +80,15 @@ int clientsMenu(bool reloadFile) {
 		switch (choice) {
 			case 1:
 				// Sort clients in the file
-				choice = sortFileCli(allClients, clientsNum);
+				sortFileCli(allClients, clientsNum);
 
 				// Show all clients only if it's explicitly asked by the user.
 				if (!reloadFile) {
 					choice = showAllClients(allClients, clientsNum);
 				}
-				//TODO: Add rewrite for sortFile
+
+				//TODO: Run rewrite only if needed
+				rewriteClientsToFile(allClients, clientsNum);
 				break;
 			case 2:
 				// Append a new client to the file.
@@ -106,7 +106,10 @@ int clientsMenu(bool reloadFile) {
 				error = false;
 				break;
 			default:
-				error = true;
+				// Show error only if the choice is not set on "go back"
+				if (choice != -1) {
+					error = true;
+				}
 				break;
 		}
 	} while (error == true);
@@ -138,22 +141,20 @@ int professMenu() {
 	do {
 		clearScr();
 
+		printSectionName("Professionisti", false);
+
+		newLine();
+		puts("Scegli un'operazione:");
+		puts("1. Mostra tutti i professionisti");
+		puts("2. Torna indietro");
 		newLine();
 
 		if (error) {
 			notFoundError();
+
+			// Reset error after showing
+			error = false;
 		}
-
-		setGreenColor();
-		printSectionName("Professionisti", false);
-		resetColor();
-		newLine();
-
-		puts("Scegli un'operazione:");
-		puts("1. Mostra tutti i professionisti");
-		puts("2. Torna indietro");
-
-		newLine();
 
 		printf("Operazione: ");
 		choice = readInteger();
@@ -162,6 +163,7 @@ int professMenu() {
 			case 1:
 				choice = showAllPros(allProfessionals, professionalsNum);
 				sortFilePro(allProfessionals, professionalsNum);
+				//TODO: Run rewrite only if needed
 				rewriteProfessionalsToFile(allProfessionals, professionalsNum);
 				break;
 			case 2:
@@ -171,10 +173,12 @@ int professMenu() {
 				error = false;
 				break;
 			default:
-				error = true;
+				// Show error only if the choice is not set on "go back"
+				if (choice != -1) {
+					error = true;
+				}
 				break;
 		}
-
 	} while (error == true);
 	return choice;
 }
@@ -202,18 +206,9 @@ int buildingsMenu() {
 
 	do {
 		clearScr();
-
-		newLine();
-
-		if (error) {
-			notFoundError();
-		}
-
-		setGreenColor();
 		printSectionName("Immobili", false);
-		resetColor();
-		newLine();
 
+		newLine();
 		puts("Scegli un'operazione:");
 		puts("1. Visualizza tutti gli immobili");
 		puts("2. Cerca un immobile");
@@ -221,8 +216,14 @@ int buildingsMenu() {
 		puts("4. Elimina un immobile");
 		puts("5. Risultati agenzia");
 		puts("6. Torna indietro");
-
 		newLine();
+
+		if (error) {
+			notFoundError();
+
+			// Reset error after showing
+			error = false;
+		}
 
 		printf("Operazione: ");
 		choice = readInteger();
@@ -231,6 +232,7 @@ int buildingsMenu() {
 			case 1:
 				choice = showAllBuildings(allBuildings, buildingsNum);
 				sortFileBui(allBuildings, buildingsNum);
+				//TODO: Run rewrite only if needed
 				rewriteBuildingsToFile(allBuildings, buildingsNum);
 				break;
 			case 2:
@@ -252,7 +254,10 @@ int buildingsMenu() {
 				error = false;
 				break;
 			default:
-				error = true;
+				// Show error only if the choice is not set on "go back"
+				if (choice != -1) {
+					error = true;
+				}
 				break;
 		}
 
@@ -269,24 +274,21 @@ void mainMenu() {
 
 	do {
 		clearScr();
-
-		newLine();
-
-		if (error) {
-			notFoundError();
-		}
-
-		setCyanColor();
-
 		printSectionName("Menu principale", true);
-		newLine();
 
+		newLine();
 		puts("Scegli un'operazione:");
 		puts("1. Clienti");
 		puts("2. Professionisti");
 		puts("3. Immobili");
-
 		newLine();
+
+		if (error) {
+			notFoundError();
+
+			// Reset error after showing
+			error = false;
+		}
 
 		printf("Operazione: ");
 		choice = readInteger();
@@ -302,7 +304,10 @@ void mainMenu() {
 				choice = buildingsMenu();
 				break;
 			default:
-				error = true;
+				// Show error only if the choice is not set on "go back"
+				if (choice != -1) {
+					error = true;
+				}
 				break;
 		}
 	} while (error == true || choice == -1);

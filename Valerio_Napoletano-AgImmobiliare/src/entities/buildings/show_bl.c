@@ -126,6 +126,7 @@ void showBuildingData(building *bl) {
 int showAllBuildings(building *bl, int num_buildings) {
 	int i;
 
+	clearScr();
 	printSectionName("Lista immobili", false);
 
 	if (num_buildings != 0) {

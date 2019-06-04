@@ -240,6 +240,7 @@ int searchBuilding(building *allBuildings, int num_buildings) {
 	int price = 0;
 	char city[MAX_STRING_SIZE];
 
+	clearScr();
 	printSectionName("Ricerca immobili", false);
 
 	if (num_buildings != 0) {

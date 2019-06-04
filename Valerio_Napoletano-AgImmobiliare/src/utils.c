@@ -263,7 +263,7 @@ void pause() {
  */
 void notFoundError() {
 	setRedColor();
-	puts("Tipologia non trovata, per favore riprova. \n");
+	puts("Tipologia non trovata, per favore riprova.\n");
 	resetColor();
 }
 
@@ -291,16 +291,16 @@ void setTitle(char *titleToSet) {
  * @param isHome Shows the program title if true
  */
 void printSectionName(char *string, bool isHome) {
+	// Set the console window title
 	setTitle(string);
-	clearScr();
 
+	// Show only if isHome boolean is true
 	if (isHome) {
-		puts("\n||| Agenzia Immobiliare di Saverio Valerio e Giuseppe Napoletano |||");
+		setCyanColor();
+		puts("||| Agenzia Immobiliare di Saverio Valerio e Giuseppe Napoletano |||\n");
+		resetColor();
 	}
 
-	newLine();
-
-	resetColor();
 	printf("||| ");
 
 	setGreenColor();
@@ -308,7 +308,6 @@ void printSectionName(char *string, bool isHome) {
 
 	resetColor();
 	printf(" |||");
-
 	newLine();
 }
 

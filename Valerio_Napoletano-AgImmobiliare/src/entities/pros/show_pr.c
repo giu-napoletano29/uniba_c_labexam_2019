@@ -72,6 +72,7 @@ void showProData(professional *pr) {
 int showAllPros(professional *pros, int num_pros) {
 	int i;
 
+	clearScr();
 	printSectionName("Lista professionisti", false);
 
 	if (num_pros != 0) {
