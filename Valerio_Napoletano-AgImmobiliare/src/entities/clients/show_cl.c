@@ -110,7 +110,7 @@ int showAllClients(client *allClients, int num_clients) {
 	int i;
 	bool runRewrite = false;
 
-	printSectionName("Lista clienti");
+	printSectionName("Lista clienti", false);
 
 	if (num_clients != 0) {
 		for (i = 0; i < num_clients; i++) {

@@ -15,7 +15,7 @@ bool isNumber(char *str);
 bool isChar(char *str);
 
 void printFormattedDate(time_t epochTime);
-void printSectionName(char *headerString);
+void printSectionName(char *string, bool isHome);
 void convertToUpperCase(char *s);
 
 int readString(char *value, bool onlyAlpha, bool onlyNumbers);

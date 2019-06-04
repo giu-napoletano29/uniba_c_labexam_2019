@@ -56,7 +56,7 @@ void saveBuildingLocalDate(building *bl) {
 int addBuilding() {
 	building bl = { 0, "", 0, "", "", 0, 0, "", "", 1 };
 
-	printSectionName("Aggiunta immobile");
+	printSectionName("Aggiunta immobile", false);
 
 	genBuildingID(&bl);
 
@@ -91,7 +91,7 @@ int addBuilding() {
 int deleteBuilding(building *allBuildings, int num_buildings) {
 	bool found = false;
 
-	printSectionName("Eliminazione immobile");
+	printSectionName("Eliminazione immobile", false);
 
 	int toDeleteID;
 	printf("\nInserisci identiticativo immobile da eliminare: ");
