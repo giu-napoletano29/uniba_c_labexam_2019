@@ -31,7 +31,7 @@ int resultsAgency(building *bl, int num_buildings) {
 	short int num_bl_found = 0;
 	bool error = false;
 
-	printSectionName("Risultati agenzia");
+	printSectionName("Risultati agenzia", false);
 
 	if (num_buildings != 0) {
 		printf("\nInserisci primo intervallo di data (gg/mm/aaaa): ");

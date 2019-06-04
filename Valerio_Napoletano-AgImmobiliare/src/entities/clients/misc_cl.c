@@ -39,7 +39,7 @@ void saveLocalDate(client *cl) {
 int addClient() {
 	client cl = { "", "", "", 1, "", 0, 0, 1, false };
 
-	printSectionName("Aggiunta cliente");
+	printSectionName("Aggiunta cliente", false);
 
 	reqName(&cl);
 
@@ -72,7 +72,7 @@ int addClient() {
 int deleteClient(client *allClients, int num_clients) {
 	bool found = false;
 
-	printSectionName("Eliminazione cliente");
+	printSectionName("Eliminazione cliente", false);
 
 	char toDeleteID[MAX_STRING_SIZE];
 	printf("\nInserisci Codice Fiscale o Partita IVA del cliente da eliminare: ");

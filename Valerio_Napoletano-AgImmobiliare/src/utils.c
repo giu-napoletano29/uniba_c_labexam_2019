@@ -288,10 +288,15 @@ void setTitle(char *titleToSet) {
  * @brief Print in the console the formatted "section name".
  *
  * @param string Section name to display.
+ * @param isHome Shows the program title if true
  */
-void printSectionName(char *string) {
+void printSectionName(char *string, bool isHome) {
 	setTitle(string);
 	clearScr();
+
+	if (isHome) {
+		puts("\n||| Agenzia Immobiliare di Saverio Valerio e Giuseppe Napoletano |||");
+	}
 
 	newLine();
 
