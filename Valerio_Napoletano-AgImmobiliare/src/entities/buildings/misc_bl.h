@@ -8,5 +8,7 @@
 #define ENTITIES_BUILDINGS_MISC_BL_H_
 
 void initBuildingsArray(building *bl, int size);
+int addBuilding();
+int deleteBuilding(building *allBuildings, int num_buildings);
 
 #endif /* ENTITIES_BUILDINGS_MISC_BL_H_ */

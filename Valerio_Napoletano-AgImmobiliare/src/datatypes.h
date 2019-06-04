@@ -71,7 +71,7 @@ typedef struct {
 } potential;
 
 typedef struct {
-	char id[MAX_STRING_SIZE];
+	int id;
 	char street[MAX_STRING_SIZE];
 	short int civic;
 	char city[MAX_STRING_SIZE];
@@ -82,6 +82,7 @@ typedef struct {
 	// Owner phone number
 	char phone[MAX_STRING_SIZE];
 	building_type b_type;
+	bool toDelete; /**< If true this building won't be saved in the file */
 } building;
 
 #endif

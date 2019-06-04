@@ -8,11 +8,14 @@
 #ifndef ENTITIES_BUILDINGS_FILES_BL_H_
 #define ENTITIES_BUILDINGS_FILES_BL_H_
 
+#include <stdio.h>
+
 int loadBuildingsFile(building *bl);
 void readBuildingsFile(FILE *filePtr, building *cl);
 int searchBuilding(building *allBuildings, int num_buildings);
 int getBuildingsNumber();
 int rewriteBuildingsToFile(building *bl, int rows);
 int checkDuplicateBuildings(building *bl, int rows);
+int appendBuildingToFile(building *bl);
 
 #endif /* ENTITIES_BUILDINGS_FILES_BL_H_ */

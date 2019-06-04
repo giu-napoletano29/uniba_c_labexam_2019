@@ -149,9 +149,9 @@ void sortFileBui(building *bl, int rows) {
 				strcpy(bl[i].city, bl[j].city);
 				strcpy(bl[j].city, cmp.city);
 
-				strcpy(cmp.id, bl[i].id);
-				strcpy(bl[i].id, bl[j].id);
-				strcpy(bl[j].id, cmp.id);
+				cmp.id = bl[i].id;
+				bl[i].id = bl[j].id;
+				bl[j].id = cmp.id;
 
 				strcpy(cmp.owner, bl[i].owner);
 				strcpy(bl[i].owner, bl[j].owner);

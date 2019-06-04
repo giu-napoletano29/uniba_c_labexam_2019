@@ -48,7 +48,7 @@ int resultsAgency(building *bl, int num_buildings) {
 			for (int i = 0; i < num_buildings; i++) {
 				if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2) {
 					setCyanColor();
-					printf("--- IMMOBILE %s ---", (bl + i)->id);
+					printf("--- IMMOBILE %d ---", (bl + i)->id);
 					resetColor();
 
 					newLine();

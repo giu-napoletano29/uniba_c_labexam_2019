@@ -42,6 +42,23 @@ void showBuildingType(int type) {
 }
 
 /**
+ * Print to stdout available building type choices.
+ */
+void printBuildingChoices() {
+	printf("Tipologia immobile da cercare: ");
+	newLine();
+	printf("1. Appartamento");
+	newLine();
+	printf("2. Appartamento a due piani");
+	newLine();
+	printf("3. Villa");
+	newLine();
+	printf("4. Casa di campagna");
+	newLine();
+	printf("5. Attico");
+}
+
+/**
  * @brief Print every field present in a building struct.
  *
  * @param bl building type struct
@@ -50,7 +67,7 @@ void showBuildingData(building *bl) {
 	setCyanColor();
 	printf("Identificativo: ");
 	resetColor();
-	printf("%s \n", bl->id);
+	printf("%d \n", bl->id);
 
 	setCyanColor();
 	printf("Indirizzo: ");
