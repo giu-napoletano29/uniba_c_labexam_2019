@@ -28,11 +28,10 @@
 /**
  * @brief Initialize the main allClients data structure and show the "clients" menu.
  *
- * @param reloadFile If true this function is called back again "recursively" for loading the updated data.
  * @return -1 for going back to the main menu.
  */
-int clientsMenu(bool reloadFile) {
-	short int choice;
+int clientsMenu() {
+	short int choice = 0;
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "client" type */
@@ -48,53 +47,43 @@ int clientsMenu(bool reloadFile) {
 	 If so asks the user to change it. */
 	checkDuplicateClients(allClients, clientsNum);
 
+	// Sort clients in the file
+	sortFileCli(allClients, clientsNum);
+
+	//TODO: Run rewrite only if needed
+	rewriteClientsToFile(allClients, clientsNum);
+
 	do {
 		clearScr();
 
 		/** - Shows the main clients menu asking the user what wants to do. */
-		if (!reloadFile) {
-			printSectionName("Clienti", false);
+		printSectionName("Clienti", false);
 
-			newLine();
-			puts("Scegli un'operazione:");
-			puts("1. Visualizza tutti i clienti");
-			puts("2. Aggiungi un cliente");
-			puts("3. Elimina un cliente");
-			puts("4. Torna indietro");
-			newLine();
+		newLine();
+		puts("Scegli un'operazione:");
+		puts("1. Visualizza tutti i clienti");
+		puts("2. Aggiungi un cliente");
+		puts("3. Elimina un cliente");
+		puts("4. Torna indietro");
+		newLine();
 
-			if (error) {
-				notFoundError();
+		if (error) {
+			notFoundError();
 
-				// Reset error after showing
-				error = false;
-			}
-
-			printf("Operazione: ");
-			choice = readInteger();
-		} else {
-			// Auto "jump" to the first switch case for reloading the file and sorting it.
-			choice = 1;
+			// Reset error after showing
+			error = false;
 		}
+
+		printf("Operazione: ");
+		choice = readInteger();
 
 		switch (choice) {
 			case 1:
-				// Sort clients in the file
-				sortFileCli(allClients, clientsNum);
-
-				// Show all clients only if it's explicitly asked by the user.
-				if (!reloadFile) {
-					choice = showAllClients(allClients, clientsNum);
-				}
-
-				//TODO: Run rewrite only if needed
-				rewriteClientsToFile(allClients, clientsNum);
+				choice = showAllClients(allClients, clientsNum);
 				break;
 			case 2:
 				// Append a new client to the file.
 				choice = addClient();
-				// Call again the function for loading the new updated data.
-				clientsMenu(true);
 				break;
 			case 3:
 				choice = deleteClient(allClients, clientsNum);
@@ -103,18 +92,15 @@ int clientsMenu(bool reloadFile) {
 				// This is used as a flag for the "go back" choice
 				// It's not that likely that an user will manually insert -1 as a choice.
 				choice = -1;
-				error = false;
 				break;
 			default:
 				// Show error only if the choice is not set on "go back"
-				if (choice != -1) {
-					error = true;
-				}
+				error = true;
 				break;
 		}
 	} while (error == true);
 
-	return -1;
+	return choice;
 }
 
 /**
@@ -122,7 +108,7 @@ int clientsMenu(bool reloadFile) {
  * @return -1 for going back to the main menu.
  */
 int professMenu() {
-	short int choice;
+	short int choice = 0;
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "professional" type */
@@ -170,13 +156,9 @@ int professMenu() {
 				// This is used as a flag for the "go back" choice
 				// It's not that likely that an user will manually insert -1 as a choice.
 				choice = -1;
-				error = false;
 				break;
 			default:
-				// Show error only if the choice is not set on "go back"
-				if (choice != -1) {
-					error = true;
-				}
+				error = true;
 				break;
 		}
 	} while (error == true);
@@ -188,7 +170,7 @@ int professMenu() {
  * @return -1 for going back to the main menu.
  */
 int buildingsMenu() {
-	short int choice;
+	short int choice = 0;
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "building" type */
@@ -251,13 +233,9 @@ int buildingsMenu() {
 				// This is used as a flag for the "go back" choice
 				// It's not that likely that an user will manually insert -1 as a choice.
 				choice = -1;
-				error = false;
 				break;
 			default:
-				// Show error only if the choice is not set on "go back"
-				if (choice != -1) {
-					error = true;
-				}
+				error = true;
 				break;
 		}
 
@@ -269,7 +247,7 @@ int buildingsMenu() {
  * @brief Main menu of the software. Connects the various clients, pros and buildings submenus.
  */
 void mainMenu() {
-	short int choice;
+	short int choice = 0;
 	bool error = false;
 
 	do {
@@ -295,7 +273,7 @@ void mainMenu() {
 
 		switch (choice) {
 			case 1:
-				choice = clientsMenu(false);
+				choice = clientsMenu();
 				break;
 			case 2:
 				choice = professMenu();
@@ -303,12 +281,13 @@ void mainMenu() {
 			case 3:
 				choice = buildingsMenu();
 				break;
-			default:
-				// Show error only if the choice is not set on "go back"
-				if (choice != -1) {
-					error = true;
-				}
+			case -1:
+				error = false;
 				break;
+			default:
+				error = true;
+				break;
+
 		}
 	} while (error == true || choice == -1);
 }

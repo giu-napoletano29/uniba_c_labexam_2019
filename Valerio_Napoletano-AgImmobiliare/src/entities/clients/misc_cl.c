@@ -60,7 +60,7 @@ int addClient() {
 
 	appendClientToFile(&cl);
 
-	return 0;
+	return -1;
 }
 
 /**

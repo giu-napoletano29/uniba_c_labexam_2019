@@ -8,6 +8,6 @@
 #include <stdbool.h>
 
 void mainMenu();
-int clientsMenu(bool reloadFile);
+int clientsMenu();
 int professMenu();
 int buildingsMenu();
