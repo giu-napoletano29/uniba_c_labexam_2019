@@ -105,7 +105,7 @@ int rewriteClientsToFile(client *cl, int rows) {
 	filePtr = fopen("clients.dat", "w+");
 
 	// Sort clients in the memory before writing
-	sortFileCli(cl, rows);
+	sortClients(cl, rows);
 
 	if (checkFile(filePtr)) {
 		for (int i = 0; i < rows; i++) {

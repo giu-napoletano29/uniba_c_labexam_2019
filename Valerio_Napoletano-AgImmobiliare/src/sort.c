@@ -20,7 +20,7 @@
  * @param pr Array of structs, professional data type
  * @param rows Numbers of records in the "pr" array of structs.
  */
-void sortFilePro(professional *pr, int rows) {
+void sortPros(professional *pr, int rows) {
 	professional cmp;
 
 	for (int j = 0; j < rows; j++) {
@@ -69,7 +69,7 @@ void sortFilePro(professional *pr, int rows) {
  * @param cl Array of structs, client data type
  * @param rows Numbers of records in the "cl" array of structs.
  */
-void sortFileCli(client *cl, int rows) {
+void sortClients(client *cl, int rows) {
 	client cmp;
 
 	for (int j = 0; j < rows; j++) {
@@ -122,7 +122,7 @@ void sortFileCli(client *cl, int rows) {
  * @param bl Array of structs, building data type
  * @param rows Numbers of records in the "bl" array of structs.
  */
-void sortFileBui(building *bl, int rows) {
+void sortBuildings(building *bl, int rows) {
 	building cmp;
 
 	for (int j = 0; j < rows; j++) {

@@ -105,7 +105,7 @@ int professMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "professional" type */
-	int professionalsNum = getProfessionalsNumber();
+	int professionalsNum = getProsNumber();
 	professional allProfessionals[professionalsNum];
 	initProsArray(allProfessionals, professionalsNum);
 
@@ -125,7 +125,9 @@ int professMenu() {
 		newLine();
 		puts("Scegli un'operazione:");
 		puts("1. Mostra tutti i professionisti");
-		puts("2. Torna indietro");
+		puts("2. Aggiungi un professionista");
+		puts("3. Elimina un professionista");
+		puts("4. Torna indietro");
 		newLine();
 
 		if (error) {
@@ -141,11 +143,18 @@ int professMenu() {
 		switch (choice) {
 			case 1:
 				choice = showAllPros(allProfessionals, professionalsNum);
-				sortFilePro(allProfessionals, professionalsNum);
+				sortPros(allProfessionals, professionalsNum);
 				//TODO: Run rewrite only if needed
-				rewriteProfessionalsToFile(allProfessionals, professionalsNum);
+				rewriteProsToFile(allProfessionals, professionalsNum);
 				break;
 			case 2:
+				// Append a new professional to the file.
+				choice = addPro(allProfessionals, professionalsNum);
+				break;
+			case 3:
+				choice = deletePro(allProfessionals, professionalsNum);
+				break;
+			case 4:
 				// This is used as a flag for the "go back" choice
 				// It's not that likely that an user will manually insert -1 as a choice.
 				choice = -1;
@@ -206,7 +215,7 @@ int buildingsMenu() {
 		switch (choice) {
 			case 1:
 				choice = showAllBuildings(allBuildings, buildingsNum);
-				sortFileBui(allBuildings, buildingsNum);
+				sortBuildings(allBuildings, buildingsNum);
 				//TODO: Run rewrite only if needed
 				rewriteBuildingsToFile(allBuildings, buildingsNum);
 				break;

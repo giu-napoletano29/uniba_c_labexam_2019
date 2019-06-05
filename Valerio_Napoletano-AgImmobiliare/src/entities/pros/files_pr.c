@@ -173,7 +173,7 @@ int loadProsFile(professional *pr) {
  *
  * @return Number of professionals. (integer)
  */
-int getProfessionalsNumber() {
+int getProsNumber() {
 	FILE *filePtr;
 	int rows = 0;
 	filePtr = fopen("professionals.csv", "a+");
@@ -215,7 +215,7 @@ void loadPotFile(char id[]) {
  * @param pr Professional array of structs where the data is stored
  * @param rows How many professionals are registered
  */
-void rewriteProfessionalsToFile(professional *pr, int rows) {
+void rewriteProsToFile(professional *pr, int rows) {
 	FILE *filePtr;
 	filePtr = fopen("professionals.csv", "w+");
 
@@ -296,6 +296,6 @@ int checkDuplicatePros(professional *pr, int rows) {
 			}
 		}
 	}
-	rewriteProfessionalsToFile(pr, rows);
+	rewriteProsToFile(pr, rows);
 	return result;
 }

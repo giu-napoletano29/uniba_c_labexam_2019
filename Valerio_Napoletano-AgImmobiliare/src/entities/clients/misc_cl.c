@@ -37,11 +37,10 @@ void saveLocalDate(client *cl) {
  * Initializes a client struct and calls the "req" functions for filling the latter.
  *
  * allClients and num_clients parameters are needed
- * for calling sortFileCli() and rewriteClientsToFile()
+ * for calling sortClients() and rewriteClientsToFile()
  *
  * @param allClients Array of structs (client type)
  * @param num_clients Number of items (clients) saved in the array.
- * @return Value for returning back to the menu (-1)
  * @return -1 for going back to the main menu.
  */
 int addClient(client *allClients, int num_clients) {
@@ -71,7 +70,7 @@ int addClient(client *allClients, int num_clients) {
 	appendClientToFile(&cl);
 
 	/** Sort clients in the memory */
-	sortFileCli(allClients, num_clients);
+	sortClients(allClients, num_clients);
 
 	/** - Re-declare and re-initialize the array of structs with the newly created client */
 	newClientsNum = getClientsNumber();
