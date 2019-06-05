@@ -17,6 +17,7 @@
 #include "files_cl.h"
 #include "req_cl.h"
 #include "show_cl.h"
+#include "misc_cl.h"
 
 /**
  * @brief Get current system date and save the UNIX Epoch time value.
@@ -45,9 +46,11 @@ void saveLocalDate(client *cl) {
  */
 int addClient(client *allClients, int num_clients) {
 	client cl = { "", "", "", 1, "", 0, 0, 1, false };
+	int newClientsNum = 0;
 
 	clearScr();
 	printSectionName("Aggiunta cliente", false);
+	newLine();
 
 	reqName(&cl);
 
@@ -67,11 +70,19 @@ int addClient(client *allClients, int num_clients) {
 
 	appendClientToFile(&cl);
 
-	// Sort clients in the memory
+	/** Sort clients in the memory */
 	sortFileCli(allClients, num_clients);
 
-	// Rewrite ordered clients file
-	rewriteClientsToFile(allClients, num_clients);
+	/** - Re-declare and re-initialize the array of structs with the newly created client */
+	newClientsNum = getClientsNumber();
+	client newAllClients[newClientsNum];
+	initClientsArray(newAllClients, newClientsNum);
+
+	/** - Load client file and stores the parsed data in the memory. */
+	loadClientFile(newAllClients);
+
+	/** Rewrite ordered array of structs from memory to the clients file */
+	rewriteClientsToFile(newAllClients, newClientsNum);
 
 	return -1;
 }

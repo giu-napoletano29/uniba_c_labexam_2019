@@ -14,6 +14,7 @@
 #include "../../datatypes.h"
 #include "../../file_utils.h"
 #include "../../utils.h"
+#include "../../sort.h"
 #include "show_cl.h"
 #include "req_cl.h" // For reqID() and reqPIVA()
 
