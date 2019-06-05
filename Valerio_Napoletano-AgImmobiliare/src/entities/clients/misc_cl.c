@@ -13,6 +13,7 @@
 
 #include "../../datatypes.h"
 #include "../../utils.h"
+#include "../../sort.h"
 #include "files_cl.h"
 #include "req_cl.h"
 #include "show_cl.h"
@@ -34,9 +35,15 @@ void saveLocalDate(client *cl) {
  * @brief Append an user to the user file.
  * Initializes a client struct and calls the "req" functions for filling the latter.
  *
+ * allClients and num_clients parameters are needed
+ * for calling sortFileCli() and rewriteClientsToFile()
+ *
+ * @param allClients Array of structs (client type)
+ * @param num_clients Number of items (clients) saved in the array.
+ * @return Value for returning back to the menu (-1)
  * @return -1 for going back to the main menu.
  */
-int addClient() {
+int addClient(client *allClients, int num_clients) {
 	client cl = { "", "", "", 1, "", 0, 0, 1, false };
 
 	clearScr();
@@ -59,6 +66,12 @@ int addClient() {
 	saveLocalDate(&cl);
 
 	appendClientToFile(&cl);
+
+	// Sort clients in the memory
+	sortFileCli(allClients, num_clients);
+
+	// Rewrite ordered clients file
+	rewriteClientsToFile(allClients, num_clients);
 
 	return -1;
 }
@@ -88,7 +101,11 @@ int deleteClient(client *allClients, int num_clients) {
 	}
 
 	if (found) {
+		// Sort clients in the memory (just in case, should already be ordered)
+		sortFileCli(allClients, num_clients);
+
 		rewriteClientsToFile(allClients, num_clients);
+
 		setGreenColor();
 		printf("\nCliente eliminato!\n");
 		resetColor();

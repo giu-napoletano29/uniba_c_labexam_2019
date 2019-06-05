@@ -47,12 +47,6 @@ int clientsMenu() {
 	 If so asks the user to change it. */
 	checkDuplicateClients(allClients, clientsNum);
 
-	// Sort clients in the file
-	sortFileCli(allClients, clientsNum);
-
-	//TODO: Run rewrite only if needed
-	rewriteClientsToFile(allClients, clientsNum);
-
 	do {
 		clearScr();
 
@@ -83,7 +77,7 @@ int clientsMenu() {
 				break;
 			case 2:
 				// Append a new client to the file.
-				choice = addClient();
+				choice = addClient(allClients, clientsNum);
 				break;
 			case 3:
 				choice = deleteClient(allClients, clientsNum);
@@ -94,7 +88,6 @@ int clientsMenu() {
 				choice = -1;
 				break;
 			default:
-				// Show error only if the choice is not set on "go back"
 				error = true;
 				break;
 		}

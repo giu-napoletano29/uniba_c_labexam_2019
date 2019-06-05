@@ -11,6 +11,7 @@
 #include <string.h> // strcmp()
 
 #include "../../utils.h"
+#include "../../sort.h"
 #include "../buildings/show_bl.h"
 #include "files_cl.h" // rewriteClientsToFile
 #include "misc_cl.h" // checkIfUserExpired()
@@ -109,6 +110,12 @@ void showClientData(client *cl) {
 int showAllClients(client *allClients, int num_clients) {
 	int i;
 	bool runRewrite = false;
+
+	// Sort clients in the memory
+	sortFileCli(allClients, num_clients);
+
+	// Rewrite ordered clients file
+	rewriteClientsToFile(allClients, num_clients);
 
 	clearScr();
 	printSectionName("Lista clienti", false);

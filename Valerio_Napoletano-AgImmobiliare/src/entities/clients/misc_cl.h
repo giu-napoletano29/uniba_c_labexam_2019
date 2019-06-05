@@ -8,7 +8,7 @@
 #ifndef ENTITIES_CLIENTS_MISC_CL_H_
 #define ENTITIES_CLIENTS_MISC_CL_H_
 
-int addClient();
+int addClient(client *allClients, int num_clients);
 void saveLocalDate(client *cl);
 bool checkIfUserExpired(time_t epochTime, char id[]);
 void initClientsArray(client *cl, int size);
