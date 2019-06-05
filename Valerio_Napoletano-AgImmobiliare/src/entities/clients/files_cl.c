@@ -102,6 +102,10 @@ void parseClientFile(FILE *filePtr, client *cl) {
 int rewriteClientsToFile(client *cl, int rows) {
 	FILE *filePtr;
 	filePtr = fopen("clients.dat", "w+");
+
+	// Sort clients in the memory before writing
+	sortFileCli(cl, rows);
+
 	if (checkFile(filePtr)) {
 		for (int i = 0; i < rows; i++) {
 			// Save client to file only if the client is not marked for deletion

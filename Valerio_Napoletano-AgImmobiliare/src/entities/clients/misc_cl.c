@@ -101,9 +101,6 @@ int deleteClient(client *allClients, int num_clients) {
 	}
 
 	if (found) {
-		// Sort clients in the memory (just in case, should already be ordered)
-		sortFileCli(allClients, num_clients);
-
 		rewriteClientsToFile(allClients, num_clients);
 
 		setGreenColor();

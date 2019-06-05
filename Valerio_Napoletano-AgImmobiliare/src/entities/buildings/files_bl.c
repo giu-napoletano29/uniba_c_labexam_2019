@@ -318,7 +318,7 @@ int searchBuilding(building *allBuildings, int num_buildings) {
 /**
  * @brief Append a new building to the "buildings.dat" file
  *
- * @param cl Building struct where the data is stored
+ * @param bl Building struct where the data is stored
  * @return -1 go back to main menu
  */
 int appendBuildingToFile(building *bl) {
