@@ -19,7 +19,7 @@
 #include "req_pr.h"
 
 /**
- * @brief Parse "professional" file (professionals.csv)
+ * @brief Parse "professional" file (pros_potential.dat)
  *
  * @param filePtr Pointer to file initalized from fopen()
  * @param pr Professional array of structs for storing parsed data.
@@ -107,7 +107,7 @@ void findPotential(char id[], potential *pr, int num_profess) {
 }
 
 /**
- * @brief Parse "potential" file (potentials.csv)
+ * @brief Parse "potential" file (potentials.dat)
  * Check out findPotential() for more information about the "potential".
  *
  * @param fp_pot Pointer to file initalized from fopen()
@@ -158,7 +158,7 @@ void parsePotentialsFile(FILE *fp_pot, potential *pr, char id[], int rows) {
  */
 int loadProsFile(professional *pr) {
 	FILE *filePtr;
-	filePtr = fopen("professionals.csv", "a+");
+	filePtr = fopen("pros_potential.dat", "a+");
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		readProsFile(filePtr, pr);
@@ -176,7 +176,26 @@ int loadProsFile(professional *pr) {
 int getProsNumber() {
 	FILE *filePtr;
 	int rows = 0;
-	filePtr = fopen("professionals.csv", "a+");
+	filePtr = fopen("pros_potential.dat", "a+");
+	if (checkFile(filePtr)) {
+		if (filePtr != NULL) {
+			rewind(filePtr);
+			rows = countRows(filePtr);
+		}
+	}
+	fclose(filePtr);
+	return rows;
+}
+
+/**
+ * @brief Get how many potentials are saved in the file.
+ *
+ * @return Number of potentials. (integer)
+ */
+int getPotsNumber() {
+	FILE *filePtr;
+	int rows = 0;
+	filePtr = fopen("potentials.dat", "a+");
 	if (checkFile(filePtr)) {
 		if (filePtr != NULL) {
 			rewind(filePtr);
@@ -195,7 +214,7 @@ int getProsNumber() {
 void loadPotFile(char id[]) {
 	int rows = 0;
 	FILE *fp_pot;
-	fp_pot = fopen("pro_potential.csv", "a+");
+	fp_pot = fopen("pros_potential.dat", "a+");
 	if (checkFile(fp_pot)) {
 		rows = countRows(fp_pot);
 		rewind(fp_pot);
@@ -206,32 +225,6 @@ void loadPotFile(char id[]) {
 		parsePotentialsFile(fp_pot, pr, id, rows);
 	}
 	fclose(fp_pot);
-}
-
-/**
- * @brief Replace professionals file contents with the data saved in the array of structs.
- * Can be useful for deleting/update data from the file.
- *
- * @param pr Professional array of structs where the data is stored
- * @param rows How many professionals are registered
- */
-void rewriteProsToFile(professional *pr, int rows) {
-	FILE *filePtr;
-	filePtr = fopen("professionals.csv", "w+");
-
-	if (checkFile(filePtr)) {
-		rewind(filePtr);
-		for (int i = 0; i < rows; i++) {
-			fprintf(filePtr, "%s,%s,%s,%s,%s,%s", pr[i].id, pr[i].name, pr[i].surname, pr[i].area,
-					pr[i].phone, pr[i].email);
-
-			formattedDateToFile(filePtr, &pr[i].reg_date);
-
-			fprintf(filePtr, "%d\n", pr[i].buildings_sold);
-		}
-	}
-
-	fclose(filePtr);
 }
 
 /**
@@ -298,4 +291,69 @@ int checkDuplicatePros(professional *pr, int rows) {
 	}
 	rewriteProsToFile(pr, rows);
 	return result;
+}
+
+/**
+ * @brief Append a new professional to the "pros_potential.dat" file
+ *
+ * @param cl Client struct where the data is stored
+ * @return -1 go back to main menu
+ */
+int appendProToFile(professional *pr, potential *pt) {
+	FILE *clientsFilePtr, potentialsFilePtr;
+	clientsFilePtr = fopen("pros_potential.dat", "a+");
+	potentialsFilePtr = fopen("potentials.dat", "a+");
+
+	if (checkFile(clientsFilePtr) && checkFile(potentialsFilePtr)) {
+		// Save to file only if the client is not marked for deletion
+		if (!pr->toDelete) {
+			// Write professionals file
+			fprintf(clientsFilePtr, "%s,%s,%s,%s,%s,%s", pr->id, pr->name, pr->surname, pr->area, pr->phone,
+					pr->email);
+
+			formattedDateToFile(clientsFilePtr, &pr->reg_date);
+
+			fprintf(clientsFilePtr, "%d\n", pr->buildings_sold);
+
+			// Write potentials file
+			fprintf(potentialsFilePtr, "%s,%s", pt->id, pt->content);
+		}
+	}
+
+	fclose(clientsFilePtr);
+	fclose(potentialsFilePtr);
+	return -1;
+}
+
+/**
+ * @brief Replace professionals file contents with the data saved in the array of structs.
+ * Can be useful for deleting/update data from the file.
+ *
+ * @param pr Professional array of structs where the data is stored
+ * @param rows How many professionals are registered
+ */
+void rewriteProsToFile(professional *allPros, potential *allPts, int rows) {
+	FILE *clientsFilePtr, *potentialsFilePtr;
+	clientsFilePtr = fopen("pros_potential.dat", "w+");
+	potentialsFilePtr = fopen("potentials.dat", "w+");
+
+	if (checkFile(clientsFilePtr) && checkFile(potentialsFilePtr)) {
+		rewind(clientsFilePtr);
+		rewind(potentialsFilePtr);
+		for (int i = 0; i < rows; i++) {
+			// Write professionals file
+			fprintf(clientsFilePtr, "%s,%s,%s,%s,%s,%s", allPros->id, allPros->name, allPros->surname, allPros->area, allPros->phone,
+					allPros->email);
+
+			formattedDateToFile(clientsFilePtr, &allPros->reg_date);
+
+			fprintf(clientsFilePtr, "%d\n", allPros->buildings_sold);
+
+			// Write potentials file
+			fprintf(potentialsFilePtr, "%s,%s", allPts->id, allPts->content);
+		}
+	}
+
+	fclose(clientsFilePtr);
+	fclose(potentialsFilePtr);
 }

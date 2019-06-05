@@ -19,7 +19,7 @@
 #include "req_cl.h" // For reqID() and reqPIVA()
 
 /**
- * @brief Parse "clients" file (professionals.csv)
+ * @brief Parse "clients" file (clients.dat)
  *
  * @param filePtr Pointer to file initalized from fopen()
  * @param cl Client array of structs for storing parsed data.

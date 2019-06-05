@@ -35,4 +35,95 @@ void reqProCF(professional *pr) {
 			error = false;
 		}
 	} while (error == true);
+
+	clearScr();
 }
+
+/**
+ * @brief Request professional's name from stdin.
+ *
+ * @param pr "professional" type struct
+ */
+void reqProName(professional *pr) {
+	printf("Nome: ");
+	readString(pr->name, true, false);
+
+	clearScr();
+}
+
+/**
+ * @brief Request professional's surname from stdin.
+ *
+ * @param cl "professional" type struct
+ */
+void reqProSurname(professional *pr) {
+	printf("Cognome: ");
+	readString(pr->surname, true, false);
+
+	clearScr();
+}
+
+/**
+ * @brief Request professional's area from stdin.
+ *
+ * @param pr "professional" type struct
+ */
+void reqProArea(professional *pr) {
+	printf("Area: ");
+	readString(pr->area, true, false);
+
+	clearScr();
+}
+
+/**
+ * @brief Request professional's phone number from stdin.
+ *
+ * @param pr "professional" type struct
+ */
+void reqProPhone(professional *pr) {
+	printf("Numero di telefono: ");
+	readString(pr->area, false, false);
+
+	clearScr();
+}
+
+/**
+ * @brief Request professional's email from stdin.
+ *
+ * @param pr "professional" type struct
+ */
+void reqProEmail(professional *pr) {
+	printf("Indirizzo e-mail: ");
+	readString(pr->email, false, false);
+
+	clearScr();
+}
+
+/**
+ * @brief Request professional's number of buildings sold from stdin.
+ *
+ * @param pr "professional" type struct
+ */
+void reqProSoldBuildings(professional *pr) {
+	printf("Immobili venduti: ");
+	pr->buildings_sold = readInteger();
+
+	clearScr();
+}
+
+/**
+ * @brief Request professional's potential stdin.
+ *
+ * @param pr "professional" type struct
+ */
+void reqProPotential(professional *pr, potential *pt) {
+	printf("Potenziale: ");
+
+	strcpy(pt->id, pr->id);
+
+	readString(pt->content, false, false);
+
+	clearScr();
+}
+
+

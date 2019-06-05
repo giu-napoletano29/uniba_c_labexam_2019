@@ -109,6 +109,11 @@ int professMenu() {
 	professional allProfessionals[professionalsNum];
 	initProsArray(allProfessionals, professionalsNum);
 
+	/** - Declare and initialize the array of structs, "potentials" type */
+	int potsNum = getPotsNumber();
+	potential allPotentials[potsNum];
+	initPotentialsArray(allPotentials, potsNum);
+
 	/** - Load pros file and stores the parsed data in the memory. */
 	loadProsFile(allProfessionals);
 

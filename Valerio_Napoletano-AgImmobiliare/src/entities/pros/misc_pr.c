@@ -9,6 +9,7 @@
 #include <string.h>
 
 #include "files_pr.h"
+#include "req_pr.h"
 
 #include "../../datatypes.h"
 #include "../../utils.h"
@@ -73,31 +74,33 @@ void saveLocalDatePro(professional *pr) {
 
 int addPro(professional *allPros, int num_pros) {
 	professional pr = { "", "", "", "", "", "", 0, 0, false};
+	potential pt = { "", "" };
 	int newProsNum = 0;
 
 	clearScr();
 	printSectionName("Aggiunta professionista", false);
 	newLine();
 
-	/*
-	reqName(&cl);
+	reqProCF(&pr);
 
-	reqSurname(&cl);
+	reqProName(&pr);
 
-	reqType(&cl);
+	reqProSurname(&pr);
 
-	reqID(&cl);
+	reqProArea(&pr);
 
-	reqCompanyName(&cl);
+	reqProPhone(&pr);
 
-	reqBudget(&cl);
+	reqProEmail(&pr);
 
-	reqPropertyType(&cl);
+	reqProSoldBuildings(&pr);
+
+	reqProPotential(&pr, &pt);
 
 	saveLocalDatePro(&pr);
 
-	appendProToFile(&pr);
-*/
+	appendProToFile(&pr, &pt);
+
 	/** - Sort clients in the memory */
 	sortPros(allPros, num_pros);
 
