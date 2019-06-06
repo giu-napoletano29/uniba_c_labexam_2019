@@ -108,7 +108,7 @@ int loadProsFile(professional *allPros) {
 }
 
 /**
- * @brief Append a new professional to the "pros_potential.dat" file
+ * @brief Append a new professional to the "professionals.dat" file
  *
  * @param pr Professional struct where the data is stored
  * @return -1 go back to main menu
@@ -143,7 +143,7 @@ int appendProToFile(professional *pr) {
  */
 void rewriteProsToFile(professional *allPros, int rows) {
 	FILE *filePtr;
-	filePtr = fopen("pros_potential.dat", "w+");
+	filePtr = fopen("professionals.dat", "w+");
 
 	if (checkFile(filePtr)) {
 		rewind(filePtr);

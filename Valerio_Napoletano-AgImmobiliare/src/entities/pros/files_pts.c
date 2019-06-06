@@ -59,10 +59,10 @@ void parsePotentialsFile(FILE *fp_pot, potential *pr) {
 		while (token != NULL) {
 			switch (field) {
 				case 0:
-					strcpy(pr[pr_num].id, token);
+					strcpy((pr + pr_num)->id, token);
 					break;
 				case 1:
-					strcpy(pr[pr_num].content, token);
+					strcpy((pr + pr_num)->content, token);
 					break;
 			}
 			// Read the other tokens
@@ -87,6 +87,50 @@ void loadPotentialsFile(potential *allPotentials) {
 		rewind(filePtr);
 
 		parsePotentialsFile(filePtr, allPotentials);
+	}
+
+	fclose(filePtr);
+}
+
+
+/**
+ * @brief Append a new potential to the "pros_potential.dat" file
+ *
+ * @param pr Potential struct where the data is stored
+ * @return -1 go back to main menu
+ */
+int appendPtsToFile(potential *pt) {
+	FILE *filePtr;
+	filePtr = fopen("pros_potential.dat", "a+");
+
+	if (checkFile(filePtr)) {
+		// Save to file only if the client is not marked for deletion
+		if (!pt->toDelete) {
+			// Write professionals file
+			fprintf(filePtr, "%s,%s\n", pt->id, pt->content);
+		}
+	}
+
+	fclose(filePtr);
+	return -1;
+}
+
+/**
+ * @brief Replace potentials file contents with the data saved in the array of structs.
+ * Can be useful for deleting/update data from the file.
+ *
+ * @param allPts Potentials array of structs where the data is stored
+ * @param rows How many potentials are registered
+ */
+void rewritePtsToFile(potential *allPts, int rows) {
+	FILE *filePtr;
+	filePtr = fopen("pros_potential.dat", "w+");
+
+	if (checkFile(filePtr)) {
+		rewind(filePtr);
+		for (int i = 0; i < rows; i++) {
+			fprintf(filePtr, "%s,%s", (allPts + i)->id, (allPts + i)->content);
+		}
 	}
 
 	fclose(filePtr);

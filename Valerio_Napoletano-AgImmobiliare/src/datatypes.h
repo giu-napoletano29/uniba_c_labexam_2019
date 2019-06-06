@@ -63,12 +63,13 @@ typedef struct {
 	char email[MAX_STRING_SIZE];
 	time_t reg_date; /**< Registration date in Epoch time */
 	int buildings_sold; /**< Number of buildings that this professional has sold */
-	bool toDelete; /**< If true this client won't be saved in the file */
+	bool toDelete; /**< If true this professional won't be saved in the file */
 } professional;
 
 typedef struct {
 	char id[MAX_STRING_SIZE]; /**< "Codice Fiscale" in Italy */
 	char content[MAX_TEXT_SIZE];
+	bool toDelete; /**< If true this potential won't be saved in the file */
 } potential;
 
 typedef struct {

@@ -105,31 +105,35 @@ int addPro(professional *allPros, potential *allPts, int num_pros) {
 
 	appendProToFile(&pr);
 
-	/** - Sort clients in the memory */
-	sortPros(allPros, num_pros);
+	appendPtsToFile(&pt);
 
+	/** - Sort clients in the memory */
+	//TODO: Maybe does not work
+	//sortPros(allPros, num_pros);
+
+	// --- PROFESSIONALS ---
 	/** - Re-declare and re-initialize the array of structs with the newly created pro */
 	newProsNum = countFileRows("professionals");
 	professional newAllPros[newProsNum];
 	initProsArray(newAllPros, newProsNum);
 
+	/** - Load pros file and stores the parsed data in the memory. */
+	loadProsFile(newAllPros);
+
+	/** - Rewrite ordered array of structs from memory to the pros file */
+	rewriteProsToFile(newAllPros, newProsNum);
+
+	// --- POTENTIALS ---
 	/** - Re-declare and re-initialize the array of structs with the newly created potentials */
 	newPtsNum = countFileRows("pros_potential");
 	potential newAllPts[newPtsNum];
 	initPotentialsArray(newAllPts, newPtsNum);
 
-	/** - Load pros file and stores the parsed data in the memory. */
-	loadProsFile(newAllPros);
-
 	/** - Load potentials file and stores the parsed data in the memory. */
 	loadPotentialsFile(newAllPts);
 
 	/** - Rewrite ordered array of structs from memory to the pros file */
-	rewriteProsToFile(newAllPros, newProsNum);
-
-	/** - Rewrite ordered array of structs from memory to the pros file */
-	// TODO: MISSING
-	//rewritePotentialsToFile(newAllPts, newPtsNum);
+	rewritePtsToFile(newAllPts, newPtsNum);
 
 	return -1;
 }
