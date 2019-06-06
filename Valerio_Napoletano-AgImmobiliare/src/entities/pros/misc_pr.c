@@ -9,6 +9,7 @@
 #include <string.h>
 
 #include "files_pr.h"
+#include "files_pts.h"
 #include "req_pr.h"
 
 #include "../../datatypes.h"
@@ -69,6 +70,7 @@ void saveLocalDatePro(professional *pr) {
  * for calling sortPros() and rewriteProsToFile()
  *
  * @param allPros Array of structs (professional type)
+ * @param allPts Array of structs (potential type)
  * @param num_pros Number of items (professionals) saved in the array.
  * @return Value for returning back to the menu (-1)
  */
@@ -119,8 +121,15 @@ int addPro(professional *allPros, potential *allPts, int num_pros) {
 	/** - Load pros file and stores the parsed data in the memory. */
 	loadProsFile(newAllPros);
 
+	/** - Load potentials file and stores the parsed data in the memory. */
+	loadPotentialsFile(newAllPts);
+
 	/** - Rewrite ordered array of structs from memory to the pros file */
 	rewriteProsToFile(newAllPros, newProsNum);
+
+	/** - Rewrite ordered array of structs from memory to the pros file */
+	// TODO: MISSING
+	//rewritePotentialsToFile(newAllPts, newPtsNum);
 
 	return -1;
 }

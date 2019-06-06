@@ -123,7 +123,14 @@ int professMenu() {
 	/**
 	 - Check if there's any client with duplicated IDs
 	 If so asks the user to change it. */
-	checkDuplicatePros(allProfessionals, professionalsNum);
+	 //TODO: Check if works
+	//checkDuplicatePros(allProfessionals, professionalsNum);
+
+	/*
+	 sortPros(allProfessionals, professionalsNum);
+	 //TODO: Run rewrite only if needed
+	 rewriteProsToFile(allProfessionals, professionalsNum);
+	 */
 
 	do {
 		clearScr();
@@ -150,14 +157,11 @@ int professMenu() {
 
 		switch (choice) {
 			case 1:
-				choice = showAllPros(allProfessionals, professionalsNum);
-				sortPros(allProfessionals, professionalsNum);
-				//TODO: Run rewrite only if needed
-				rewriteProsToFile(allProfessionals, professionalsNum);
+				choice = showAllPros(allProfessionals, allPotentials, professionalsNum);
 				break;
 			case 2:
 				// Append a new professional to the file.
-				choice = addPro(allProfessionals, professionalsNum);
+				choice = addPro(allProfessionals, allPotentials, professionalsNum);
 				break;
 			case 3:
 				choice = deletePro(allProfessionals, professionalsNum);

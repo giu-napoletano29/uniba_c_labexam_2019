@@ -6,5 +6,6 @@
  */
 
 void findPotential(char id[], potential *pr, int num_profess);
-void parsePotentialsFile(FILE *fp_pot, potential *pr, int rows);
+
+void parsePotentialsFile(FILE *fp_pot, potential *pr);
 void loadPotentialsFile(potential *allPotentials);

@@ -18,8 +18,9 @@
  * @brief Print every field available in a professional struct.
  *
  * @param pr professional type struct
+ * @param allPts Array of structs of all available potentials records
  */
-void showProData(professional *pr) {
+void showProData(professional *pr, potential *allPts, int num_records) {
 	setCyanColor();
 	printf("Codice fiscale: ");
 	resetColor();
@@ -60,9 +61,8 @@ void showProData(professional *pr) {
 	resetColor();
 	printf("%d \n", pr->buildings_sold);
 
-	//TODO: Program crashes if no potentials are available for the clients
-	//TODO: TO UPDATE
-	//loadPotentialsFile(pr->id);
+	// Print related potential
+	findPotential(pr->id, allPts, num_records);
 }
 
 /**
@@ -70,21 +70,22 @@ void showProData(professional *pr) {
  * Iterates on num_pros calling the showProData() function.
  *
  * @param pros Array of structs (professional type)
- * @param num_pros Number of items (professionals) saved in the array.
+ * @param num_records Number of items professionals/potentials saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-int showAllPros(professional *pros, int num_pros) {
+int showAllPros(professional *allPros, potential *allPts, int num_records) {
 	int i;
 
 	clearScr();
 	printSectionName("Lista professionisti", false);
 
-	if (num_pros != 0) {
-		for (i = 0; i < num_pros; i++) {
+	if (num_records != 0) {
+		for (i = 0; i < num_records; i++) {
 			setCyanColor();
 			printf("\n-- PROFESSIONISTA %d --\n", i + 1);
 			resetColor();
-			showProData(pros + i);
+
+			showProData((allPros + i), allPts, num_records);
 		}
 	} else {
 		dbEmptyError();

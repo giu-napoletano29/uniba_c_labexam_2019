@@ -10,6 +10,7 @@
 
 #include "../../utils.h"
 #include "../../datatypes.h"
+#include "../../file_utils.h"
 
 /**
  * @brief Print potential string of a specific professional.
@@ -18,15 +19,15 @@
  *
  * @param id Professional's ID
  * @param pr Potentials array of structs
- * @param num_profess Number of professionals registered
+ * @param num_records Number of professionals/potentials registered
  */
-void findPotential(char id[], potential *pr, int num_profess) {
-	for (int i = 0; i < num_profess; i++) {
+void findPotential(char id[], potential *pr, int num_records) {
+	for (int i = 0; i < num_records; i++) {
 		if (strCompare(id, pr[i].id)) {
 			setCyanColor();
 			printf("Potenziale: ");
 			resetColor();
-			printf("%s \n", pr[i].content);
+			printf("%s \n", (pr + i)->content);
 		}
 	}
 }
@@ -37,10 +38,8 @@ void findPotential(char id[], potential *pr, int num_profess) {
  *
  * @param fp_pot Pointer to file initalized from fopen()
  * @param pr Professional array of structs for storing parsed data.
- * @param id ID of the professional connected to a specific potential record.
- * @param rows Number of professionals registered
  */
-void parsePotentialsFile(FILE *fp_pot, potential *pr, int rows) {
+void parsePotentialsFile(FILE *fp_pot, potential *pr) {
 	char line[MAX_TEXT_SIZE];
 	char *token;
 
@@ -72,29 +71,23 @@ void parsePotentialsFile(FILE *fp_pot, potential *pr, int rows) {
 		}
 		pr_num++;
 	}
-	//TODO: Remove
-	//findPotential(id, pr, rows);
 }
 
 /**
  * @brief Initialize potential array of structs and parse professionals' potential file.
  *
- * @param id ID of the professional connected to a specific potential record.
+ * @param allPotentials Array of structs (potential datatype) where data will be stored.
  */
 void loadPotentialsFile(potential *allPotentials) {
-	FILE *fp_pot;
-	fp_pot = fopen("pros_potential.dat", "a+");
+	FILE *filePtr;
 
-	//TODO: TO UPDATE
-	/*
-	if (checkFile(fp_pot)) {
-		rows = countRows(fp_pot);
-		rewind(fp_pot);
-		potential pr[rows];
-		initPotentialsArray(pr, rows);
+	filePtr = fopen("pros_potential.dat", "a+");
 
-		parsePotentialsFile(fp_pot, pr, rows);
+	if (checkFile(filePtr)) {
+		rewind(filePtr);
+
+		parsePotentialsFile(filePtr, allPotentials);
 	}
-	*/
-	fclose(fp_pot);
+
+	fclose(filePtr);
 }

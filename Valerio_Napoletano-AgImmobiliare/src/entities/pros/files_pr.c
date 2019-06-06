@@ -22,7 +22,7 @@
  * @brief Parse "professional" file (professionals.dat)
  *
  * @param filePtr Pointer to file initalized from fopen()
- * @param pr Professional array of structs for storing parsed data.
+ * @param allPros Array of structs (professionals data type)
  */
 void parseProsFile(FILE *filePtr, professional *allPros) {
 	char line[MAX_TEXT_SIZE];
@@ -89,7 +89,7 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
 /**
  * @brief Load professional file to memory.
  *
- * @param pr Array of structs (professional datatype) where data will be stored.
+ * @param allPros Array of structs (professional datatype) where data will be stored.
  * @return -1 for going back to the main menu.
  */
 int loadProsFile(professional *allPros) {
@@ -97,7 +97,7 @@ int loadProsFile(professional *allPros) {
 
 	prosFilePtr = fopen("professionals.dat", "a+");
 
-	if (checkFile(prosFilePtr) && checkFile(prosFilePtr)) {
+	if (checkFile(prosFilePtr)) {
 		rewind(prosFilePtr);
 
 		parseProsFile(prosFilePtr, allPros);
