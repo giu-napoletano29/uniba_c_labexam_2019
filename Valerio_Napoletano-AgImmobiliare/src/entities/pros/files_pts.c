@@ -32,7 +32,7 @@ void findPotential(char id[], potential *pr, int num_profess) {
 }
 
 /**
- * @brief Parse "potential" file (potentials.dat)
+ * @brief Parse "potential" file (pros_potential.dat)
  * Check out findPotential() for more information about the "potential".
  *
  * @param fp_pot Pointer to file initalized from fopen()
@@ -85,7 +85,7 @@ void parsePotentialsFile(FILE *fp_pot, potential *pr, int rows) {
 int getPotsNumber() {
 	FILE *filePtr;
 	int rows = 0;
-	filePtr = fopen("potentials.dat", "a+");
+	filePtr = fopen("pros_potential.dat", "a+");
 	if (checkFile(filePtr)) {
 		if (filePtr != NULL) {
 			rewind(filePtr);
