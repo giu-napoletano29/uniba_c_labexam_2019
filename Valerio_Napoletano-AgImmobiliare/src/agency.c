@@ -30,8 +30,8 @@ int resultsAgency(building *bl, int num_buildings) {
 	time_t reg_date2;
 	short int num_bl_found = 0;
 	int tot_price = 0;
+	short int choice = 0;
 	bool error = false;
-	bool b_stamp = true; //determines which category of buildings to print
 
 	clearScr();
 	printSectionName("Risultati agenzia", false);
@@ -48,13 +48,41 @@ int resultsAgency(building *bl, int num_buildings) {
 		newLine();
 
 		if (reg_date1 < reg_date2) {
-			setCyanColor();
-			printf("--- IMMOBILI VENDUTI ---\n");
+			printf("\nIN VENDITA: \t|");
+			for (int i = 0; i < num_buildings; i++) {
+				if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2 && bl[i].sold == false) {
+					printf("=");
+					num_bl_found++;
+				}
+			}
+			printf("|\n %d", num_bl_found);
+			num_bl_found = 0;
 			newLine();
-			resetColor();
-			for (int count = 0; count < 2; count++) {
+
+			printf("\nVENDUTI: \t|");
+			for (int i = 0; i < num_buildings; i++) {
+				if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2 && bl[i].sold == true) {
+					printf("=");
+					num_bl_found++;
+					tot_price += bl[i].price;
+				}
+			}
+			printf("|\n %d", num_bl_found);
+			num_bl_found = 0;
+			newLine();
+			//pause();
+
+			printf("\nVuoi visualizzare la lista degli immobili venduti?: ");
+			choice = askConfirm();
+
+			if (choice == 1) {
+				setCyanColor();
+				printf("--- IMMOBILI VENDUTI ---\n");
+				newLine();
+				resetColor();
+
 				for (int i = 0; i < num_buildings; i++) {
-					if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2 && bl[i].sold == b_stamp) {
+					if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2 && bl[i].sold == true) {
 						setCyanColor();
 						printf("--- IMMOBILE %d ---", (bl + i)->id);
 						resetColor();
@@ -62,11 +90,6 @@ int resultsAgency(building *bl, int num_buildings) {
 						newLine();
 						showBuildingData(bl + i);
 						newLine();
-
-						if (bl[i].sold == true) {
-							tot_price += bl[i].price;
-						}
-
 						num_bl_found++;
 					}
 				}
@@ -75,17 +98,9 @@ int resultsAgency(building *bl, int num_buildings) {
 					printf("Nessun immobile trovato con l'intervallo scelto.\n\n");
 					resetColor();
 				}
-				b_stamp = false;
 				num_bl_found = 0;
-
-				if (count == 0) {
-					setCyanColor();
-					newLine();
-					printf("--- IMMOBILI NON VENDUTI ---\n");
-					newLine();
-					resetColor();
-				}
 			}
+
 			newLine();
 			setCyanColor();
 			printf("Ricavi Totali: ");
