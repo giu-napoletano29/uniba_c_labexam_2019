@@ -22,44 +22,46 @@
  */
 void sortFilePro(professional *pr, int rows) {
 	professional cmp;
+	int index_min = 0;
 
-	for (int j = 0; j < rows; j++) {
-		for (int i = 0; i < rows; i++) {
-			if (strcmp(pr[j].surname, pr[i].surname) < 0) {
-				cmp.buildings_sold = pr[i].buildings_sold;
-				pr[i].buildings_sold = pr[j].buildings_sold;
-				pr[j].buildings_sold = cmp.buildings_sold;
-
-				cmp.reg_date = pr[i].reg_date;
-				pr[i].reg_date = pr[j].reg_date;
-				pr[j].reg_date = cmp.reg_date;
-
-				strcpy(cmp.name, pr[i].name);
-				strcpy(pr[i].name, pr[j].name);
-				strcpy(pr[j].name, cmp.name);
-
-				strcpy(cmp.id, pr[i].id);
-				strcpy(pr[i].id, pr[j].id);
-				strcpy(pr[j].id, cmp.id);
-
-				strcpy(cmp.surname, pr[i].surname);
-				strcpy(pr[i].surname, pr[j].surname);
-				strcpy(pr[j].surname, cmp.surname);
-
-				strcpy(cmp.area, pr[i].area);
-				strcpy(pr[i].area, pr[j].area);
-				strcpy(pr[j].area, cmp.area);
-
-				strcpy(cmp.phone, pr[i].phone);
-				strcpy(pr[i].phone, pr[j].phone);
-				strcpy(pr[j].phone, cmp.phone);
-
-				strcpy(cmp.email, pr[i].email);
-				strcpy(pr[i].email, pr[j].email);
-				strcpy(pr[j].email, cmp.email);
-
+	for (int j = 0; j < rows - 1; j++) {
+		index_min = j;
+		for (int i = j + 1; i < rows; i++) {
+			if (strcmp(pr[i].surname, pr[index_min].surname) < 0) {
+				index_min = i;
 			}
-		}
+		}	// Element are moved at the end of the comparison process to avoid useless operation
+		cmp.buildings_sold = pr[j].buildings_sold;
+		pr[j].buildings_sold = pr[index_min].buildings_sold;
+		pr[index_min].buildings_sold = cmp.buildings_sold;
+
+		cmp.reg_date = pr[j].reg_date;
+		pr[j].reg_date = pr[index_min].reg_date;
+		pr[index_min].reg_date = cmp.reg_date;
+
+		strcpy(cmp.name, pr[j].name);
+		strcpy(pr[j].name, pr[index_min].name);
+		strcpy(pr[index_min].name, cmp.name);
+
+		strcpy(cmp.id, pr[j].id);
+		strcpy(pr[j].id, pr[index_min].id);
+		strcpy(pr[index_min].id, cmp.id);
+
+		strcpy(cmp.surname, pr[j].surname);
+		strcpy(pr[j].surname, pr[index_min].surname);
+		strcpy(pr[index_min].surname, cmp.surname);
+
+		strcpy(cmp.area, pr[j].area);
+		strcpy(pr[j].area, pr[index_min].area);
+		strcpy(pr[index_min].area, cmp.area);
+
+		strcpy(cmp.phone, pr[j].phone);
+		strcpy(pr[j].phone, pr[index_min].phone);
+		strcpy(pr[index_min].phone, cmp.phone);
+
+		strcpy(cmp.email, pr[j].email);
+		strcpy(pr[j].email, pr[index_min].email);
+		strcpy(pr[index_min].email, cmp.email);
 	}
 }
 
@@ -71,48 +73,50 @@ void sortFilePro(professional *pr, int rows) {
  */
 void sortFileCli(client *cl, int rows) {
 	client cmp;
+	int index_min = 0;
 
-	for (int j = 0; j < rows; j++) {
-		for (int i = 0; i < rows; i++) {
-			if (strcmp(cl[j].surname, cl[i].surname) < 0) {
-				cmp.budget = cl[i].budget;
-				cl[i].budget = cl[j].budget;
-				cl[j].budget = cmp.budget;
-
-				cmp.cl_type = cl[i].cl_type;
-				cl[i].cl_type = cl[j].cl_type;
-				cl[j].cl_type = cmp.cl_type;
-
-				cmp.toDelete = cl[i].toDelete;
-				cl[i].toDelete = cl[j].toDelete;
-				cl[j].toDelete = cmp.toDelete;
-
-				cmp.building_type = cl[i].building_type;
-				cl[i].building_type = cl[j].building_type;
-				cl[j].building_type = cmp.building_type;
-
-				cmp.reg_date = cl[i].reg_date;
-				cl[i].reg_date = cl[j].reg_date;
-				cl[j].reg_date = cmp.reg_date;
-
-				strcpy(cmp.name, cl[i].name);
-				strcpy(cl[i].name, cl[j].name);
-				strcpy(cl[j].name, cmp.name);
-
-				strcpy(cmp.id, cl[i].id);
-				strcpy(cl[i].id, cl[j].id);
-				strcpy(cl[j].id, cmp.id);
-
-				strcpy(cmp.surname, cl[i].surname);
-				strcpy(cl[i].surname, cl[j].surname);
-				strcpy(cl[j].surname, cmp.surname);
-
-				strcpy(cmp.company_name, cl[i].company_name);
-				strcpy(cl[i].company_name, cl[j].company_name);
-				strcpy(cl[j].company_name, cmp.company_name);
-
+	for (int j = 0; j < rows - 1; j++) {
+		index_min = j;
+		for (int i = j + 1; i < rows; i++) {
+			if (strcmp(cl[i].surname, cl[index_min].surname) < 0) {
+				index_min = i;
 			}
-		}
+		}	// Element are moved at the end of the comparison process to avoid useless operation
+		cmp.budget = cl[j].budget;
+		cl[j].budget = cl[index_min].budget;
+		cl[index_min].budget = cmp.budget;
+
+		cmp.cl_type = cl[j].cl_type;
+		cl[j].cl_type = cl[index_min].cl_type;
+		cl[index_min].cl_type = cmp.cl_type;
+
+		cmp.toDelete = cl[j].toDelete;
+		cl[j].toDelete = cl[index_min].toDelete;
+		cl[index_min].toDelete = cmp.toDelete;
+
+		cmp.building_type = cl[j].building_type;
+		cl[j].building_type = cl[index_min].building_type;
+		cl[index_min].building_type = cmp.building_type;
+
+		cmp.reg_date = cl[j].reg_date;
+		cl[j].reg_date = cl[index_min].reg_date;
+		cl[index_min].reg_date = cmp.reg_date;
+
+		strcpy(cmp.name, cl[j].name);
+		strcpy(cl[j].name, cl[index_min].name);
+		strcpy(cl[index_min].name, cmp.name);
+
+		strcpy(cmp.id, cl[j].id);
+		strcpy(cl[j].id, cl[index_min].id);
+		strcpy(cl[index_min].id, cmp.id);
+
+		strcpy(cmp.surname, cl[j].surname);
+		strcpy(cl[j].surname, cl[index_min].surname);
+		strcpy(cl[index_min].surname, cmp.surname);
+
+		strcpy(cmp.company_name, cl[j].company_name);
+		strcpy(cl[j].company_name, cl[index_min].company_name);
+		strcpy(cl[index_min].company_name, cmp.company_name);
 	}
 }
 
@@ -124,50 +128,53 @@ void sortFileCli(client *cl, int rows) {
  */
 void sortFileBui(building *bl, int rows) {
 	building cmp;
+	int index_min = 0;
 
-	for (int j = 0; j < rows; j++) {
-		for (int i = 0; i < rows; i++) {
-			if (strcmp(bl[j].owner, bl[i].owner) < 0) {
-				cmp.civic = bl[i].civic;
-				bl[i].civic = bl[j].civic;
-				bl[j].civic = cmp.civic;
+	for (int j = 0; j < rows - 1; j++) {
+		index_min = j;
+		for (int i = j + 1; i < rows; i++) {
+			if (strcmp(bl[i].owner, bl[index_min].owner) < 0) {
 
-				cmp.b_type = bl[i].b_type;
-				bl[i].b_type = bl[j].b_type;
-				bl[j].b_type = cmp.b_type;
-
-				cmp.price = bl[i].price;
-				bl[i].price = bl[j].price;
-				bl[j].price = cmp.price;
-
-				cmp.reg_date = bl[i].reg_date;
-				bl[i].reg_date = bl[j].reg_date;
-				bl[j].reg_date = cmp.reg_date;
-
-				strcpy(cmp.city, bl[i].city);
-				strcpy(bl[i].city, bl[j].city);
-				strcpy(bl[j].city, cmp.city);
-
-				cmp.id = bl[i].id;
-				bl[i].id = bl[j].id;
-				bl[j].id = cmp.id;
-
-				strcpy(cmp.owner, bl[i].owner);
-				strcpy(bl[i].owner, bl[j].owner);
-				strcpy(bl[j].owner, cmp.owner);
-
-				strcpy(cmp.phone, bl[i].phone);
-				strcpy(bl[i].phone, bl[j].phone);
-				strcpy(bl[j].phone, cmp.phone);
-
-				strcpy(cmp.province, bl[i].province);
-				strcpy(bl[i].province, bl[j].province);
-				strcpy(bl[j].province, cmp.province);
-
-				strcpy(cmp.street, bl[i].street);
-				strcpy(bl[i].street, bl[j].street);
-				strcpy(bl[j].street, cmp.street);
 			}
 		}
+		cmp.civic = bl[j].civic;
+		bl[j].civic = bl[index_min].civic;
+		bl[index_min].civic = cmp.civic;
+
+		cmp.b_type = bl[j].b_type;
+		bl[j].b_type = bl[index_min].b_type;
+		bl[index_min].b_type = cmp.b_type;
+
+		cmp.price = bl[j].price;
+		bl[j].price = bl[index_min].price;
+		bl[index_min].price = cmp.price;
+
+		cmp.reg_date = bl[j].reg_date;
+		bl[j].reg_date = bl[index_min].reg_date;
+		bl[index_min].reg_date = cmp.reg_date;
+
+		strcpy(cmp.city, bl[j].city);
+		strcpy(bl[j].city, bl[index_min].city);
+		strcpy(bl[index_min].city, cmp.city);
+
+		cmp.id = bl[j].id;
+		bl[j].id = bl[index_min].id;
+		bl[index_min].id = cmp.id;
+
+		strcpy(cmp.owner, bl[j].owner);
+		strcpy(bl[j].owner, bl[index_min].owner);
+		strcpy(bl[index_min].owner, cmp.owner);
+
+		strcpy(cmp.phone, bl[j].phone);
+		strcpy(bl[j].phone, bl[index_min].phone);
+		strcpy(bl[index_min].phone, cmp.phone);
+
+		strcpy(cmp.province, bl[j].province);
+		strcpy(bl[j].province, bl[index_min].province);
+		strcpy(bl[index_min].province, cmp.province);
+
+		strcpy(cmp.street, bl[j].street);
+		strcpy(bl[j].street, bl[index_min].street);
+		strcpy(bl[index_min].street, cmp.street);
 	}
 }
