@@ -134,7 +134,7 @@ void sortFileBui(building *bl, int rows) {
 		index_min = j;
 		for (int i = j + 1; i < rows; i++) {
 			if (strcmp(bl[i].owner, bl[index_min].owner) < 0) {
-
+				index_min = i;
 			}
 		}
 		cmp.civic = bl[j].civic;
@@ -176,5 +176,9 @@ void sortFileBui(building *bl, int rows) {
 		strcpy(cmp.street, bl[j].street);
 		strcpy(bl[j].street, bl[index_min].street);
 		strcpy(bl[index_min].street, cmp.street);
+
+		cmp.sold = bl[j].sold;
+		bl[j].sold = bl[index_min].sold;
+		bl[index_min].sold = cmp.sold;
 	}
 }

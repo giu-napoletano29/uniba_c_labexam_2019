@@ -29,7 +29,9 @@ int resultsAgency(building *bl, int num_buildings) {
 	time_t reg_date1;
 	time_t reg_date2;
 	short int num_bl_found = 0;
+	int tot_price = 0;
 	bool error = false;
+	bool b_stamp = true; //determines which category of buildings to print
 
 	clearScr();
 	printSectionName("Risultati agenzia", false);
@@ -46,19 +48,51 @@ int resultsAgency(building *bl, int num_buildings) {
 		newLine();
 
 		if (reg_date1 < reg_date2) {
-			for (int i = 0; i < num_buildings; i++) {
-				if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2) {
-					setCyanColor();
-					printf("--- IMMOBILE %d ---", (bl + i)->id);
+			setCyanColor();
+			printf("--- IMMOBILI VENDUTI ---\n");
+			newLine();
+			resetColor();
+			for (int count = 0; count < 2; count++) {
+				for (int i = 0; i < num_buildings; i++) {
+					if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2 && bl[i].sold == b_stamp) {
+						setCyanColor();
+						printf("--- IMMOBILE %d ---", (bl + i)->id);
+						resetColor();
+
+						newLine();
+						showBuildingData(bl + i);
+						newLine();
+
+						if (bl[i].sold == true) {
+							tot_price += bl[i].price;
+						}
+
+						num_bl_found++;
+					}
+				}
+				if (num_bl_found == 0 && !error) {
+					setYellowColor();
+					printf("Nessun immobile trovato con l'intervallo scelto.\n\n");
 					resetColor();
+				}
+				b_stamp = false;
+				num_bl_found = 0;
 
+				if (count == 0) {
+					setCyanColor();
 					newLine();
-					showBuildingData(bl + i);
+					printf("--- IMMOBILI NON VENDUTI ---\n");
 					newLine();
-
-					num_bl_found++;
+					resetColor();
 				}
 			}
+			newLine();
+			setCyanColor();
+			printf("Ricavi Totali: ");
+			resetColor();
+			printf("%d euro\n", tot_price);
+			newLine();
+
 		} else {
 			setRedColor();
 			printf("E' stato inserito un intervallo errato.\n\n");
@@ -66,11 +100,6 @@ int resultsAgency(building *bl, int num_buildings) {
 			resetColor();
 		}
 
-		if (num_bl_found == 0 && !error) {
-			setYellowColor();
-			printf("Nessun immobile trovato con l'intervallo scelto.\n\n");
-			resetColor();
-		}
 	} else {
 		dbEmptyError();
 	}
