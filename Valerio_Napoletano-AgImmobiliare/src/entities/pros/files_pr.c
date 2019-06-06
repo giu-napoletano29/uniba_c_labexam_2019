@@ -296,11 +296,13 @@ int checkDuplicatePros(professional *pr, int rows) {
 /**
  * @brief Append a new professional to the "pros_potential.dat" file
  *
- * @param cl Client struct where the data is stored
+ * @param pr Professional struct where the data is stored
+ * @param pt Potential struct where the data is stored
  * @return -1 go back to main menu
  */
 int appendProToFile(professional *pr, potential *pt) {
-	FILE *clientsFilePtr, potentialsFilePtr;
+	FILE *clientsFilePtr;
+	FILE *potentialsFilePtr;
 	clientsFilePtr = fopen("pros_potential.dat", "a+");
 	potentialsFilePtr = fopen("potentials.dat", "a+");
 
@@ -329,7 +331,8 @@ int appendProToFile(professional *pr, potential *pt) {
  * @brief Replace professionals file contents with the data saved in the array of structs.
  * Can be useful for deleting/update data from the file.
  *
- * @param pr Professional array of structs where the data is stored
+ * @param allPros Professional array of structs where the data is stored
+ * @param allPts Potential array of structs where the data is stored
  * @param rows How many professionals are registered
  */
 void rewriteProsToFile(professional *allPros, potential *allPts, int rows) {

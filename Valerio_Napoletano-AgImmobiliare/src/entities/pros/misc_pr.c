@@ -51,7 +51,7 @@ void initProsArray(professional *pro, int size) {
  * @brief Get current system date and save the UNIX Epoch time value.
  *
  * @see https://en.wikipedia.org/wiki/Unix_time
- * @param cl "client" type struct
+ * @param pr "professional" type struct
  */
 void saveLocalDatePro(professional *pr) {
 	time_t timeRightNow;

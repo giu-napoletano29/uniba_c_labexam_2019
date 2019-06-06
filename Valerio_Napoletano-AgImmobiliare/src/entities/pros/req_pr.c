@@ -7,6 +7,8 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
+
 #include "../../utils.h"
 
 /**
@@ -54,7 +56,7 @@ void reqProName(professional *pr) {
 /**
  * @brief Request professional's surname from stdin.
  *
- * @param cl "professional" type struct
+ * @param pr "professional" type struct
  */
 void reqProSurname(professional *pr) {
 	printf("Cognome: ");
@@ -115,6 +117,7 @@ void reqProSoldBuildings(professional *pr) {
  * @brief Request professional's potential stdin.
  *
  * @param pr "professional" type struct
+ * @param pt "potential" type struct
  */
 void reqProPotential(professional *pr, potential *pt) {
 	printf("Potenziale: ");
