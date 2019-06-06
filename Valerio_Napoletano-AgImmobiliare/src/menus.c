@@ -116,6 +116,7 @@ int professMenu() {
 
 	/** - Load pros file and stores the parsed data in the memory. */
 	loadProsFile(allProfessionals);
+	loadPotentialsFile(allPotentials);
 
 	/**
 	 - Check if there's any client with duplicated IDs

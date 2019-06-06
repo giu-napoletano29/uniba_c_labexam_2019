@@ -72,10 +72,11 @@ void saveLocalDatePro(professional *pr) {
  * @return Value for returning back to the menu (-1)
  */
 
-int addPro(professional *allPros, int num_pros) {
+int addPro(professional *allPros, potential *allPts, int num_pros) {
 	professional pr = { "", "", "", "", "", "", 0, 0, false};
 	potential pt = { "", "" };
 	int newProsNum = 0;
+	int newPtsNum = 0;
 
 	clearScr();
 	printSectionName("Aggiunta professionista", false);
@@ -99,7 +100,7 @@ int addPro(professional *allPros, int num_pros) {
 
 	saveLocalDatePro(&pr);
 
-	appendProToFile(&pr, &pt);
+	appendProToFile(&pr);
 
 	/** - Sort clients in the memory */
 	sortPros(allPros, num_pros);
@@ -108,6 +109,11 @@ int addPro(professional *allPros, int num_pros) {
 	newProsNum = getProsNumber();
 	professional newAllPros[newProsNum];
 	initProsArray(newAllPros, newProsNum);
+
+	/** - Re-declare and re-initialize the array of structs with the newly created potentials */
+	newPtsNum = getPotsNumber();
+	potential newAllPts[newPtsNum];
+	initPotentialsArray(newAllPts, newPtsNum);
 
 	/** - Load pros file and stores the parsed data in the memory. */
 	loadProsFile(newAllPros);

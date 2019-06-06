@@ -10,14 +10,11 @@
 
 #include "../../datatypes.h"
 
-int loadProsFile(professional *pr);
+int loadProsFile(professional *allPros);
 int getProsNumber();
-void readProsFile(FILE *filePtr, professional *pr);
-void parsePotentialsFile(FILE *fp_pot, potential *pr, char id[], int rows);
-void findPotential(char id[], potential *pr, int rows);
-void loadPotFile(char id[]);
-int checkDuplicatePros(professional *pr, int rows);
-int appendProToFile(professional *pr, potential *pt);
-int rewriteProsToFile(professional *allPros, potential *allPts, int rows);
+void parseProsFile(FILE *filePtr, professional *pr);
+int checkDuplicatePros(professional *allPros, int rows);
+int appendProToFile(professional *pr);
+int rewriteProsToFile(professional *allPros, int rows);
 
 #endif /* ENTITIES_PROS_FILES_PR_H_ */

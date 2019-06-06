@@ -11,6 +11,9 @@
 #include "../../utils.h"
 #include "files_pr.h"
 
+//TODO: Maybe should be removed
+#include "files_pts.h"
+
 /**
  * @brief Print every field available in a professional struct.
  *
@@ -58,7 +61,7 @@ void showProData(professional *pr) {
 	printf("%d \n", pr->buildings_sold);
 
 	//TODO: Program crashes if no potentials are available for the clients
-	loadPotFile(pr->id);
+	loadPotentialsFile(pr->id);
 }
 
 /**
