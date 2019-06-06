@@ -1,8 +1,8 @@
-/*
- * files_pts.c
- *
- *  Created on: 6 giu 2019
- *      Author: Saverio Valerio
+/**
+ * @file files_pts.c
+ * @author Saverio Valerio
+ * @date 6 June 2019
+ * @brief Functions for handling the CSV file related to the professionals' "potential".
  */
 
 #include <stdio.h>
@@ -76,44 +76,25 @@ void parsePotentialsFile(FILE *fp_pot, potential *pr, int rows) {
 	//findPotential(id, pr, rows);
 }
 
-
-/**
- * @brief Get how many potentials are saved in the file.
- *
- * @return Number of potentials. (integer)
- */
-int getPotsNumber() {
-	FILE *filePtr;
-	int rows = 0;
-	filePtr = fopen("pros_potential.dat", "a+");
-	if (checkFile(filePtr)) {
-		if (filePtr != NULL) {
-			rewind(filePtr);
-			rows = countRows(filePtr);
-		}
-	}
-	fclose(filePtr);
-	return rows;
-}
-
-
 /**
  * @brief Initialize potential array of structs and parse professionals' potential file.
  *
  * @param id ID of the professional connected to a specific potential record.
  */
-void loadPotentialsFile(char id[]) {
-	int rows = 0;
+void loadPotentialsFile(potential *allPotentials) {
 	FILE *fp_pot;
 	fp_pot = fopen("pros_potential.dat", "a+");
+
+	//TODO: TO UPDATE
+	/*
 	if (checkFile(fp_pot)) {
 		rows = countRows(fp_pot);
 		rewind(fp_pot);
-
 		potential pr[rows];
 		initPotentialsArray(pr, rows);
 
 		parsePotentialsFile(fp_pot, pr, rows);
 	}
+	*/
 	fclose(fp_pot);
 }

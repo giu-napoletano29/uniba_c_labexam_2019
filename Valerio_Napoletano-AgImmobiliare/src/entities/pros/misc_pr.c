@@ -14,6 +14,7 @@
 #include "../../datatypes.h"
 #include "../../utils.h"
 #include "../../sort.h"
+#include "../../file_utils.h"
 
 /**
  * @brief Initialize an array of structs of "potentials".
@@ -106,12 +107,12 @@ int addPro(professional *allPros, potential *allPts, int num_pros) {
 	sortPros(allPros, num_pros);
 
 	/** - Re-declare and re-initialize the array of structs with the newly created pro */
-	newProsNum = getProsNumber();
+	newProsNum = countFileRows("professionals");
 	professional newAllPros[newProsNum];
 	initProsArray(newAllPros, newProsNum);
 
 	/** - Re-declare and re-initialize the array of structs with the newly created potentials */
-	newPtsNum = getPotsNumber();
+	newPtsNum = countFileRows("pros_potential");
 	potential newAllPts[newPtsNum];
 	initPotentialsArray(newAllPts, newPtsNum);
 

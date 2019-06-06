@@ -61,7 +61,8 @@ void showProData(professional *pr) {
 	printf("%d \n", pr->buildings_sold);
 
 	//TODO: Program crashes if no potentials are available for the clients
-	loadPotentialsFile(pr->id);
+	//TODO: TO UPDATE
+	//loadPotentialsFile(pr->id);
 }
 
 /**

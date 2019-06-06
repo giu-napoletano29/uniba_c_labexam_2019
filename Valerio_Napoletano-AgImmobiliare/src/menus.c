@@ -9,8 +9,10 @@
 #include <stdbool.h>
 
 #include "utils.h"
-
+#include "file_utils.h"
 #include "agency.h"
+#include "sort.h"
+
 #include "entities/buildings/files_bl.h"
 #include "entities/buildings/misc_bl.h"
 #include "entities/buildings/show_bl.h"
@@ -23,7 +25,7 @@
 #include "entities/pros/files_pr.h"
 #include "entities/pros/misc_pr.h"
 #include "entities/pros/show_pr.h"
-#include "sort.h"
+#include "entities/pros/files_pts.h"
 
 /**
  * @brief Initialize the main allClients data structure and show the "clients" menu.
@@ -35,7 +37,7 @@ int clientsMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "client" type */
-	int clientsNum = getClientsNumber();
+	int clientsNum = countFileRows("clients");
 	client allClients[clientsNum];
 	initClientsArray(allClients, clientsNum);
 
@@ -105,12 +107,12 @@ int professMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "professional" type */
-	int professionalsNum = getProsNumber();
+	int professionalsNum = countFileRows("professionals");
 	professional allProfessionals[professionalsNum];
 	initProsArray(allProfessionals, professionalsNum);
 
 	/** - Declare and initialize the array of structs, "potentials" type */
-	int potsNum = getPotsNumber();
+	int potsNum = countFileRows("pros_potential");
 	potential allPotentials[potsNum];
 	initPotentialsArray(allPotentials, potsNum);
 
@@ -182,7 +184,7 @@ int buildingsMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "building" type */
-	int buildingsNum = getBuildingsNumber();
+	int buildingsNum = countFileRows("buildings");
 	building allBuildings[buildingsNum];
 	initBuildingsArray(allBuildings, buildingsNum);
 

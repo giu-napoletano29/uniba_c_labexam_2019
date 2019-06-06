@@ -108,25 +108,6 @@ int loadProsFile(professional *allPros) {
 }
 
 /**
- * @brief Get how many professionals are saved in the file.
- *
- * @return Number of professionals. (integer)
- */
-int getProsNumber() {
-	FILE *filePtr;
-	int rows = 0;
-	filePtr = fopen("pros_potential.dat", "a+");
-	if (checkFile(filePtr)) {
-		if (filePtr != NULL) {
-			rewind(filePtr);
-			rows = countRows(filePtr);
-		}
-	}
-	fclose(filePtr);
-	return rows;
-}
-
-/**
  * @brief Append a new professional to the "pros_potential.dat" file
  *
  * @param pr Professional struct where the data is stored

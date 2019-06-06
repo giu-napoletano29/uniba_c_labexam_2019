@@ -14,6 +14,4 @@ int rewriteClientsToFile(client *cl, int rows);
 int appendClientToFile(client *cl);
 int checkDuplicateClients(client *cl, int rows);
 
-int getClientsNumber();
-
 #endif /* ENTITIES_CLIENTS_FILES_CL_H_ */

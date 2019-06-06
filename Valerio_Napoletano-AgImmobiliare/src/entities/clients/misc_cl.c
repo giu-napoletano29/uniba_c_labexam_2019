@@ -14,6 +14,8 @@
 #include "../../datatypes.h"
 #include "../../utils.h"
 #include "../../sort.h"
+#include "../../file_utils.h"
+
 #include "files_cl.h"
 #include "req_cl.h"
 #include "show_cl.h"
@@ -73,7 +75,7 @@ int addClient(client *allClients, int num_clients) {
 	sortClients(allClients, num_clients);
 
 	/** - Re-declare and re-initialize the array of structs with the newly created client */
-	newClientsNum = getClientsNumber();
+	newClientsNum = countFileRows("clients");
 	client newAllClients[newClientsNum];
 	initClientsArray(newAllClients, newClientsNum);
 

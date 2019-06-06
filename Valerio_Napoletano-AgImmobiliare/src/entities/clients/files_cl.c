@@ -151,22 +151,6 @@ int appendClientToFile(client *cl) {
 }
 
 /**
- * @brief Get how many clients are saved in the file.
- *
- * @return Number of clients. (integer)
- */
-int getClientsNumber() {
-	FILE *filePtr;
-	int rows = 0;
-	filePtr = fopen("clients.dat", "a+");
-	if (checkFile(filePtr)) {
-		rows = countRows(filePtr);
-		fclose(filePtr);
-	}
-	return rows;
-}
-
-/**
  * @brief Load the "clients.dat" file and run the parsing function
  *
  * @param cl Array of structs (client data type) where the data will be saved.

@@ -209,22 +209,6 @@ int checkDuplicateBuildings(building *bl, int rows) {
 	rewriteBuildingsToFile(bl, rows);
 	return result;
 }
-/**
- * @brief Get how many buildings are saved in the file.
- *
- * @return Number of buildings. (integer)
- */
-int getBuildingsNumber() {
-	FILE *filePtr;
-	int rows = 0;
-	filePtr = fopen("buildings.dat", "a+");
-	if (checkFile(filePtr)) {
-		rewind(filePtr);
-		rows = countRows(filePtr);
-	}
-	fclose(filePtr);
-	return rows;
-}
 
 /**
  * @brief Search for a specific building using a criteria.
