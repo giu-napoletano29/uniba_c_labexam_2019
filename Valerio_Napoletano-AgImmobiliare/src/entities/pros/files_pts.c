@@ -52,9 +52,14 @@ void parsePotentialsFile(FILE *fp_pot, potential *pr) {
 		// Fields counter (ID, name, etc..)
 		field = 0;
 
-		/* Tokenize and load in the internal struct */
+		/**
+		 * The delimiter used is the pipe symbol ( | ) instead of the comma.
+		 * This is for avoiding any conflict from an user that might insert the comma
+		 * because the "potential" is text.
+		 */
+		// Tokenize and load in the internal struct
 		// Get first token
-		token = strtok(line, ",");
+		token = strtok(line, "|");
 
 		while (token != NULL) {
 			switch (field) {
@@ -66,7 +71,7 @@ void parsePotentialsFile(FILE *fp_pot, potential *pr) {
 					break;
 			}
 			// Read the other tokens
-			token = strtok(NULL, ",");
+			token = strtok(NULL, "|");
 			field++;
 		}
 		pr_num++;
@@ -92,7 +97,6 @@ void loadPotentialsFile(potential *allPotentials) {
 	fclose(filePtr);
 }
 
-
 /**
  * @brief Append a new potential to the "pros_potential.dat" file
  *
@@ -107,7 +111,7 @@ int appendPtsToFile(potential *pt) {
 		// Save to file only if the client is not marked for deletion
 		if (!pt->toDelete) {
 			// Write professionals file
-			fprintf(filePtr, "%s,%s\n", pt->id, pt->content);
+			fprintf(filePtr, "%s|%s\n", pt->id, pt->content);
 		}
 	}
 
@@ -129,7 +133,7 @@ void rewritePtsToFile(potential *allPts, int rows) {
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		for (int i = 0; i < rows; i++) {
-			fprintf(filePtr, "%s,%s", (allPts + i)->id, (allPts + i)->content);
+			fprintf(filePtr, "%s|%s", (allPts + i)->id, (allPts + i)->content);
 		}
 	}
 
