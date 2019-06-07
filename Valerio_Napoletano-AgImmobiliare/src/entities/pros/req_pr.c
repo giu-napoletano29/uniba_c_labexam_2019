@@ -84,7 +84,7 @@ void reqProArea(professional *pr) {
  */
 void reqProPhone(professional *pr) {
 	printf("Numero di telefono: ");
-	readString(pr->area, false, false);
+	readString(pr->phone, false, false);
 
 	clearScr();
 }
@@ -123,7 +123,7 @@ void reqProPotential(professional *pr, potential *pt) {
 	printf("Potenziale: ");
 
 	strcpy(pt->id, pr->id);
-
+	//TODO: Tell to the user to not insert a comma (because we are using it as the CSV delimiter)
 	readString(pt->content, false, false);
 
 	clearScr();
