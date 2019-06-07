@@ -183,14 +183,14 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
  */
 void initClientsArray(client *cl, int size) {
 	for (int i = 0; i < size; i++) {
-		strcpy(cl[i].id, "");
-		strcpy(cl[i].name, "");
-		strcpy(cl[i].surname, "");
-		cl[i].cl_type = single;
-		strcpy(cl[i].company_name, "");
-		cl[i].budget = 0;
-		cl[i].reg_date = 0;
-		cl[i].building_type = flat;
-		cl[i].toDelete = false;
+		strcpy((cl + i)->id, "");
+		strcpy((cl + i)->name, "");
+		strcpy((cl + i)->surname, "");
+		(cl + i)->cl_type = single;
+		strcpy((cl + i)->company_name, "");
+		(cl + i)->budget = 0;
+		(cl + i)->reg_date = 0;
+		(cl + i)->building_type = flat;
+		(cl + i)->toDelete = false;
 	}
 }

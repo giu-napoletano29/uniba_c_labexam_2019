@@ -47,36 +47,36 @@ void parseClientFile(FILE *filePtr, client *cl) {
 		while (token != NULL) {
 			switch (field) {
 				case 0:
-					strcpy(cl[cl_num].id, token);
+					strcpy((cl + cl_num)->id, token);
 					break;
 				case 1:
-					strcpy(cl[cl_num].name, token);
-					convertToUpperCase(cl[cl_num].name);
+					strcpy((cl + cl_num)->name, token);
+					convertToUpperCase((cl + cl_num)->name);
 					break;
 				case 2:
-					strcpy(cl[cl_num].surname, token);
-					convertToUpperCase(cl[cl_num].surname);
+					strcpy((cl + cl_num)->surname, token);
+					convertToUpperCase((cl + cl_num)->surname);
 					break;
 				case 3:
 					enum_tmp = atoi(token);
-					cl[cl_num].cl_type = enum_tmp;
+					(cl + cl_num)->cl_type = enum_tmp;
 					break;
 				case 4:
-					strcpy(cl[cl_num].company_name, token);
-					convertToUpperCase(cl[cl_num].company_name);
+					strcpy((cl + cl_num)->company_name, token);
+					convertToUpperCase((cl + cl_num)->company_name);
 					break;
 				case 5:
-					cl[cl_num].budget = atoi(token);
+					(cl + cl_num)->budget = atoi(token);
 					break;
 				case 6:
 					/*
 					 *  Save parsed Epoch time into clients struct
 					 */
-					cl[cl_num].reg_date = parseDateInFile(token);
+					(cl + cl_num)->reg_date = parseDateInFile(token);
 					break;
 				case 7:
 					enum_tmp = atoi(token);
-					cl[cl_num].building_type = enum_tmp;
+					(cl + cl_num)->building_type = enum_tmp;
 					break;
 			}
 
@@ -110,13 +110,13 @@ int rewriteClientsToFile(client *cl, int rows) {
 	if (checkFile(filePtr)) {
 		for (int i = 0; i < rows; i++) {
 			// Save client to file only if the client is not marked for deletion
-			if (!cl[i].toDelete) {
-				fprintf(filePtr, "%s,%s,%s,%d,%s,%d", cl[i].id, cl[i].name, cl[i].surname, cl[i].cl_type,
-						cl[i].company_name, cl[i].budget);
+			if (!(cl + i)->toDelete) {
+				fprintf(filePtr, "%s,%s,%s,%d,%s,%d", (cl + i)->id, (cl + i)->name, (cl + i)->surname, (cl + i)->cl_type,
+						(cl + i)->company_name, (cl + i)->budget);
 
-				formattedDateToFile(filePtr, &cl[i].reg_date);
+				formattedDateToFile(filePtr, &(cl + i)->reg_date);
 
-				fprintf(filePtr, "%d\n", cl[i].building_type);
+				fprintf(filePtr, "%d\n", (cl + i)->building_type);
 			}
 		}
 	}
@@ -181,7 +181,7 @@ bool checkDuplicateClients(client *cl, int rows) {
 
 	for (int i = 0; i < rows; i++) {
 		for (int j = i + 1; j < rows; j++) {
-			if (strCompare(cl[i].id, cl[j].id)) {
+			if (strCompare((cl + i)->id, (cl + j)->id)) {
 				clearScr();
 				setRedColor();
 				printf("\nERRORE: Il database contiene degli utenti con ID identico.\n");
@@ -216,7 +216,7 @@ bool checkDuplicateClients(client *cl, int rows) {
 				switch (choice) {
 					case 1:
 						// If client type is "company"
-						if (cl[i].cl_type == 3) {
+						if ((cl + i)->cl_type == 3) {
 							reqPIVA(cl + i);
 						} else {
 							reqCF(cl + i);
@@ -224,7 +224,7 @@ bool checkDuplicateClients(client *cl, int rows) {
 						break;
 					case 2:
 						// If client type is "company"
-						if (cl[j].cl_type == 3) {
+						if ((cl + j)->cl_type == 3) {
 							reqPIVA(cl + j);
 						} else {
 							reqCF(cl + j);

@@ -44,38 +44,38 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 		while (token != NULL) {
 			switch (field) {
 				case 0:
-					bl[bl_num].id = atoi(token);
+					(bl + bl_num)->id = atoi(token);
 					break;
 				case 1:
-					strcpy(bl[bl_num].street, token);
+					strcpy((bl + bl_num)->street, token);
 					break;
 				case 2:
-					bl[bl_num].civic = atoi(token);
+					(bl + bl_num)->civic = atoi(token);
 					break;
 				case 3:
-					strcpy(bl[bl_num].city, token);
-					convertToUpperCase(bl[bl_num].city);
+					strcpy((bl + bl_num)->city, token);
+					convertToUpperCase((bl + bl_num)->city);
 					break;
 				case 4:
-					strcpy(bl[bl_num].province, token);
+					strcpy((bl + bl_num)->province, token);
 					break;
 				case 5:
 					// Save parsed Epoch time into clients struct
-					bl[bl_num].reg_date = parseDateInFile(token);
+					(bl + bl_num)->reg_date = parseDateInFile(token);
 					break;
 				case 6:
-					bl[bl_num].price = atoi(token);
+					(bl + bl_num)->price = atoi(token);
 					break;
 				case 7:
-					strcpy(bl[bl_num].owner, token);
-					convertToUpperCase(bl[bl_num].owner);
+					strcpy((bl + bl_num)->owner, token);
+					convertToUpperCase((bl + bl_num)->owner);
 					break;
 				case 8:
-					strcpy(bl[bl_num].phone, token);
+					strcpy((bl + bl_num)->phone, token);
 					break;
 				case 9:
 					enum_tmp = atoi(token);
-					bl[bl_num].b_type = enum_tmp;
+					(bl + bl_num)->b_type = enum_tmp;
 					break;
 			}
 
@@ -126,13 +126,13 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 		rewind(filePtr);
 
 		for (int i = 0; i < rows; i++) {
-			if (!bl[i].toDelete) {
-				fprintf(filePtr, "%d,%s,%d,%s,%s", bl[i].id, bl[i].street, bl[i].civic, bl[i].city,
-						bl[i].province);
+			if (!(bl + i)->toDelete) {
+				fprintf(filePtr, "%d,%s,%d,%s,%s", (bl + i)->id, (bl + i)->street, (bl + i)->civic, (bl + i)->city,
+						(bl + i)->province);
 
-				formattedDateToFile(filePtr, &bl[i].reg_date);
+				formattedDateToFile(filePtr, &(bl + i)->reg_date);
 
-				fprintf(filePtr, "%d,%s,%s,%d\n", bl[i].price, bl[i].owner, bl[i].phone, bl[i].b_type);
+				fprintf(filePtr, "%d,%s,%s,%d\n", (bl + i)->price, (bl + i)->owner, (bl + i)->phone, (bl + i)->b_type);
 			}
 		}
 	}
@@ -156,7 +156,7 @@ int checkDuplicateBuildings(building *bl, int rows) {
 
 	for (int i = 0; i < rows; i++) {
 		for (int j = i + 1; j < rows; j++) {
-			if (bl[i].id == bl[j].id) {
+			if ((bl + i)->id == (bl + j)->id) {
 				clearScr();
 				setRedColor();
 				printf("\nERRORE: Il database contiene degli immobili con ID identico.\n");
@@ -246,7 +246,7 @@ int searchBuilding(building *allBuildings, int num_buildings) {
 					price = readInteger();
 
 					for (int i = 0; i < num_buildings; i++) {
-						if (allBuildings[i].price < price) {
+						if ((allBuildings + i)->price < price) {
 							found = true;
 							showBuildingData(allBuildings + i);
 						}
@@ -266,7 +266,7 @@ int searchBuilding(building *allBuildings, int num_buildings) {
 					convertToUpperCase(city);
 
 					for (int i = 0; i < num_buildings; i++) {
-						if (strstr(allBuildings[i].city, city) != NULL) {
+						if (strstr((allBuildings + i)->city, city) != NULL) {
 							found = true;
 							showBuildingData(allBuildings + i);
 						}

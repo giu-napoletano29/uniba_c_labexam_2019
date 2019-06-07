@@ -21,16 +21,16 @@
  */
 void initBuildingsArray(building *bl, int size) {
 	for (int i = 0; i < size; i++) {
-		bl[i].id = 0;
-		strcpy(bl[i].street, "");
-		bl[i].civic = 0;
-		strcpy(bl[i].city, "");
-		strcpy(bl[i].province, "");
-		bl[i].reg_date = 0;
-		bl[i].price = 0;
-		strcpy(bl[i].owner, "");
-		strcpy(bl[i].phone, "");
-		bl[i].b_type = flat;
+		(bl + i)->id = 0;
+		strcpy((bl + i)->street, "");
+		(bl + i)->civic = 0;
+		strcpy((bl + i)->city, "");
+		strcpy((bl + i)->province, "");
+		(bl + i)->reg_date = 0;
+		(bl + i)->price = 0;
+		strcpy((bl + i)->owner, "");
+		strcpy((bl + i)->phone, "");
+		(bl + i)->b_type = flat;
 	}
 }
 
