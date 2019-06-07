@@ -44,33 +44,33 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
 		while (token != NULL) {
 			switch (field) {
 				case 0:
-					strcpy(allPros[pr_num].id, token);
+					strcpy((allPros + pr_num)->id, token);
 					break;
 				case 1:
-					strcpy(allPros[pr_num].name, token);
-					convertToUpperCase(allPros[pr_num].name);
+					strcpy((allPros + pr_num)->name, token);
+					convertToUpperCase((allPros + pr_num)->name);
 					break;
 				case 2:
-					strcpy(allPros[pr_num].surname, token);
-					convertToUpperCase(allPros[pr_num].surname);
+					strcpy((allPros + pr_num)->surname, token);
+					convertToUpperCase((allPros + pr_num)->surname);
 					break;
 				case 3:
-					strcpy(allPros[pr_num].area, token);
+					strcpy((allPros + pr_num)->area, token);
 					break;
 				case 4:
-					strcpy(allPros[pr_num].phone, token);
+					strcpy((allPros + pr_num)->phone, token);
 					break;
 				case 5:
-					strcpy(allPros[pr_num].email, token);
+					strcpy((allPros + pr_num)->email, token);
 					break;
 				case 6:
 					/*
 					 *  Save parsed Epoch time into clients struct
 					 */
-					allPros[pr_num].reg_date = parseDateInFile(token);
+					(allPros + pr_num)->reg_date = parseDateInFile(token);
 					break;
 				case 7:
-					allPros[pr_num].buildings_sold = atoi(token);
+					(allPros + pr_num)->buildings_sold = atoi(token);
 					break;
 			}
 
@@ -179,7 +179,7 @@ int checkDuplicatePros(professional *allPros, int rows) {
 
 	for (int i = 0; i < rows; i++) {
 		for (int j = i + 1; j < rows; j++) {
-			if (strCompare(allPros[i].id, allPros[j].id)) {
+			if (strCompare((allPros + i)->id, (allPros + j)->id)) {
 				clearScr();
 				setRedColor();
 				printf("\nERRORE: Il database contiene dei professionisti con ID identico.\n");

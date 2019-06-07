@@ -23,7 +23,7 @@
  */
 void findPotential(char id[], potential *pr, int num_records) {
 	for (int i = 0; i < num_records; i++) {
-		if (strCompare(id, pr[i].id)) {
+		if (strCompare(id, (pr + i)->id)) {
 			setCyanColor();
 			printf("Potenziale: ");
 			resetColor();
