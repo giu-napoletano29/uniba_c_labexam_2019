@@ -9,9 +9,9 @@
 #include <stdlib.h>
 
 #include "../../utils.h"
-#include "files_pr.h"
+#include "../../sort.h"
 
-//TODO: Maybe should be removed
+#include "files_pr.h"
 #include "files_pts.h"
 
 /**
@@ -77,6 +77,10 @@ void showProData(professional *pr, potential *allPts, int num_records) {
  */
 int showAllPros(professional *allPros, potential *allPts, int num_records) {
 	int i;
+
+	sortPros(allPros, num_records);
+	//TODO: Run rewrite only if needed
+	rewriteProsToFile(allPros, num_records);
 
 	clearScr();
 	printSectionName("Lista professionisti", false);

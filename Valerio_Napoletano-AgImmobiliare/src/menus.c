@@ -123,14 +123,7 @@ int professMenu() {
 	/**
 	 - Check if there's any client with duplicated IDs
 	 If so asks the user to change it. */
-	 //TODO: Check if works
-	//checkDuplicatePros(allProfessionals, professionalsNum);
-
-	/*
-	 sortPros(allProfessionals, professionalsNum);
-	 //TODO: Run rewrite only if needed
-	 rewriteProsToFile(allProfessionals, professionalsNum);
-	 */
+	 checkDuplicatePros(allProfessionals, professionalsNum);
 
 	do {
 		clearScr();

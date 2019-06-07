@@ -38,6 +38,8 @@ void reqProCF(professional *pr) {
 		}
 	} while (error == true);
 
+	convertToUpperCase(pr->id);
+
 	clearScr();
 }
 
@@ -49,6 +51,7 @@ void reqProCF(professional *pr) {
 void reqProName(professional *pr) {
 	printf("Nome: ");
 	readString(pr->name, true, false);
+	convertToUpperCase(pr->name);
 
 	clearScr();
 }
@@ -61,6 +64,7 @@ void reqProName(professional *pr) {
 void reqProSurname(professional *pr) {
 	printf("Cognome: ");
 	readString(pr->surname, true, false);
+	convertToUpperCase(pr->surname);
 
 	clearScr();
 }
