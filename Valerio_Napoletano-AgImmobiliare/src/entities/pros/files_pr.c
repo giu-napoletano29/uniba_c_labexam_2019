@@ -148,13 +148,16 @@ void rewriteProsToFile(professional *allPros, int rows) {
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		for (int i = 0; i < rows; i++) {
-			// Write professionals file
-			fprintf(filePtr, "%s,%s,%s,%s,%s,%s", (allPros + i)->id, (allPros + i)->name,
-					(allPros + i)->surname, (allPros + i)->area, (allPros + i)->phone, (allPros + i)->email);
+			// Write to file only if toDelete bool is false
+			if (!(allPros + i)->toDelete) {
+				fprintf(filePtr, "%s,%s,%s,%s,%s,%s", (allPros + i)->id, (allPros + i)->name,
+						(allPros + i)->surname, (allPros + i)->area, (allPros + i)->phone,
+						(allPros + i)->email);
 
-			formattedDateToFile(filePtr, &(allPros + i)->reg_date);
+				formattedDateToFile(filePtr, &(allPros + i)->reg_date);
 
-			fprintf(filePtr, "%d\n", (allPros + i)->buildings_sold);
+				fprintf(filePtr, "%d\n", (allPros + i)->buildings_sold);
+			}
 		}
 	}
 

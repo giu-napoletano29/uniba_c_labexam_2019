@@ -71,12 +71,11 @@ void saveLocalDatePro(professional *pr) {
  *
  * @param allPros Array of structs (professional type)
  * @param allPts Array of structs (potential type)
- * @param num_pros Number of items (professionals) saved in the array.
+ * @param num_records Number of items professionals/potentials saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-
-int addPro(professional *allPros, potential *allPts, int num_pros) {
-	professional pr = { "", "", "", "", "", "", 0, 0, false};
+int addPro(professional *allPros, potential *allPts, int num_records) {
+	professional pr = { "", "", "", "", "", "", 0, 0, false };
 	potential pt = { "", "" };
 	int newProsNum = 0;
 	int newPtsNum = 0;
@@ -107,11 +106,11 @@ int addPro(professional *allPros, potential *allPts, int num_pros) {
 
 	appendPtsToFile(&pt);
 
-	/** - Sort clients in the memory */
-	//TODO: Maybe does not work
-	//sortPros(allPros, num_pros);
-
 	// --- PROFESSIONALS ---
+
+	/** - Sort professionls in the memory */
+	sortPros(allPros, num_records);
+
 	/** - Re-declare and re-initialize the array of structs with the newly created pro */
 	newProsNum = countFileRows("professionals");
 	professional newAllPros[newProsNum];
@@ -124,6 +123,7 @@ int addPro(professional *allPros, potential *allPts, int num_pros) {
 	rewriteProsToFile(newAllPros, newProsNum);
 
 	// --- POTENTIALS ---
+
 	/** - Re-declare and re-initialize the array of structs with the newly created potentials */
 	newPtsNum = countFileRows("pros_potential");
 	potential newAllPts[newPtsNum];
@@ -139,13 +139,14 @@ int addPro(professional *allPros, potential *allPts, int num_pros) {
 }
 
 /**
- * Delete a pro identified by his ID inputted by the user.
+ * Delete a professional and its potential identified by his ID inputted by the user.
  *
- * @param allPros Array of structs of all clients registered.
- * @param num_pros Number of clients registered.
+ * @param allPros Array of structs of all professionals registered.
+ * @param allPts Array of structs of all potentials registered.
+ * @param num_records Number of professionals/potentials registered.
  * @return -1 for going back to the menu
  */
-int deletePro(professional *allPros, int num_pros) {
+int deletePro(professional *allPros, potential *allPts, int num_records) {
 	bool found = false;
 
 	clearScr();
@@ -155,7 +156,8 @@ int deletePro(professional *allPros, int num_pros) {
 	printf("\nInserisci Codice Fiscale del professionista da eliminare: ");
 	readString(toDeleteID, false, false);
 
-	for (int i = 0; i < num_pros; i++) {
+	for (int i = 0; i < num_records; i++) {
+		// Set the "toDelete" flag on true of the chosen professional
 		if (strCompare(toDeleteID, (allPros + i)->id)) {
 			(allPros + i)->toDelete = true;
 			found = true;
@@ -163,10 +165,18 @@ int deletePro(professional *allPros, int num_pros) {
 	}
 
 	if (found) {
-		rewriteProsToFile(allPros, num_pros);
+		// Set the "toDelete" flag on true of the professional "potential"
+		for (int i = 0; i < num_records; i++) {
+			if (strCompare(toDeleteID, (allPts + i)->id)) {
+				(allPts + i)->toDelete = true;
+			}
+		}
+
+		rewriteProsToFile(allPros, num_records);
+		rewritePtsToFile(allPts, num_records);
 
 		setGreenColor();
-		printf("\nCliente eliminato!\n");
+		printf("\nProfessionista eliminato!\n");
 		resetColor();
 	} else {
 		setRedColor();

@@ -157,7 +157,7 @@ int professMenu() {
 				choice = addPro(allProfessionals, allPotentials, professionalsNum);
 				break;
 			case 3:
-				choice = deletePro(allProfessionals, professionalsNum);
+				choice = deletePro(allProfessionals, allPotentials, professionalsNum);
 				break;
 			case 4:
 				// This is used as a flag for the "go back" choice

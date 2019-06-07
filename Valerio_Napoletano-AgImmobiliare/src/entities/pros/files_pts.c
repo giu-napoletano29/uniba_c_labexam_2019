@@ -108,7 +108,7 @@ int appendPtsToFile(potential *pt) {
 	filePtr = fopen("pros_potential.dat", "a+");
 
 	if (checkFile(filePtr)) {
-		// Save to file only if the client is not marked for deletion
+		// Save to file only if the potential is not marked for deletion
 		if (!pt->toDelete) {
 			// Write professionals file
 			fprintf(filePtr, "%s|%s\n", pt->id, pt->content);
@@ -133,7 +133,10 @@ void rewritePtsToFile(potential *allPts, int rows) {
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		for (int i = 0; i < rows; i++) {
-			fprintf(filePtr, "%s|%s", (allPts + i)->id, (allPts + i)->content);
+			// Write to file only if toDelete bool is false
+			if (!(allPts + i)->toDelete) {
+				fprintf(filePtr, "%s|%s\n", (allPts + i)->id, (allPts + i)->content);
+			}
 		}
 	}
 
