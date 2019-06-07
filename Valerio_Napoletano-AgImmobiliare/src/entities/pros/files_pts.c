@@ -100,7 +100,7 @@ void loadPotentialsFile(potential *allPotentials) {
 /**
  * @brief Append a new potential to the "pros_potential.dat" file
  *
- * @param pr Potential struct where the data is stored
+ * @param pt Potential struct where the data is stored
  * @return -1 go back to main menu
  */
 int appendPtsToFile(potential *pt) {
