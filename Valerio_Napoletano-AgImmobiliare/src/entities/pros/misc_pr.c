@@ -78,7 +78,6 @@ int addPro(professional *allPros, potential *allPts, int num_records) {
 	professional pr = { "", "", "", "", "", "", 0, 0, false };
 	potential pt = { "", "" };
 	int newProsNum = 0;
-	int newPtsNum = 0;
 
 	clearScr();
 	printSectionName("Aggiunta professionista", false);
@@ -111,29 +110,16 @@ int addPro(professional *allPros, potential *allPts, int num_records) {
 	/** - Sort professionls in the memory */
 	sortPros(allPros, num_records);
 
-	/** - Re-declare and re-initialize the array of structs with the newly created pro */
+	/** - Re-declare and re-initialize the array of structs with the newly created pros */
 	newProsNum = countFileRows("professionals");
 	professional newAllPros[newProsNum];
 	initProsArray(newAllPros, newProsNum);
 
-	/** - Load pros file and stores the parsed data in the memory. */
+	/** - Reload pros file and stores the parsed data in the memory. */
 	loadProsFile(newAllPros);
 
-	/** - Rewrite ordered array of structs from memory to the pros file */
+	/** - Write ordered array of structs from memory to the pros file */
 	rewriteProsToFile(newAllPros, newProsNum);
-
-	// --- POTENTIALS ---
-
-	/** - Re-declare and re-initialize the array of structs with the newly created potentials */
-	newPtsNum = countFileRows("pros_potential");
-	potential newAllPts[newPtsNum];
-	initPotentialsArray(newAllPts, newPtsNum);
-
-	/** - Load potentials file and stores the parsed data in the memory. */
-	loadPotentialsFile(newAllPts);
-
-	/** - Rewrite ordered array of structs from memory to the pros file */
-	rewritePtsToFile(newAllPts, newPtsNum);
 
 	return -1;
 }
