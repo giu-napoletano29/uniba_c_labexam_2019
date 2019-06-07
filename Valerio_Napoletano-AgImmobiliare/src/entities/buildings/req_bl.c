@@ -17,7 +17,6 @@
 #include "../../consts.h"
 #include "show_bl.h" // For using printBuildingChoices()
 
-
 /**
  * @brief Generate building's ID and set in the struct.
  *
@@ -43,7 +42,7 @@ void reqBuildingStreet(building *bl) {
 	printf("\nVia/Piazza/Viale: ");
 	readString(bl->street, false, false);
 
-	puts("\nNumero civico: ");
+	printf("\nNumero civico: ");
 	bl->civic = readInteger();
 	clearScr();
 }
@@ -55,7 +54,7 @@ void reqBuildingStreet(building *bl) {
  */
 void reqBuildingCity(building *bl) {
 	printf("Citta': ");
-	readString(bl->city, true, false);
+	readString(bl->city, false, false);
 	clearScr();
 }
 
@@ -65,8 +64,20 @@ void reqBuildingCity(building *bl) {
  * @param bl "building" type struct
  */
 void reqBuildingProvince(building *bl) {
-	printf("Provincia: ");
-	readString(bl->province, true, false);
+	bool error = false;
+
+	printf("Provincia (come sigla): ");
+	do {
+		if (readString(bl->province, true, false) != 2) {
+			error = true;
+			setYellowColor();
+			puts("\nValore errato!");
+			printf("Inserisci la sigla di una provincia (es. BT): ");
+			resetColor();
+		} else {
+			error = false;
+		}
+	} while (error == true);
 	clearScr();
 }
 
@@ -129,5 +140,5 @@ void reqBuildingType(building *bl) {
 		if (bl->b_type < 1 || bl->b_type > 5) {
 			error = true;
 		}
-	} while (bl->b_type  < 1 || bl->b_type > 5);
+	} while (bl->b_type < 1 || bl->b_type > 5);
 }
