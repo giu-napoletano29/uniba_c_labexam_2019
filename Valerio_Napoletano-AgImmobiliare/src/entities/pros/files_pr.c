@@ -19,12 +19,12 @@
 #include "req_pr.h"
 
 /**
- * @brief Parse "professional" file (professionals.csv)
+ * @brief Parse "professional" file (professionals.dat)
  *
  * @param filePtr Pointer to file initalized from fopen()
- * @param pr Professional array of structs for storing parsed data.
+ * @param allPros Array of structs (professionals data type)
  */
-void readProsFile(FILE *filePtr, professional *pr) {
+void parseProsFile(FILE *filePtr, professional *allPros) {
 	char line[MAX_TEXT_SIZE];
 	char *token;
 
@@ -44,33 +44,33 @@ void readProsFile(FILE *filePtr, professional *pr) {
 		while (token != NULL) {
 			switch (field) {
 				case 0:
-					strcpy(pr[pr_num].id, token);
+					strcpy((allPros + pr_num)->id, token);
 					break;
 				case 1:
-					strcpy(pr[pr_num].name, token);
-					convertToUpperCase(pr[pr_num].name);
+					strcpy((allPros + pr_num)->name, token);
+					convertToUpperCase((allPros + pr_num)->name);
 					break;
 				case 2:
-					strcpy(pr[pr_num].surname, token);
-					convertToUpperCase(pr[pr_num].surname);
+					strcpy((allPros + pr_num)->surname, token);
+					convertToUpperCase((allPros + pr_num)->surname);
 					break;
 				case 3:
-					strcpy(pr[pr_num].area, token);
+					strcpy((allPros + pr_num)->area, token);
 					break;
 				case 4:
-					strcpy(pr[pr_num].phone, token);
+					strcpy((allPros + pr_num)->phone, token);
 					break;
 				case 5:
-					strcpy(pr[pr_num].email, token);
+					strcpy((allPros + pr_num)->email, token);
 					break;
 				case 6:
 					/*
 					 *  Save parsed Epoch time into clients struct
 					 */
-					pr[pr_num].reg_date = parseDateInFile(token);
+					(allPros + pr_num)->reg_date = parseDateInFile(token);
 					break;
 				case 7:
-					pr[pr_num].buildings_sold = atoi(token);
+					(allPros + pr_num)->buildings_sold = atoi(token);
 					break;
 			}
 
@@ -87,81 +87,47 @@ void readProsFile(FILE *filePtr, professional *pr) {
 }
 
 /**
- * @brief Print potential string of a specific professional.
- * The "potential" of a pro is a simple string that explains what are his "strenghts".
- * E.g. "He's able to sell quickly houses located on the beach."
+ * @brief Load professional file to memory.
  *
- * @param id Professional's ID
- * @param pr Potentials array of structs
- * @param num_profess Number of professionals registered
- */
-void findPotential(char id[], potential *pr, int num_profess) {
-	for (int i = 0; i < num_profess; i++) {
-		if (strCompare(id, pr[i].id)) {
-			setCyanColor();
-			printf("Potenziale: ");
-			resetColor();
-			printf("%s \n", pr[i].content);
-		}
-	}
-}
-
-/**
- * @brief Parse "potential" file (potentials.csv)
- * Check out findPotential() for more information about the "potential".
- *
- * @param fp_pot Pointer to file initalized from fopen()
- * @param pr Professional array of structs for storing parsed data.
- * @param id ID of the professional connected to a specific potential record.
- * @param rows Number of professionals registered
- */
-void parsePotentialsFile(FILE *fp_pot, potential *pr, char id[], int rows) {
-	char line[MAX_TEXT_SIZE];
-	char *token;
-
-	int field;
-	// Pros counter
-	int pr_num = 0;
-
-	while (fgets(line, sizeof line, fp_pot) != NULL) /* read a line */
-	{
-		// Fields counter (ID, name, etc..)
-		field = 0;
-
-		/* Tokenize and load in the internal struct */
-		// Get first token
-		token = strtok(line, ",");
-
-		while (token != NULL) {
-			switch (field) {
-				case 0:
-					strcpy(pr[pr_num].id, token);
-					break;
-				case 1:
-					strcpy(pr[pr_num].content, token);
-					break;
-			}
-			// Read the other tokens
-			token = strtok(NULL, ",");
-			field++;
-		}
-		pr_num++;
-	}
-	findPotential(id, pr, rows);
-}
-
-/**
- * @brief Load professional.csv file to memory.
- *
- * @param pr Array of structs (professional datatype) where data will be stored.
+ * @param allPros Array of structs (professional datatype) where data will be stored.
  * @return -1 for going back to the main menu.
  */
-int loadProsFile(professional *pr) {
+int loadProsFile(professional *allPros) {
+	FILE *prosFilePtr;
+
+	prosFilePtr = fopen("professionals.dat", "a+");
+
+	if (checkFile(prosFilePtr)) {
+		rewind(prosFilePtr);
+
+		parseProsFile(prosFilePtr, allPros);
+	}
+
+	fclose(prosFilePtr);
+	return -1;
+}
+
+/**
+ * @brief Append a new professional to the "professionals.dat" file
+ *
+ * @param pr Professional struct where the data is stored
+ * @return -1 go back to main menu
+ */
+int appendProToFile(professional *pr) {
 	FILE *filePtr;
-	filePtr = fopen("professionals.csv", "a+");
+	filePtr = fopen("professionals.dat", "a+");
+
 	if (checkFile(filePtr)) {
-		rewind(filePtr);
-		readProsFile(filePtr, pr);
+		// Save to file only if the client is not marked for deletion
+		if (!pr->toDelete) {
+			// Write professionals file
+			fprintf(filePtr, "%s,%s,%s,%s,%s,%s", pr->id, pr->name, pr->surname, pr->area, pr->phone,
+					pr->email);
+
+			formattedDateToFile(filePtr, &pr->reg_date);
+
+			fprintf(filePtr, "%d\n", pr->buildings_sold);
+		}
 	}
 
 	fclose(filePtr);
@@ -169,65 +135,29 @@ int loadProsFile(professional *pr) {
 }
 
 /**
- * @brief Get how many professionals are saved in the file.
- *
- * @return Number of professionals. (integer)
- */
-int getProfessionalsNumber() {
-	FILE *filePtr;
-	int rows = 0;
-	filePtr = fopen("professionals.csv", "a+");
-	if (checkFile(filePtr)) {
-		if (filePtr != NULL) {
-			rewind(filePtr);
-			rows = countRows(filePtr);
-		}
-	}
-	fclose(filePtr);
-	return rows;
-}
-
-/**
- * @brief Initialize potential array of structs and parse professionals' potential file.
- *
- * @param id ID of the professional connected to a specific potential record.
- */
-void loadPotFile(char id[]) {
-	int rows = 0;
-	FILE *fp_pot;
-	fp_pot = fopen("pro_potential.csv", "a+");
-	if (checkFile(fp_pot)) {
-		rows = countRows(fp_pot);
-		rewind(fp_pot);
-
-		potential pr[rows];
-		initPotentialsArray(pr, rows);
-
-		parsePotentialsFile(fp_pot, pr, id, rows);
-	}
-	fclose(fp_pot);
-}
-
-/**
  * @brief Replace professionals file contents with the data saved in the array of structs.
  * Can be useful for deleting/update data from the file.
  *
- * @param pr Professional array of structs where the data is stored
+ * @param allPros Professional array of structs where the data is stored
  * @param rows How many professionals are registered
  */
-void rewriteProfessionalsToFile(professional *pr, int rows) {
+void rewriteProsToFile(professional *allPros, int rows) {
 	FILE *filePtr;
-	filePtr = fopen("professionals.csv", "w+");
+	filePtr = fopen("professionals.dat", "w+");
 
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		for (int i = 0; i < rows; i++) {
-			fprintf(filePtr, "%s,%s,%s,%s,%s,%s", pr[i].id, pr[i].name, pr[i].surname, pr[i].area,
-					pr[i].phone, pr[i].email);
+			// Write to file only if toDelete bool is false
+			if (!(allPros + i)->toDelete) {
+				fprintf(filePtr, "%s,%s,%s,%s,%s,%s", (allPros + i)->id, (allPros + i)->name,
+						(allPros + i)->surname, (allPros + i)->area, (allPros + i)->phone,
+						(allPros + i)->email);
 
-			formattedDateToFile(filePtr, &pr[i].reg_date);
+				formattedDateToFile(filePtr, &(allPros + i)->reg_date);
 
-			fprintf(filePtr, "%d\n", pr[i].buildings_sold);
+				fprintf(filePtr, "%d\n", (allPros + i)->buildings_sold);
+			}
 		}
 	}
 
@@ -238,18 +168,18 @@ void rewriteProfessionalsToFile(professional *pr, int rows) {
  * @brief Check for duplicates in the file.
  * If so ask the user to change one of the IDs.
  *
- * @param pr Professional array of structs where the data is stored
+ * @param allPros Professional array of structs where the data is stored
  * @param rows How many professionals are registered
  * @return -1 if duplicates are found.
  */
-int checkDuplicatePros(professional *pr, int rows) {
+int checkDuplicatePros(professional *allPros, int rows) {
 	bool result = false;
 	bool error = false;
 	short int choice = 0;
 
 	for (int i = 0; i < rows; i++) {
 		for (int j = i + 1; j < rows; j++) {
-			if (strCompare(pr[i].id, pr[j].id)) {
+			if (strCompare((allPros + i)->id, (allPros + j)->id)) {
 				clearScr();
 				setRedColor();
 				printf("\nERRORE: Il database contiene dei professionisti con ID identico.\n");
@@ -258,12 +188,12 @@ int checkDuplicatePros(professional *pr, int rows) {
 				setCyanColor();
 				printf("\n--- PROFESSIONISTA 1 ---\n");
 				resetColor();
-				showProData(pr + i);
+				showProData(allPros + i);
 
 				setCyanColor();
 				printf("\n--- PROFESSIONISTA 2 ---\n");
 				resetColor();
-				showProData(pr + j);
+				showProData(allPros + j);
 
 				do {
 					if (error) {
@@ -283,10 +213,10 @@ int checkDuplicatePros(professional *pr, int rows) {
 
 				switch (choice) {
 					case 1:
-						reqProCF(pr + i);
+						reqProCF(allPros + i);
 						break;
 					case 2:
-						reqProCF(pr + j);
+						reqProCF(allPros + j);
 						break;
 				}
 				i = 0;
@@ -296,6 +226,6 @@ int checkDuplicatePros(professional *pr, int rows) {
 			}
 		}
 	}
-	rewriteProfessionalsToFile(pr, rows);
+	rewriteProsToFile(allPros, rows);
 	return result;
 }

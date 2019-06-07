@@ -40,18 +40,29 @@ bool checkFile(FILE *filePtr) {
 /**
  * @brief Count rows present in the file.
  *
- * @param filePtr Pointer to file initialized by fopen()
+ * @param name File name (without extension)
  * @return Number of rows detected.
  */
-int countRows(FILE *filePtr) {
-	int count = 0;
-	char line[MAX_TEXT_SIZE];
-	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
-	{
-		count++;
-	}
+int countFileRows(char *name) {
+	FILE *filePtr;
+	int rowsNum = 0;
+	char filename[MAX_STRING_SIZE] = "";
+	char line[MAX_TEXT_SIZE] = "";
 
-	return count;
+	// Add the ".dat" file extension using a safe method for string concatenation
+	snprintf(filename, sizeof filename, "%s%s", name, ".dat");
+
+	filePtr = fopen(filename, "a+");
+	if (checkFile(filePtr)) {
+		// Just in case
+		rewind(filePtr);
+
+		while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
+		{
+			rowsNum++;
+		}
+	}
+	return rowsNum;
 }
 
 /**

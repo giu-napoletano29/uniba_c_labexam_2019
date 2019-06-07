@@ -9,5 +9,12 @@
 #define ENTITIES_PROS_REQ_PR_H_
 
 void reqProCF(professional *pr);
+void reqProName(professional *pr);
+void reqProSurname(professional *pr);
+void reqProArea(professional *pr);
+void reqProPhone(professional *pr);
+void reqProEmail(professional *pr);
+void reqProSoldBuildings(professional *pr);
+void reqProPotential(professional *pr, potential *pt);
 
 #endif /* ENTITIES_PROS_REQ_PR_H_ */

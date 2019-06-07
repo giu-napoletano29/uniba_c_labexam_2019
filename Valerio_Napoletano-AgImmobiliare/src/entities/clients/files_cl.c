@@ -19,7 +19,7 @@
 #include "req_cl.h" // For reqID() and reqPIVA()
 
 /**
- * @brief Parse "clients" file (professionals.csv)
+ * @brief Parse "clients" file (clients.dat)
  *
  * @param filePtr Pointer to file initalized from fopen()
  * @param cl Client array of structs for storing parsed data.
@@ -105,7 +105,7 @@ int rewriteClientsToFile(client *cl, int rows) {
 	filePtr = fopen("clients.dat", "w+");
 
 	// Sort clients in the memory before writing
-	sortFileCli(cl, rows);
+	sortClients(cl, rows);
 
 	if (checkFile(filePtr)) {
 		for (int i = 0; i < rows; i++) {
@@ -148,22 +148,6 @@ int appendClientToFile(client *cl) {
 
 	fclose(filePtr);
 	return -1;
-}
-
-/**
- * @brief Get how many clients are saved in the file.
- *
- * @return Number of clients. (integer)
- */
-int getClientsNumber() {
-	FILE *filePtr;
-	int rows = 0;
-	filePtr = fopen("clients.dat", "a+");
-	if (checkFile(filePtr)) {
-		rows = countRows(filePtr);
-		fclose(filePtr);
-	}
-	return rows;
 }
 
 /**
