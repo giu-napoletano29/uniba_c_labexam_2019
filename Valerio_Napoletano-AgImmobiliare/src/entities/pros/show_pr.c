@@ -28,14 +28,9 @@ void showProData(professional *pr, potential *allPts, int numRecords) {
 	printf("%s \n", pr->id);
 
 	setCyanColor();
-	printf("Nome: ");
+	printf("Nome e cognome: ");
 	resetColor();
-	printf("%s \n", pr->name);
-
-	setCyanColor();
-	printf("Cognome: ");
-	resetColor();
-	printf("%s \n", pr->surname);
+	printf("%s %s \n", pr->name, pr->surname);
 
 	setCyanColor();
 	printf("Area di competenza: ");
@@ -87,7 +82,7 @@ int showAllPros(professional *allPros, potential *allPts, int numRecords) {
 	if (numRecords != 0) {
 		for (i = 0; i < numRecords; i++) {
 			setCyanColor();
-			printf("\n-- PROFESSIONISTA %d --\n", i + 1);
+			printf("\n-- PROFESSIONISTA --\n");
 			resetColor();
 
 			showProData((allPros + i), allPts, numRecords);
