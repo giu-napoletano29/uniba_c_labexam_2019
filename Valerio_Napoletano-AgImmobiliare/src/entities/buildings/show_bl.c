@@ -100,37 +100,23 @@ void printContractChoices() {
  *
  * @param bl building type struct
  */
-void showBuildingData(building *bl) {	
-	setCyanColor();
-	printf("Identificativo: ");
-	resetColor();
-	printf("%d \n", bl->id);
-
+void showBuildingData(building *bl) {
 	setCyanColor();
 	printf("Tipo contratto: ");
-	resetColor();
+	setYellowColor();
 	showContractType(bl->ctrType);
-	
+	resetColor();
+
 	setCyanColor();
 	printf("Indirizzo: ");
 	resetColor();
-	printf("%s \n", bl->street);
-
-	setCyanColor();
-	printf("Numero civico: ");
-	resetColor();
-	printf("%d \n", bl->civic);
+	printf("%s, %d \n", bl->street, bl->civic);
 
 	setCyanColor();
 	printf("Citta': ");
 	resetColor();
-	printf("%s \n", bl->city);
-
-	setCyanColor();
-	printf("Provincia: ");
-	resetColor();
-	printf("%s \n", bl->province);
-
+	printf("%s (%s)\n", bl->city, bl->province);
+	
 	setCyanColor();
 	printf("Data di registrazione: ");
 	resetColor();
@@ -138,33 +124,36 @@ void showBuildingData(building *bl) {
 
 	setCyanColor();
 	printf("Prezzo: ");
-	resetColor();
+	setYellowColor();
 	printf("%.2f euro \n", bl->price);
+	resetColor();
 
 	setCyanColor();
-	printf("Venditore: ");
+	printf("Proprietario: ");
 	resetColor();
-	printf("%s \n", bl->owner);
-
-	setCyanColor();
-	printf("Numero di telefono venditore: ");
-	resetColor();
-	printf("%s \n", bl->phone);
+	printf("%s (tel. %s)\n", bl->owner, bl->phone);
 
 	setCyanColor();
 	printf("Tipologia: ");
-	resetColor();
+	setYellowColor();
 	showBuildingType(bl->builType);
+	resetColor();
 
 	setCyanColor();
-	printf("Venduto/Affittato: ");
-	resetColor();
+	if (bl->ctrType == 1) {
+		printf("Affittato: ");
+	} else if (bl->ctrType == 2) {
+		printf("Venduto: ");
+	}
 	if (bl->soldOn != 0) {
+		setGreenColor();
 		printf("Si', il giorno ");
 		printFormattedDate(bl->soldOn);
 	} else {
+		setRedColor();
 		printf("No\n");
 	}
+	resetColor();
 
 }
 
@@ -178,7 +167,7 @@ void showBuildingData(building *bl) {
  */
 int showAllBuildings(building *bl, int numBuildings) {
 	int i;
-	
+
 	sortBuildings(bl, numBuildings);
 	rewriteBuildingsToFile(bl, numBuildings);
 
@@ -188,7 +177,7 @@ int showAllBuildings(building *bl, int numBuildings) {
 	if (numBuildings != 0) {
 		for (i = 0; i < numBuildings; i++) {
 			setCyanColor();
-			printf("\n-- IMMOBILE %d --\n", i + 1);
+			printf("\n-- IMMOBILE ID %d --\n", (bl + i)->id);
 			resetColor();
 			showBuildingData(bl + i);
 		}
