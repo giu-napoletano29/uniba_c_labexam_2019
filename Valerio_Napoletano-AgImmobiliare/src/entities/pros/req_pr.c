@@ -1,5 +1,5 @@
 /**
- * @file req_cl.c
+ * @file req_pr.c
  * @author Saverio Valerio
  * @date 1 June 2019
  * @brief Functions file containing prototypes related to the "request professionals' data" functions.

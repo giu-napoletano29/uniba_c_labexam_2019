@@ -1,8 +1,8 @@
 /**
- * @file req_cl.c
+ * @file req_bl.c
  * @author Saverio Valerio
  * @date 2 June 2019
- * @brief Functions file containing prototypes related to the "request buildings' data" functions.
+ * @brief Functions used for requesting "buildings data" to the user.
  */
 
 #include <stdio.h>

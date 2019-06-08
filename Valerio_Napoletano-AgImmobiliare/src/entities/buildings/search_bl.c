@@ -1,8 +1,8 @@
-/*
- * search_bl.c
- *
- *  Created on: 8 giu 2019
- *      Author: Saverio Valerio
+/**
+ * @file search_bl.c
+ * @author Saverio Valerio
+ * @date 8 June 2019
+ * @brief Functions for searching buildings using specific criteria.
  */
 
 #include <stdio.h>
@@ -15,6 +15,12 @@
 
 #include "show_bl.h"
 
+/**
+ * @brief Search buildings within a specific price range.
+ * 
+ * @param allBuildings Array of structs of all registered buildings
+ * @param numBuildings Number of buildings registered
+ */
 void searchBuildingsForPrice(building *allBuildings, int numBuildings) {
 	// Boolean for keeping track if at least one record has been found
 	bool found = false;
@@ -51,6 +57,12 @@ void searchBuildingsForPrice(building *allBuildings, int numBuildings) {
 	pause();
 }
 
+/**
+ * @brief Search buildings available in a specific city.
+ * 
+ * @param allBuildings Array of structs of all registered buildings
+ * @param numBuildings Number of buildings registered
+ */
 void searchBuildingsForCity(building *allBuildings, int numBuildings) {
 	// Boolean for keeping track if at least one record has been found
 	bool found = false;
