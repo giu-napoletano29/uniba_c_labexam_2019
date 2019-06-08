@@ -10,7 +10,7 @@
 
 void showBuildingType();
 void showBuildingData(building *bl);
-int showAllBuildings(building *bl, int num_buildings);
+int showAllBuildings(building *bl, int numBuildings);
 void printBuildingChoices();
 
 #endif /* ENTITIES_BUILDINGS_SHOW_BL_H_ */

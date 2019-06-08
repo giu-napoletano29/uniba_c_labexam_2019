@@ -1,8 +1,8 @@
 /**
- * @file req_cl.c
+ * @file req_bl.c
  * @author Saverio Valerio
  * @date 2 June 2019
- * @brief Functions file containing prototypes related to the "request buildings' data" functions.
+ * @brief Functions used for requesting "buildings data" to the user.
  */
 
 #include <stdio.h>
@@ -42,7 +42,7 @@ void reqBuildingStreet(building *bl) {
 	printf("\nVia/Piazza/Viale: ");
 	readString(bl->street, false, false);
 
-	puts("\nNumero civico: ");
+	printf("\nNumero civico: ");
 	bl->civic = readInteger();
 	clearScr();
 }
@@ -54,7 +54,7 @@ void reqBuildingStreet(building *bl) {
  */
 void reqBuildingCity(building *bl) {
 	printf("Citta': ");
-	readString(bl->city, true, false);
+	readString(bl->city, false, false);
 	clearScr();
 }
 
@@ -64,8 +64,20 @@ void reqBuildingCity(building *bl) {
  * @param bl "building" type struct
  */
 void reqBuildingProvince(building *bl) {
-	printf("Provincia: ");
-	readString(bl->province, true, false);
+	bool error = false;
+
+	printf("Provincia (come sigla): ");
+	do {
+		if (readString(bl->province, true, false) != 2) {
+			error = true;
+			setYellowColor();
+			puts("\nValore errato!");
+			printf("Inserisci la sigla di una provincia (es. BT): ");
+			resetColor();
+		} else {
+			error = false;
+		}
+	} while (error == true);
 	clearScr();
 }
 
@@ -76,7 +88,8 @@ void reqBuildingProvince(building *bl) {
  */
 void reqBuildingPrice(building *bl) {
 	printf("Prezzo in euro: ");
-	bl->price = readInteger();
+	bl->price = readDouble();
+	
 	clearScr();
 }
 
@@ -138,7 +151,7 @@ void reqBuildingSold(building *bl) {
 	do {
 		error = false;
 
-		printf("Inserisci se l'immobile è stato venduto: ");
+		printf("Inserisci se l'immobile e' stato venduto: ");
 		readString(tmp_string, true, false);
 		convertToUpperCase(tmp_string);
 

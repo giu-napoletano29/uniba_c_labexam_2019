@@ -9,14 +9,19 @@
 #include <stdlib.h>
 
 #include "../../utils.h"
+#include "../../sort.h"
+
 #include "files_pr.h"
+#include "files_pts.h"
 
 /**
  * @brief Print every field available in a professional struct.
  *
  * @param pr professional type struct
+ * @param allPts Array of structs of all available potentials records
+ * @param num_records Number of professionals/potentials saved in the array.
  */
-void showProData(professional *pr) {
+void showProData(professional *pr, potential *allPts, int num_records) {
 	setCyanColor();
 	printf("Codice fiscale: ");
 	resetColor();
@@ -57,30 +62,36 @@ void showProData(professional *pr) {
 	resetColor();
 	printf("%d \n", pr->buildings_sold);
 
-	//TODO: Program crashes if no potentials are available for the clients
-	loadPotFile(pr->id);
+	// Print related potential
+	findPotential(pr->id, allPts, num_records);
 }
 
 /**
  * @brief Print every client available in the array of structs.
  * Iterates on num_pros calling the showProData() function.
  *
- * @param pros Array of structs (professional type)
- * @param num_pros Number of items (professionals) saved in the array.
+ * @param allPros Array of structs of all registerd professionals
+ * @param allPts Array of structs of all registered potentials
+ * @param num_records Number of professionals/potentials saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-int showAllPros(professional *pros, int num_pros) {
+int showAllPros(professional *allPros, potential *allPts, int num_records) {
 	int i;
+
+	sortPros(allPros, num_records);
+	//TODO: Run rewrite only if needed
+	rewriteProsToFile(allPros, num_records);
 
 	clearScr();
 	printSectionName("Lista professionisti", false);
 
-	if (num_pros != 0) {
-		for (i = 0; i < num_pros; i++) {
+	if (num_records != 0) {
+		for (i = 0; i < num_records; i++) {
 			setCyanColor();
 			printf("\n-- PROFESSIONISTA %d --\n", i + 1);
 			resetColor();
-			showProData(pros + i);
+
+			showProData((allPros + i), allPts, num_records);
 		}
 	} else {
 		dbEmptyError();

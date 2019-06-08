@@ -112,7 +112,7 @@ int showAllClients(client *allClients, int num_clients) {
 	bool runRewrite = false;
 
 	// Sort clients in the memory
-	sortFileCli(allClients, num_clients);
+	sortClients(allClients, num_clients);
 
 	// Rewrite ordered clients file
 	rewriteClientsToFile(allClients, num_clients);

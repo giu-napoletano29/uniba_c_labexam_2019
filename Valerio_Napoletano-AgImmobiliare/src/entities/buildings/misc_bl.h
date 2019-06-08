@@ -9,6 +9,6 @@
 
 void initBuildingsArray(building *bl, int size);
 int addBuilding();
-int deleteBuilding(building *allBuildings, int num_buildings);
+int deleteBuilding(building *allBuildings, int numBuildings);
 
 #endif /* ENTITIES_BUILDINGS_MISC_BL_H_ */

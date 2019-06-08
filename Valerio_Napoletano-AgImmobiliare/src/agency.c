@@ -20,10 +20,10 @@
  * @brief Show how many buildings and which ones are available in a specific date interval.
  *
  * @param bl Array of structs of available buildings.
- * @param num_buildings Number of available buildings.
+ * @param numBuildings Number of available buildings.
  * @return -1 for going back to the main menu
  */
-int resultsAgency(building *bl, int num_buildings) {
+int resultsAgency(building *bl, int numBuildings) {
 	char date1[10];
 	char date2[10];
 	time_t reg_date1;
@@ -36,7 +36,7 @@ int resultsAgency(building *bl, int num_buildings) {
 	clearScr();
 	printSectionName("Risultati agenzia", false);
 
-	if (num_buildings != 0) {
+	if (numBuildings != 0) {
 		printf("\nInserisci primo intervallo di data (gg/mm/aaaa): ");
 		readString(date1, false, false);
 		reg_date1 = parseDateInFile(date1);
@@ -82,7 +82,7 @@ int resultsAgency(building *bl, int num_buildings) {
 				resetColor();
 
 				for (int i = 0; i < num_buildings; i++) {
-					if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2 && bl[i].sold == true) {
+					if ((bl + i)->reg_date > reg_date1 && (bl + i)->reg_date < reg_date2 && (bl + i)->sold == true) {
 						setCyanColor();
 						printf("--- IMMOBILE %d ---", (bl + i)->id);
 						resetColor();

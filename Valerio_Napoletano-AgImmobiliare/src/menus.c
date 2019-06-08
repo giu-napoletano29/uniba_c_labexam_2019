@@ -9,8 +9,10 @@
 #include <stdbool.h>
 
 #include "utils.h"
-
+#include "file_utils.h"
 #include "agency.h"
+#include "sort.h"
+
 #include "entities/buildings/files_bl.h"
 #include "entities/buildings/misc_bl.h"
 #include "entities/buildings/show_bl.h"
@@ -23,7 +25,7 @@
 #include "entities/pros/files_pr.h"
 #include "entities/pros/misc_pr.h"
 #include "entities/pros/show_pr.h"
-#include "sort.h"
+#include "entities/pros/files_pts.h"
 
 /**
  * @brief Initialize the main allClients data structure and show the "clients" menu.
@@ -35,7 +37,7 @@ int clientsMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "client" type */
-	int clientsNum = getClientsNumber();
+	int clientsNum = countFileRows("clients");
 	client allClients[clientsNum];
 	initClientsArray(allClients, clientsNum);
 
@@ -105,17 +107,23 @@ int professMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "professional" type */
-	int professionalsNum = getProfessionalsNumber();
+	int professionalsNum = countFileRows("professionals");
 	professional allProfessionals[professionalsNum];
 	initProsArray(allProfessionals, professionalsNum);
 
+	/** - Declare and initialize the array of structs, "potentials" type */
+	int potsNum = countFileRows("pros_potential");
+	potential allPotentials[potsNum];
+	initPotentialsArray(allPotentials, potsNum);
+
 	/** - Load pros file and stores the parsed data in the memory. */
 	loadProsFile(allProfessionals);
+	loadPotentialsFile(allPotentials);
 
 	/**
 	 - Check if there's any client with duplicated IDs
 	 If so asks the user to change it. */
-	checkDuplicatePros(allProfessionals, professionalsNum);
+	 checkDuplicatePros(allProfessionals, professionalsNum);
 
 	do {
 		clearScr();
@@ -125,7 +133,9 @@ int professMenu() {
 		newLine();
 		puts("Scegli un'operazione:");
 		puts("1. Mostra tutti i professionisti");
-		puts("2. Torna indietro");
+		puts("2. Aggiungi un professionista");
+		puts("3. Elimina un professionista");
+		puts("4. Torna indietro");
 		newLine();
 
 		if (error) {
@@ -140,12 +150,16 @@ int professMenu() {
 
 		switch (choice) {
 			case 1:
-				choice = showAllPros(allProfessionals, professionalsNum);
-				sortFilePro(allProfessionals, professionalsNum);
-				//TODO: Run rewrite only if needed
-				rewriteProfessionalsToFile(allProfessionals, professionalsNum);
+				choice = showAllPros(allProfessionals, allPotentials, professionalsNum);
 				break;
 			case 2:
+				// Append a new professional to the file.
+				choice = addPro(allProfessionals, allPotentials, professionalsNum);
+				break;
+			case 3:
+				choice = deletePro(allProfessionals, allPotentials, professionalsNum);
+				break;
+			case 4:
 				// This is used as a flag for the "go back" choice
 				// It's not that likely that an user will manually insert -1 as a choice.
 				choice = -1;
@@ -167,7 +181,7 @@ int buildingsMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "building" type */
-	int buildingsNum = getBuildingsNumber();
+	int buildingsNum = countFileRows("buildings");
 	building allBuildings[buildingsNum];
 	initBuildingsArray(allBuildings, buildingsNum);
 
@@ -206,7 +220,7 @@ int buildingsMenu() {
 		switch (choice) {
 			case 1:
 				choice = showAllBuildings(allBuildings, buildingsNum);
-				sortFileBui(allBuildings, buildingsNum);
+				sortBuildings(allBuildings, buildingsNum);
 				//TODO: Run rewrite only if needed
 				rewriteBuildingsToFile(allBuildings, buildingsNum);
 				break;

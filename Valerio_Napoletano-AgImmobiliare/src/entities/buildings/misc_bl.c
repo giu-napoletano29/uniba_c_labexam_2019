@@ -21,17 +21,17 @@
  */
 void initBuildingsArray(building *bl, int size) {
 	for (int i = 0; i < size; i++) {
-		bl[i].id = 0;
-		strcpy(bl[i].street, "");
-		bl[i].civic = 0;
-		strcpy(bl[i].city, "");
-		strcpy(bl[i].province, "");
-		bl[i].reg_date = 0;
-		bl[i].price = 0;
-		strcpy(bl[i].owner, "");
-		strcpy(bl[i].phone, "");
-		bl[i].b_type = flat;
-		bl[i].sold = false;
+		(bl + i)->id = 0;
+		strcpy((bl + i)->street, "");
+		(bl + i)->civic = 0;
+		strcpy((bl + i)->city, "");
+		strcpy((bl + i)->province, "");
+		(bl + i)->reg_date = 0;
+		(bl + i)->price = 0;
+		strcpy((bl + i)->owner, "");
+		strcpy((bl + i)->phone, "");
+		(bl + i)->b_type = flat;
+    (bl + i)->sold = false;
 	}
 }
 
@@ -89,10 +89,10 @@ int addBuilding() {
  * Delete a building identified by his ID inputted by the user.
  *
  * @param allBuildings Array of structs of all buildings registered.
- * @param num_buildings Number of buildings registered.
+ * @param numBuildings Number of buildings registered.
  * @return -1 for going back to the menu
  */
-int deleteBuilding(building *allBuildings, int num_buildings) {
+int deleteBuilding(building *allBuildings, int numBuildings) {
 	bool found = false;
 
 	clearScr();
@@ -102,7 +102,7 @@ int deleteBuilding(building *allBuildings, int num_buildings) {
 	printf("\nInserisci identiticativo immobile da eliminare: ");
 	toDeleteID = readInteger();
 
-	for (int i = 0; i < num_buildings; i++) {
+	for (int i = 0; i < numBuildings; i++) {
 		if (toDeleteID == (allBuildings + i)->id) {
 			(allBuildings + i)->toDelete = true;
 			found = true;
@@ -110,7 +110,7 @@ int deleteBuilding(building *allBuildings, int num_buildings) {
 	}
 
 	if (found) {
-		rewriteBuildingsToFile(allBuildings, num_buildings);
+		rewriteBuildingsToFile(allBuildings, numBuildings);
 		setGreenColor();
 		printf("\nImmobile eliminato!\n");
 		resetColor();

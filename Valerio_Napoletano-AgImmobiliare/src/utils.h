@@ -20,6 +20,7 @@ void convertToUpperCase(char *s);
 
 int readString(char *value, bool onlyAlpha, bool onlyNumbers);
 int readInteger();
+double readDouble();
 
 bool strCompare(char *from, char *to);
 bool askConfirm();
