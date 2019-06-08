@@ -13,7 +13,9 @@
 #include "../../datatypes.h"
 #include "../../file_utils.h"
 #include "../../utils.h"
+
 #include "show_bl.h"
+#include "search_bl.h"
 
 /**
  * @brief Parse "buildings" file (buildings.dat)
@@ -127,12 +129,13 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 
 		for (int i = 0; i < rows; i++) {
 			if (!(bl + i)->toDelete) {
-				fprintf(filePtr, "%d,%s,%d,%s,%s", (bl + i)->id, (bl + i)->street, (bl + i)->civic, (bl + i)->city,
-						(bl + i)->province);
+				fprintf(filePtr, "%d,%s,%d,%s,%s", (bl + i)->id, (bl + i)->street, (bl + i)->civic,
+						(bl + i)->city, (bl + i)->province);
 
 				formattedDateToFile(filePtr, &(bl + i)->reg_date);
 
-				fprintf(filePtr, "%.2f,%s,%s,%d\n", (bl + i)->price, (bl + i)->owner, (bl + i)->phone, (bl + i)->b_type);
+				fprintf(filePtr, "%.2f,%s,%s,%d\n", (bl + i)->price, (bl + i)->owner, (bl + i)->phone,
+						(bl + i)->b_type);
 			}
 		}
 	}
@@ -214,20 +217,16 @@ int checkDuplicateBuildings(building *bl, int rows) {
  * @brief Search for a specific building using a criteria.
  *
  * @param allBuildings Array of structs of all registered buildings.
- * @param num_buildings Number of buildings registered.
+ * @param numBuildings Number of buildings registered.
  */
-int searchBuilding(building *allBuildings, int num_buildings) {
-	short int choice = 0;
+int searchBuilding(building *allBuildings, int numBuildings) {
 	bool error = false;
-	// Boolean for keeping track if at least one record has been found
-	bool found = false;
-	int price = 0;
-	char city[MAX_STRING_SIZE];
+	short int choice = 0;
 
 	clearScr();
 	printSectionName("Ricerca immobili", false);
 
-	if (num_buildings != 0) {
+	if (numBuildings != 0) {
 		do {
 			newLine();
 
@@ -242,43 +241,10 @@ int searchBuilding(building *allBuildings, int num_buildings) {
 
 			switch (choice) {
 				case 1:
-					printf("\nInserisci il prezzo massimo dell'immobile: ");
-					price = readInteger();
-
-					for (int i = 0; i < num_buildings; i++) {
-						if ((allBuildings + i)->price < price) {
-							found = true;
-							showBuildingData(allBuildings + i);
-						}
-					}
-
-					if (!found) {
-						setYellowColor();
-						printf("\nNessun record trovato.\n");
-						resetColor();
-					}
-
-					pause();
+					searchBuildingsForPrice(allBuildings, numBuildings);
 					break;
 				case 2:
-					printf("\nInserisci la localita' dell'immobile: ");
-					readString(city, false, false);
-					convertToUpperCase(city);
-
-					for (int i = 0; i < num_buildings; i++) {
-						if (strstr((allBuildings + i)->city, city) != NULL) {
-							found = true;
-							showBuildingData(allBuildings + i);
-						}
-					}
-
-					if (!found) {
-						setYellowColor();
-						printf("\nNessun record trovato.\n");
-						resetColor();
-					}
-
-					pause();
+					searchBuildingsForCity(allBuildings, numBuildings);
 					break;
 				case 3:
 					// This is used as a flag for the "go back" choice

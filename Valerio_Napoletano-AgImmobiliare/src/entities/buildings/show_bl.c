@@ -117,20 +117,20 @@ void showBuildingData(building *bl) {
 
 /**
  * @brief Print every building available in the array of structs.
- * Iterates on num_buildings calling the showBuildingData() function.
+ * Iterates on numBuildings calling the showBuildingData() function.
  *
  * @param bl Array of structs (building type)
- * @param num_buildings Number of items (buildings) saved in the array.
+ * @param numBuildings Number of items (buildings) saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-int showAllBuildings(building *bl, int num_buildings) {
+int showAllBuildings(building *bl, int numBuildings) {
 	int i;
 
 	clearScr();
 	printSectionName("Lista immobili", false);
 
-	if (num_buildings != 0) {
-		for (i = 0; i < num_buildings; i++) {
+	if (numBuildings != 0) {
+		for (i = 0; i < numBuildings; i++) {
 			setCyanColor();
 			printf("\n-- IMMOBILE %d --\n", i + 1);
 			resetColor();
