@@ -11,7 +11,7 @@
 void initPotentialsArray(potential *po, int size);
 void initProsArray(professional *pro, int size);
 
-int addPro(professional *allPros, potential *allPts, int num_records);
-int deletePro(professional *allPros, potential *allPts, int num_records);
+int addPro(professional *allPros, potential *allPts, int numRecords);
+int deletePro(professional *allPros, potential *allPts, int numRecords);
 
 #endif /* ENTITIES_PROS_MISC_PR_H_ */

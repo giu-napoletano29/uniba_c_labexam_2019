@@ -30,10 +30,10 @@ void parseClientFile(FILE *filePtr, client *cl) {
 
 	int field;
 	// Client counter
-	int cl_num = 0;
+	int clientsNum = 0;
 
 	// Temp var for string to integer conversion (enum)
-	int enum_tmp = 0;
+	int enumTmp = 0;
 
 	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
@@ -47,36 +47,36 @@ void parseClientFile(FILE *filePtr, client *cl) {
 		while (token != NULL) {
 			switch (field) {
 				case 0:
-					strcpy((cl + cl_num)->id, token);
+					strcpy((cl + clientsNum)->id, token);
 					break;
 				case 1:
-					strcpy((cl + cl_num)->name, token);
-					convertToUpperCase((cl + cl_num)->name);
+					strcpy((cl + clientsNum)->name, token);
+					convertToUpperCase((cl + clientsNum)->name);
 					break;
 				case 2:
-					strcpy((cl + cl_num)->surname, token);
-					convertToUpperCase((cl + cl_num)->surname);
+					strcpy((cl + clientsNum)->surname, token);
+					convertToUpperCase((cl + clientsNum)->surname);
 					break;
 				case 3:
-					enum_tmp = atoi(token);
-					(cl + cl_num)->cl_type = enum_tmp;
+					enumTmp = atoi(token);
+					(cl + clientsNum)->clType = enumTmp;
 					break;
 				case 4:
-					strcpy((cl + cl_num)->company_name, token);
-					convertToUpperCase((cl + cl_num)->company_name);
+					strcpy((cl + clientsNum)->companyName, token);
+					convertToUpperCase((cl + clientsNum)->companyName);
 					break;
 				case 5:
-					(cl + cl_num)->budget = atoi(token);
+					(cl + clientsNum)->budget = atoi(token);
 					break;
 				case 6:
 					/*
 					 *  Save parsed Epoch time into clients struct
 					 */
-					(cl + cl_num)->reg_date = parseDate(token);
+					(cl + clientsNum)->regDate = parseDate(token);
 					break;
 				case 7:
-					enum_tmp = atoi(token);
-					(cl + cl_num)->building_type = enum_tmp;
+					enumTmp = atoi(token);
+					(cl + clientsNum)->buildingType = enumTmp;
 					break;
 			}
 
@@ -87,9 +87,9 @@ void parseClientFile(FILE *filePtr, client *cl) {
 		}
 
 		// Initialize toDelete to false
-		(cl + cl_num)->toDelete = false;
+		(cl + clientsNum)->toDelete = false;
 
-		cl_num++;
+		clientsNum++;
 
 		newLine();
 	}
@@ -115,11 +115,11 @@ int rewriteClientsToFile(client *cl, int rows) {
 			// Save client to file only if the client is not marked for deletion
 			if (!(cl + i)->toDelete) {
 				fprintf(filePtr, "%s,%s,%s,%d,%s,%d", (cl + i)->id, (cl + i)->name, (cl + i)->surname,
-						(cl + i)->cl_type, (cl + i)->company_name, (cl + i)->budget);
+						(cl + i)->clType, (cl + i)->companyName, (cl + i)->budget);
 
-				formattedDateToFile(filePtr, &(cl + i)->reg_date);
+				formattedDateToFile(filePtr, &(cl + i)->regDate);
 
-				fprintf(filePtr, "%d\n", (cl + i)->building_type);
+				fprintf(filePtr, "%d\n", (cl + i)->buildingType);
 			}
 		}
 	}
@@ -140,12 +140,12 @@ int appendClientToFile(client *cl) {
 	if (checkFile(filePtr)) {
 		// Save to file only if the client is not marked for deletion
 		if (!cl->toDelete) {
-			fprintf(filePtr, "%s,%s,%s,%d,%s,%d", cl->id, cl->name, cl->surname, cl->cl_type,
-					cl->company_name, cl->budget);
+			fprintf(filePtr, "%s,%s,%s,%d,%s,%d", cl->id, cl->name, cl->surname, cl->clType,
+					cl->companyName, cl->budget);
 
-			formattedDateToFile(filePtr, &cl->reg_date);
+			formattedDateToFile(filePtr, &cl->regDate);
 
-			fprintf(filePtr, "%d\n", cl->building_type);
+			fprintf(filePtr, "%d\n", cl->buildingType);
 		}
 	}
 
@@ -219,7 +219,7 @@ bool checkDuplicateClients(client *cl, int rows) {
 				switch (choice) {
 					case 1:
 						// If client type is "company"
-						if ((cl + i)->cl_type == 3) {
+						if ((cl + i)->clType == 3) {
 							reqPIVA(cl + i);
 						} else {
 							reqCF(cl + i);
@@ -227,7 +227,7 @@ bool checkDuplicateClients(client *cl, int rows) {
 						break;
 					case 2:
 						// If client type is "company"
-						if ((cl + j)->cl_type == 3) {
+						if ((cl + j)->clType == 3) {
 							reqPIVA(cl + j);
 						} else {
 							reqCF(cl + j);

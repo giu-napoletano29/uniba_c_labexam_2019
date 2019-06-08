@@ -29,10 +29,10 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 
 	int field;
 	// Buildings counter
-	int bl_num = 0;
+	int builNum = 0;
 
 	// Temp var for string to integer conversion (enum)
-	int enum_tmp = 0;
+	int enumTmp = 0;
 
 	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
@@ -46,50 +46,50 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 		while (token != NULL) {
 			switch (field) {
 				case 0:
-					(bl + bl_num)->id = atoi(token);
+					(bl + builNum)->id = atoi(token);
 					break;
 				case 1:
-					strcpy((bl + bl_num)->street, token);
+					strcpy((bl + builNum)->street, token);
 					break;
 				case 2:
-					(bl + bl_num)->civic = atoi(token);
+					(bl + builNum)->civic = atoi(token);
 					break;
 				case 3:
-					strcpy((bl + bl_num)->city, token);
-					convertToUpperCase((bl + bl_num)->city);
+					strcpy((bl + builNum)->city, token);
+					convertToUpperCase((bl + builNum)->city);
 					break;
 				case 4:
-					strcpy((bl + bl_num)->province, token);
+					strcpy((bl + builNum)->province, token);
 					break;
 				case 5:
 					// Save parsed Epoch time into clients struct
-					(bl + bl_num)->reg_date = parseDate(token);
+					(bl + builNum)->regDate = parseDate(token);
 					break;
 				case 6:
-					(bl + bl_num)->price = strtod(token, NULL);
+					(bl + builNum)->price = strtod(token, NULL);
 					break;
 				case 7:
-					strcpy((bl + bl_num)->owner, token);
-					convertToUpperCase((bl + bl_num)->owner);
+					strcpy((bl + builNum)->owner, token);
+					convertToUpperCase((bl + builNum)->owner);
 					break;
 				case 8:
-					strcpy((bl + bl_num)->phone, token);
+					strcpy((bl + builNum)->phone, token);
 					break;
 				case 9:
-					(bl + bl_num)->soldOn = parseDate(token);
+					(bl + builNum)->soldOn = parseDate(token);
 
 					// If parseDate failed we assume that the building is still on sale.
-					if ((bl + bl_num)->soldOn == -1) {
-						(bl + bl_num)->soldOn = 0;
+					if ((bl + builNum)->soldOn == -1) {
+						(bl + builNum)->soldOn = 0;
 					}
 					break;
 				case 10:
-					enum_tmp = atoi(token);
-					(bl + bl_num)->b_type = enum_tmp;
+					enumTmp = atoi(token);
+					(bl + builNum)->builType = enumTmp;
 					break;
 				case 11:
-					enum_tmp = atoi(token);
-					(bl + bl_num)->c_type = enum_tmp;
+					enumTmp = atoi(token);
+					(bl + builNum)->ctrType = enumTmp;
 					break;
 			}
 
@@ -100,9 +100,9 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 		}
 
 		// Initialize toDelete to false
-		(bl + bl_num)->toDelete = false;
+		(bl + builNum)->toDelete = false;
 
-		bl_num++;
+		builNum++;
 
 		newLine();
 	}
@@ -147,7 +147,7 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 				fprintf(filePtr, "%d,%s,%d,%s,%s", (bl + i)->id, (bl + i)->street, (bl + i)->civic,
 						(bl + i)->city, (bl + i)->province);
 
-				formattedDateToFile(filePtr, &(bl + i)->reg_date);
+				formattedDateToFile(filePtr, &(bl + i)->regDate);
 
 				fprintf(filePtr, "%.2f,%s,%s", (bl + i)->price, (bl + i)->owner, (bl + i)->phone);
 
@@ -158,7 +158,7 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 					fprintf(filePtr, ",0,");
 				}
 
-				fprintf(filePtr, "%d,%d\n", (bl + i)->b_type, (bl + i)->c_type);
+				fprintf(filePtr, "%d,%d\n", (bl + i)->builType, (bl + i)->ctrType);
 			}
 		}
 	}
@@ -307,7 +307,7 @@ int appendBuildingToFile(building *bl) {
 		if (!bl->toDelete) {
 			fprintf(filePtr, "%d,%s,%d,%s,%s", bl->id, bl->street, bl->civic, bl->city, bl->province);
 
-			formattedDateToFile(filePtr, &bl->reg_date);
+			formattedDateToFile(filePtr, &bl->regDate);
 
 			fprintf(filePtr, "%.2f,%s,%s", bl->price, bl->owner, bl->phone);
 
@@ -318,7 +318,7 @@ int appendBuildingToFile(building *bl) {
 				fprintf(filePtr, ",0,");
 			}
 
-			fprintf(filePtr, "%d,%d\n", bl->b_type, bl->c_type);
+			fprintf(filePtr, "%d,%d\n", bl->builType, bl->ctrType);
 		}
 	}
 

@@ -25,13 +25,13 @@
  * @param bl "building" type struct
  */
 void genBuildingID(building *bl) {
-	int rand_num = 0;
+	int randNum = 0;
 	srand(time(NULL));
 
 	// Limit number to 9
-	rand_num = rand();
+	randNum = rand();
 
-	bl->id = rand_num;
+	bl->id = randNum;
 }
 
 /**
@@ -138,12 +138,12 @@ void reqBuildingType(building *bl) {
 		}
 
 		printf("Inserisci il numero che identifica la tipologia: ");
-		bl->b_type = readInteger();
+		bl->builType = readInteger();
 
-		if (bl->b_type < 1 || bl->b_type > 5) {
+		if (bl->builType < 1 || bl->builType > 5) {
 			error = true;
 		}
-	} while (bl->b_type < 1 || bl->b_type > 5);
+	} while (bl->builType < 1 || bl->builType > 5);
 }
 
 /**
@@ -166,12 +166,12 @@ void reqContractType(building *bl) {
 		}
 
 		printf("Inserisci il numero che identifica la tipologia: ");
-		bl->c_type = readInteger();
+		bl->ctrType = readInteger();
 
-		if (bl->c_type < 1 || bl->c_type > 2) {
+		if (bl->ctrType < 1 || bl->ctrType > 2) {
 			error = true;
 		}
-	} while (bl->c_type < 1 || bl->c_type > 2);
+	} while (bl->ctrType < 1 || bl->ctrType > 2);
 	
 	clearScr();
 }

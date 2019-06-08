@@ -31,7 +31,7 @@ void saveLocalDate(client *cl) {
 	time_t timeRightNow;
 
 	// time function returns the current Epoch time (time_t)
-	cl->reg_date = time(&timeRightNow);
+	cl->regDate = time(&timeRightNow);
 }
 
 /**
@@ -137,7 +137,7 @@ int deleteClient(client *allClients, int num_clients) {
  */
 bool checkIfUserExpired(time_t epochTime, char id[]) {
 	/** Temp "tm" struct required for parsing the date properly from the file */
-	struct tm temp_date = { 0 };
+	struct tm tempDate = { 0 };
 
 	/**
 	 * tm_mon is defined as a range between 0 to 11.
@@ -145,8 +145,8 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 	 *
 	 * @see http://www.cplusplus.com/reference/ctime/tm/
 	 */
-	temp_date.tm_mon -= 1;
-	temp_date.tm_year -= 1900;
+	tempDate.tm_mon -= 1;
+	tempDate.tm_year -= 1900;
 
 	bool delete = false;
 
@@ -186,11 +186,11 @@ void initClientsArray(client *cl, int size) {
 		strcpy((cl + i)->id, "");
 		strcpy((cl + i)->name, "");
 		strcpy((cl + i)->surname, "");
-		(cl + i)->cl_type = single;
-		strcpy((cl + i)->company_name, "");
+		(cl + i)->clType = single;
+		strcpy((cl + i)->companyName, "");
 		(cl + i)->budget = 0;
-		(cl + i)->reg_date = 0;
-		(cl + i)->building_type = flat;
+		(cl + i)->regDate = 0;
+		(cl + i)->buildingType = flat;
 		(cl + i)->toDelete = false;
 	}
 }

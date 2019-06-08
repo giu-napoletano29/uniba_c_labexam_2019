@@ -30,7 +30,7 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
 
 	int field;
 	// Pros counter
-	int pr_num = 0;
+	int proNum = 0;
 
 	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
@@ -44,33 +44,33 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
 		while (token != NULL) {
 			switch (field) {
 				case 0:
-					strcpy((allPros + pr_num)->id, token);
+					strcpy((allPros + proNum)->id, token);
 					break;
 				case 1:
-					strcpy((allPros + pr_num)->name, token);
-					convertToUpperCase((allPros + pr_num)->name);
+					strcpy((allPros + proNum)->name, token);
+					convertToUpperCase((allPros + proNum)->name);
 					break;
 				case 2:
-					strcpy((allPros + pr_num)->surname, token);
-					convertToUpperCase((allPros + pr_num)->surname);
+					strcpy((allPros + proNum)->surname, token);
+					convertToUpperCase((allPros + proNum)->surname);
 					break;
 				case 3:
-					strcpy((allPros + pr_num)->area, token);
+					strcpy((allPros + proNum)->area, token);
 					break;
 				case 4:
-					strcpy((allPros + pr_num)->phone, token);
+					strcpy((allPros + proNum)->phone, token);
 					break;
 				case 5:
-					strcpy((allPros + pr_num)->email, token);
+					strcpy((allPros + proNum)->email, token);
 					break;
 				case 6:
 					/*
 					 *  Save parsed Epoch time into clients struct
 					 */
-					(allPros + pr_num)->reg_date = parseDate(token);
+					(allPros + proNum)->regDate = parseDate(token);
 					break;
 				case 7:
-					(allPros + pr_num)->buildings_sold = atoi(token);
+					(allPros + proNum)->buildingsSold = atoi(token);
 					break;
 			}
 
@@ -81,9 +81,9 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
 		}
 
 		// Initialize toDelete to false
-		(allPros + pr_num)->toDelete = false;
+		(allPros + proNum)->toDelete = false;
 		
-		pr_num++;
+		proNum++;
 
 		newLine();
 	}
@@ -127,9 +127,9 @@ int appendProToFile(professional *pr) {
 			fprintf(filePtr, "%s,%s,%s,%s,%s,%s", pr->id, pr->name, pr->surname, pr->area, pr->phone,
 					pr->email);
 
-			formattedDateToFile(filePtr, &pr->reg_date);
+			formattedDateToFile(filePtr, &pr->regDate);
 
-			fprintf(filePtr, "%d\n", pr->buildings_sold);
+			fprintf(filePtr, "%d\n", pr->buildingsSold);
 		}
 	}
 
@@ -157,9 +157,9 @@ void rewriteProsToFile(professional *allPros, int rows) {
 						(allPros + i)->surname, (allPros + i)->area, (allPros + i)->phone,
 						(allPros + i)->email);
 
-				formattedDateToFile(filePtr, &(allPros + i)->reg_date);
+				formattedDateToFile(filePtr, &(allPros + i)->regDate);
 
-				fprintf(filePtr, "%d\n", (allPros + i)->buildings_sold);
+				fprintf(filePtr, "%d\n", (allPros + i)->buildingsSold);
 			}
 		}
 	}

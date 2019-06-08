@@ -18,7 +18,7 @@
 
 /**
  * @brief Print out a string with the client type.
- * Check out the "client_type" in datatypes.h
+ * Check out the "clientType" in datatypes.h
  *
  * @param type Integer that represents the client type.
  */
@@ -68,14 +68,14 @@ void showClientData(client *cl) {
 	setCyanColor();
 	printf("Tipo cliente: ");
 	resetColor();
-	showClientType(cl->cl_type);
+	showClientType(cl->clType);
 
 	/** Show company name only if registered */
-	if (cl->cl_type == 3) {
+	if (cl->clType == 3) {
 		setCyanColor();
 		printf("Nome azienda: ");
 		resetColor();
-		printf("%s \n", cl->company_name);
+		printf("%s \n", cl->companyName);
 	}
 
 	setCyanColor();
@@ -86,14 +86,14 @@ void showClientData(client *cl) {
 	setCyanColor();
 	printf("Tipologia immobile da cercare: ");
 	resetColor();
-	showBuildingType(cl->building_type);
+	showBuildingType(cl->buildingType);
 
 	setCyanColor();
 	printf("Data di registrazione: ");
 	resetColor();
-	printFormattedDate(cl->reg_date);
+	printFormattedDate(cl->regDate);
 
-	if (checkIfUserExpired(cl->reg_date, cl->id)) {
+	if (checkIfUserExpired(cl->regDate, cl->id)) {
 		// Set toDelete flag
 		cl->toDelete = true;
 	}

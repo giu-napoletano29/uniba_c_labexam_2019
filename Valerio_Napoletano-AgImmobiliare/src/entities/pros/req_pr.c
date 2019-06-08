@@ -112,7 +112,7 @@ void reqProEmail(professional *pr) {
  */
 void reqProSoldBuildings(professional *pr) {
 	printf("Immobili venduti: ");
-	pr->buildings_sold = readInteger();
+	pr->buildingsSold = readInteger();
 
 	clearScr();
 }

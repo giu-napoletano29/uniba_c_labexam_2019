@@ -30,8 +30,8 @@ int resultsAgency(building *bl, int numBuildings) {
 	time_t startDateInterval;
 	time_t endDateInterval;
 	
-	short int num_bl_found = 0;
-	int tot_price = 0;
+	short int numBuildingsFound = 0;
+	int totPrice = 0;
 	bool error = false;
 
 	clearScr();
@@ -54,36 +54,36 @@ int resultsAgency(building *bl, int numBuildings) {
 			setRedColor();
 			printf("\nNON VENDUTI: \t|");
 			for (int i = 0; i < numBuildings; i++) {
-				if ((bl + i)->reg_date >= startDateInterval && (bl + i)->reg_date <= endDateInterval &&  (bl + i)->soldOn == 0) {
+				if ((bl + i)->regDate >= startDateInterval && (bl + i)->regDate <= endDateInterval &&  (bl + i)->soldOn == 0) {
 					printf("=");
-					num_bl_found++;
+					numBuildingsFound++;
 				}
 			}			
-			printf("|\n %d", num_bl_found);
+			printf("|\n %d", numBuildingsFound);
 			resetColor();
 
 			// SOLD HISTOGRAM
-			num_bl_found = 0;
+			numBuildingsFound = 0;
 			newLine();
 			setGreenColor();
 			printf("\nVENDUTI: \t|");
 			for (int i = 0; i < numBuildings; i++) {
 				if ((bl + i)->soldOn >= startDateInterval && (bl + i)->soldOn <= endDateInterval) {
 					printf("=");
-					num_bl_found++;
-					tot_price += bl[i].price;
+					numBuildingsFound++;
+					totPrice += bl[i].price;
 				}
 			}
-			printf("|\n %d", num_bl_found);
+			printf("|\n %d", numBuildingsFound);
 			resetColor();
 			
 			// TOTAL PROFIT
-			num_bl_found = 0;
+			numBuildingsFound = 0;
 			newLine();
 			setCyanColor();
 			printf("\nRicavi totali relativi al periodo: ");
 			resetColor();
-			printf("%d euro\n", tot_price);
+			printf("%d euro\n", totPrice);
 
 			printf("\nVuoi visualizzare la lista degli immobili venduti? (s/n): ");
 			if (askConfirm()) {
@@ -98,15 +98,15 @@ int resultsAgency(building *bl, int numBuildings) {
 						newLine();
 						showBuildingData(bl + i);
 						newLine();
-						num_bl_found++;
+						numBuildingsFound++;
 					}
 				}
-				if (num_bl_found == 0 && !error) {
+				if (numBuildingsFound == 0 && !error) {
 					setYellowColor();
 					printf("Nessun immobile trovato con l'intervallo scelto.\n\n");
 					resetColor();
 				}
-				num_bl_found = 0;
+				numBuildingsFound = 0;
 			}
 		} else {
 			setRedColor();

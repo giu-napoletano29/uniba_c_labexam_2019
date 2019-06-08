@@ -25,7 +25,7 @@ typedef enum {
 	company,
 	/** Stato */
 	government
-} client_type;
+} clientType;
 
 /**
  * @brief Data type for handling the building type
@@ -41,7 +41,7 @@ typedef enum {
 	farmhouse,
 	/** Attico */
 	attic
-} building_type;
+} buildingType;
 
 /**
  * @brief Data type for handling the contract type
@@ -51,17 +51,17 @@ typedef enum {
 	rent,
 	/** Vendita */
 	sale
-} contract_type;
+} contractType;
 
 typedef struct {
 	char id[MAX_STRING_SIZE]; /**< "Codice Fiscale" in Italy */
 	char name[MAX_STRING_SIZE];
 	char surname[MAX_STRING_SIZE];
-	client_type cl_type; /**< Client type */
-	char company_name[MAX_STRING_SIZE]; /**< Company name (if type is company) */
+	clientType clType; /**< Client type */
+	char companyName[MAX_STRING_SIZE]; /**< Company name (if type is company) */
 	int budget; /**< Integer is enough, does not make any sense having a "float/double" budget */
-	time_t reg_date; /**< Registration date in Epoch time */
-	building_type building_type; /**< Type of building that needs to be searched */
+	time_t regDate; /**< Registration date in Epoch time */
+	buildingType buildingType; /**< Type of building that needs to be searched */
 	bool toDelete; /**< If true this client won't be saved in the file */
 } client;
 
@@ -74,8 +74,8 @@ typedef struct {
 	char phone[MAX_STRING_SIZE];
 	// Email address
 	char email[MAX_STRING_SIZE];
-	time_t reg_date; /**< Registration date in Epoch time */
-	int buildings_sold; /**< Number of buildings that this professional has sold */
+	time_t regDate; /**< Registration date in Epoch time */
+	int buildingsSold; /**< Number of buildings that this professional has sold */
 	bool toDelete; /**< If true this professional won't be saved in the file */
 } professional;
 
@@ -91,14 +91,14 @@ typedef struct {
 	short int civic;
 	char city[MAX_STRING_SIZE];
 	char province[MAX_STRING_SIZE];
-	time_t reg_date; /**< Registration date in Epoch time */
+	time_t regDate; /**< Registration date in Epoch time */
 	double price;
 	char owner[MAX_STRING_SIZE];
 	// Owner phone number
 	char phone[MAX_STRING_SIZE];
 	time_t soldOn; /**< Sold date in Epoch time. If it's 0, then the building is still on sale */
-	contract_type c_type;
-	building_type b_type;
+	contractType ctrType;
+	buildingType builType;
 	bool toDelete; /**< If true this building won't be saved in the file */
 } building;
 

@@ -19,10 +19,10 @@
  *
  * @param id Professional's ID
  * @param pr Potentials array of structs
- * @param num_records Number of professionals/potentials registered
+ * @param numRecords Number of professionals/potentials registered
  */
-void findPotential(char id[], potential *pr, int num_records) {
-	for (int i = 0; i < num_records; i++) {
+void findPotential(char id[], potential *pr, int numRecords) {
+	for (int i = 0; i < numRecords; i++) {
 		if (strCompare(id, (pr + i)->id)) {
 			setCyanColor();
 			printf("Potenziale: ");
@@ -36,18 +36,18 @@ void findPotential(char id[], potential *pr, int num_records) {
  * @brief Parse "potential" file (pros_potential.dat)
  * Check out findPotential() for more information about the "potential".
  *
- * @param fp_pot Pointer to file initalized from fopen()
+ * @param filePtr Pointer to file initalized from fopen()
  * @param pr Professional array of structs for storing parsed data.
  */
-void parsePotentialsFile(FILE *fp_pot, potential *pr) {
+void parsePotentialsFile(FILE *filePtr, potential *pr) {
 	char line[MAX_TEXT_SIZE];
 	char *token;
 
 	int field;
 	// Pros counter
-	int pr_num = 0;
+	int proNum = 0;
 
-	while (fgets(line, sizeof line, fp_pot) != NULL) /* read a line */
+	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
 		// Fields counter (ID, name, etc..)
 		field = 0;
@@ -64,17 +64,17 @@ void parsePotentialsFile(FILE *fp_pot, potential *pr) {
 		while (token != NULL) {
 			switch (field) {
 				case 0:
-					strcpy((pr + pr_num)->id, token);
+					strcpy((pr + proNum)->id, token);
 					break;
 				case 1:
-					strcpy((pr + pr_num)->content, token);
+					strcpy((pr + proNum)->content, token);
 					break;
 			}
 			// Read the other tokens
 			token = strtok(NULL, "|");
 			field++;
 		}
-		pr_num++;
+		proNum++;
 	}
 }
 

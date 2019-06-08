@@ -16,7 +16,7 @@
 
 /**
  * @brief Print out a string with the building type.
- * Check out the "building_type" in datatypes.h
+ * Check out the "buildingType" in datatypes.h
  *
  * @param type Integer that represents the building type.
  */
@@ -47,7 +47,7 @@ void showBuildingType(int type) {
 
 /**
  * @brief Print out a string with the contract type.
- * Check out "contract_type" in datatypes.h
+ * Check out "contractType" in datatypes.h
  *
  * @param type Integer that represents the contract type.
  */
@@ -109,7 +109,7 @@ void showBuildingData(building *bl) {
 	setCyanColor();
 	printf("Tipo contratto: ");
 	resetColor();
-	showContractType(bl->c_type);
+	showContractType(bl->ctrType);
 	
 	setCyanColor();
 	printf("Indirizzo: ");
@@ -134,7 +134,7 @@ void showBuildingData(building *bl) {
 	setCyanColor();
 	printf("Data di registrazione: ");
 	resetColor();
-	printFormattedDate(bl->reg_date);
+	printFormattedDate(bl->regDate);
 
 	setCyanColor();
 	printf("Prezzo: ");
@@ -154,7 +154,7 @@ void showBuildingData(building *bl) {
 	setCyanColor();
 	printf("Tipologia: ");
 	resetColor();
-	showBuildingType(bl->b_type);
+	showBuildingType(bl->builType);
 
 	setCyanColor();
 	printf("Venduto/Affittato: ");

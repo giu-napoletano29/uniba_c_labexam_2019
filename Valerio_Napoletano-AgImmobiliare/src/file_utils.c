@@ -73,9 +73,9 @@ int countFileRows(char *name) {
  */
 time_t parseDate(char string[MAX_STRING_SIZE]) {
 	// Temp "tm" struct required for parsing the date properly from the file
-	struct tm temp_date = { 0 };
+	struct tm tempDate = { 0 };
 
-	sscanf(string, "%d/%d/%d", &temp_date.tm_mday, &temp_date.tm_mon, &temp_date.tm_year);
+	sscanf(string, "%d/%d/%d", &tempDate.tm_mday, &tempDate.tm_mon, &tempDate.tm_year);
 
 	/**
 	 * tm_mon is defined as a range between 0 to 11.
@@ -83,10 +83,10 @@ time_t parseDate(char string[MAX_STRING_SIZE]) {
 	 *
 	 * @see http://www.cplusplus.com/reference/ctime/tm/
 	 */
-	temp_date.tm_mon -= 1;
-	temp_date.tm_year -= 1900;
+	tempDate.tm_mon -= 1;
+	tempDate.tm_year -= 1900;
 
-	return mktime(&temp_date);
+	return mktime(&tempDate);
 }
 
 /**

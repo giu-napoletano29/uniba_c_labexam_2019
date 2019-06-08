@@ -9,6 +9,6 @@
 #define ENTITIES_PROS_SHOW_PR_H_
 
 void showProData(professional *pr);
-int showAllPros(professional *allPros, potential *allPts, int num_records);
+int showAllPros(professional *allPros, potential *allPts, int numRecords);
 
 #endif /* ENTITIES_PROS_SHOW_PR_H_ */

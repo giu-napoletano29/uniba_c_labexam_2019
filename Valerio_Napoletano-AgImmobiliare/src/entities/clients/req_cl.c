@@ -83,7 +83,7 @@ void reqCF(client *cl) {
  * @param cl "client" type struct
  */
 void reqID(client *cl) {
-	if (cl->cl_type == 3) {
+	if (cl->clType == 3) {
 		reqPIVA(cl);
 	} else {
 		reqCF(cl);
@@ -137,12 +137,12 @@ void reqType(client *cl) {
 		}
 
 		printf("Inserisci il numero che identifica la tipologia: ");
-		cl->cl_type = readInteger();
+		cl->clType = readInteger();
 
-		if (cl->cl_type < 1 || cl->cl_type > 4) {
+		if (cl->clType < 1 || cl->clType > 4) {
 			error = true;
 		}
-	} while (cl->cl_type < 1 || cl->cl_type > 4);
+	} while (cl->clType < 1 || cl->clType > 4);
 
 	clearScr();
 }
@@ -154,13 +154,13 @@ void reqType(client *cl) {
  * @param cl "client" type struct
  */
 void reqCompanyName(client *cl) {
-	if (cl->cl_type == 3) {
+	if (cl->clType == 3) {
 		newLine();
 		printf("Nome azienda: ");
 		// numCheck is false because a company name can have numbers
-		readString(cl->company_name, false, false);
+		readString(cl->companyName, false, false);
 	} else {
-		strcpy(cl->company_name, "-");
+		strcpy(cl->companyName, "-");
 	}
 
 	clearScr();
@@ -184,10 +184,10 @@ void reqBudget(client *cl) {
 		printf("Budget in euro: ");
 		cl->budget = readInteger();
 
-		if (cl->budget < MIN_USER_BUDGET || cl->cl_type > MAX_USER_BUDGET) {
+		if (cl->budget < MIN_USER_BUDGET || cl->clType > MAX_USER_BUDGET) {
 			error = true;
 		}
-	} while (cl->budget < MIN_USER_BUDGET || cl->cl_type > MAX_USER_BUDGET);
+	} while (cl->budget < MIN_USER_BUDGET || cl->clType > MAX_USER_BUDGET);
 
 	clearScr();
 }
@@ -212,12 +212,12 @@ void reqPropertyType(client *cl) {
 		}
 
 		printf("Inserisci il numero che identifica la tipologia: ");
-		cl->building_type = readInteger();
+		cl->buildingType = readInteger();
 
-		if (cl->building_type < 1 || cl->building_type > 5) {
+		if (cl->buildingType < 1 || cl->buildingType > 5) {
 			error = true;
 		}
-	} while (cl->building_type < 1 || cl->building_type > 5);
+	} while (cl->buildingType < 1 || cl->buildingType > 5);
 
 	clearScr();
 }

@@ -19,9 +19,9 @@
  *
  * @param pr professional type struct
  * @param allPts Array of structs of all available potentials records
- * @param num_records Number of professionals/potentials saved in the array.
+ * @param numRecords Number of professionals/potentials saved in the array.
  */
-void showProData(professional *pr, potential *allPts, int num_records) {
+void showProData(professional *pr, potential *allPts, int numRecords) {
 	setCyanColor();
 	printf("Codice fiscale: ");
 	resetColor();
@@ -55,42 +55,42 @@ void showProData(professional *pr, potential *allPts, int num_records) {
 	setCyanColor();
 	printf("Data di registrazione: ");
 	resetColor();
-	printFormattedDate(pr->reg_date);
+	printFormattedDate(pr->regDate);
 
 	setCyanColor();
 	printf("Immobili venduti: ");
 	resetColor();
-	printf("%d \n", pr->buildings_sold);
+	printf("%d \n", pr->buildingsSold);
 
 	// Print related potential
-	findPotential(pr->id, allPts, num_records);
+	findPotential(pr->id, allPts, numRecords);
 }
 
 /**
  * @brief Print every client available in the array of structs.
- * Iterates on num_pros calling the showProData() function.
+ * Iterates on numRecords calling the showProData() function.
  *
  * @param allPros Array of structs of all registerd professionals
  * @param allPts Array of structs of all registered potentials
- * @param num_records Number of professionals/potentials saved in the array.
+ * @param numRecords Number of professionals/potentials saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-int showAllPros(professional *allPros, potential *allPts, int num_records) {
+int showAllPros(professional *allPros, potential *allPts, int numRecords) {
 	int i;
 
-	sortPros(allPros, num_records);
-	rewriteProsToFile(allPros, num_records);
+	sortPros(allPros, numRecords);
+	rewriteProsToFile(allPros, numRecords);
 
 	clearScr();
 	printSectionName("Lista professionisti", false);
 
-	if (num_records != 0) {
-		for (i = 0; i < num_records; i++) {
+	if (numRecords != 0) {
+		for (i = 0; i < numRecords; i++) {
 			setCyanColor();
 			printf("\n-- PROFESSIONISTA %d --\n", i + 1);
 			resetColor();
 
-			showProData((allPros + i), allPts, num_records);
+			showProData((allPros + i), allPts, numRecords);
 		}
 	} else {
 		dbEmptyError();

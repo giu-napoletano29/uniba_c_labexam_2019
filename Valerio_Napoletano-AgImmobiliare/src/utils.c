@@ -36,7 +36,7 @@ void clearScr() {
 #if defined(_WIN32)
 	system("cls");
 #elif defined(__unix__) || defined(__APPLE__) && defined(__MACH__)
-		system("clear");
+	system("clear");
 #endif
 }
 

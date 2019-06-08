@@ -26,11 +26,11 @@ void initBuildingsArray(building *bl, int size) {
 		(bl + i)->civic = 0;
 		strcpy((bl + i)->city, "");
 		strcpy((bl + i)->province, "");
-		(bl + i)->reg_date = 0;
+		(bl + i)->regDate = 0;
 		(bl + i)->price = 0;
 		strcpy((bl + i)->owner, "");
 		strcpy((bl + i)->phone, "");
-		(bl + i)->b_type = flat;
+		(bl + i)->builType = flat;
 		(bl + i)->soldOn = 0;
 	}
 }
@@ -45,7 +45,7 @@ void saveBuildingLocalDate(building *bl) {
 	time_t timeRightNow;
 
 	// time function returns the current Epoch time (time_t)
-	bl->reg_date = time(&timeRightNow);
+	bl->regDate = time(&timeRightNow);
 }
 
 /**
