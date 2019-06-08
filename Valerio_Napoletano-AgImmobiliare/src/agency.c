@@ -45,8 +45,6 @@ int resultsAgency(building *bl, int numBuildings) {
 		readString(date2, false, false);
 		reg_date2 = parseDateInFile(date2);
 
-		newLine();
-
 		if (reg_date1 < reg_date2) {
 			printf("\nIN VENDITA: \t|");
 			for (int i = 0; i < numBuildings; i++) {
@@ -69,20 +67,22 @@ int resultsAgency(building *bl, int numBuildings) {
 			}
 			printf("|\n %d", num_bl_found);
 			num_bl_found = 0;
-			newLine();
-			//pause();
 
-			printf("\nVuoi visualizzare la lista degli immobili venduti?: ");
+			newLine();
+			setCyanColor();
+			printf("\nRicavi totali: ");
+			resetColor();
+			printf("%d euro\n", tot_price);
+
+			printf("\nVuoi visualizzare la lista degli immobili venduti? (s/n): ");
 			choice = askConfirm();
 
 			if (choice == 1) {
-				setCyanColor();
-				printf("--- IMMOBILI VENDUTI ---\n");
 				newLine();
-				resetColor();
 
 				for (int i = 0; i < numBuildings; i++) {
-					if ((bl + i)->reg_date > reg_date1 && (bl + i)->reg_date < reg_date2 && (bl + i)->sold == true) {
+					if ((bl + i)->reg_date
+							> reg_date1&& (bl + i)->reg_date < reg_date2 && (bl + i)->sold == true) {
 						setCyanColor();
 						printf("--- IMMOBILE %d ---", (bl + i)->id);
 						resetColor();
@@ -100,14 +100,6 @@ int resultsAgency(building *bl, int numBuildings) {
 				}
 				num_bl_found = 0;
 			}
-
-			newLine();
-			setCyanColor();
-			printf("Ricavi Totali: ");
-			resetColor();
-			printf("%d euro\n", tot_price);
-			newLine();
-
 		} else {
 			setRedColor();
 			printf("E' stato inserito un intervallo errato.\n\n");
