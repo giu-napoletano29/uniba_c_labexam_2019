@@ -62,6 +62,8 @@ int addBuilding() {
 
 	genBuildingID(&bl);
 
+	reqContractType(&bl);
+	
 	reqBuildingStreet(&bl);
 
 	reqBuildingCity(&bl);

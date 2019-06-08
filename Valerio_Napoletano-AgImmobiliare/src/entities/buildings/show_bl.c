@@ -42,6 +42,28 @@ void showBuildingType(int type) {
 }
 
 /**
+ * @brief Print out a string with the contract type.
+ * Check out "contract_type" in datatypes.h
+ *
+ * @param type Integer that represents the contract type.
+ */
+void showContractType(int type) {
+	switch (type) {
+		case 1:
+			printf("Affitto");
+			break;
+		case 2:
+			printf("Vendita");
+			break;
+		default:
+			printf("Dato non corretto");
+			break;
+	}
+
+	printf("\n");
+}
+
+/**
  * Print to stdout available building type choices.
  */
 void printBuildingChoices() {
@@ -59,6 +81,17 @@ void printBuildingChoices() {
 }
 
 /**
+ * Print to stdout available contract type choices.
+ */
+void printContractChoices() {
+	printf("\nTipologia contratto: ");
+	newLine();
+	printf("1. Affitto");
+	newLine();
+	printf("2. Vendita");
+}
+
+/**
  * @brief Print every field present in a building struct.
  *
  * @param bl building type struct
@@ -69,6 +102,11 @@ void showBuildingData(building *bl) {
 	resetColor();
 	printf("%d \n", bl->id);
 
+	setCyanColor();
+	printf("Tipo contratto: ");
+	resetColor();
+	showContractType(bl->c_type);
+	
 	setCyanColor();
 	printf("Indirizzo: ");
 	resetColor();

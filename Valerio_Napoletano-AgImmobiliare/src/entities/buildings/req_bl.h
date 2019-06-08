@@ -16,6 +16,7 @@ void reqBuildingPrice(building *bl);
 void reqBuildingOwner(building *bl);
 void reqBuildingPhone(building *bl);
 void reqBuildingType(building *bl);
+void reqContractType(building *bl);
 void reqBuildingSold(building *bl);
 
 #endif /* ENTITIES_BUILDINGS_REQ_BL_H_ */

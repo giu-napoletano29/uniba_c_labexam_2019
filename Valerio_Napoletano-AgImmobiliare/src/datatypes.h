@@ -14,7 +14,7 @@
 #include "time.h"
 
 /**
- * @brief Struct for handling the client type
+ * @brief Data type for handling the client type
  */
 typedef enum {
 	/** Famiglia */
@@ -27,6 +27,9 @@ typedef enum {
 	government
 } client_type;
 
+/**
+ * @brief Data type for handling the building type
+ */
 typedef enum {
 	/** Appartamento */
 	flat,
@@ -39,6 +42,16 @@ typedef enum {
 	/** Attico */
 	attic
 } building_type;
+
+/**
+ * @brief Data type for handling the contract type
+ */
+typedef enum {
+	/** Affitto */
+	rent,
+	/** Vendita */
+	sale
+} contract_type;
 
 typedef struct {
 	char id[MAX_STRING_SIZE]; /**< "Codice Fiscale" in Italy */
@@ -84,6 +97,7 @@ typedef struct {
 	// Owner phone number
 	char phone[MAX_STRING_SIZE];
 	time_t soldOn; /**< Sold date in Epoch time. If it's 0, then the building is still on sale */
+	contract_type c_type;
 	building_type b_type;
 	bool toDelete; /**< If true this building won't be saved in the file */
 } building;

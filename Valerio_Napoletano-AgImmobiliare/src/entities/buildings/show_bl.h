@@ -12,5 +12,7 @@ void showBuildingType();
 void showBuildingData(building *bl);
 int showAllBuildings(building *bl, int numBuildings);
 void printBuildingChoices();
+void showContractType(int type);
+void printContractChoices();
 
 #endif /* ENTITIES_BUILDINGS_SHOW_BL_H_ */

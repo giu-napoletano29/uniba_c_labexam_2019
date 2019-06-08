@@ -77,15 +77,19 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 					break;
 				case 9:
 					(bl + bl_num)->soldOn = parseDate(token);
-					
+
 					// If parseDate failed we assume that the building is still on sale.
-					if((bl + bl_num)->soldOn == -1) {
+					if ((bl + bl_num)->soldOn == -1) {
 						(bl + bl_num)->soldOn = 0;
 					}
 					break;
 				case 10:
 					enum_tmp = atoi(token);
 					(bl + bl_num)->b_type = enum_tmp;
+					break;
+				case 11:
+					enum_tmp = atoi(token);
+					(bl + bl_num)->c_type = enum_tmp;
 					break;
 			}
 
@@ -151,7 +155,7 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 					fprintf(filePtr, ",0,");
 				}
 
-				fprintf(filePtr, "%d\n", (bl + i)->b_type);
+				fprintf(filePtr, "%d,%d\n", (bl + i)->b_type, (bl + i)->c_type);
 			}
 		}
 	}
@@ -306,8 +310,7 @@ int appendBuildingToFile(building *bl) {
 				fprintf(filePtr, ",0,");
 			}
 
-			fprintf(filePtr, "%d\n", bl->b_type);
-
+			fprintf(filePtr, "%d,%d\n", bl->b_type, bl->c_type);
 		}
 	}
 

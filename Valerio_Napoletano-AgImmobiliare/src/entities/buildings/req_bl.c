@@ -146,13 +146,48 @@ void reqBuildingType(building *bl) {
 	} while (bl->b_type < 1 || bl->b_type > 5);
 }
 
+/**
+ * @brief Request building's contract type (rent or sale) from stdin.
+ *
+ * @param bl "building" type struct
+ */
+void reqContractType(building *bl) {
+	bool error = false;
+
+	printContractChoices();
+
+	newLine();
+
+	do {
+		newLine();
+
+		if (error) {
+			notFoundError();
+		}
+
+		printf("Inserisci il numero che identifica la tipologia: ");
+		bl->c_type = readInteger();
+
+		if (bl->c_type < 1 || bl->c_type > 2) {
+			error = true;
+		}
+	} while (bl->c_type < 1 || bl->c_type > 2);
+	
+	clearScr();
+}
+
+/**
+ * @brief Request if the building has been sold (and if so, when).
+ *
+ * @param bl "building" type struct
+ */
 void reqBuildingSold(building *bl) {
 	char soldOnString[MAX_STRING_SIZE];
 	time_t soldOn = 0;
 
 	clearScr();
 	
-	printf("L'immobile e' stato venduto? (s/n): ");
+	printf("L'immobile e' stato venduto/dato in affitto? (s/n): ");
 	if (askConfirm()) {
 		printf("Quando? Inserisci una data (gg/mm/yyyy): ");
 		readString(soldOnString, false, false);
