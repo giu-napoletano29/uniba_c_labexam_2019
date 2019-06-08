@@ -85,6 +85,7 @@ typedef struct {
 	char phone[MAX_STRING_SIZE];
 	building_type b_type;
 	bool toDelete; /**< If true this building won't be saved in the file */
+	bool sold;
 } building;
 
 #endif

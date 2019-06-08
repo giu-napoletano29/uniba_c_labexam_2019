@@ -31,6 +31,7 @@ void initBuildingsArray(building *bl, int size) {
 		strcpy((bl + i)->owner, "");
 		strcpy((bl + i)->phone, "");
 		(bl + i)->b_type = flat;
+    (bl + i)->sold = false;
 	}
 }
 
@@ -54,7 +55,7 @@ void saveBuildingLocalDate(building *bl) {
  * @return -1 for going back to the main menu.
  */
 int addBuilding() {
-	building bl = { 0, "", 0, "", "", 0, 0, "", "", 1 };
+	building bl = { 0, "", 0, "", "", 0, 0, "", "", 1, 0 };
 
 	clearScr();
 	printSectionName("Aggiunta immobile", false);
@@ -74,6 +75,8 @@ int addBuilding() {
 	reqBuildingPhone(&bl);
 
 	reqBuildingType(&bl);
+
+	reqBuildingSold(&bl);
 
 	saveBuildingLocalDate(&bl);
 

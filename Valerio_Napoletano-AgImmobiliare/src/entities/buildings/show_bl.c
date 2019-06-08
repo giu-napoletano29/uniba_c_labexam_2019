@@ -113,6 +113,16 @@ void showBuildingData(building *bl) {
 	printf("Tipologia: ");
 	resetColor();
 	showBuildingType(bl->b_type);
+
+	setCyanColor();
+	printf("Venduto: ");
+	resetColor();
+	if (bl->sold == 1) {
+		printf("VERO \n");
+	} else {
+		printf("FALSO \n");
+	}
+
 }
 
 /**

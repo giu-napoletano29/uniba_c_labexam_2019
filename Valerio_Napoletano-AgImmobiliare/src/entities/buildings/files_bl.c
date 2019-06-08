@@ -79,6 +79,9 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 					enum_tmp = atoi(token);
 					(bl + bl_num)->b_type = enum_tmp;
 					break;
+				case 10:
+					bl[bl_num].sold = atoi(token);
+					break;
 			}
 
 			// Read the other tokens
@@ -134,8 +137,8 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 
 				formattedDateToFile(filePtr, &(bl + i)->reg_date);
 
-				fprintf(filePtr, "%.2f,%s,%s,%d\n", (bl + i)->price, (bl + i)->owner, (bl + i)->phone,
-						(bl + i)->b_type);
+				fprintf(filePtr, "%.2f,%s,%s,%d,%d\n", (bl + i)->price, (bl + i)->owner, (bl + i)->phone,
+						(bl + i)->b_type, (bl + i)->sold);
 			}
 		}
 	}
@@ -281,7 +284,7 @@ int appendBuildingToFile(building *bl) {
 
 			formattedDateToFile(filePtr, &bl->reg_date);
 
-			fprintf(filePtr, "%.2f,%s,%s,%d\n", bl->price, bl->owner, bl->phone, bl->b_type);
+			fprintf(filePtr, "%.2f,%s,%s,%d\n", bl->price, bl->owner, bl->phone, bl->b_type, bl->sold);
 		}
 	}
 

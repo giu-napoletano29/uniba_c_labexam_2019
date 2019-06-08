@@ -143,3 +143,29 @@ void reqBuildingType(building *bl) {
 		}
 	} while (bl->b_type < 1 || bl->b_type > 5);
 }
+
+void reqBuildingSold(building *bl) {
+	bool error = false;
+	char tmp_string[MAX_STRING_SIZE];
+
+	do {
+		error = false;
+
+		printf("Inserisci se l'immobile e' stato venduto: ");
+		readString(tmp_string, true, false);
+		convertToUpperCase(tmp_string);
+
+		if (strcmp(tmp_string, "VERO") == 0 || strcmp(tmp_string, "1") == 0) {
+			bl->sold = true;
+		} else if (strcmp(tmp_string, "FALSO") == 0 || strcmp(tmp_string, "0") == 0) {
+			bl->sold = false;
+		} else {
+			error = true;
+			setYellowColor();
+			puts("\nValore errato.\nInserisci un valore corretto e premi Invio (VERO/FALSO o 1/0): ");
+			resetColor();
+		}
+	} while (error == true);
+
+	clearScr();
+}
