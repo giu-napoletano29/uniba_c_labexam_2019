@@ -97,7 +97,7 @@ void showBuildingData(building *bl) {
 	setCyanColor();
 	printf("Prezzo: ");
 	resetColor();
-	printf("%d euro \n", bl->price);
+	printf("%.2f euro \n", bl->price);
 
 	setCyanColor();
 	printf("Venditore: ");

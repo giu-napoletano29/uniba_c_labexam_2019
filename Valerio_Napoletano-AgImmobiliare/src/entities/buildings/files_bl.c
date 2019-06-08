@@ -64,7 +64,7 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 					(bl + bl_num)->reg_date = parseDateInFile(token);
 					break;
 				case 6:
-					(bl + bl_num)->price = atoi(token);
+					(bl + bl_num)->price = strtod(token, NULL);
 					break;
 				case 7:
 					strcpy((bl + bl_num)->owner, token);
@@ -132,7 +132,7 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 
 				formattedDateToFile(filePtr, &(bl + i)->reg_date);
 
-				fprintf(filePtr, "%d,%s,%s,%d\n", (bl + i)->price, (bl + i)->owner, (bl + i)->phone, (bl + i)->b_type);
+				fprintf(filePtr, "%.2f,%s,%s,%d\n", (bl + i)->price, (bl + i)->owner, (bl + i)->phone, (bl + i)->b_type);
 			}
 		}
 	}
@@ -315,7 +315,7 @@ int appendBuildingToFile(building *bl) {
 
 			formattedDateToFile(filePtr, &bl->reg_date);
 
-			fprintf(filePtr, "%d,%s,%s,%d\n", bl->price, bl->owner, bl->phone, bl->b_type);
+			fprintf(filePtr, "%.2f,%s,%s,%d\n", bl->price, bl->owner, bl->phone, bl->b_type);
 		}
 	}
 

@@ -186,9 +186,9 @@ int readInteger() {
 	int value = -1;
 
 	do {
-// Read from stdin
+		// Read from stdin
 		fgets(buffer, sizeof(buffer), stdin);
-// Format the string removing the useless \n
+		// Format the string removing the useless \n
 		sscanf(buffer, "%[^\n]", buffer);
 
 		/** Check if there are any numbers in the string. */
@@ -200,6 +200,60 @@ int readInteger() {
 		} else {
 			/** If no errors are found, convert to integer. */
 			value = atoi(buffer);
+			error = false;
+		}
+	} while (error == true);
+
+	return value;
+}
+
+/**
+ * @brief Read a string from stdin with input checks and convert to a double.
+ *
+ * Note that floating point numbers SHOULD NOT be used for handling currency values.
+ * Still this is a quick way for "handling decimals" without overengineering this software. * 
+ * @see https://stackoverflow.com/questions/3730019/why-not-use-double-or-float-to-represent-currency/3730040#3730040
+ * @return int Double from stdin. -1 if an unrecoverable error is detected.
+ */
+double readDouble() {
+	bool error = false;
+	char *comma;
+	
+	/**	Define an internal string buffer. */
+	char buffer[MAX_STRING_SIZE];
+	/**  Initialize value to -1 for representing a possible error state. */
+	double value = -1;
+
+	do {
+		// Read from stdin
+		fgets(buffer, sizeof(buffer), stdin);
+		// Remove the useless \n
+		sscanf(buffer, "%[^\n]", buffer);
+
+		/** 
+		 * In Italy (and most EU countries) the decimal separator is the "comma"
+		 * Therefore, we expect that the user will insert a decimal value with a comma.
+		 * Still, the double format expects a "dot" as the decimal separator.
+		 * 
+		 * The comma will then be replaced with a dot (if needed) for saving everything properly.
+		 */
+		// Check if a comma can be found in the buffer string
+		comma = strchr(buffer, ',');
+		
+		// Replace the comma with a dot
+		if (comma)
+			*comma = '.';
+		
+		// Format the string for getting the value double value
+		sscanf(buffer, "%lf", &value);
+
+		/** Check if there are any numbers in the string. */
+		if (anyChar(buffer)) {
+			error = true;
+			setYellowColor();
+			puts("\nInserisci un numero corretto e premi Invio: ");
+			resetColor();
+		} else {
 			error = false;
 		}
 	} while (error == true);

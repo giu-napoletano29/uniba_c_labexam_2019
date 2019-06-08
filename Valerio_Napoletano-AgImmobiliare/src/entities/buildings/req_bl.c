@@ -88,7 +88,8 @@ void reqBuildingProvince(building *bl) {
  */
 void reqBuildingPrice(building *bl) {
 	printf("Prezzo in euro: ");
-	bl->price = readInteger();
+	bl->price = readDouble();
+	
 	clearScr();
 }
 
