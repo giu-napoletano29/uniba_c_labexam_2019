@@ -38,14 +38,14 @@ void saveLocalDate(client *cl) {
  * @brief Append an user to the user file.
  * Initializes a client struct and calls the "req" functions for filling the latter.
  *
- * allClients and num_clients parameters are needed
+ * allClients and numClients parameters are needed
  * for calling sortClients() and rewriteClientsToFile()
  *
  * @param allClients Array of structs (client type)
- * @param num_clients Number of items (clients) saved in the array.
+ * @param numClients Number of items (clients) saved in the array.
  * @return -1 for going back to the main menu.
  */
-int addClient(client *allClients, int num_clients) {
+int addClient(client *allClients, int numClients) {
 	client cl = { "", "", "", 1, "", 0, 0, 1, false };
 	int newClientsNum = 0;
 
@@ -72,7 +72,7 @@ int addClient(client *allClients, int num_clients) {
 	appendClientToFile(&cl);
 
 	/** Sort clients in the memory */
-	sortClients(allClients, num_clients);
+	sortClients(allClients, numClients);
 
 	/** - Re-declare and re-initialize the array of structs with the newly created client */
 	newClientsNum = countFileRows("clients");
@@ -92,10 +92,10 @@ int addClient(client *allClients, int num_clients) {
  * Delete a client identified by his ID inputted by the user.
  *
  * @param allClients Array of structs of all clients registered.
- * @param num_clients Number of clients registered.
+ * @param numClients Number of clients registered.
  * @return -1 for going back to the menu
  */
-int deleteClient(client *allClients, int num_clients) {
+int deleteClient(client *allClients, int numClients) {
 	bool found = false;
 
 	clearScr();
@@ -105,7 +105,7 @@ int deleteClient(client *allClients, int num_clients) {
 	printf("\nInserisci Codice Fiscale o Partita IVA del cliente da eliminare: ");
 	readString(toDeleteID, false, false);
 
-	for (int i = 0; i < num_clients; i++) {
+	for (int i = 0; i < numClients; i++) {
 		if (strCompare(toDeleteID, (allClients + i)->id)) {
 			(allClients + i)->toDelete = true;
 			found = true;
@@ -113,7 +113,7 @@ int deleteClient(client *allClients, int num_clients) {
 	}
 
 	if (found) {
-		rewriteClientsToFile(allClients, num_clients);
+		rewriteClientsToFile(allClients, numClients);
 
 		setGreenColor();
 		printf("\nCliente eliminato!\n");

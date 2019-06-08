@@ -56,14 +56,9 @@ void showClientData(client *cl) {
 	printf("%s \n", cl->id);
 
 	setCyanColor();
-	printf("Nome: ");
+	printf("Nome e cognome: ");
 	resetColor();
-	printf("%s \n", cl->name);
-
-	setCyanColor();
-	printf("Cognome: ");
-	resetColor();
-	printf("%s \n", cl->surname);
+	printf("%s %s \n", cl->name, cl->surname);
 
 	setCyanColor();
 	printf("Tipo cliente: ");
@@ -101,29 +96,29 @@ void showClientData(client *cl) {
 
 /**
  * @brief Print every client available in the array of structs.
- * Iterates on num_clients calling the showClientData() function.
+ * Iterates on numClients calling the showClientData() function.
  *
  * @param allClients Array of structs (client type)
- * @param num_clients Number of items (clients) saved in the array.
+ * @param numClients Number of items (clients) saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-int showAllClients(client *allClients, int num_clients) {
+int showAllClients(client *allClients, int numClients) {
 	int i;
 	bool runRewrite = false;
 
 	// Sort clients in the memory
-	sortClients(allClients, num_clients);
+	sortClients(allClients, numClients);
 
 	// Rewrite ordered clients file
-	rewriteClientsToFile(allClients, num_clients);
+	rewriteClientsToFile(allClients, numClients);
 
 	clearScr();
 	printSectionName("Lista clienti", false);
 
-	if (num_clients != 0) {
-		for (i = 0; i < num_clients; i++) {
+	if (numClients != 0) {
+		for (i = 0; i < numClients; i++) {
 			setCyanColor();
-			printf("\n-- CLIENTE %d --\n", i + 1);
+			printf("\n-- CLIENTE --\n");
 			resetColor();
 			showClientData(allClients + i);
 
@@ -135,7 +130,7 @@ int showAllClients(client *allClients, int num_clients) {
 
 		// Rewrite clients file without the deleted clients, if needed.
 		if (runRewrite) {
-			rewriteClientsToFile(allClients, num_clients);
+			rewriteClientsToFile(allClients, numClients);
 		}
 		newLine();
 

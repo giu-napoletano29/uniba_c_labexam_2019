@@ -10,6 +10,6 @@
 
 void showClientType();
 void showClientData(client *cl);
-int showAllClients(client *cl, int num_clients);
+int showAllClients(client *cl, int numClients);
 
 #endif /* ENTITIES_CLIENTS_SHOW_CL_H_ */
