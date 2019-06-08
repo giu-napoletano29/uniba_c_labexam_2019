@@ -284,7 +284,7 @@ int appendBuildingToFile(building *bl) {
 
 			formattedDateToFile(filePtr, &bl->reg_date);
 
-			fprintf(filePtr, "%.2f,%s,%s,%d\n", bl->price, bl->owner, bl->phone, bl->b_type, bl->sold);
+			fprintf(filePtr, "%.2f,%s,%s,%d,%d\n", bl->price, bl->owner, bl->phone, bl->b_type, bl->sold);
 		}
 	}
 

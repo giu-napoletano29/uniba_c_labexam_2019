@@ -49,7 +49,7 @@ int resultsAgency(building *bl, int numBuildings) {
 
 		if (reg_date1 < reg_date2) {
 			printf("\nIN VENDITA: \t|");
-			for (int i = 0; i < num_buildings; i++) {
+			for (int i = 0; i < numBuildings; i++) {
 				if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2 && bl[i].sold == false) {
 					printf("=");
 					num_bl_found++;
@@ -60,7 +60,7 @@ int resultsAgency(building *bl, int numBuildings) {
 			newLine();
 
 			printf("\nVENDUTI: \t|");
-			for (int i = 0; i < num_buildings; i++) {
+			for (int i = 0; i < numBuildings; i++) {
 				if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2 && bl[i].sold == true) {
 					printf("=");
 					num_bl_found++;
@@ -81,7 +81,7 @@ int resultsAgency(building *bl, int numBuildings) {
 				newLine();
 				resetColor();
 
-				for (int i = 0; i < num_buildings; i++) {
+				for (int i = 0; i < numBuildings; i++) {
 					if ((bl + i)->reg_date > reg_date1 && (bl + i)->reg_date < reg_date2 && (bl + i)->sold == true) {
 						setCyanColor();
 						printf("--- IMMOBILE %d ---", (bl + i)->id);
