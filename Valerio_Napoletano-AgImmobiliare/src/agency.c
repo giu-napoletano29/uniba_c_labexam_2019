@@ -47,17 +47,25 @@ int resultsAgency(building *bl, int numBuildings) {
 		endDateInterval = parseDate(endDateIntervalStr);
 
 		if (startDateInterval < endDateInterval) {
+			setYellowColor();
 			puts("\n--- I dati sono relativi al periodo scelto ---");
+			
+			// NOT SOLD HISTOGRAM
+			setRedColor();
 			printf("\nNON VENDUTI: \t|");
 			for (int i = 0; i < numBuildings; i++) {
 				if ((bl + i)->reg_date >= startDateInterval && (bl + i)->reg_date <= endDateInterval &&  (bl + i)->soldOn == 0) {
 					printf("=");
 					num_bl_found++;
 				}
-			}
+			}			
 			printf("|\n %d", num_bl_found);
+			resetColor();
+
+			// SOLD HISTOGRAM
 			num_bl_found = 0;
 			newLine();
+			setGreenColor();
 			printf("\nVENDUTI: \t|");
 			for (int i = 0; i < numBuildings; i++) {
 				if ((bl + i)->soldOn >= startDateInterval && (bl + i)->soldOn <= endDateInterval) {
@@ -67,8 +75,10 @@ int resultsAgency(building *bl, int numBuildings) {
 				}
 			}
 			printf("|\n %d", num_bl_found);
+			resetColor();
+			
+			// TOTAL PROFIT
 			num_bl_found = 0;
-
 			newLine();
 			setCyanColor();
 			printf("\nRicavi totali relativi al periodo: ");
