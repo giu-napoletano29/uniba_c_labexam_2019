@@ -72,7 +72,7 @@ void parseClientFile(FILE *filePtr, client *cl) {
 					/*
 					 *  Save parsed Epoch time into clients struct
 					 */
-					(cl + cl_num)->reg_date = parseDateInFile(token);
+					(cl + cl_num)->reg_date = parseDate(token);
 					break;
 				case 7:
 					enum_tmp = atoi(token);

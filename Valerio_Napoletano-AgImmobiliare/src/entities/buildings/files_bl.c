@@ -23,7 +23,7 @@
  * @param filePtr Pointer to file initalized from fopen()
  * @param bl Buildings array of structs for storing parsed data.
  */
-void readBuildingsFile(FILE *filePtr, building *bl) {
+void parseBuildingsFile(FILE *filePtr, building *bl) {
 	char line[MAX_TEXT_SIZE];
 	char *token;
 
@@ -63,7 +63,7 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 					break;
 				case 5:
 					// Save parsed Epoch time into clients struct
-					(bl + bl_num)->reg_date = parseDateInFile(token);
+					(bl + bl_num)->reg_date = parseDate(token);
 					break;
 				case 6:
 					(bl + bl_num)->price = strtod(token, NULL);
@@ -76,11 +76,16 @@ void readBuildingsFile(FILE *filePtr, building *bl) {
 					strcpy((bl + bl_num)->phone, token);
 					break;
 				case 9:
-					enum_tmp = atoi(token);
-					(bl + bl_num)->b_type = enum_tmp;
+					(bl + bl_num)->soldOn = parseDate(token);
+					
+					// If parseDate failed we assume that the building is still on sale.
+					if((bl + bl_num)->soldOn == -1) {
+						(bl + bl_num)->soldOn = 0;
+					}
 					break;
 				case 10:
-					bl[bl_num].sold = atoi(token);
+					enum_tmp = atoi(token);
+					(bl + bl_num)->b_type = enum_tmp;
 					break;
 			}
 
@@ -107,7 +112,7 @@ int loadBuildingsFile(building *bl) {
 	filePtr = fopen("buildings.dat", "a+");
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
-		readBuildingsFile(filePtr, bl);
+		parseBuildingsFile(filePtr, bl);
 	}
 
 	fclose(filePtr);
@@ -137,8 +142,16 @@ int rewriteBuildingsToFile(building *bl, int rows) {
 
 				formattedDateToFile(filePtr, &(bl + i)->reg_date);
 
-				fprintf(filePtr, "%.2f,%s,%s,%d,%d\n", (bl + i)->price, (bl + i)->owner, (bl + i)->phone,
-						(bl + i)->b_type, (bl + i)->sold);
+				fprintf(filePtr, "%.2f,%s,%s", (bl + i)->price, (bl + i)->owner, (bl + i)->phone);
+
+				// Save the purchase date if available, if not just save 0. (thus the building is still on sale)
+				if ((bl + i)->soldOn != 0) {
+					formattedDateToFile(filePtr, &(bl + i)->soldOn);
+				} else {
+					fprintf(filePtr, ",0,");
+				}
+
+				fprintf(filePtr, "%d\n", (bl + i)->b_type);
 			}
 		}
 	}
@@ -284,7 +297,17 @@ int appendBuildingToFile(building *bl) {
 
 			formattedDateToFile(filePtr, &bl->reg_date);
 
-			fprintf(filePtr, "%.2f,%s,%s,%d,%d\n", bl->price, bl->owner, bl->phone, bl->b_type, bl->sold);
+			fprintf(filePtr, "%.2f,%s,%s", bl->price, bl->owner, bl->phone);
+
+			// Save the purchase date if available, if not just save 0. (thus the building is still on sale)
+			if (bl->soldOn != 0) {
+				formattedDateToFile(filePtr, &(bl)->soldOn);
+			} else {
+				fprintf(filePtr, ",0,");
+			}
+
+			fprintf(filePtr, "%d\n", bl->b_type);
+
 		}
 	}
 

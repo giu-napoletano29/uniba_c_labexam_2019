@@ -31,7 +31,7 @@ void initBuildingsArray(building *bl, int size) {
 		strcpy((bl + i)->owner, "");
 		strcpy((bl + i)->phone, "");
 		(bl + i)->b_type = flat;
-    (bl + i)->sold = false;
+		(bl + i)->soldOn = 0;
 	}
 }
 

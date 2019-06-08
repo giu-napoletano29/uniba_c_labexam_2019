@@ -67,7 +67,7 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
 					/*
 					 *  Save parsed Epoch time into clients struct
 					 */
-					(allPros + pr_num)->reg_date = parseDateInFile(token);
+					(allPros + pr_num)->reg_date = parseDate(token);
 					break;
 				case 7:
 					(allPros + pr_num)->buildings_sold = atoi(token);

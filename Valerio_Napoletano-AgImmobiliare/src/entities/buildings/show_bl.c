@@ -63,7 +63,7 @@ void printBuildingChoices() {
  *
  * @param bl building type struct
  */
-void showBuildingData(building *bl) {
+void showBuildingData(building *bl) {	
 	setCyanColor();
 	printf("Identificativo: ");
 	resetColor();
@@ -117,10 +117,11 @@ void showBuildingData(building *bl) {
 	setCyanColor();
 	printf("Venduto: ");
 	resetColor();
-	if (bl->sold == 1) {
-		printf("VERO \n");
+	if (bl->soldOn != 0) {
+		printf("Si', il giorno ");
+		printFormattedDate(bl->soldOn);
 	} else {
-		printf("FALSO \n");
+		printf("No\n");
 	}
 
 }

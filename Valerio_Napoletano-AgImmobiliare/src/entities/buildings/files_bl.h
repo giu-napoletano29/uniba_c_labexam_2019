@@ -11,7 +11,7 @@
 #include <stdio.h>
 
 int loadBuildingsFile(building *bl);
-void readBuildingsFile(FILE *filePtr, building *cl);
+void parseBuildingsFile(FILE *filePtr, building *cl);
 int searchBuilding(building *allBuildings, int numBuildings);
 int rewriteBuildingsToFile(building *bl, int rows);
 int checkDuplicateBuildings(building *bl, int rows);

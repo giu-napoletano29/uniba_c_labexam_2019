@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-// For parseDateInFile()
+// For parseDate()
 #include <time.h>
 
 #include "utils.h"
@@ -24,13 +24,14 @@
  * @return -1 for going back to the main menu
  */
 int resultsAgency(building *bl, int numBuildings) {
-	char date1[10];
-	char date2[10];
-	time_t reg_date1;
-	time_t reg_date2;
+	char startDateIntervalStr[10];
+	char endDateIntervalStr[10];
+	
+	time_t startDateInterval;
+	time_t endDateInterval;
+	
 	short int num_bl_found = 0;
 	int tot_price = 0;
-	short int choice = 0;
 	bool error = false;
 
 	clearScr();
@@ -38,17 +39,18 @@ int resultsAgency(building *bl, int numBuildings) {
 
 	if (numBuildings != 0) {
 		printf("\nInserisci primo intervallo di data (gg/mm/aaaa): ");
-		readString(date1, false, false);
-		reg_date1 = parseDateInFile(date1);
+		readString(startDateIntervalStr, false, false);
+		startDateInterval = parseDate(startDateIntervalStr);
 
 		printf("\nInserisci secondo intervallo di data (gg/mm/aaaa): ");
-		readString(date2, false, false);
-		reg_date2 = parseDateInFile(date2);
+		readString(endDateIntervalStr, false, false);
+		endDateInterval = parseDate(endDateIntervalStr);
 
-		if (reg_date1 < reg_date2) {
-			printf("\nIN VENDITA: \t|");
+		if (startDateInterval < endDateInterval) {
+			puts("\n--- I dati sono relativi al periodo scelto ---");
+			printf("\nNON VENDUTI: \t|");
 			for (int i = 0; i < numBuildings; i++) {
-				if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2 && bl[i].sold == false) {
+				if ((bl + i)->reg_date >= startDateInterval && (bl + i)->reg_date <= endDateInterval &&  (bl + i)->soldOn == 0) {
 					printf("=");
 					num_bl_found++;
 				}
@@ -56,10 +58,9 @@ int resultsAgency(building *bl, int numBuildings) {
 			printf("|\n %d", num_bl_found);
 			num_bl_found = 0;
 			newLine();
-
 			printf("\nVENDUTI: \t|");
 			for (int i = 0; i < numBuildings; i++) {
-				if (bl[i].reg_date > reg_date1 && bl[i].reg_date < reg_date2 && bl[i].sold == true) {
+				if ((bl + i)->soldOn >= startDateInterval && (bl + i)->soldOn <= endDateInterval) {
 					printf("=");
 					num_bl_found++;
 					tot_price += bl[i].price;
@@ -70,19 +71,16 @@ int resultsAgency(building *bl, int numBuildings) {
 
 			newLine();
 			setCyanColor();
-			printf("\nRicavi totali: ");
+			printf("\nRicavi totali relativi al periodo: ");
 			resetColor();
 			printf("%d euro\n", tot_price);
 
 			printf("\nVuoi visualizzare la lista degli immobili venduti? (s/n): ");
-			choice = askConfirm();
-
-			if (choice == 1) {
+			if (askConfirm()) {
 				newLine();
 
 				for (int i = 0; i < numBuildings; i++) {
-					if ((bl + i)->reg_date
-							> reg_date1&& (bl + i)->reg_date < reg_date2 && (bl + i)->sold == true) {
+					if ((bl + i)->soldOn >= startDateInterval && (bl + i)->soldOn <= endDateInterval) {
 						setCyanColor();
 						printf("--- IMMOBILE %d ---", (bl + i)->id);
 						resetColor();

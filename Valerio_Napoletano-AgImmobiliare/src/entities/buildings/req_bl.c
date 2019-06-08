@@ -15,6 +15,8 @@
 #include "../../utils.h"
 #include "../../datatypes.h"
 #include "../../consts.h"
+#include "../../file_utils.h"
+
 #include "show_bl.h" // For using printBuildingChoices()
 
 /**
@@ -89,7 +91,7 @@ void reqBuildingProvince(building *bl) {
 void reqBuildingPrice(building *bl) {
 	printf("Prezzo in euro: ");
 	bl->price = readDouble();
-	
+
 	clearScr();
 }
 
@@ -145,27 +147,19 @@ void reqBuildingType(building *bl) {
 }
 
 void reqBuildingSold(building *bl) {
-	bool error = false;
-	char tmp_string[MAX_STRING_SIZE];
+	char soldOnString[MAX_STRING_SIZE];
+	time_t soldOn = 0;
 
-	do {
-		error = false;
-
-		printf("Inserisci se l'immobile e' stato venduto: ");
-		readString(tmp_string, true, false);
-		convertToUpperCase(tmp_string);
-
-		if (strcmp(tmp_string, "VERO") == 0 || strcmp(tmp_string, "1") == 0) {
-			bl->sold = true;
-		} else if (strcmp(tmp_string, "FALSO") == 0 || strcmp(tmp_string, "0") == 0) {
-			bl->sold = false;
-		} else {
-			error = true;
-			setYellowColor();
-			puts("\nValore errato.\nInserisci un valore corretto e premi Invio (VERO/FALSO o 1/0): ");
-			resetColor();
-		}
-	} while (error == true);
+	clearScr();
+	
+	printf("L'immobile e' stato venduto? (s/n): ");
+	if (askConfirm()) {
+		printf("Quando? Inserisci una data (gg/mm/yyyy): ");
+		readString(soldOnString, false, false);
+		soldOn = parseDate(soldOnString);
+	} else {
+		bl->soldOn = 0;
+	}
 
 	clearScr();
 }

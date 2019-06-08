@@ -83,9 +83,9 @@ typedef struct {
 	char owner[MAX_STRING_SIZE];
 	// Owner phone number
 	char phone[MAX_STRING_SIZE];
+	time_t soldOn; /**< Sold date in Epoch time. If it's 0, then the building is still on sale */
 	building_type b_type;
 	bool toDelete; /**< If true this building won't be saved in the file */
-	bool sold;
 } building;
 
 #endif

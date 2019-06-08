@@ -16,7 +16,7 @@
 bool checkFile(FILE *filePtr);
 int countFileRows(char *name);
 void copyFile(FILE *fp_from, FILE *fp_to, int choice);
-time_t parseDateInFile(char string[MAX_STRING_SIZE]);
+time_t parseDate(char string[MAX_STRING_SIZE]);
 void formattedDateToFile(FILE *filePtr, time_t *epochTime);
 
 #endif /* FILE_UTILS_H_ */

@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h> // For parseDateInFile()
+#include <time.h> // For parseDate()
 
 #include "utils.h"
 #include "file_utils.h"
@@ -71,7 +71,7 @@ int countFileRows(char *name) {
  * @param string Date string to parse
  * @return time_t value (encoded in UNIX Epoch time)
  */
-time_t parseDateInFile(char string[MAX_STRING_SIZE]) {
+time_t parseDate(char string[MAX_STRING_SIZE]) {
 	// Temp "tm" struct required for parsing the date properly from the file
 	struct tm temp_date = { 0 };
 

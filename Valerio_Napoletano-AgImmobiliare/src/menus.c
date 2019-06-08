@@ -203,7 +203,7 @@ int buildingsMenu() {
 		puts("2. Cerca un immobile");
 		puts("3. Aggiungi un immobile");
 		puts("4. Elimina un immobile");
-		puts("5. Risultati agenzia");
+		puts("5. Risultati di vendita agenzia");
 		puts("6. Torna indietro");
 		newLine();
 

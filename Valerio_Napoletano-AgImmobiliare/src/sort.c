@@ -177,8 +177,8 @@ void sortBuildings(building *bl, int rows) {
 		strcpy((bl + j)->street, (bl + index_min)->street);
 		strcpy((bl + index_min)->street, cmp.street);
       
-    cmp.sold = (bl + j)->sold;
-	  (bl + j)->sold = (bl + index_min)->sold;
-		(bl + index_min)->sold = cmp.sold;
+		cmp.soldOn = (bl + j)->soldOn;
+		(bl + j)->soldOn = (bl + index_min)->soldOn;
+		(bl + index_min)->soldOn = cmp.soldOn;
 	}
 }
