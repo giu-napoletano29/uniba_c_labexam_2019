@@ -80,6 +80,9 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
 			field++;
 		}
 
+		// Initialize toDelete to false
+		(allPros + pr_num)->toDelete = false;
+		
 		pr_num++;
 
 		newLine();
@@ -226,6 +229,9 @@ int checkDuplicatePros(professional *allPros, int rows) {
 			}
 		}
 	}
-	rewriteProsToFile(allPros, rows);
+
+	if (result) {
+		rewriteProsToFile(allPros, rows);
+	}
 	return result;
 }

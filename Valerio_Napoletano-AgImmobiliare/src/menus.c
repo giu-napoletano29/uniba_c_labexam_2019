@@ -11,7 +11,6 @@
 #include "utils.h"
 #include "file_utils.h"
 #include "agency.h"
-#include "sort.h"
 
 #include "entities/buildings/files_bl.h"
 #include "entities/buildings/misc_bl.h"
@@ -220,9 +219,6 @@ int buildingsMenu() {
 		switch (choice) {
 			case 1:
 				choice = showAllBuildings(allBuildings, buildingsNum);
-				sortBuildings(allBuildings, buildingsNum);
-				//TODO: Run rewrite only if needed
-				rewriteBuildingsToFile(allBuildings, buildingsNum);
 				break;
 			case 2:
 				choice = searchBuilding(allBuildings, buildingsNum);

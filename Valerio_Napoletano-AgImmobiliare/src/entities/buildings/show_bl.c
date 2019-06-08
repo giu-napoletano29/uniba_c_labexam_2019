@@ -8,7 +8,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "files_bl.h"
+
 #include "../../utils.h"
+#include "../../sort.h"
+#include "../../datatypes.h"
 
 /**
  * @brief Print out a string with the building type.
@@ -153,7 +157,7 @@ void showBuildingData(building *bl) {
 	showBuildingType(bl->b_type);
 
 	setCyanColor();
-	printf("Venduto: ");
+	printf("Venduto/Affittato: ");
 	resetColor();
 	if (bl->soldOn != 0) {
 		printf("Si', il giorno ");
@@ -174,6 +178,9 @@ void showBuildingData(building *bl) {
  */
 int showAllBuildings(building *bl, int numBuildings) {
 	int i;
+	
+	sortBuildings(bl, numBuildings);
+	rewriteBuildingsToFile(bl, numBuildings);
 
 	clearScr();
 	printSectionName("Lista immobili", false);

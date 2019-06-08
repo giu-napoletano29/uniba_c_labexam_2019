@@ -183,7 +183,6 @@ void reqContractType(building *bl) {
  */
 void reqBuildingSold(building *bl) {
 	char soldOnString[MAX_STRING_SIZE];
-	time_t soldOn = 0;
 
 	clearScr();
 	
@@ -191,7 +190,7 @@ void reqBuildingSold(building *bl) {
 	if (askConfirm()) {
 		printf("Quando? Inserisci una data (gg/mm/yyyy): ");
 		readString(soldOnString, false, false);
-		soldOn = parseDate(soldOnString);
+		bl->soldOn = parseDate(soldOnString);
 	} else {
 		bl->soldOn = 0;
 	}

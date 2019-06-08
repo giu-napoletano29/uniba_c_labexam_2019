@@ -99,6 +99,9 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 			field++;
 		}
 
+		// Initialize toDelete to false
+		(bl + bl_num)->toDelete = false;
+
 		bl_num++;
 
 		newLine();
@@ -179,7 +182,7 @@ int checkDuplicateBuildings(building *bl, int rows) {
 
 	for (int i = 0; i < rows; i++) {
 		for (int j = i + 1; j < rows; j++) {
-			if ((bl + i)->id == (bl + j)->id) {
+			if ((bl + i)->id == (bl + j)->id && !result) {
 				clearScr();
 				setRedColor();
 				printf("\nERRORE: Il database contiene degli immobili con ID identico.\n");
@@ -214,10 +217,10 @@ int checkDuplicateBuildings(building *bl, int rows) {
 				printf("Nuovo ID: ");
 				switch (choice) {
 					case 1:
-						readInteger((bl + i)->id);
+						(bl + i)->id = readInteger();
 						break;
 					case 2:
-						readInteger((bl + j)->id);
+						(bl + j)->id = readInteger();
 						break;
 					default:
 						break;
@@ -229,7 +232,12 @@ int checkDuplicateBuildings(building *bl, int rows) {
 			}
 		}
 	}
-	rewriteBuildingsToFile(bl, rows);
+
+	if (result) {
+		// Write on file only if needed
+		rewriteBuildingsToFile(bl, rows);
+	}
+
 	return result;
 }
 

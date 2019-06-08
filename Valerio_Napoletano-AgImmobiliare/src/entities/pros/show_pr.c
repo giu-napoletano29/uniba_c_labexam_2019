@@ -79,7 +79,6 @@ int showAllPros(professional *allPros, potential *allPts, int num_records) {
 	int i;
 
 	sortPros(allPros, num_records);
-	//TODO: Run rewrite only if needed
 	rewriteProsToFile(allPros, num_records);
 
 	clearScr();

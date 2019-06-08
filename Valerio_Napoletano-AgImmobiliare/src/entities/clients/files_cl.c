@@ -86,6 +86,9 @@ void parseClientFile(FILE *filePtr, client *cl) {
 			field++;
 		}
 
+		// Initialize toDelete to false
+		(cl + cl_num)->toDelete = false;
+
 		cl_num++;
 
 		newLine();
@@ -111,8 +114,8 @@ int rewriteClientsToFile(client *cl, int rows) {
 		for (int i = 0; i < rows; i++) {
 			// Save client to file only if the client is not marked for deletion
 			if (!(cl + i)->toDelete) {
-				fprintf(filePtr, "%s,%s,%s,%d,%s,%d", (cl + i)->id, (cl + i)->name, (cl + i)->surname, (cl + i)->cl_type,
-						(cl + i)->company_name, (cl + i)->budget);
+				fprintf(filePtr, "%s,%s,%s,%d,%s,%d", (cl + i)->id, (cl + i)->name, (cl + i)->surname,
+						(cl + i)->cl_type, (cl + i)->company_name, (cl + i)->budget);
 
 				formattedDateToFile(filePtr, &(cl + i)->reg_date);
 
@@ -240,6 +243,9 @@ bool checkDuplicateClients(client *cl, int rows) {
 			}
 		}
 	}
-	rewriteClientsToFile(cl, rows);
+
+	if (result) {
+		rewriteClientsToFile(cl, rows);
+	}
 	return result;
 }

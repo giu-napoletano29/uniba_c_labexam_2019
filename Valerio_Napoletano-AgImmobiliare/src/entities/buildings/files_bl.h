@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 
+#include "../../datatypes.h"
+
 int loadBuildingsFile(building *bl);
 void parseBuildingsFile(FILE *filePtr, building *cl);
 int searchBuilding(building *allBuildings, int numBuildings);
