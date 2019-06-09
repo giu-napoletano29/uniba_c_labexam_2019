@@ -108,6 +108,7 @@ void showClientData(client *cl, bool checkExpiration) {
  */
 int showAllClients(client *allClients, int numClients) {
 	bool runRewrite = false;
+	bool checkExpiration = false;
 
 	// Sort clients in the memory
 	sortClients(allClients, numClients);
@@ -118,9 +119,17 @@ int showAllClients(client *allClients, int numClients) {
 	clearScr();
 	printSectionName("Lista clienti", false);
 
+	setYellowColor();
+	printf("\nVuoi eliminare i clienti registrati da piu' di %d giorni? (quindi scaduti)\n(s/n): ",
+			CLIENT_EXPIRE_DAYS);
+	resetColor();
+	if (askConfirm()) {
+		checkExpiration = true;
+	}
+
 	if (numClients != 0) {
 		for (int i = 0; i < numClients; i++) {
-			showClientData((allClients + i), true);
+			showClientData((allClients + i), checkExpiration);
 
 			// Check if some clients are ready for deletion.
 			if ((allClients + i)->toDelete) {
