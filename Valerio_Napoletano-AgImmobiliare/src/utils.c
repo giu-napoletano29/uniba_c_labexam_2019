@@ -144,7 +144,7 @@ bool anyChar(char *str) {
  */
 int readString(char *value, bool onlyAlpha, bool onlyNumbers) {
 	bool error = false;
-	char inputVal[MAX_STRING_SIZE];
+	char inputVal[MAX_STRING_SIZE] = "";
 
 	do {
 		// Read from stdin
@@ -179,9 +179,8 @@ int readString(char *value, bool onlyAlpha, bool onlyNumbers) {
  */
 int readInteger() {
 	bool error = false;
-
 	/**	Define an internal string buffer. */
-	char buffer[MAX_STRING_SIZE];
+	char buffer[MAX_STRING_SIZE] = "";
 	/**  Initialize value to -1 for representing a possible error state. */
 	int value = -1;
 
@@ -217,11 +216,11 @@ int readInteger() {
  */
 double readDouble() {
 	bool error = false;
+	// Initialization of a "comma" pointer for replacing
 	char *comma;
-	
-	/**	Define an internal string buffer. */
-	char buffer[MAX_STRING_SIZE];
-	/**  Initialize value to -1 for representing a possible error state. */
+	// Define an internal string buffer.
+	char buffer[MAX_STRING_SIZE] = "";
+	// Initialize value to -1 for representing a possible error state.
 	double value = -1;
 
 	do {
@@ -296,13 +295,13 @@ void printFormattedDate(time_t epochTime) {
 	/**
 	 * Declare pointer to time struct for handling UNIX Epoch time
 	 */
-	struct tm *clDate;
+	struct tm *clDate = { 0 };
 
 	/**
 	 * Declare buffer for printing out the date (required by strftime)
 	 *  day/month/year (eg. 22/05/2019)
 	 */
-	char dateBuffer[11];
+	char dateBuffer[11] = "";
 
 	/**
 	 *  Fill time struct getting date/time info from the UNIX Epoch time
@@ -322,7 +321,8 @@ void printFormattedDate(time_t epochTime) {
  * @param str String to convert to uppercase.
  */
 void convertToUpperCase(char *str) {
-	int len = strlen(str);
+	int len = 0;
+	len = strlen(str);
 	for (int i = 0; i < len; i++) {
 		str[i] = toupper(str[i]);
 	}
@@ -352,8 +352,8 @@ void notFoundError() {
  * @param titleToSet String to set as the console window's title.
  */
 void setTitle(char *titleToSet) {
-	char command[MAX_TEXT_SIZE];
-	char defaultName[MAX_STRING_SIZE];
+	char command[MAX_TEXT_SIZE] = "";
+	char defaultName[MAX_STRING_SIZE] = "";
 
 	strcpy(defaultName, "Agenzia Immobiliare");
 
@@ -416,7 +416,7 @@ bool strCompare(char *from, char *to) {
  */
 bool askConfirm() {
 	/** Declare array of 2 positions for keeping the newline "\n" */
-	char usrInput[1];
+	char usrInput[1] = "";
 
 	bool choice = false;
 	bool error = false;

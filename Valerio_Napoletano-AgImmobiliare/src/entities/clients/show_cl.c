@@ -107,7 +107,6 @@ void showClientData(client *cl, bool checkExpiration) {
  * @return Value for returning back to the menu (-1)
  */
 int showAllClients(client *allClients, int numClients) {
-	int i;
 	bool runRewrite = false;
 
 	// Sort clients in the memory
@@ -120,7 +119,7 @@ int showAllClients(client *allClients, int numClients) {
 	printSectionName("Lista clienti", false);
 
 	if (numClients != 0) {
-		for (i = 0; i < numClients; i++) {
+		for (int i = 0; i < numClients; i++) {
 			showClientData((allClients + i), true);
 
 			// Check if some clients are ready for deletion.

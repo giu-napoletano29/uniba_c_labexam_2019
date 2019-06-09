@@ -57,7 +57,7 @@ void initProsArray(professional *pro, int size) {
  * @param pr "professional" type struct
  */
 void saveLocalDatePro(professional *pr) {
-	time_t timeRightNow;
+	time_t timeRightNow = 0;
 
 	// time function returns the current Epoch time (time_t)
 	pr->regDate = time(&timeRightNow);

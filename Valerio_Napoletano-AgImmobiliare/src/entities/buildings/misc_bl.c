@@ -42,7 +42,7 @@ void initBuildingsArray(building *bl, int size) {
  * @param bl "building" type struct
  */
 void saveBuildingLocalDate(building *bl) {
-	time_t timeRightNow;
+	time_t timeRightNow = 0;
 
 	// time function returns the current Epoch time (time_t)
 	bl->regDate = time(&timeRightNow);

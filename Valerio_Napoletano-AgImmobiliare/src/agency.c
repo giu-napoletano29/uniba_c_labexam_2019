@@ -24,11 +24,11 @@
  * @return -1 for going back to the main menu
  */
 int resultsAgency(building *bl, int numBuildings) {
-	char startDateIntervalStr[10];
-	char endDateIntervalStr[10];
+	char startDateIntervalStr[10] = "";
+	char endDateIntervalStr[10] = "";
 	
-	time_t startDateInterval;
-	time_t endDateInterval;
+	time_t startDateInterval = 0;
+	time_t endDateInterval = 0;
 	
 	short int numBuildingsFound = 0;
 	int totPrice = 0;

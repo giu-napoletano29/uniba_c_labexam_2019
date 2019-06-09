@@ -21,7 +21,7 @@
  * @param rows Numbers of records in the "pr" array of structs.
  */
 void sortPros(professional *pr, int rows) {
-	professional cmp;
+	professional cmp = { "", "", "", "", "", "", 0, 0, false};
 	int indexMin = 0;
 
 	for (int j = 0; j < rows - 1; j++) {
@@ -72,7 +72,7 @@ void sortPros(professional *pr, int rows) {
  * @param rows Numbers of records in the "cl" array of structs.
  */
 void sortClients(client *cl, int rows) {
-	client cmp;
+	client cmp = { "", "", "", single, "", 0, 0, flat, false};
 	int indexMin = 0;
 
 	for (int j = 0; j < rows - 1; j++) {
@@ -127,7 +127,7 @@ void sortClients(client *cl, int rows) {
  * @param rows Numbers of records in the "bl" array of structs.
  */
 void sortBuildings(building *bl, int rows) {
-	building cmp;
+	building cmp = { 0, "", 0, "", "", 0, 0.0, "", "", 0, rent, flat, false };
 	int indexMin = 0;
 
 	for (int j = 0; j < rows - 1; j++) {

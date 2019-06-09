@@ -25,10 +25,10 @@
  * @param allPros Array of structs (professionals data type)
  */
 void parseProsFile(FILE *filePtr, professional *allPros) {
-	char line[MAX_TEXT_SIZE];
+	char line[MAX_TEXT_SIZE] = "";
 	char *token;
 
-	int field;
+	int field = 0;
 	// Pros counter
 	int proNum = 0;
 

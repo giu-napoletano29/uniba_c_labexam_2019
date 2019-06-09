@@ -40,10 +40,10 @@ void findPotential(char id[], potential *pr, int numRecords) {
  * @param pr Professional array of structs for storing parsed data.
  */
 void parsePotentialsFile(FILE *filePtr, potential *pr) {
-	char line[MAX_TEXT_SIZE];
+	char line[MAX_TEXT_SIZE] = "";
 	char *token;
 
-	int field;
+	int field = 0;
 	// Pros counter
 	int proNum = 0;
 

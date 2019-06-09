@@ -72,8 +72,6 @@ void showProData(professional *pr, potential *allPts, int numRecords) {
  * @return Value for returning back to the menu (-1)
  */
 int showAllPros(professional *allPros, potential *allPts, int numRecords) {
-	int i;
-
 	sortPros(allPros, numRecords);
 	rewriteProsToFile(allPros, numRecords);
 
@@ -81,7 +79,7 @@ int showAllPros(professional *allPros, potential *allPts, int numRecords) {
 	printSectionName("Lista professionisti", false);
 
 	if (numRecords != 0) {
-		for (i = 0; i < numRecords; i++) {
+		for (int i = 0; i < numRecords; i++) {
 			showProData((allPros + i), allPts, numRecords);
 		}
 	} else {

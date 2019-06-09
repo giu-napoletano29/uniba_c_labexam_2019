@@ -24,10 +24,10 @@
  * @param bl Buildings array of structs for storing parsed data.
  */
 void parseBuildingsFile(FILE *filePtr, building *bl) {
-	char line[MAX_TEXT_SIZE];
+	char line[MAX_TEXT_SIZE] = "";
 	char *token;
 
-	int field;
+	int field = 0;
 	// Buildings counter
 	int builNum = 0;
 

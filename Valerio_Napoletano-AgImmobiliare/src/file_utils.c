@@ -77,13 +77,13 @@ void formattedDateToFile(FILE *filePtr, time_t *epochTime) {
 	/**
 	 * Declare pointer to time struct for handling UNIX Epoch time
 	 */
-	struct tm *clDate;
+	struct tm *clDate = { 0 };
 
 	/**
 	 * Declare buffer for printing out the date (required by strftime)
 	 *  day/month/year (eg. 22/05/2019)
 	 */
-	char dateBuffer[11];
+	char dateBuffer[11] = "";
 
 	/**
 	 *  Fill time struct getting date/time info from the UNIX Epoch time
