@@ -28,7 +28,7 @@
  * @param cl "client" type struct
  */
 void saveLocalDate(client *cl) {
-	time_t timeRightNow;
+	time_t timeRightNow = 0;
 
 	// time function returns the current Epoch time (time_t)
 	cl->regDate = time(&timeRightNow);
@@ -97,11 +97,11 @@ int addClient(client *allClients, int numClients) {
  */
 int deleteClient(client *allClients, int numClients) {
 	bool found = false;
+	char toDeleteID[MAX_STRING_SIZE] = "0";
 
 	clearScr();
 	printSectionName("Eliminazione cliente", false);
 
-	char toDeleteID[MAX_STRING_SIZE];
 	printf("\nInserisci Codice Fiscale o Partita IVA del cliente da eliminare: ");
 	readString(toDeleteID, false, false);
 
@@ -109,15 +109,23 @@ int deleteClient(client *allClients, int numClients) {
 		if (strCompare(toDeleteID, (allClients + i)->id)) {
 			(allClients + i)->toDelete = true;
 			found = true;
+			
+			showClientData((allClients + i), false);
 		}
 	}
 
 	if (found) {
-		rewriteClientsToFile(allClients, numClients);
-
-		setGreenColor();
-		printf("\nCliente eliminato!\n");
+		setYellowColor();
+		printf("\nSei sicuro di voler cancellare il cliente selezionato? (s/n): ");
 		resetColor();
+
+		if (askConfirm()) {
+			rewriteClientsToFile(allClients, numClients);
+
+			setGreenColor();
+			printf("\nCliente eliminato!\n");
+			resetColor();
+		}
 	} else {
 		setRedColor();
 		printf("\nNessun cliente trovato con l'ID inserito.\n");
@@ -136,6 +144,8 @@ int deleteClient(client *allClients, int numClients) {
  * @return true if user is expired, false otherwise
  */
 bool checkIfUserExpired(time_t epochTime, char id[]) {
+	bool delete = false;
+
 	/** Temp "tm" struct required for parsing the date properly from the file */
 	struct tm tempDate = { 0 };
 
@@ -147,8 +157,6 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
 	 */
 	tempDate.tm_mon -= 1;
 	tempDate.tm_year -= 1900;
-
-	bool delete = false;
 
 	/** Calculates how many days the client registration expired. */
 	int diffDays = difftime(time(NULL), epochTime) / DAY_IN_SECONDS;

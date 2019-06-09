@@ -23,6 +23,7 @@
  */
 void showProData(professional *pr, potential *allPts, int numRecords) {
 	setCyanColor();
+	printf("\n-- PROFESSIONISTA --\n");
 	printf("Codice fiscale: ");
 	resetColor();
 	printf("%s \n", pr->id);
@@ -81,10 +82,6 @@ int showAllPros(professional *allPros, potential *allPts, int numRecords) {
 
 	if (numRecords != 0) {
 		for (i = 0; i < numRecords; i++) {
-			setCyanColor();
-			printf("\n-- PROFESSIONISTA --\n");
-			resetColor();
-
 			showProData((allPros + i), allPts, numRecords);
 		}
 	} else {

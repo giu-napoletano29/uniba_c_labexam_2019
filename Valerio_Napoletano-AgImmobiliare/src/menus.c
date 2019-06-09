@@ -122,7 +122,7 @@ int professMenu() {
 	/**
 	 - Check if there's any client with duplicated IDs
 	 If so asks the user to change it. */
-	 checkDuplicatePros(allProfessionals, professionalsNum);
+	checkDuplicatePros(allProfessionals, professionalsNum);
 
 	do {
 		clearScr();
@@ -200,10 +200,13 @@ int buildingsMenu() {
 		puts("Scegli un'operazione:");
 		puts("1. Visualizza tutti gli immobili");
 		puts("2. Cerca un immobile");
+		puts("------");
 		puts("3. Aggiungi un immobile");
 		puts("4. Elimina un immobile");
-		puts("5. Risultati di vendita agenzia");
-		puts("6. Torna indietro");
+		puts("5. Vendi/affitta un immobile");
+		puts("------");
+		puts("6. Risultati di vendita agenzia");
+		puts("7. Torna indietro");
 		newLine();
 
 		if (error) {
@@ -230,9 +233,12 @@ int buildingsMenu() {
 				choice = deleteBuilding(allBuildings, buildingsNum);
 				break;
 			case 5:
-				choice = resultsAgency(allBuildings, buildingsNum);
+				choice = sellBuilding(allBuildings, buildingsNum);
 				break;
 			case 6:
+				choice = resultsAgency(allBuildings, buildingsNum);
+				break;
+			case 7:
 				// This is used as a flag for the "go back" choice
 				// It's not that likely that an user will manually insert -1 as a choice.
 				choice = -1;

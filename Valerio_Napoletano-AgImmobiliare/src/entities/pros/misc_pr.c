@@ -134,36 +134,51 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
  */
 int deletePro(professional *allPros, potential *allPts, int numRecords) {
 	bool found = false;
+	int proIndex = 0;
+	int ptsIndex = 0;
+	char toDeleteID[MAX_STRING_SIZE] = "";
 
 	clearScr();
 	printSectionName("Eliminazione professionista", false);
 
-	char toDeleteID[MAX_STRING_SIZE];
 	printf("\nInserisci Codice Fiscale del professionista da eliminare: ");
 	readString(toDeleteID, false, false);
 
 	for (int i = 0; i < numRecords; i++) {
 		// Set the "toDelete" flag on true of the chosen professional
 		if (strCompare(toDeleteID, (allPros + i)->id)) {
-			(allPros + i)->toDelete = true;
 			found = true;
-		}
-	}
+			proIndex = i;
 
-	if (found) {
+			(allPros + i)->toDelete = true;
+		}
+
 		// Set the "toDelete" flag on true of the professional "potential"
 		for (int i = 0; i < numRecords; i++) {
 			if (strCompare(toDeleteID, (allPts + i)->id)) {
+				ptsIndex = i;
+
 				(allPts + i)->toDelete = true;
 			}
 		}
+	}
+	
+	// Show professional data before deletion confirmation (for user visual validation)
+	showProData((allPros + proIndex), (allPts + ptsIndex), numRecords);
 
-		rewriteProsToFile(allPros, numRecords);
-		rewritePtsToFile(allPts, numRecords);
-
-		setGreenColor();
-		printf("\nProfessionista eliminato!\n");
+	if (found) {
+		setYellowColor();
+		printf("\nSei sicuro di voler cancellare il professionistsa selezionato? (s/n): ");
 		resetColor();
+
+		if (askConfirm()) {
+			rewriteProsToFile(allPros, numRecords);
+			rewritePtsToFile(allPts, numRecords);
+
+			setGreenColor();
+			printf("\nProfessionista eliminato!\n");
+			resetColor();
+		}
 	} else {
 		setRedColor();
 		printf("\nNessun professionista trovato con l'ID inserito.\n");

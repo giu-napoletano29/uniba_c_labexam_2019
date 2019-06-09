@@ -63,7 +63,7 @@ int addBuilding() {
 	genBuildingID(&bl);
 
 	reqContractType(&bl);
-	
+
 	reqBuildingStreet(&bl);
 
 	reqBuildingCity(&bl);
@@ -95,12 +95,12 @@ int addBuilding() {
  * @return -1 for going back to the menu
  */
 int deleteBuilding(building *allBuildings, int numBuildings) {
+	int toDeleteID = 0;
 	bool found = false;
 
 	clearScr();
 	printSectionName("Eliminazione immobile", false);
 
-	int toDeleteID;
 	printf("\nInserisci identiticativo immobile da eliminare: ");
 	toDeleteID = readInteger();
 
@@ -108,17 +108,69 @@ int deleteBuilding(building *allBuildings, int numBuildings) {
 		if (toDeleteID == (allBuildings + i)->id) {
 			(allBuildings + i)->toDelete = true;
 			found = true;
+
+			showBuildingData(allBuildings + i);
 		}
 	}
 
 	if (found) {
-		rewriteBuildingsToFile(allBuildings, numBuildings);
-		setGreenColor();
-		printf("\nImmobile eliminato!\n");
+		setYellowColor();
+		printf("\nSei sicuro di voler cancellare l'immobile selezionato? (s/n): ");
 		resetColor();
+		if (askConfirm()) {
+			rewriteBuildingsToFile(allBuildings, numBuildings);
+			setRedColor();
+			printf("\nImmobile eliminato!\n");
+			resetColor();
+			pause();
+		}
 	} else {
 		setRedColor();
 		printf("\nNessun immobile trovato con l'ID inserito.\n");
+		resetColor();
+	}
+	newLine();
+	return -1;
+}
+
+/**
+ * A building can be sold or rented to a specific client.
+ * This function sets the soldOn attribute in order to determine if the contract has been completed.
+ * 
+ * @param allBuildings Array of structs of all buildings registered.
+ * @param numBuildings Number of buildings registered.
+ * @return -1 for going back to the menu
+ */
+int sellBuilding(building *allBuildings, int numBuildings) {
+	int buildingID = 0;
+	char soldOnString[MAX_STRING_SIZE] = "";
+	bool found = false;
+
+	clearScr();
+	printSectionName("Vendita/affitto immobile", false);
+
+	printf("\nInserisci identiticativo immobile: ");
+	buildingID = readInteger();
+
+	for (int i = 0; i < numBuildings; i++) {
+		if (buildingID == (allBuildings + i)->id && (allBuildings + i)->soldOn == 0) {
+
+			showBuildingData(allBuildings + i);
+
+			printf("\nInserisci la data di vendita/inizio affitto (gg/mm/yyyy): ");
+			readString(soldOnString, false, false);
+			(allBuildings + i)->soldOn = parseDate(soldOnString);
+
+			found = true;
+		}
+	}
+
+	if (found) {
+		// Update the file only if needed
+		rewriteBuildingsToFile(allBuildings, numBuildings);
+	} else {
+		setRedColor();
+		printf("\nNessun immobile trovato con l'ID inserito\noppure risulta gia' venduto.\n");
 		resetColor();
 	}
 	newLine();

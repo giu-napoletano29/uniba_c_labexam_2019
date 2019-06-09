@@ -193,12 +193,12 @@ bool checkDuplicateClients(client *cl, int rows) {
 				setCyanColor();
 				printf("\n--- CLIENTE 1 ---\n");
 				resetColor();
-				showClientData(cl + i);
+				showClientData(cl + i, false);
 
 				setCyanColor();
 				printf("\n--- CLIENTE 2 ---\n");
 				resetColor();
-				showClientData(cl + j);
+				showClientData(cl + j, false);
 
 				do {
 					if (error) {

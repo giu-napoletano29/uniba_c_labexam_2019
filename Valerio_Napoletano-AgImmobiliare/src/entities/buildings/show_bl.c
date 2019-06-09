@@ -102,6 +102,7 @@ void printContractChoices() {
  */
 void showBuildingData(building *bl) {
 	setCyanColor();
+	printf("\n-- IMMOBILE ID %d --\n", bl->id);
 	printf("Tipo contratto: ");
 	setYellowColor();
 	showContractType(bl->ctrType);
@@ -116,7 +117,7 @@ void showBuildingData(building *bl) {
 	printf("Citta': ");
 	resetColor();
 	printf("%s (%s)\n", bl->city, bl->province);
-	
+
 	setCyanColor();
 	printf("Data di registrazione: ");
 	resetColor();
@@ -176,9 +177,6 @@ int showAllBuildings(building *bl, int numBuildings) {
 
 	if (numBuildings != 0) {
 		for (i = 0; i < numBuildings; i++) {
-			setCyanColor();
-			printf("\n-- IMMOBILE ID %d --\n", (bl + i)->id);
-			resetColor();
 			showBuildingData(bl + i);
 		}
 		newLine();

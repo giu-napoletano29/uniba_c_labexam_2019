@@ -65,29 +65,6 @@ int countFileRows(char *name) {
 	return rowsNum;
 }
 
-/**
- * @brief Parse date from a string formatted in day/month/year.
- *
- * @param string Date string to parse
- * @return time_t value (encoded in UNIX Epoch time)
- */
-time_t parseDate(char string[MAX_STRING_SIZE]) {
-	// Temp "tm" struct required for parsing the date properly from the file
-	struct tm tempDate = { 0 };
-
-	sscanf(string, "%d/%d/%d", &tempDate.tm_mday, &tempDate.tm_mon, &tempDate.tm_year);
-
-	/**
-	 * tm_mon is defined as a range between 0 to 11.
-	 * tm_year starts from 1900.
-	 *
-	 * @see http://www.cplusplus.com/reference/ctime/tm/
-	 */
-	tempDate.tm_mon -= 1;
-	tempDate.tm_year -= 1900;
-
-	return mktime(&tempDate);
-}
 
 /**
  * @brief Save formatted date in day/month/year to file.

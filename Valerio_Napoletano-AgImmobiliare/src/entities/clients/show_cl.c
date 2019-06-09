@@ -48,9 +48,11 @@ void showClientType(int type) {
  * @brief Print every field available in a client struct.
  *
  * @param cl client type struct
+ * @param checkExpiration If true this function will also call checkIfUserExpired() 
  */
-void showClientData(client *cl) {
+void showClientData(client *cl, bool checkExpiration) {
 	setCyanColor();
+	printf("\n-- CLIENTE --\n");
 	printf("Codice fiscale: ");
 	resetColor();
 	printf("%s \n", cl->id);
@@ -88,9 +90,11 @@ void showClientData(client *cl) {
 	resetColor();
 	printFormattedDate(cl->regDate);
 
-	if (checkIfUserExpired(cl->regDate, cl->id)) {
-		// Set toDelete flag
-		cl->toDelete = true;
+	if (checkExpiration) {
+		if (checkIfUserExpired(cl->regDate, cl->id)) {
+			// Set toDelete flag
+			cl->toDelete = true;
+		}
 	}
 }
 
@@ -117,10 +121,7 @@ int showAllClients(client *allClients, int numClients) {
 
 	if (numClients != 0) {
 		for (i = 0; i < numClients; i++) {
-			setCyanColor();
-			printf("\n-- CLIENTE --\n");
-			resetColor();
-			showClientData(allClients + i);
+			showClientData((allClients + i), true);
 
 			// Check if some clients are ready for deletion.
 			if ((allClients + i)->toDelete) {

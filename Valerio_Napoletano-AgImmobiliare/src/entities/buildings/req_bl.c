@@ -182,7 +182,7 @@ void reqContractType(building *bl) {
  * @param bl "building" type struct
  */
 void reqBuildingSold(building *bl) {
-	char soldOnString[MAX_STRING_SIZE];
+	char soldOnString[MAX_STRING_SIZE] = "";
 
 	clearScr();
 	

@@ -16,14 +16,15 @@ bool isChar(char *str);
 
 void printFormattedDate(time_t epochTime);
 void printSectionName(char *string, bool isHome);
+time_t parseDate(char string[MAX_STRING_SIZE]);
+
 void convertToUpperCase(char *s);
+bool strCompare(char *from, char *to);
+bool askConfirm();
 
 int readString(char *value, bool onlyAlpha, bool onlyNumbers);
 int readInteger();
 double readDouble();
-
-bool strCompare(char *from, char *to);
-bool askConfirm();
 
 void resetColor();
 void setRedColor();
