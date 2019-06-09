@@ -1,0 +1,5 @@
+#include "resources.h"
+
+// Icon made by Smashicons (https://www.flaticon.com/authors/smashicons)
+// for Flaticon.com
+AppIcon ICON "../src/icon.ico"
