@@ -87,17 +87,9 @@ int resultsAgency(building *bl, int numBuildings) {
 
 			printf("\nVuoi visualizzare la lista degli immobili venduti? (s/n): ");
 			if (askConfirm()) {
-				newLine();
-
 				for (int i = 0; i < numBuildings; i++) {
 					if ((bl + i)->soldOn >= startDateInterval && (bl + i)->soldOn <= endDateInterval) {
-						setCyanColor();
-						printf("--- IMMOBILE %d ---", (bl + i)->id);
-						resetColor();
-
-						newLine();
 						showBuildingData(bl + i);
-						newLine();
 						numBuildingsFound++;
 					}
 				}
@@ -118,6 +110,7 @@ int resultsAgency(building *bl, int numBuildings) {
 	} else {
 		dbEmptyError();
 	}
+	newLine();
 	pause();
 
 	return -1;
