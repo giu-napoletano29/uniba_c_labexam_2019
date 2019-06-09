@@ -81,9 +81,9 @@ void parsePotentialsFile(FILE *filePtr, potential *pr) {
 /**
  * @brief Initialize potential array of structs and parse professionals' potential file.
  *
- * @param allPotentials Array of structs (potential datatype) where data will be stored.
+ * @param allPts Array of structs (potential datatype) where data will be stored.
  */
-void loadPotentialsFile(potential *allPotentials) {
+void loadPotentialsFile(potential *allPts) {
 	FILE *filePtr;
 
 	filePtr = fopen("pros_potential.dat", "a+");
@@ -91,7 +91,7 @@ void loadPotentialsFile(potential *allPotentials) {
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
 
-		parsePotentialsFile(filePtr, allPotentials);
+		parsePotentialsFile(filePtr, allPts);
 	}
 
 	fclose(filePtr);

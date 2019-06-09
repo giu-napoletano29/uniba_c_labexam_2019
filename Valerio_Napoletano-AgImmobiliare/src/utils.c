@@ -195,7 +195,7 @@ int readInteger() {
 		if (anyChar(buffer)) {
 			error = true;
 			setYellowColor();
-			puts("\nInserisci un numero corretto e premi Invio: ");
+			printf("\nInserisci un numero corretto e premi Invio: ");
 			resetColor();
 		} else {
 			/** If no errors are found, convert to integer. */

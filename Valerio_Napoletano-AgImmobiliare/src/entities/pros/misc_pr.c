@@ -67,7 +67,7 @@ void saveLocalDatePro(professional *pr) {
  * @brief Append a professional to its file.
  * Initializes a "professional" struct and calls the "req" functions for filling the latter.
  *
- * allProfessionals and num_pros parameters are needed
+ * allPros and num_pros parameters are needed
  * for calling sortPros() and rewriteProsToFile()
  *
  * @param allPros Array of structs (professional type)

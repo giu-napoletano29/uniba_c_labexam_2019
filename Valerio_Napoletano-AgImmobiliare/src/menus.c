@@ -98,7 +98,7 @@ int clientsMenu() {
 }
 
 /**
- * @brief Initialize the main allProfessionals data structure and show the "professionals" menu.
+ * @brief Initialize the main allPros data structure and show the "professionals" menu.
  * @return -1 for going back to the main menu.
  */
 int professMenu() {
@@ -106,23 +106,23 @@ int professMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "professional" type */
-	int professionalsNum = countFileRows("professionals");
-	professional allProfessionals[professionalsNum];
-	initProsArray(allProfessionals, professionalsNum);
+	int prosNum = countFileRows("professionals");
+	professional allPros[prosNum];
+	initProsArray(allPros, prosNum);
 
 	/** - Declare and initialize the array of structs, "potentials" type */
 	int potsNum = countFileRows("pros_potential");
-	potential allPotentials[potsNum];
-	initPotentialsArray(allPotentials, potsNum);
+	potential allPts[potsNum];
+	initPotentialsArray(allPts, potsNum);
 
 	/** - Load pros file and stores the parsed data in the memory. */
-	loadProsFile(allProfessionals);
-	loadPotentialsFile(allPotentials);
+	loadProsFile(allPros);
+	loadPotentialsFile(allPts);
 
 	/**
 	 - Check if there's any client with duplicated IDs
 	 If so asks the user to change it. */
-	checkDuplicatePros(allProfessionals, professionalsNum);
+	checkDuplicatePros(allPros, allPts, prosNum);
 
 	do {
 		clearScr();
@@ -149,14 +149,14 @@ int professMenu() {
 
 		switch (choice) {
 			case 1:
-				choice = showAllPros(allProfessionals, allPotentials, professionalsNum);
+				choice = showAllPros(allPros, allPts, prosNum);
 				break;
 			case 2:
 				// Append a new professional to the file.
-				choice = addPro(allProfessionals, allPotentials, professionalsNum);
+				choice = addPro(allPros, allPts, prosNum);
 				break;
 			case 3:
-				choice = deletePro(allProfessionals, allPotentials, professionalsNum);
+				choice = deletePro(allPros, allPts, prosNum);
 				break;
 			case 4:
 				// This is used as a flag for the "go back" choice
@@ -290,13 +290,17 @@ void mainMenu() {
 			case 3:
 				choice = buildingsMenu();
 				break;
+			// choice = -1 represent the "go back to main menu" value from other functions
 			case -1:
+				error = false;
+				break;
+			// choice = 0 represent the initialized value from this function
+			case 0:
 				error = false;
 				break;
 			default:
 				error = true;
 				break;
-
 		}
-	} while (error == true || choice == -1);
+	} while (error == true || choice == 0 || choice == -1);
 }
