@@ -43,6 +43,7 @@ void reqBuildingStreet(building *bl) {
 	//TODO: Only checks are both false for reading spaces
 	printf("\nVia/Piazza/Viale: ");
 	readString(bl->street, false, false);
+	convertToUpperCase(bl->street);
 
 	printf("\nNumero civico: ");
 	bl->civic = readInteger();
@@ -57,6 +58,7 @@ void reqBuildingStreet(building *bl) {
 void reqBuildingCity(building *bl) {
 	printf("Citta': ");
 	readString(bl->city, false, false);
+	convertToUpperCase(bl->city);
 	clearScr();
 }
 
@@ -80,6 +82,8 @@ void reqBuildingProvince(building *bl) {
 			error = false;
 		}
 	} while (error == true);
+	
+	convertToUpperCase(bl->province);
 	clearScr();
 }
 
@@ -104,6 +108,7 @@ void reqBuildingOwner(building *bl) {
 	printf("Nome e cognome proprietario: ");
 	//TODO: Only checks are both false for reading spaces
 	readString(bl->owner, false, false);
+	convertToUpperCase(bl->owner);
 	clearScr();
 }
 

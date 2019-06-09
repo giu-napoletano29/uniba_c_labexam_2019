@@ -50,6 +50,7 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 					break;
 				case 1:
 					strcpy((bl + builNum)->street, token);
+					convertToUpperCase((bl + builNum)->street);
 					break;
 				case 2:
 					(bl + builNum)->civic = atoi(token);

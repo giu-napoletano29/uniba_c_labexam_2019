@@ -11,6 +11,7 @@
 #include "files_pr.h"
 #include "files_pts.h"
 #include "req_pr.h"
+#include "show_pr.h"
 
 #include "../../datatypes.h"
 #include "../../utils.h"

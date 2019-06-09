@@ -171,11 +171,12 @@ void rewriteProsToFile(professional *allPros, int rows) {
  * @brief Check for duplicates in the file.
  * If so ask the user to change one of the IDs.
  *
- * @param allPros Professional array of structs where the data is stored
- * @param rows How many professionals are registered
+ * @param allPros Array of structs where all professionals are stored
+ * @param allPots Array of structs where all professionals' potentials are stored
+ * @param rows How many professionals/potentials are registered
  * @return -1 if duplicates are found.
  */
-int checkDuplicatePros(professional *allPros, int rows) {
+int checkDuplicatePros(professional *allPros, potential *allPts, int rows) {
 	bool result = false;
 	bool error = false;
 	short int choice = 0;
@@ -191,12 +192,12 @@ int checkDuplicatePros(professional *allPros, int rows) {
 				setCyanColor();
 				printf("\n--- PROFESSIONISTA 1 ---\n");
 				resetColor();
-				showProData(allPros + i);
+				showProData(allPros + i, allPts, rows);
 
 				setCyanColor();
 				printf("\n--- PROFESSIONISTA 2 ---\n");
 				resetColor();
-				showProData(allPros + j);
+				showProData((allPros + j), allPts, rows);
 
 				do {
 					if (error) {
