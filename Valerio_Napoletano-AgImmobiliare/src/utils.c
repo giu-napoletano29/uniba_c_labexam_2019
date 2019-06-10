@@ -155,12 +155,12 @@ int readString(char *value, bool onlyAlpha, bool onlyNumbers) {
 		if (onlyAlpha && isOnlyAlpha(inputVal)) {
 			error = true;
 			setYellowColor();
-			puts("\nValore errato.\nInserisci una stringa corretta senza spazi e premi Invio: ");
+			printf("\nValore errato.\nInserisci una stringa corretta senza spazi: ");
 			resetColor();
 		} else if (onlyNumbers && anyChar(inputVal)) {
 			error = true;
 			setYellowColor();
-			puts("\nValore errato.\nInserisci solo cifre senza spazi e premi Invio: ");
+			printf("\nValore errato.\nInserisci solo cifre senza spazi: ");
 			resetColor();
 		} else {
 			error = false;

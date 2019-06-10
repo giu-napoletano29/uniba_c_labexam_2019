@@ -82,7 +82,7 @@ void reqBuildingProvince(building *bl) {
 			error = false;
 		}
 	} while (error == true);
-	
+
 	convertToUpperCase(bl->province);
 	clearScr();
 }
@@ -177,7 +177,7 @@ void reqContractType(building *bl) {
 			error = true;
 		}
 	} while (bl->ctrType < 1 || bl->ctrType > 2);
-	
+
 	clearScr();
 }
 
@@ -190,15 +190,20 @@ void reqBuildingSold(building *bl) {
 	char soldOnString[MAX_STRING_SIZE] = "";
 
 	clearScr();
-	
+
 	printf("L'immobile e' stato venduto/dato in affitto? (s/n): ");
+	
 	if (askConfirm()) {
+		newLine();
+		// Workaround for avoiding askConfirm() conflict with readString
+		fflush(stdin);
+		
 		printf("Quando? Inserisci una data (gg/mm/yyyy): ");
 		readString(soldOnString, false, false);
 		bl->soldOn = parseDate(soldOnString);
 	} else {
 		bl->soldOn = 0;
 	}
-
+	
 	clearScr();
 }
