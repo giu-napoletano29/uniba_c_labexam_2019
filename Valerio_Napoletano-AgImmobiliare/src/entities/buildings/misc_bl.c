@@ -48,6 +48,28 @@ void saveBuildingLocalDate(building *bl) {
 	bl->regDate = time(&timeRightNow);
 }
 
+void checkDuplicateIDbl(building *bl, building *allBuildings, int numBuildings) {
+	bool error = false;
+	do {
+		if (error) {
+			setYellowColor();
+			puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
+			resetColor();
+		}
+		genBuildingID(bl);
+
+		for (int i = 0; i < numBuildings; i++) {
+			if (bl->id == (allBuildings + i)->id) {
+				error = true;
+				i = numBuildings;
+			} else {
+				error = false;
+			}
+		}
+
+	} while (error == true);
+}
+
 /**
  * @brief Append a building to the buildings file.
  * Initializes a client struct and calls the "req" functions for filling the latter.
@@ -60,7 +82,7 @@ int addBuilding(building *allBuildings, int numBuildings) {
 	clearScr();
 	printSectionName("Aggiunta immobile", false);
 
-	checkDuplicateIDcl(&bl, allBuildings, numBuildings);
+	checkDuplicateIDbl(&bl, allBuildings, numBuildings);
 
 	reqContractType(&bl);
 
@@ -85,28 +107,6 @@ int addBuilding(building *allBuildings, int numBuildings) {
 	appendBuildingToFile(&bl);
 
 	return -1;
-}
-
-void checkDuplicateIDbl(building *bl, building *allBuildings, int numBuildings) {
-	bool error = false;
-	do {
-		if (error) {
-			setYellowColor();
-			puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
-			resetColor();
-		}
-		genBuildingID(bl);
-
-		for (int i = 0; i < numBuildings; i++) {
-			if (bl->id == (allBuildings + i)->id) {
-				error = true;
-				i = numBuildings;
-			} else {
-				error = false;
-			}
-		}
-
-	} while (error == true);
 }
 
 /**

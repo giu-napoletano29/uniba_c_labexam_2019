@@ -63,6 +63,28 @@ void saveLocalDatePro(professional *pr) {
 	pr->regDate = time(&timeRightNow);
 }
 
+void checkDuplicateIDpr(professional *pr, professional *allPros, int numRecords) {
+	bool error = false;
+	do {
+		if (error) {
+			setYellowColor();
+			puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
+			resetColor();
+		}
+		reqProCF(pr);
+
+		for (int i = 0; i < numRecords; i++) {
+			if (strcmp(pr->id, (allPros + i)->id) == 0) {
+				error = true;
+				i = numRecords;
+			} else {
+				error = false;
+			}
+		}
+
+	} while (error == true);
+}
+
 /**
  * @brief Append a professional to its file.
  * Initializes a "professional" struct and calls the "req" functions for filling the latter.
@@ -123,28 +145,6 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 	rewriteProsToFile(newAllPros, newProsNum);
 
 	return -1;
-}
-
-void checkDuplicateIDpr(professional *pr, professional *allPros, int numRecords) {
-	bool error = false;
-	do {
-		if (error) {
-			setYellowColor();
-			puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
-			resetColor();
-		}
-		reqProCF(pr);
-
-		for (int i = 0; i < numRecords; i++) {
-			if (strcmp(pr->id, (allPros + i)->id) == 0) {
-				error = true;
-				i = numRecords;
-			} else {
-				error = false;
-			}
-		}
-
-	} while (error == true);
 }
 
 /**
