@@ -21,7 +21,7 @@
  * @param rows Numbers of records in the "pr" array of structs.
  */
 void sortPros(professional *pr, int rows) {
-	professional cmp = { "", "", "", "", "", "", 0, 0, false};
+	professional cmp = { "", "", "", "", "", "", 0, 0, false };
 	int indexMin = 0;
 
 	for (int j = 0; j < rows - 1; j++) {
@@ -72,7 +72,7 @@ void sortPros(professional *pr, int rows) {
  * @param rows Numbers of records in the "cl" array of structs.
  */
 void sortClients(client *cl, int rows) {
-	client cmp = { "", "", "", single, "", 0, 0, flat, false};
+	client cmp = { "", "", "", single, "", 0, 0, flat, false };
 	int indexMin = 0;
 
 	for (int j = 0; j < rows - 1; j++) {
@@ -145,6 +145,10 @@ void sortBuildings(building *bl, int rows) {
 		(bl + j)->builType = (bl + indexMin)->builType;
 		(bl + indexMin)->builType = cmp.builType;
 
+		cmp.ctrType = (bl + j)->ctrType;
+		(bl + j)->ctrType = (bl + indexMin)->ctrType;
+		(bl + indexMin)->ctrType = cmp.ctrType;
+
 		cmp.price = (bl + j)->price;
 		(bl + j)->price = (bl + indexMin)->price;
 		(bl + indexMin)->price = cmp.price;
@@ -176,7 +180,7 @@ void sortBuildings(building *bl, int rows) {
 		strcpy(cmp.street, (bl + j)->street);
 		strcpy((bl + j)->street, (bl + indexMin)->street);
 		strcpy((bl + indexMin)->street, cmp.street);
-      
+
 		cmp.soldOn = (bl + j)->soldOn;
 		(bl + j)->soldOn = (bl + indexMin)->soldOn;
 		(bl + indexMin)->soldOn = cmp.soldOn;
