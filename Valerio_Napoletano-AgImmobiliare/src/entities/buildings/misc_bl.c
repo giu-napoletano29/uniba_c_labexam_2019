@@ -88,6 +88,74 @@ int addBuilding() {
 }
 
 /**
+ * Edit a building identified by his ID inputted by the user.
+ *
+ * @param allBuildings Array of structs of all buildings registered.
+ * @param numBuildings Number of buildings registered.
+ * @return -1 for going back to the menu
+ */
+int editBuilding(building *allBuildings, int numBuildings) {
+	unsigned int toEditID = 0;
+	unsigned int buildingPos = 0;
+	bool found = false;
+
+	clearScr();
+	printSectionName("Modifica immobile", false);
+
+	printf("\nInserisci identiticativo immobile da modificare: ");
+	toEditID = readInteger();
+
+	for (int i = 0; i < numBuildings; i++) {
+		if (toEditID == (allBuildings + i)->id) {
+			buildingPos = i;
+			found = true;
+		}
+	}
+
+	if (found && (allBuildings + buildingPos)->soldOn != 0) {
+		/**
+		 * It does not make any sense to allow the editing of the address, city, province
+		 * because it would just be a completely different building.
+		 */ 		
+		
+		setCyanColor();
+		printf("\nTipo contratto attuale: ");
+		resetColor();
+		showContractType((allBuildings + buildingPos)->ctrType);
+		reqContractType(allBuildings + buildingPos);
+		
+		setCyanColor();
+		printf("\nPrezzo attuale: ");
+		resetColor();
+		printf("%0.2f\n", (allBuildings + buildingPos)->price);
+		newLine();
+		reqBuildingPrice(allBuildings + buildingPos);
+
+		setCyanColor();
+		printf("\nProprietario attuale: ");
+		resetColor();
+		printf("%s\n", (allBuildings + buildingPos)->owner);
+		newLine();
+		reqBuildingOwner(allBuildings + buildingPos);
+
+		setCyanColor();
+		printf("\nTel. proprietario attuale: ");
+		resetColor();
+		printf("%s\n", (allBuildings + buildingPos)->phone);
+		newLine();
+		reqBuildingPhone(allBuildings + buildingPos);
+
+		rewriteBuildingsToFile(allBuildings, numBuildings);
+	} else {
+		setRedColor();
+		printf("\nNessun immobile trovato con l'ID inserito\noppure risulta venduto.");
+		resetColor();
+		pause();
+	}
+	return -1;
+}
+
+/**
  * Delete a building identified by his ID inputted by the user.
  *
  * @param allBuildings Array of structs of all buildings registered.
@@ -122,7 +190,6 @@ int deleteBuilding(building *allBuildings, int numBuildings) {
 			setRedColor();
 			printf("\nImmobile eliminato!\n");
 			resetColor();
-			pause();
 		}
 	} else {
 		setRedColor();
@@ -130,6 +197,7 @@ int deleteBuilding(building *allBuildings, int numBuildings) {
 		resetColor();
 	}
 	newLine();
+	pause();
 	return -1;
 }
 

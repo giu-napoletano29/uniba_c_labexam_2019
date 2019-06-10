@@ -202,11 +202,12 @@ int buildingsMenu() {
 		puts("2. Cerca un immobile");
 		puts("------");
 		puts("3. Aggiungi un immobile");
-		puts("4. Elimina un immobile");
-		puts("5. Vendi/affitta un immobile");
+		puts("4. Modifica un immobile");
+		puts("5. Elimina un immobile");
+		puts("6. Vendi/affitta un immobile");
 		puts("------");
-		puts("6. Risultati di vendita agenzia");
-		puts("7. Torna indietro");
+		puts("7. Risultati di vendita agenzia");
+		puts("8. Torna indietro");
 		newLine();
 
 		if (error) {
@@ -230,15 +231,18 @@ int buildingsMenu() {
 				choice = addBuilding();
 				break;
 			case 4:
-				choice = deleteBuilding(allBuildings, buildingsNum);
+				choice = editBuilding(allBuildings, buildingsNum);
 				break;
 			case 5:
-				choice = sellBuilding(allBuildings, buildingsNum);
+				choice = deleteBuilding(allBuildings, buildingsNum);
 				break;
 			case 6:
-				choice = resultsAgency(allBuildings, buildingsNum);
+				choice = sellBuilding(allBuildings, buildingsNum);
 				break;
 			case 7:
+				choice = resultsAgency(allBuildings, buildingsNum);
+				break;
+			case 8:
 				// This is used as a flag for the "go back" choice
 				// It's not that likely that an user will manually insert -1 as a choice.
 				choice = -1;
@@ -290,11 +294,11 @@ void mainMenu() {
 			case 3:
 				choice = buildingsMenu();
 				break;
-			// choice = -1 represent the "go back to main menu" value from other functions
+				// choice = -1 represent the "go back to main menu" value from other functions
 			case -1:
 				error = false;
 				break;
-			// choice = 0 represent the initialized value from this function
+				// choice = 0 represent the initialized value from this function
 			case 0:
 				error = false;
 				break;

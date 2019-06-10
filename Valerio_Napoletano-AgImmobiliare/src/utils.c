@@ -441,7 +441,7 @@ bool askConfirm() {
 }
 
 /**
- * Print DB empty error to stdout
+ * @brief Print DB empty error to stdout
  */
 void dbEmptyError() {
 	setRedColor();
