@@ -59,7 +59,7 @@ int addClient(client *allClients, int numClients) {
 
 	reqType(&cl);
 
-	reqID(&cl);
+	checkDuplicateID(&cl, allClients, numClients);
 
 	reqCompanyName(&cl);
 
@@ -88,6 +88,28 @@ int addClient(client *allClients, int numClients) {
 	return -1;
 }
 
+void checkDuplicateID(client *cl, client *allClients, int numClients) {
+	bool error = false;
+	do {
+		if (error) {
+			setYellowColor();
+			puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
+			resetColor();
+		}
+		reqID(cl);
+
+		for (int i = 0; i < numClients; i++) {
+			if (strcmp(cl->id, (allClients + i)->id) == 0) {
+				error = true;
+				i = numClients;
+			} else {
+				error = false;
+			}
+		}
+
+	} while (error == true);
+}
+
 /**
  * Delete a client identified by his ID inputted by the user.
  *
@@ -109,7 +131,7 @@ int deleteClient(client *allClients, int numClients) {
 		if (strCompare(toDeleteID, (allClients + i)->id)) {
 			(allClients + i)->toDelete = true;
 			found = true;
-			
+
 			showClientData((allClients + i), false);
 		}
 	}
