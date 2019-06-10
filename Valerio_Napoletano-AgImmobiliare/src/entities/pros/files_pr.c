@@ -172,7 +172,7 @@ void rewriteProsToFile(professional *allPros, int rows) {
  * If so ask the user to change one of the IDs.
  *
  * @param allPros Array of structs where all professionals are stored
- * @param allPots Array of structs where all professionals' potentials are stored
+ * @param allPts Array of structs where all professionals' potentials are stored
  * @param rows How many professionals/potentials are registered
  * @return -1 if duplicates are found.
  */
