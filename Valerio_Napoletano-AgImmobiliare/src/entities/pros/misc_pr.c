@@ -84,7 +84,7 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 	printSectionName("Aggiunta professionista", false);
 	newLine();
 
-	reqProCF(&pr);
+	checkDuplicateIDpr(&pr, allPros, numRecords);
 
 	reqProName(&pr);
 
@@ -125,6 +125,28 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 	return -1;
 }
 
+void checkDuplicateIDpr(professional *pr, professional *allPros, int numRecords) {
+	bool error = false;
+	do {
+		if (error) {
+			setYellowColor();
+			puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
+			resetColor();
+		}
+		reqProCF(pr);
+
+		for (int i = 0; i < numRecords; i++) {
+			if (strcmp(pr->id, (allPros + i)->id) == 0) {
+				error = true;
+				i = numRecords;
+			} else {
+				error = false;
+			}
+		}
+
+	} while (error == true);
+}
+
 /**
  * Delete a professional and its potential identified by his ID inputted by the user.
  *
@@ -163,7 +185,7 @@ int deletePro(professional *allPros, potential *allPts, int numRecords) {
 			}
 		}
 	}
-	
+
 	// Show professional data before deletion confirmation (for user visual validation)
 	showProData((allPros + proIndex), (allPts + ptsIndex), numRecords);
 

@@ -59,7 +59,7 @@ int addClient(client *allClients, int numClients) {
 
 	reqType(&cl);
 
-	checkDuplicateID(&cl, allClients, numClients);
+	checkDuplicateIDcl(&cl, allClients, numClients);
 
 	reqCompanyName(&cl);
 
@@ -88,7 +88,7 @@ int addClient(client *allClients, int numClients) {
 	return -1;
 }
 
-void checkDuplicateID(client *cl, client *allClients, int numClients) {
+void checkDuplicateIDcl(client *cl, client *allClients, int numClients) {
 	bool error = false;
 	do {
 		if (error) {
