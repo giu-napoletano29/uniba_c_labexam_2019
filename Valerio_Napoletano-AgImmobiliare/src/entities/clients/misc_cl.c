@@ -59,7 +59,7 @@ int addClient(client *allClients, int numClients) {
 
 	reqType(&cl);
 
-	checkDuplicateIDcl(&cl, allClients, numClients);
+	checkDuplicateClientID(&cl, allClients, numClients);
 
 	reqCompanyName(&cl);
 
@@ -88,7 +88,14 @@ int addClient(client *allClients, int numClients) {
 	return -1;
 }
 
-void checkDuplicateIDcl(client *cl, client *allClients, int numClients) {
+/**
+ * @brief Request the client ID and check that it is not already registered.
+ * 
+ * @param cl Client struct that is being registered.
+ * @param allClients Array of structs where all clients are available.
+ * @param numClients Number of clients registered.
+ */
+void checkDuplicateClientID(client *cl, client *allClients, int numClients) {
 	bool error = false;
 	do {
 		if (error) {

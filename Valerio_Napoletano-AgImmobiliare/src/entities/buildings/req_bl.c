@@ -28,7 +28,6 @@ void genBuildingID(building *bl) {
 	int randNum = 0;
 	srand(time(NULL));
 
-	// Limit number to 9
 	randNum = rand();
 
 	bl->id = randNum;

@@ -63,7 +63,15 @@ void saveLocalDatePro(professional *pr) {
 	pr->regDate = time(&timeRightNow);
 }
 
-void checkDuplicateIDpr(professional *pr, professional *allPros, int numRecords) {
+
+/**
+ * @brief Request the professional ID and check that it is not already registered.
+ * 
+ * @param pr Professional struct that is being registered.
+ * @param allPros Array of structs where all pros are available.
+ * @param numRecords Number of pros registered.
+ */
+void checkDuplicateProID(professional *pr, professional *allPros, int numRecords) {
 	bool error = false;
 	do {
 		if (error) {
@@ -106,7 +114,7 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 	printSectionName("Aggiunta professionista", false);
 	newLine();
 
-	checkDuplicateIDpr(&pr, allPros, numRecords);
+	checkDuplicateProID(&pr, allPros, numRecords);
 
 	reqProName(&pr);
 

@@ -48,14 +48,16 @@ void saveBuildingLocalDate(building *bl) {
 	bl->regDate = time(&timeRightNow);
 }
 
-void checkDuplicateIDbl(building *bl, building *allBuildings, int numBuildings) {
+/** 
+ * @brief Calls genBuildingID(), checks if it's a duplicate and generates the ID again if required.
+ * 
+ * @param bl Buildings struct that is being registered.
+ * @param allBuildings Array of structs where all buildings are available.
+ * @param numBuildings Number of buildings registered.
+ */
+void checkDuplicateBuildingID(building *bl, building *allBuildings, int numBuildings) {
 	bool error = false;
 	do {
-		if (error) {
-			setYellowColor();
-			puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
-			resetColor();
-		}
 		genBuildingID(bl);
 
 		for (int i = 0; i < numBuildings; i++) {
@@ -82,7 +84,7 @@ int addBuilding(building *allBuildings, int numBuildings) {
 	clearScr();
 	printSectionName("Aggiunta immobile", false);
 
-	checkDuplicateIDbl(&bl, allBuildings, numBuildings);
+	checkDuplicateBuildingID(&bl, allBuildings, numBuildings);
 
 	reqContractType(&bl);
 
