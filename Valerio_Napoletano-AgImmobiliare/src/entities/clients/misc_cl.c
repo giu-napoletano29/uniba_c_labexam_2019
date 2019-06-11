@@ -59,7 +59,7 @@ int addClient(client *allClients, int numClients) {
 
 	reqType(&cl);
 
-	reqID(&cl);
+	checkDuplicateClientID(&cl, allClients, numClients);
 
 	reqCompanyName(&cl);
 
@@ -89,6 +89,35 @@ int addClient(client *allClients, int numClients) {
 }
 
 /**
+ * @brief Request the client ID and check that it is not already registered.
+ * 
+ * @param cl Client struct that is being registered.
+ * @param allClients Array of structs where all clients are available.
+ * @param numClients Number of clients registered.
+ */
+void checkDuplicateClientID(client *cl, client *allClients, int numClients) {
+	bool error = false;
+	do {
+		if (error) {
+			setYellowColor();
+			puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
+			resetColor();
+		}
+		reqID(cl);
+
+		for (int i = 0; i < numClients; i++) {
+			if (strcmp(cl->id, (allClients + i)->id) == 0) {
+				error = true;
+				i = numClients;
+			} else {
+				error = false;
+			}
+		}
+
+	} while (error == true);
+}
+
+/**
  * Delete a client identified by his ID inputted by the user.
  *
  * @param allClients Array of structs of all clients registered.
@@ -109,7 +138,7 @@ int deleteClient(client *allClients, int numClients) {
 		if (strCompare(toDeleteID, (allClients + i)->id)) {
 			(allClients + i)->toDelete = true;
 			found = true;
-			
+
 			showClientData((allClients + i), false);
 		}
 	}

@@ -63,6 +63,36 @@ void saveLocalDatePro(professional *pr) {
 	pr->regDate = time(&timeRightNow);
 }
 
+
+/**
+ * @brief Request the professional ID and check that it is not already registered.
+ * 
+ * @param pr Professional struct that is being registered.
+ * @param allPros Array of structs where all pros are available.
+ * @param numRecords Number of pros registered.
+ */
+void checkDuplicateProID(professional *pr, professional *allPros, int numRecords) {
+	bool error = false;
+	do {
+		if (error) {
+			setYellowColor();
+			puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
+			resetColor();
+		}
+		reqProCF(pr);
+
+		for (int i = 0; i < numRecords; i++) {
+			if (strcmp(pr->id, (allPros + i)->id) == 0) {
+				error = true;
+				i = numRecords;
+			} else {
+				error = false;
+			}
+		}
+
+	} while (error == true);
+}
+
 /**
  * @brief Append a professional to its file.
  * Initializes a "professional" struct and calls the "req" functions for filling the latter.
@@ -84,7 +114,7 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 	printSectionName("Aggiunta professionista", false);
 	newLine();
 
-	reqProCF(&pr);
+	checkDuplicateProID(&pr, allPros, numRecords);
 
 	reqProName(&pr);
 
@@ -163,7 +193,7 @@ int deletePro(professional *allPros, potential *allPts, int numRecords) {
 			}
 		}
 	}
-	
+
 	// Show professional data before deletion confirmation (for user visual validation)
 	showProData((allPros + proIndex), (allPts + ptsIndex), numRecords);
 

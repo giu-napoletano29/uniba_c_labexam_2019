@@ -8,9 +8,11 @@
 #define ENTITIES_BUILDINGS_MISC_BL_H_
 
 void initBuildingsArray(building *bl, int size);
-int addBuilding();
+int addBuilding(building *allBuildings, int numBuildings);
 int deleteBuilding(building *allBuildings, int numBuildings);
 int sellBuilding(building *allBuildings, int numBuildings);
 int editBuilding(building *allBuildings, int numBuildings);
+
+void checkDuplicateBuildingID(building *bl, building *allBuildings, int numBuildings);
 
 #endif /* ENTITIES_BUILDINGS_MISC_BL_H_ */

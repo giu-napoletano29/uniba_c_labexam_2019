@@ -228,7 +228,7 @@ int buildingsMenu() {
 				choice = searchBuilding(allBuildings, buildingsNum);
 				break;
 			case 3:
-				choice = addBuilding();
+				choice = addBuilding(allBuildings, buildingsNum);
 				break;
 			case 4:
 				choice = editBuilding(allBuildings, buildingsNum);

@@ -48,19 +48,43 @@ void saveBuildingLocalDate(building *bl) {
 	bl->regDate = time(&timeRightNow);
 }
 
+/** 
+ * @brief Calls genBuildingID(), checks if it's a duplicate and generates the ID again if required.
+ * 
+ * @param bl Buildings struct that is being registered.
+ * @param allBuildings Array of structs where all buildings are available.
+ * @param numBuildings Number of buildings registered.
+ */
+void checkDuplicateBuildingID(building *bl, building *allBuildings, int numBuildings) {
+	bool error = false;
+	do {
+		genBuildingID(bl);
+
+		for (int i = 0; i < numBuildings; i++) {
+			if (bl->id == (allBuildings + i)->id) {
+				error = true;
+				i = numBuildings;
+			} else {
+				error = false;
+			}
+		}
+
+	} while (error == true);
+}
+
 /**
  * @brief Append a building to the buildings file.
  * Initializes a client struct and calls the "req" functions for filling the latter.
  *
  * @return -1 for going back to the main menu.
  */
-int addBuilding() {
+int addBuilding(building *allBuildings, int numBuildings) {
 	building bl = { 0, "", 0, "", "", 0, 0, "", "", 1, 0 };
 
 	clearScr();
 	printSectionName("Aggiunta immobile", false);
 
-	genBuildingID(&bl);
+	checkDuplicateBuildingID(&bl, allBuildings, numBuildings);
 
 	reqContractType(&bl);
 
@@ -116,14 +140,14 @@ int editBuilding(building *allBuildings, int numBuildings) {
 		/**
 		 * It does not make any sense to allow the editing of the address, city, province
 		 * because it would just be a completely different building.
-		 */ 		
-		
+		 */
+
 		setCyanColor();
 		printf("\nTipo contratto attuale: ");
 		resetColor();
 		showContractType((allBuildings + buildingPos)->ctrType);
 		reqContractType(allBuildings + buildingPos);
-		
+
 		setCyanColor();
 		printf("\nPrezzo attuale: ");
 		resetColor();
@@ -204,7 +228,7 @@ int deleteBuilding(building *allBuildings, int numBuildings) {
 /**
  * A building can be sold or rented to a specific client.
  * This function sets the soldOn attribute in order to determine if the contract has been completed.
- * 
+ *
  * @param allBuildings Array of structs of all buildings registered.
  * @param numBuildings Number of buildings registered.
  * @return -1 for going back to the menu
