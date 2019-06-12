@@ -7,6 +7,7 @@
 
 #include "CUnit/Basic.h"
 
+#include "entities/clients/tests_cl.h"
 #include "entities/buildings/tests_bl.h"
 
 /**
@@ -21,12 +22,14 @@
 int startTests() {
 	CU_initialize_registry();
 	
-	//CU_pSuite pSuiteClients = CU_add_suite("Suite_Clients", initSuiteClients(), cleanSuiteClients());
+	CU_pSuite pSuiteClients = CU_add_suite("Suite_Clients", initSuiteClients, cleanSuiteClients);
 	CU_pSuite pSuiteBuildings = CU_add_suite("Suite_Buildings", initSuiteBuildings, cleanSuiteBuildings);
-	//CU_pSuite pSuitePros = CU_add_suite("Suite_Pros", initSuitePros(), cleanSuitePros());
+	//CU_pSuite pSuitePros = CU_add_suite("Suite_Pros", initSuitePros, cleanSuitePros;
 	
-	CU_add_test(pSuiteBuildings, "Test building file parsing", test_buildingsFileParse);
-	
+	CU_add_test(pSuiteClients, "Test clients file parsing", testClientsFileParse);
+
+	CU_add_test(pSuiteBuildings, "Test building file parsing", testBuildingsFileParse);
+
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 	CU_basic_run_tests();
 	

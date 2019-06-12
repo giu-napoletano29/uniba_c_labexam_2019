@@ -69,7 +69,7 @@ int addClient(client *allClients, int numClients) {
 
 	saveLocalDate(&cl);
 
-	appendClientToFile(&cl);
+	appendClientToFile(&cl, CLIENTS_FNAME);
 
 	/** Sort clients in the memory */
 	sortClients(allClients, numClients);
@@ -80,7 +80,7 @@ int addClient(client *allClients, int numClients) {
 	initClientsArray(newAllClients, newClientsNum);
 
 	/** - Load client file and stores the parsed data in the memory. */
-	loadClientFile(newAllClients);
+	loadClientFile(newAllClients, CLIENTS_FNAME);
 
 	/** Rewrite ordered array of structs from memory to the clients file */
 	rewriteClientsToFile(newAllClients, newClientsNum);

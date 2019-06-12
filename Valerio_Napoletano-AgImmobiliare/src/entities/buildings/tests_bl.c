@@ -1,5 +1,5 @@
 /**
- * @file tests.c
+ * @file tests_bl.c
  * @author Saverio Valerio
  * @date 12 June 2019
  * @brief Functions that made up the "buildings" CUnit test suite
@@ -15,7 +15,7 @@
 #include "files_bl.h"
 
 // Test file name
-char testFile[MAX_STRING_SIZE] = "building_test.dat";
+char buildingsTestFile[MAX_STRING_SIZE] = "building_test.dat";
 
 /**
  * @brief Initialize the "buildings" test suite creating a temp file with mock building data.
@@ -32,7 +32,7 @@ int initSuiteBuildings() {
 	initBuildingsArray(&testBuilding, 1);
 
 	// Create a test file
-	filePtr = fopen(testFile, "w+");
+	filePtr = fopen(buildingsTestFile, "w+");
 
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
@@ -56,7 +56,7 @@ int initSuiteBuildings() {
 		result = 0;
 
 		// Print data to test file
-		appendBuildingToFile(&testBuilding, testFile);
+		appendBuildingToFile(&testBuilding, buildingsTestFile);
 	}
 	fclose(filePtr);
 	return result;
@@ -68,7 +68,7 @@ int initSuiteBuildings() {
  */
 int cleanSuiteBuildings() {
 	// Delete test file
-	remove(testFile);
+	remove(buildingsTestFile);
 
 	return 0;
 }
@@ -80,7 +80,7 @@ int cleanSuiteBuildings() {
  * Converting regDate to a string is necessary because CUnit does not seems to work well with
  * "time_t" data type.
  */
-void test_buildingsFileParse() {
+void testBuildingsFileParse() {
 	struct tm *clDate = { 0 };
 	char dateBuffer[11] = "";
 	
@@ -88,7 +88,7 @@ void test_buildingsFileParse() {
 	initBuildingsArray(&testBuilding, 1);
 
 	// Load and parse the temp buildings file
-	CU_ASSERT(loadBuildingsFile(&testBuilding, testFile));
+	CU_ASSERT(loadBuildingsFile(&testBuilding, buildingsTestFile));
 
 	// Check that fields has been loaded correctly in the struct
 	CU_ASSERT_EQUAL(testBuilding.id, 93781);

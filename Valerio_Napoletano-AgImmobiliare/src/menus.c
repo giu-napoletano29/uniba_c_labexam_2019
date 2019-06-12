@@ -42,7 +42,7 @@ int clientsMenu() {
 	initClientsArray(allClients, clientsNum);
 
 	/** - Load client file and stores the parsed data in the memory. */
-	loadClientFile(allClients);
+	loadClientFile(allClients, CLIENTS_FNAME);
 
 	/**
 	 - Check if there's any client with duplicated IDs

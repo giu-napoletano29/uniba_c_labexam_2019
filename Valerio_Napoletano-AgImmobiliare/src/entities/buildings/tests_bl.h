@@ -10,6 +10,6 @@
 
 int initSuiteBuildings();
 int cleanSuiteBuildings();
-void test_buildingsFileParse();
+void testBuildingsFileParse();
 
 #endif /* ENTITIES_BUILDINGS_TESTS_BL_H_ */

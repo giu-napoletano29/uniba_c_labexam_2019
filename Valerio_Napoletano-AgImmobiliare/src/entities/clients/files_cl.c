@@ -132,11 +132,12 @@ int rewriteClientsToFile(client *cl, int rows) {
  * @brief Append a new client to the "clients.dat" file
  *
  * @param cl Client struct where the data is stored
+ * @param filename Filename where data should be written
  * @return -1 go back to main menu
  */
-int appendClientToFile(client *cl) {
+int appendClientToFile(client *cl, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen("clients.dat", "a+");
+	filePtr = fopen(filename, "a+");
 	if (checkFile(filePtr)) {
 		// Save to file only if the client is not marked for deletion
 		if (!cl->toDelete) {
@@ -157,11 +158,12 @@ int appendClientToFile(client *cl) {
  * @brief Load the "clients.dat" file and run the parsing function
  *
  * @param cl Array of structs (client data type) where the data will be saved.
+ * @param filename Filename where data should be loaded from.
  * @return -1 going back to the menu
  */
-int loadClientFile(client *cl) {
+int loadClientFile(client *cl, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen("clients.dat", "a+");
+	filePtr = fopen(filename, "a+");
 	if (checkFile(filePtr)) {
 		parseClientFile(filePtr, cl);
 		fclose(filePtr);
