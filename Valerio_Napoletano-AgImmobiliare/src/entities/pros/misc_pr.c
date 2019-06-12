@@ -63,7 +63,6 @@ void saveLocalDatePro(professional *pr) {
 	pr->regDate = time(&timeRightNow);
 }
 
-
 /**
  * @brief Request the professional ID and check that it is not already registered.
  * 
@@ -132,9 +131,9 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 
 	saveLocalDatePro(&pr);
 
-	appendProToFile(&pr);
+	appendProToFile(&pr, PROS_FNAME);
 
-	appendPtsToFile(&pt);
+	appendPtsToFile(&pt, PTS_FNAME);
 
 	// --- PROFESSIONALS ---
 
@@ -147,11 +146,31 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 	initProsArray(newAllPros, newProsNum);
 
 	/** - Reload pros file and stores the parsed data in the memory. */
-	loadProsFile(newAllPros);
+	loadProsFile(newAllPros, PROS_FNAME);
 
 	/** - Write ordered array of structs from memory to the pros file */
-	rewriteProsToFile(newAllPros, newProsNum);
+	rewriteProsToFile(newAllPros, newProsNum, PROS_FNAME);
 
+	return -1;
+}
+
+int deletePro(professional *allPros, potential *allPts, int numRecords, char *toDeleteID, char *prosFile,
+		char *ptsFile) {
+
+	for (int i = 0; i < numRecords; i++) {
+		if (strCompare(toDeleteID, (allPros + i)->id)) {
+			(allPros + i)->toDelete = true;
+		}
+	}
+
+	for (int i = 0; i < numRecords; i++) {
+		if (strCompare(toDeleteID, (allPts + i)->id)) {
+			(allPts + i)->toDelete = true;
+		}
+	}
+	rewriteProsToFile(allPros, numRecords, prosFile);
+	rewritePtsToFile(allPts, numRecords, ptsFile);
+	
 	return -1;
 }
 
@@ -163,7 +182,7 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
  * @param numRecords Number of professionals/potentials registered.
  * @return -1 for going back to the menu
  */
-int deletePro(professional *allPros, potential *allPts, int numRecords) {
+int requestProDeletion(professional *allPros, potential *allPts, int numRecords) {
 	bool found = false;
 	int proIndex = 0;
 	int ptsIndex = 0;
@@ -176,20 +195,14 @@ int deletePro(professional *allPros, potential *allPts, int numRecords) {
 	readString(toDeleteID, false, false);
 
 	for (int i = 0; i < numRecords; i++) {
-		// Set the "toDelete" flag on true of the chosen professional
 		if (strCompare(toDeleteID, (allPros + i)->id)) {
 			found = true;
 			proIndex = i;
-
-			(allPros + i)->toDelete = true;
 		}
 
-		// Set the "toDelete" flag on true of the professional "potential"
 		for (int i = 0; i < numRecords; i++) {
 			if (strCompare(toDeleteID, (allPts + i)->id)) {
 				ptsIndex = i;
-
-				(allPts + i)->toDelete = true;
 			}
 		}
 	}
@@ -203,9 +216,7 @@ int deletePro(professional *allPros, potential *allPts, int numRecords) {
 		resetColor();
 
 		if (askConfirm()) {
-			rewriteProsToFile(allPros, numRecords);
-			rewritePtsToFile(allPts, numRecords);
-
+			deletePro(allPros, allPts, numRecords, toDeleteID, PROS_FNAME, PTS_FNAME);
 			setGreenColor();
 			printf("\nProfessionista eliminato!\n");
 			resetColor();

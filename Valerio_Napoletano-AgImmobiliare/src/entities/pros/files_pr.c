@@ -19,7 +19,7 @@
 #include "req_pr.h"
 
 /**
- * @brief Parse "professional" file (professionals.dat)
+ * @brief Parse "professional" file
  *
  * @param filePtr Pointer to file initalized from fopen()
  * @param allPros Array of structs (professionals data type)
@@ -93,12 +93,13 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
  * @brief Load professional file to memory.
  *
  * @param allPros Array of structs (professional datatype) where data will be stored.
+ * @param filename Name of the file from which retrieving the data.
  * @return -1 for going back to the main menu.
  */
-int loadProsFile(professional *allPros) {
+int loadProsFile(professional *allPros, char *filename) {
 	FILE *prosFilePtr;
 
-	prosFilePtr = fopen("professionals.dat", "a+");
+	prosFilePtr = fopen(filename, "a+");
 
 	if (checkFile(prosFilePtr)) {
 		rewind(prosFilePtr);
@@ -111,14 +112,15 @@ int loadProsFile(professional *allPros) {
 }
 
 /**
- * @brief Append a new professional to the "professionals.dat" file
+ * @brief Append a new professional to the professionals file
  *
  * @param pr Professional struct where the data is stored
+ * @param filename Filename where data should be written
  * @return -1 go back to main menu
  */
-int appendProToFile(professional *pr) {
+int appendProToFile(professional *pr, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen("professionals.dat", "a+");
+	filePtr = fopen(filename, "a+");
 
 	if (checkFile(filePtr)) {
 		// Save to file only if the client is not marked for deletion
@@ -143,10 +145,11 @@ int appendProToFile(professional *pr) {
  *
  * @param allPros Professional array of structs where the data is stored
  * @param rows How many professionals are registered
+ * @param filename Filename where data is storeds
  */
-void rewriteProsToFile(professional *allPros, int rows) {
+void rewriteProsToFile(professional *allPros, int rows, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen("professionals.dat", "w+");
+	filePtr = fopen(filename, "w+");
 
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
@@ -232,7 +235,7 @@ int checkDuplicatePros(professional *allPros, potential *allPts, int rows) {
 	}
 
 	if (result) {
-		rewriteProsToFile(allPros, rows);
+		rewriteProsToFile(allPros, rows, PROS_FNAME);
 	}
 	return result;
 }

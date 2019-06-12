@@ -18,7 +18,7 @@
 #include "search_bl.h"
 
 /**
- * @brief Parse "buildings" file (buildings.dat)
+ * @brief Parse "buildings" file
  *
  * @param filePtr Pointer to file initalized from fopen()
  * @param bl Buildings array of structs for storing parsed data.
@@ -110,21 +110,25 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 }
 
 /**
- * @brief Load buildings.dat file to memory.
+ * @brief Load buildings file to memory.
  *
  * @param bl Array of structs (building datatype) where data will be stored.
+ * @param filename Name of the file from which retrieving the data.
  * @return -1 for going back to the main menu.
  */
-int loadBuildingsFile(building *bl) {
+int loadBuildingsFile(building *bl, char *filename) {
+	int result = 0;
+	
 	FILE *filePtr;
-	filePtr = fopen("buildings.dat", "a+");
+	filePtr = fopen(filename, "a+");
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
 		parseBuildingsFile(filePtr, bl);
+		result = 1;
 	}
 
 	fclose(filePtr);
-	return -1;
+	return result;
 }
 
 /**
@@ -133,11 +137,13 @@ int loadBuildingsFile(building *bl) {
  *
  * @param bl Building array of structs where the data is stored
  * @param rows How many buildings are registered
+ * @param filename Filename where data is stored
+ * 
  */
-int rewriteBuildingsToFile(building *bl, int rows) {
+int rewriteBuildingsToFile(building *bl, int rows, char *filename) {
 	FILE *filePtr;
 	//TODO: find a good solution to prevent data loss when file is opened in w+
-	filePtr = fopen("buildings.dat", "w+");
+	filePtr = fopen(filename, "w+");
 	checkFile(filePtr);
 
 	if (filePtr != NULL) {
@@ -236,7 +242,7 @@ int checkDuplicateBuildings(building *bl, int rows) {
 
 	if (result) {
 		// Write on file only if needed
-		rewriteBuildingsToFile(bl, rows);
+		rewriteBuildingsToFile(bl, rows, BUILDINGS_FNAME);
 	}
 
 	return result;
@@ -295,14 +301,15 @@ int searchBuilding(building *allBuildings, int numBuildings) {
 }
 
 /**
- * @brief Append a new building to the "buildings.dat" file
+ * @brief Append a new building to the chosen Filename
  *
+ * @param filename Filename where data should be written
  * @param bl Building struct where the data is stored
  * @return -1 go back to main menu
  */
-int appendBuildingToFile(building *bl) {
+int appendBuildingToFile(building *bl, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen("buildings.dat", "a+");
+	filePtr = fopen(filename, "a+");
 	if (checkFile(filePtr)) {
 		// Save to file only if the client is not marked for deletion
 		if (!bl->toDelete) {

@@ -12,7 +12,8 @@ int addClient(client *allClients, int numClients);
 void saveLocalDate(client *cl);
 bool checkIfUserExpired(time_t epochTime, char id[]);
 void initClientsArray(client *cl, int size);
-int deleteClient(client *allClients, int numClients);
+int requestClientDeletion(client *allClients, int numClients);
+int deleteClient(client *allClients, int numClients, char *toDeleteID, char *filename);
 void checkDuplicateClientID(client *cl, client *allClients, int numClients);
 
 #endif /* ENTITIES_CLIENTS_MISC_CL_H_ */

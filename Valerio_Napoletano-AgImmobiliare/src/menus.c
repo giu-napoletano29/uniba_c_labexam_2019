@@ -11,6 +11,7 @@
 #include "utils.h"
 #include "file_utils.h"
 #include "agency.h"
+#include "consts.h"
 
 #include "entities/buildings/files_bl.h"
 #include "entities/buildings/misc_bl.h"
@@ -36,12 +37,12 @@ int clientsMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "client" type */
-	int clientsNum = countFileRows("clients");
+	int clientsNum = countFileRows(CLIENTS_FNAME);
 	client allClients[clientsNum];
 	initClientsArray(allClients, clientsNum);
 
 	/** - Load client file and stores the parsed data in the memory. */
-	loadClientFile(allClients);
+	loadClientFile(allClients, CLIENTS_FNAME);
 
 	/**
 	 - Check if there's any client with duplicated IDs
@@ -81,7 +82,7 @@ int clientsMenu() {
 				choice = addClient(allClients, clientsNum);
 				break;
 			case 3:
-				choice = deleteClient(allClients, clientsNum);
+				choice = requestClientDeletion(allClients, clientsNum);
 				break;
 			case 4:
 				// This is used as a flag for the "go back" choice
@@ -106,18 +107,18 @@ int professMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "professional" type */
-	int prosNum = countFileRows("professionals");
+	int prosNum = countFileRows(PROS_FNAME);
 	professional allPros[prosNum];
 	initProsArray(allPros, prosNum);
 
 	/** - Declare and initialize the array of structs, "potentials" type */
-	int potsNum = countFileRows("pros_potential");
+	int potsNum = countFileRows(PTS_FNAME);
 	potential allPts[potsNum];
 	initPotentialsArray(allPts, potsNum);
 
 	/** - Load pros file and stores the parsed data in the memory. */
-	loadProsFile(allPros);
-	loadPotentialsFile(allPts);
+	loadProsFile(allPros, PROS_FNAME);
+	loadPotentialsFile(allPts, PTS_FNAME);
 
 	/**
 	 - Check if there's any client with duplicated IDs
@@ -156,7 +157,7 @@ int professMenu() {
 				choice = addPro(allPros, allPts, prosNum);
 				break;
 			case 3:
-				choice = deletePro(allPros, allPts, prosNum);
+				choice = requestProDeletion(allPros, allPts, prosNum);
 				break;
 			case 4:
 				// This is used as a flag for the "go back" choice
@@ -180,12 +181,12 @@ int buildingsMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "building" type */
-	int buildingsNum = countFileRows("buildings");
+	int buildingsNum = countFileRows(BUILDINGS_FNAME);
 	building allBuildings[buildingsNum];
 	initBuildingsArray(allBuildings, buildingsNum);
 
 	/** - Load buildings file and stores the parsed data in the memory. */
-	loadBuildingsFile(allBuildings);
+	loadBuildingsFile(allBuildings, BUILDINGS_FNAME);
 
 	/**
 	 - Check if there's any client with duplicated IDs
@@ -234,7 +235,7 @@ int buildingsMenu() {
 				choice = editBuilding(allBuildings, buildingsNum);
 				break;
 			case 5:
-				choice = deleteBuilding(allBuildings, buildingsNum);
+				choice = requestBuildingDeletion(allBuildings, buildingsNum);
 				break;
 			case 6:
 				choice = sellBuilding(allBuildings, buildingsNum);

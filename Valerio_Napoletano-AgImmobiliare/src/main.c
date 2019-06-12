@@ -12,10 +12,19 @@
 #include "utils.h"
 #include "datatypes.h"
 
-int main(void) {
-	mainMenu();
+#include "tests.h"
 
-	pause();
+int main(void) {
+	bool runTestsAtStartup = true;
+
+	if (runTestsAtStartup) {
+		startTests();
+		// ANSI escape codes not supported in CUnit output, falling back to original
+		newLine();
+		system("pause");
+	}
+	
+	mainMenu();
 
 	return 0;
 }

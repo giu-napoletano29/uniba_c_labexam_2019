@@ -19,7 +19,7 @@
 #include "req_cl.h" // For reqID() and reqPIVA()
 
 /**
- * @brief Parse "clients" file (clients.dat)
+ * @brief Parse "clients" file
  *
  * @param filePtr Pointer to file initalized from fopen()
  * @param cl Client array of structs for storing parsed data.
@@ -101,11 +101,12 @@ void parseClientFile(FILE *filePtr, client *cl) {
  *
  * @param cl Client array of structs where the data is stored
  * @param rows How many clients are registered
+ * @param filename Filename where data should be written
  * @return -1 go back to main menu
  */
-int rewriteClientsToFile(client *cl, int rows) {
+int rewriteClientsToFile(client *cl, int rows, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen("clients.dat", "w+");
+	filePtr = fopen(filename, "w+");
 
 	// Sort clients in the memory before writing
 	sortClients(cl, rows);
@@ -129,14 +130,15 @@ int rewriteClientsToFile(client *cl, int rows) {
 }
 
 /**
- * @brief Append a new client to the "clients.dat" file
+ * @brief Append a new client to the clients file
  *
  * @param cl Client struct where the data is stored
+ * @param filename Filename where data should be written
  * @return -1 go back to main menu
  */
-int appendClientToFile(client *cl) {
+int appendClientToFile(client *cl, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen("clients.dat", "a+");
+	filePtr = fopen(filename, "a+");
 	if (checkFile(filePtr)) {
 		// Save to file only if the client is not marked for deletion
 		if (!cl->toDelete) {
@@ -154,14 +156,15 @@ int appendClientToFile(client *cl) {
 }
 
 /**
- * @brief Load the "clients.dat" file and run the parsing function
+ * @brief Load the clients file and run the parsing function
  *
  * @param cl Array of structs (client data type) where the data will be saved.
+ * @param filename Name of the file from which retrieving the data.
  * @return -1 going back to the menu
  */
-int loadClientFile(client *cl) {
+int loadClientFile(client *cl, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen("clients.dat", "a+");
+	filePtr = fopen(filename, "a+");
 	if (checkFile(filePtr)) {
 		parseClientFile(filePtr, cl);
 		fclose(filePtr);
@@ -245,7 +248,7 @@ bool checkDuplicateClients(client *cl, int rows) {
 	}
 
 	if (result) {
-		rewriteClientsToFile(cl, rows);
+		rewriteClientsToFile(cl, rows, CLIENTS_FNAME);
 	}
 	return result;
 }

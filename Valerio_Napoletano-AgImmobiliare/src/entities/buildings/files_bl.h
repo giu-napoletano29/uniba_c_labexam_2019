@@ -12,11 +12,11 @@
 
 #include "../../datatypes.h"
 
-int loadBuildingsFile(building *bl);
+int loadBuildingsFile(building *bl, char *filename);
 void parseBuildingsFile(FILE *filePtr, building *cl);
 int searchBuilding(building *allBuildings, int numBuildings);
-int rewriteBuildingsToFile(building *bl, int rows);
+int rewriteBuildingsToFile(building *bl, int rows, char *filename);
 int checkDuplicateBuildings(building *bl, int rows);
-int appendBuildingToFile(building *bl);
+int appendBuildingToFile(building *bl, char *filename);
 
 #endif /* ENTITIES_BUILDINGS_FILES_BL_H_ */
