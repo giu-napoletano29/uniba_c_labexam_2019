@@ -233,7 +233,7 @@ int requestBuildingDeletion(building *allBuildings, int numBuildings, char *file
 		printf("\nSei sicuro di voler cancellare l'immobile selezionato? (s/n): ");
 		resetColor();
 		if (askConfirm()) {
-			deleteBuilding(allBuildings, numBuildings, toDeleteID, filename);
+			deleteBuilding(allBuildings, numBuildings, toDeleteID, BUILDINGS_FNAME);
 			setRedColor();
 			printf("\nImmobile eliminato!\n");
 			resetColor();
