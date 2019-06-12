@@ -11,6 +11,7 @@
 #include "utils.h"
 #include "file_utils.h"
 #include "agency.h"
+#include "consts.h"
 
 #include "entities/buildings/files_bl.h"
 #include "entities/buildings/misc_bl.h"
@@ -185,7 +186,7 @@ int buildingsMenu() {
 	initBuildingsArray(allBuildings, buildingsNum);
 
 	/** - Load buildings file and stores the parsed data in the memory. */
-	loadBuildingsFile(allBuildings);
+	loadBuildingsFile(allBuildings, BUILDINGS_FNAME);
 
 	/**
 	 - Check if there's any client with duplicated IDs

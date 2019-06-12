@@ -106,7 +106,7 @@ int addBuilding(building *allBuildings, int numBuildings) {
 
 	saveBuildingLocalDate(&bl);
 
-	appendBuildingToFile(&bl);
+	appendBuildingToFile(&bl, BUILDINGS_FNAME);
 
 	return -1;
 }
