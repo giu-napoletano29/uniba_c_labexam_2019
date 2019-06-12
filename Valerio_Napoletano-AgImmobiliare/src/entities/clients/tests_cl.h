@@ -11,5 +11,6 @@
 int initSuiteClients();
 int cleanSuiteClients();
 void testClientsFileParse();
+void testClientDeletion();
 
 #endif /* ENTITIES_CLIENTS_TESTS_CL_H_ */

@@ -59,13 +59,11 @@ int initSuiteClients() {
 
 /**
  * @brief Cleans up the test suite removing the temp clients file
- * @return
+ * @return 0 for successful
  */
 int cleanSuiteClients() {
-	// Delete test file
-	remove(clientTestFile);
-
-	return 0;
+	// Delete test file - remove return value is 0 upon success
+	return remove(clientTestFile);
 }
 
 /**
@@ -78,11 +76,11 @@ int cleanSuiteClients() {
 void testClientsFileParse() {
 	struct tm *clDate = { 0 };
 	char dateBuffer[11] = "";
-	
+
 	client testClient;
 	initClientsArray(&testClient, 1);
 
-	// Load and parse the temp buildings file
+	// Load and parse the temp clients file
 	CU_ASSERT(loadClientFile(&testClient, clientTestFile));
 
 	// Check that fields has been loaded correctly in the struct
@@ -92,11 +90,31 @@ void testClientsFileParse() {
 	CU_ASSERT_EQUAL(testClient.clType, 3);
 	CU_ASSERT_STRING_EQUAL(testClient.companyName, "SAVAL SRL");
 	CU_ASSERT_EQUAL(testClient.budget, 200000);
-	
+
 	// Convert regDate to string and check assertion on the latter
 	clDate = localtime(&testClient.regDate);
 	strftime(dateBuffer, 11, "%d/%m/%Y", clDate);
 	CU_ASSERT_STRING_EQUAL(dateBuffer, "12/06/2019");
 
 	CU_ASSERT_EQUAL(testClient.buildingType, 3);
+}
+
+/**
+ *  @brief Test method that checks if a record can be deleted properly.
+ */
+void testClientDeletion() {
+	client testClient, newTestClient;
+	initClientsArray(&testClient, 1);
+	
+	// Initial loading and parsing of the temp clients file
+	loadClientFile(&testClient, clientTestFile);
+
+	// Delete client from the file
+	deleteClient(&testClient, 1, "VLRSVR99E17A669R", clientTestFile);
+
+	// Load and parse the temp clients file again
+	loadClientFile(&newTestClient, clientTestFile);
+
+	// Check that it's empty
+	CU_ASSERT_STRING_EQUAL(newTestClient.id, "");
 }

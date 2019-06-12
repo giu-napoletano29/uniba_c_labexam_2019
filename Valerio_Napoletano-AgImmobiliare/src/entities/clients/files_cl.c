@@ -101,11 +101,12 @@ void parseClientFile(FILE *filePtr, client *cl) {
  *
  * @param cl Client array of structs where the data is stored
  * @param rows How many clients are registered
+ * @param filename Filename where data should be written
  * @return -1 go back to main menu
  */
-int rewriteClientsToFile(client *cl, int rows) {
+int rewriteClientsToFile(client *cl, int rows, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen(CLIENTS_FNAME, "w+");
+	filePtr = fopen(filename, "w+");
 
 	// Sort clients in the memory before writing
 	sortClients(cl, rows);
@@ -247,7 +248,7 @@ bool checkDuplicateClients(client *cl, int rows) {
 	}
 
 	if (result) {
-		rewriteClientsToFile(cl, rows);
+		rewriteClientsToFile(cl, rows, CLIENTS_FNAME);
 	}
 	return result;
 }

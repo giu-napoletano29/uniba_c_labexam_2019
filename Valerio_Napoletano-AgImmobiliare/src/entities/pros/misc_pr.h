@@ -12,7 +12,7 @@ void initPotentialsArray(potential *po, int size);
 void initProsArray(professional *pro, int size);
 
 int addPro(professional *allPros, potential *allPts, int numRecords);
-int deletePro(professional *allPros, potential *allPts, int numRecords);
+int requestProDeletion(professional *allPros, potential *allPts, int numRecords);
 
 void checkDuplicateProID(potential *po, professional *allPros, int numRecords);
 

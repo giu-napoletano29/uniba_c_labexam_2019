@@ -82,7 +82,7 @@ int clientsMenu() {
 				choice = addClient(allClients, clientsNum);
 				break;
 			case 3:
-				choice = deleteClient(allClients, clientsNum);
+				choice = requestClientDeletion(allClients, clientsNum);
 				break;
 			case 4:
 				// This is used as a flag for the "go back" choice
@@ -157,7 +157,7 @@ int professMenu() {
 				choice = addPro(allPros, allPts, prosNum);
 				break;
 			case 3:
-				choice = deletePro(allPros, allPts, prosNum);
+				choice = requestProDeletion(allPros, allPts, prosNum);
 				break;
 			case 4:
 				// This is used as a flag for the "go back" choice

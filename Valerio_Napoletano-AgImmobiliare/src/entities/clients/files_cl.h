@@ -10,7 +10,7 @@
 
 int loadClientFile(client *cl, char *filename);
 void parseClientFile(FILE *filePtr, client *cl);
-int rewriteClientsToFile(client *cl, int rows);
+int rewriteClientsToFile(client *cl, int rows, char *filename);
 int appendClientToFile(client *cl, char *filename);
 int checkDuplicateClients(client *cl, int rows);
 

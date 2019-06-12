@@ -163,7 +163,7 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
  * @param numRecords Number of professionals/potentials registered.
  * @return -1 for going back to the menu
  */
-int deletePro(professional *allPros, potential *allPts, int numRecords) {
+int requestProDeletion(professional *allPros, potential *allPts, int numRecords) {
 	bool found = false;
 	int proIndex = 0;
 	int ptsIndex = 0;

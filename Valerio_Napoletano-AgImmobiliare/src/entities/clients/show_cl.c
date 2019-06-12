@@ -114,7 +114,7 @@ int showAllClients(client *allClients, int numClients) {
 	sortClients(allClients, numClients);
 
 	// Rewrite ordered clients file
-	rewriteClientsToFile(allClients, numClients);
+	rewriteClientsToFile(allClients, numClients, CLIENTS_FNAME);
 
 	clearScr();
 	printSectionName("Lista clienti", false);
@@ -139,7 +139,7 @@ int showAllClients(client *allClients, int numClients) {
 
 		// Rewrite clients file without the deleted clients, if needed.
 		if (runRewrite) {
-			rewriteClientsToFile(allClients, numClients);
+			rewriteClientsToFile(allClients, numClients, CLIENTS_FNAME);
 		}
 		newLine();
 

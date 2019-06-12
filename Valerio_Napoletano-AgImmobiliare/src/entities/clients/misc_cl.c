@@ -83,7 +83,7 @@ int addClient(client *allClients, int numClients) {
 	loadClientFile(newAllClients, CLIENTS_FNAME);
 
 	/** Rewrite ordered array of structs from memory to the clients file */
-	rewriteClientsToFile(newAllClients, newClientsNum);
+	rewriteClientsToFile(newAllClients, newClientsNum, CLIENTS_FNAME);
 
 	return -1;
 }
@@ -124,7 +124,7 @@ void checkDuplicateClientID(client *cl, client *allClients, int numClients) {
  * @param numClients Number of clients registered.
  * @return -1 for going back to the menu
  */
-int deleteClient(client *allClients, int numClients) {
+int requestClientDeletion(client *allClients, int numClients) {
 	bool found = false;
 	char toDeleteID[MAX_STRING_SIZE] = "0";
 
@@ -149,7 +149,7 @@ int deleteClient(client *allClients, int numClients) {
 		resetColor();
 
 		if (askConfirm()) {
-			rewriteClientsToFile(allClients, numClients);
+			deleteClient(allClients, numClients, toDeleteID, CLIENTS_FNAME);
 
 			setGreenColor();
 			printf("\nCliente eliminato!\n");
@@ -163,6 +163,28 @@ int deleteClient(client *allClients, int numClients) {
 	newLine();
 	pause();
 	return -1;
+}
+
+/**
+ * Delete a client identified by toDeleteID.
+ * 
+ * @param allClients Array of structs of all clients registered.
+ * @param numClients Number of clients registered.
+ * @param toDeleteID Client's ID to delete
+ * @param filename Filename where data is stored
+ * 
+ * @return
+ */
+int deleteClient(client *allClients, int numClients, char *toDeleteID, char *filename) {
+	unsigned short int result = 0;
+	for (int i = 0; i < numClients; i++) {
+		if (strCompare(toDeleteID, (allClients + i)->id)) {
+			(allClients + i)->toDelete = true;
+			result = 1;
+		}
+	}
+	rewriteClientsToFile(allClients, numClients, filename);
+	return result;
 }
 
 /**

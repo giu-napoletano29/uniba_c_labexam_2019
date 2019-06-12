@@ -28,13 +28,15 @@ int startTests() {
 	CU_pSuite pSuiteBuildings = CU_add_suite("Suite_Buildings", initSuiteBuildings, cleanSuiteBuildings);
 	CU_pSuite pSuitePros = CU_add_suite("Suite_Pros", initSuitePros, cleanSuitePros);
 	
-	CU_add_test(pSuiteClients, "Clients file parsing", testClientsFileParse);
+	CU_add_test(pSuiteClients, "[CLIENTS] File parsing", testClientsFileParse);
 
-	CU_add_test(pSuiteBuildings, "Buildings file parsing", testBuildingsFileParse);
+	CU_add_test(pSuiteClients, "[CLIENTS] Record deletion from file", testClientDeletion);
 
-	CU_add_test(pSuitePros, "Professionals and potential files parsing", testProsFileParse);
+	CU_add_test(pSuiteBuildings, "[BUILDINGS] File parsing", testBuildingsFileParse);
 
-	// Even if Eclipse complains about CU_BRM_VERBOSE missing, everything compiles without any problems.
+	CU_add_test(pSuitePros, "[PROFESSIONALS + POTENTIALS] File parsing", testProsFileParse);
+
+		// Even if Eclipse complains about CU_BRM_VERBOSE missing, everything compiles without any problems.
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 	CU_basic_run_tests();
 	
