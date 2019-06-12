@@ -145,10 +145,11 @@ int appendProToFile(professional *pr, char *filename) {
  *
  * @param allPros Professional array of structs where the data is stored
  * @param rows How many professionals are registered
+ * @param filename Filename where data is storeds
  */
-void rewriteProsToFile(professional *allPros, int rows) {
+void rewriteProsToFile(professional *allPros, int rows, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen(PROS_FNAME, "w+");
+	filePtr = fopen(filename, "w+");
 
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
@@ -234,7 +235,7 @@ int checkDuplicatePros(professional *allPros, potential *allPts, int rows) {
 	}
 
 	if (result) {
-		rewriteProsToFile(allPros, rows);
+		rewriteProsToFile(allPros, rows, PROS_FNAME);
 	}
 	return result;
 }

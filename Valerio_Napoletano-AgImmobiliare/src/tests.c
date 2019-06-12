@@ -37,6 +37,8 @@ int startTests() {
 	CU_add_test(pSuiteBuildings, "[BUILDINGS] Record deletion from file", testBuildingDeletion);
 
 	CU_add_test(pSuitePros, "[PROFESSIONALS + POTENTIALS] File parsing", testProsFileParse);
+	
+	CU_add_test(pSuitePros, "[PROFESSIONALS + POTENTIALS] Record deletion from file", testProsFileParse);
 
 	// Even if Eclipse complains about CU_BRM_VERBOSE missing, everything compiles without any problems.
 	CU_basic_set_mode(CU_BRM_VERBOSE);

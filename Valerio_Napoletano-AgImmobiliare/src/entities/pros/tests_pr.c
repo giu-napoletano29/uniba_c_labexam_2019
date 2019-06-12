@@ -127,5 +127,36 @@ void testProsFileParse() {
 	sscanf(testPts.content, "%[^\n]", testPts.content);
 
 	CU_ASSERT_STRING_EQUAL(testPts.content, "Ha molta dimestichezza nella vendita di case vacanza");
+}
 
+/**
+ *  @brief Test method that checks if a record can be deleted properly.
+ */
+void testProDeletion() {
+	professional testPro;
+	initProsArray(&testPro, 1);
+	
+	professional newTestPro;
+	initProsArray(&newTestPro, 1);
+	
+	potential testPts;
+	initPotentialsArray(&testPts, 1);
+	
+	potential newTestPts;
+	initPotentialsArray(&newTestPts, 1);
+	
+	// Initial loading and parsing of the temp pro file
+	loadProsFile(&testPro, prosTestFile);
+	loadPotentialsFile(&testPts, ptsTestFile);
+	
+	// Delete client from the file
+	deletePro(&testPro, &testPts, 1, "VLRSVR99E17A669R", prosTestFile, ptsTestFile);
+
+	// Load and parse the temp pros and potentials file again
+	loadProsFile(&newTestPro, prosTestFile);
+	loadPotentialsFile(&newTestPts, ptsTestFile);
+	
+	// Check that it's empty
+	CU_ASSERT_STRING_EQUAL(newTestPro.id, "");
+	CU_ASSERT_STRING_EQUAL(newTestPts.id, "");
 }

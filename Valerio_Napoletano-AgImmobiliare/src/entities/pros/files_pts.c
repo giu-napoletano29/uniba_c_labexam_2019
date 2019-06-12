@@ -128,10 +128,11 @@ int appendPtsToFile(potential *pt, char *filename) {
  *
  * @param allPts Potentials array of structs where the data is stored
  * @param rows How many potentials are registered
+ * @param filename Filename where data is stored
  */
-void rewritePtsToFile(potential *allPts, int rows) {
+void rewritePtsToFile(potential *allPts, int rows, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen(PTS_FNAME, "w+");
+	filePtr = fopen(filename, "w+");
 
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
