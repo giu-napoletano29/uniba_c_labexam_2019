@@ -18,7 +18,7 @@
 char clientTestFile[MAX_STRING_SIZE] = "clients_test.dat";
 
 /**
- * @brief Initialize the "clients" test suite creating a temp file with mock building data.
+ * @brief Initialize the "clients" test suite creating a temp file with mock data.
  * @return 0 success or 1 for error
  */
 int initSuiteClients() {

@@ -63,7 +63,6 @@ void saveLocalDatePro(professional *pr) {
 	pr->regDate = time(&timeRightNow);
 }
 
-
 /**
  * @brief Request the professional ID and check that it is not already registered.
  * 
@@ -150,8 +149,28 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 	loadProsFile(newAllPros, PROS_FNAME);
 
 	/** - Write ordered array of structs from memory to the pros file */
-	rewriteProsToFile(newAllPros, newProsNum);
+	rewriteProsToFile(newAllPros, newProsNum, PROS_FNAME);
 
+	return -1;
+}
+
+int deletePro(professional *allPros, potential *allPts, int numRecords, char *toDeleteID, char *prosFile,
+		char *ptsFile) {
+
+	for (int i = 0; i < numRecords; i++) {
+		if (strCompare(toDeleteID, (allPros + i)->id)) {
+			(allPros + i)->toDelete = true;
+		}
+	}
+
+	for (int i = 0; i < numRecords; i++) {
+		if (strCompare(toDeleteID, (allPts + i)->id)) {
+			(allPts + i)->toDelete = true;
+		}
+	}
+	rewriteProsToFile(allPros, numRecords, prosFile);
+	rewritePtsToFile(allPts, numRecords, ptsFile);
+	
 	return -1;
 }
 
@@ -176,20 +195,14 @@ int requestProDeletion(professional *allPros, potential *allPts, int numRecords)
 	readString(toDeleteID, false, false);
 
 	for (int i = 0; i < numRecords; i++) {
-		// Set the "toDelete" flag on true of the chosen professional
 		if (strCompare(toDeleteID, (allPros + i)->id)) {
 			found = true;
 			proIndex = i;
-
-			(allPros + i)->toDelete = true;
 		}
 
-		// Set the "toDelete" flag on true of the professional "potential"
 		for (int i = 0; i < numRecords; i++) {
 			if (strCompare(toDeleteID, (allPts + i)->id)) {
 				ptsIndex = i;
-
-				(allPts + i)->toDelete = true;
 			}
 		}
 	}
@@ -203,9 +216,7 @@ int requestProDeletion(professional *allPros, potential *allPts, int numRecords)
 		resetColor();
 
 		if (askConfirm()) {
-			rewriteProsToFile(allPros, numRecords);
-			rewritePtsToFile(allPts, numRecords);
-
+			deletePro(allPros, allPts, numRecords, toDeleteID, PROS_FNAME, PTS_FNAME);
 			setGreenColor();
 			printf("\nProfessionista eliminato!\n");
 			resetColor();

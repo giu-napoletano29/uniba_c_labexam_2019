@@ -2,7 +2,7 @@
  * @file files_bl.h
  * @author Saverio Valerio
  * @date 22 May 2019
- * @brief Header file containing prototypes related to the clients' file management functions.
+ * @brief Header file containing prototypes related to the buildings' file management functions.
  */
 
 #ifndef ENTITIES_BUILDINGS_FILES_BL_H_

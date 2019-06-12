@@ -74,7 +74,7 @@ void checkDuplicateBuildingID(building *bl, building *allBuildings, int numBuild
 
 /**
  * @brief Append a building to the buildings file.
- * Initializes a client struct and calls the "req" functions for filling the latter.
+ * Initializes a building struct and calls the "req" functions for filling the latter.
  *
  * @return -1 for going back to the main menu.
  */
@@ -182,9 +182,9 @@ int editBuilding(building *allBuildings, int numBuildings) {
 /**
  * Delete a building identified by toDeleteID.
  * 
- * @param allBuildings Array of structs of all clients registered.
- * @param numBuildings Number of clients registered.
- * @param toDeleteID Client's ID to delete
+ * @param allBuildings Array of structs of all buildings registered.
+ * @param numBuildings Number of buildings registered.
+ * @param toDeleteID Building's ID to delete
  * @param filename Filename where data is stored
  * 
  * @return 1 successful

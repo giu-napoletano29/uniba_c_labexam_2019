@@ -11,5 +11,6 @@
 int initSuitePros();
 int cleanSuitePros();
 void testProsFileParse();
+void testProDeletion();
 
 #endif /* ENTITIES_CLIENTS_TESTS_PR_H_ */

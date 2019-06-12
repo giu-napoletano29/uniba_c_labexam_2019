@@ -14,6 +14,6 @@ int loadProsFile(professional *allPros, char *filename);
 void parseProsFile(FILE *filePtr, professional *pr);
 int checkDuplicatePros(professional *allPros, potential *allPts, int rows);
 int appendProToFile(professional *pr, char *filename);
-int rewriteProsToFile(professional *allPros, int rows);
+void rewriteProsToFile(professional *allPros, int rows, char *filename);
 
 #endif /* ENTITIES_PROS_FILES_PR_H_ */

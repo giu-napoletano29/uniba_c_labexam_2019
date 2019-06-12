@@ -34,4 +34,13 @@
 #define PROS_FNAME "professionals.dat"
 #define PTS_FNAME "pros_potential.dat"
 
+/**
+*  Constant for defining if the test function can be called directly from the main menu
+ * This is useful when we want to distribute our software in production, therefore we need to easily hide tests to the "nomal" users
+ */
+#define SHOW_TESTS_MAIN_MENU true
+
+/** If needed, tests can be executed at the startup, without waiting for the menu choice */
+#define RUN_TESTS_AT_STARTUP false
+
 #endif /* CONSTS_H */

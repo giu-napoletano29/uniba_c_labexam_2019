@@ -73,7 +73,7 @@ void showProData(professional *pr, potential *allPts, int numRecords) {
  */
 int showAllPros(professional *allPros, potential *allPts, int numRecords) {
 	sortPros(allPros, numRecords);
-	rewriteProsToFile(allPros, numRecords);
+	rewriteProsToFile(allPros, numRecords, PROS_FNAME);
 
 	clearScr();
 	printSectionName("Lista professionisti", false);
