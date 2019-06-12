@@ -137,11 +137,13 @@ int loadBuildingsFile(building *bl, char *filename) {
  *
  * @param bl Building array of structs where the data is stored
  * @param rows How many buildings are registered
+ * @param filename Filename where data is stored
+ * 
  */
-int rewriteBuildingsToFile(building *bl, int rows) {
+int rewriteBuildingsToFile(building *bl, int rows, char *filename) {
 	FILE *filePtr;
 	//TODO: find a good solution to prevent data loss when file is opened in w+
-	filePtr = fopen(BUILDINGS_FNAME, "w+");
+	filePtr = fopen(filename, "w+");
 	checkFile(filePtr);
 
 	if (filePtr != NULL) {
@@ -240,7 +242,7 @@ int checkDuplicateBuildings(building *bl, int rows) {
 
 	if (result) {
 		// Write on file only if needed
-		rewriteBuildingsToFile(bl, rows);
+		rewriteBuildingsToFile(bl, rows, BUILDINGS_FNAME);
 	}
 
 	return result;

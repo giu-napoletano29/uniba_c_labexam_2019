@@ -169,7 +169,7 @@ int editBuilding(building *allBuildings, int numBuildings) {
 		newLine();
 		reqBuildingPhone(allBuildings + buildingPos);
 
-		rewriteBuildingsToFile(allBuildings, numBuildings);
+		rewriteBuildingsToFile(allBuildings, numBuildings, BUILDINGS_FNAME);
 	} else {
 		setRedColor();
 		printf("\nNessun immobile trovato con l'ID inserito\noppure risulta venduto.");
@@ -180,13 +180,37 @@ int editBuilding(building *allBuildings, int numBuildings) {
 }
 
 /**
+ * Delete a building identified by toDeleteID.
+ * 
+ * @param allBuildings Array of structs of all clients registered.
+ * @param numBuildings Number of clients registered.
+ * @param toDeleteID Client's ID to delete
+ * @param filename Filename where data is stored
+ * 
+ * @return 1 successful
+ */
+int deleteBuilding(building *allBuildings, int numBuildings, int toDeleteID, char *filename) {
+	unsigned short int result = 0;
+	for (int i = 0; i < numBuildings; i++) {
+		if (toDeleteID == (allBuildings + i)->id) {
+			(allBuildings + i)->toDelete = true;
+			result = 1;
+		}
+	}
+	rewriteBuildingsToFile(allBuildings, numBuildings, filename);
+
+	return result;
+}
+
+/**
  * Delete a building identified by his ID inputted by the user.
  *
  * @param allBuildings Array of structs of all buildings registered.
  * @param numBuildings Number of buildings registered.
+ * @param filename Filename where data is stored
  * @return -1 for going back to the menu
  */
-int deleteBuilding(building *allBuildings, int numBuildings) {
+int requestBuildingDeletion(building *allBuildings, int numBuildings, char *filename) {
 	int toDeleteID = 0;
 	bool found = false;
 
@@ -198,7 +222,6 @@ int deleteBuilding(building *allBuildings, int numBuildings) {
 
 	for (int i = 0; i < numBuildings; i++) {
 		if (toDeleteID == (allBuildings + i)->id) {
-			(allBuildings + i)->toDelete = true;
 			found = true;
 
 			showBuildingData(allBuildings + i);
@@ -210,7 +233,7 @@ int deleteBuilding(building *allBuildings, int numBuildings) {
 		printf("\nSei sicuro di voler cancellare l'immobile selezionato? (s/n): ");
 		resetColor();
 		if (askConfirm()) {
-			rewriteBuildingsToFile(allBuildings, numBuildings);
+			deleteBuilding(allBuildings, numBuildings, toDeleteID, filename);
 			setRedColor();
 			printf("\nImmobile eliminato!\n");
 			resetColor();
@@ -259,7 +282,7 @@ int sellBuilding(building *allBuildings, int numBuildings) {
 
 	if (found) {
 		// Update the file only if needed
-		rewriteBuildingsToFile(allBuildings, numBuildings);
+		rewriteBuildingsToFile(allBuildings, numBuildings, BUILDINGS_FNAME);
 	} else {
 		setRedColor();
 		printf("\nNessun immobile trovato con l'ID inserito\noppure risulta gia' venduto.\n");

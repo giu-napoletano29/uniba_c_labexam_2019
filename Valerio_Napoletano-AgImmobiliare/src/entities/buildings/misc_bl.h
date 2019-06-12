@@ -9,7 +9,8 @@
 
 void initBuildingsArray(building *bl, int size);
 int addBuilding(building *allBuildings, int numBuildings);
-int deleteBuilding(building *allBuildings, int numBuildings);
+int requestBuildingDeletion(building *allBuildings, int numBuildings);
+int deleteBuilding(building *allBuildings, int numBuildings, int toDeleteID, char *filename);
 int sellBuilding(building *allBuildings, int numBuildings);
 int editBuilding(building *allBuildings, int numBuildings);
 

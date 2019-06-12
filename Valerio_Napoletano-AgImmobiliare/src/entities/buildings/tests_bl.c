@@ -83,12 +83,12 @@ int cleanSuiteBuildings() {
 void testBuildingsFileParse() {
 	struct tm *clDate = { 0 };
 	char dateBuffer[11] = "";
-	
+
 	building testBuilding;
 	initBuildingsArray(&testBuilding, 1);
 
 	// Load and parse the temp buildings file
-	CU_ASSERT(loadBuildingsFile(&testBuilding, buildingsTestFile));
+	loadBuildingsFile(&testBuilding, buildingsTestFile);
 
 	// Check that fields has been loaded correctly in the struct
 	CU_ASSERT_EQUAL(testBuilding.id, 93781);
@@ -109,3 +109,27 @@ void testBuildingsFileParse() {
 	CU_ASSERT_EQUAL(testBuilding.ctrType, 1);
 	CU_ASSERT_EQUAL(testBuilding.soldOn, 0);
 }
+
+/**
+ *  @brief Test method that checks if a record can be deleted properly.
+ */
+void testBuildingDeletion() {
+	building testBuilding;
+	initBuildingsArray(&testBuilding, 1);
+
+	building newTestBuilding;
+	initBuildingsArray(&newTestBuilding, 1);
+
+	// Initial loading and parsing of the temp clients file
+	loadBuildingsFile(&testBuilding, buildingsTestFile);
+	
+	// Delete client from the file
+	deleteBuilding(&testBuilding, 1, 93781, buildingsTestFile);
+
+	// Initial loading and parsing of the temp clients file
+	loadBuildingsFile(&newTestBuilding, buildingsTestFile);
+
+	// Check that it's empty
+	CU_ASSERT_NOT_EQUAL(newTestBuilding.id, 93781);
+}
+

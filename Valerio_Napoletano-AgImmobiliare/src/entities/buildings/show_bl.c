@@ -168,7 +168,7 @@ void showBuildingData(building *bl) {
  */
 int showAllBuildings(building *bl, int numBuildings) {
 	sortBuildings(bl, numBuildings);
-	rewriteBuildingsToFile(bl, numBuildings);
+	rewriteBuildingsToFile(bl, numBuildings, BUILDINGS_FNAME);
 
 	clearScr();
 	printSectionName("Lista immobili", false);

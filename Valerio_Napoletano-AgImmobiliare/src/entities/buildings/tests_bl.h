@@ -11,5 +11,6 @@
 int initSuiteBuildings();
 int cleanSuiteBuildings();
 void testBuildingsFileParse();
+void testBuildingDeletion();
 
 #endif /* ENTITIES_BUILDINGS_TESTS_BL_H_ */

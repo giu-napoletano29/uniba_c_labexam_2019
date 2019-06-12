@@ -235,7 +235,7 @@ int buildingsMenu() {
 				choice = editBuilding(allBuildings, buildingsNum);
 				break;
 			case 5:
-				choice = deleteBuilding(allBuildings, buildingsNum);
+				choice = requestBuildingDeletion(allBuildings, buildingsNum);
 				break;
 			case 6:
 				choice = sellBuilding(allBuildings, buildingsNum);
