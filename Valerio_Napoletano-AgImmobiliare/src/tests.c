@@ -30,10 +30,11 @@ int startTests() {
 	
 	CU_add_test(pSuiteClients, "Clients file parsing", testClientsFileParse);
 
-	CU_add_test(pSuiteBuildings, "Building file parsing", testBuildingsFileParse);
+	CU_add_test(pSuiteBuildings, "Buildings file parsing", testBuildingsFileParse);
 
 	CU_add_test(pSuitePros, "Professionals and potential files parsing", testProsFileParse);
 
+	// Even if Eclipse complains about CU_BRM_VERBOSE missing, everything compiles without any problems.
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 	CU_basic_run_tests();
 	
