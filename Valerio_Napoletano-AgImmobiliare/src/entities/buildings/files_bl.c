@@ -18,7 +18,7 @@
 #include "search_bl.h"
 
 /**
- * @brief Parse "buildings" file (buildings.dat)
+ * @brief Parse "buildings" file
  *
  * @param filePtr Pointer to file initalized from fopen()
  * @param bl Buildings array of structs for storing parsed data.
@@ -113,7 +113,7 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
  * @brief Load buildings file to memory.
  *
  * @param bl Array of structs (building datatype) where data will be stored.
- * @param filename Filename where data should be loaded from.
+ * @param filename Name of the file from which retrieving the data.
  * @return -1 for going back to the main menu.
  */
 int loadBuildingsFile(building *bl, char *filename) {
@@ -141,7 +141,7 @@ int loadBuildingsFile(building *bl, char *filename) {
 int rewriteBuildingsToFile(building *bl, int rows) {
 	FILE *filePtr;
 	//TODO: find a good solution to prevent data loss when file is opened in w+
-	filePtr = fopen("buildings.dat", "w+");
+	filePtr = fopen(BUILDINGS_FNAME, "w+");
 	checkFile(filePtr);
 
 	if (filePtr != NULL) {

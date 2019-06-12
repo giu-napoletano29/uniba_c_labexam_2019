@@ -37,7 +37,7 @@ int clientsMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "client" type */
-	int clientsNum = countFileRows("clients");
+	int clientsNum = countFileRows(CLIENTS_FNAME);
 	client allClients[clientsNum];
 	initClientsArray(allClients, clientsNum);
 
@@ -107,18 +107,18 @@ int professMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "professional" type */
-	int prosNum = countFileRows("professionals");
+	int prosNum = countFileRows(PROS_FNAME);
 	professional allPros[prosNum];
 	initProsArray(allPros, prosNum);
 
 	/** - Declare and initialize the array of structs, "potentials" type */
-	int potsNum = countFileRows("pros_potential");
+	int potsNum = countFileRows(PTS_FNAME);
 	potential allPts[potsNum];
 	initPotentialsArray(allPts, potsNum);
 
 	/** - Load pros file and stores the parsed data in the memory. */
-	loadProsFile(allPros);
-	loadPotentialsFile(allPts);
+	loadProsFile(allPros, PROS_FNAME);
+	loadPotentialsFile(allPts, PTS_FNAME);
 
 	/**
 	 - Check if there's any client with duplicated IDs
@@ -181,7 +181,7 @@ int buildingsMenu() {
 	bool error = false;
 
 	/** - Declare and initialize the array of structs, "building" type */
-	int buildingsNum = countFileRows("buildings");
+	int buildingsNum = countFileRows(BUILDINGS_FNAME);
 	building allBuildings[buildingsNum];
 	initBuildingsArray(allBuildings, buildingsNum);
 

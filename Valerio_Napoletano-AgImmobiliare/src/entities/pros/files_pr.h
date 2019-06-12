@@ -10,10 +10,10 @@
 
 #include "../../datatypes.h"
 
-int loadProsFile(professional *allPros);
+int loadProsFile(professional *allPros, char *filename);
 void parseProsFile(FILE *filePtr, professional *pr);
 int checkDuplicatePros(professional *allPros, potential *allPts, int rows);
-int appendProToFile(professional *pr);
+int appendProToFile(professional *pr, char *filename);
 int rewriteProsToFile(professional *allPros, int rows);
 
 #endif /* ENTITIES_PROS_FILES_PR_H_ */

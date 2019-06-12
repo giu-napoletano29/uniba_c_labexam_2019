@@ -46,13 +46,9 @@ bool checkFile(FILE *filePtr) {
 int countFileRows(char *name) {
 	FILE *filePtr;
 	int rowsNum = 0;
-	char filename[MAX_STRING_SIZE] = "";
 	char line[MAX_TEXT_SIZE] = "";
 
-	// Add the ".dat" file extension using a safe method for string concatenation
-	snprintf(filename, sizeof filename, "%s%s", name, ".dat");
-
-	filePtr = fopen(filename, "a+");
+	filePtr = fopen(name, "a+");
 	if (checkFile(filePtr)) {
 		// Just in case
 		rewind(filePtr);

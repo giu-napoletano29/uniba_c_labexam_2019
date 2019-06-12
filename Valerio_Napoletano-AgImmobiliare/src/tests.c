@@ -9,6 +9,7 @@
 
 #include "entities/clients/tests_cl.h"
 #include "entities/buildings/tests_bl.h"
+#include "entities/pros/tests_pr.h"
 
 /**
  * @brief Runs automatically the CUnit tests and reports to stdout.
@@ -17,18 +18,21 @@
  * - Declares the various available test methods
  * - Runs the test with verbosing
  * - Cleans up the test registry
- * @return
+ * 
+ * @return CUnit error code
  */
 int startTests() {
 	CU_initialize_registry();
 	
 	CU_pSuite pSuiteClients = CU_add_suite("Suite_Clients", initSuiteClients, cleanSuiteClients);
 	CU_pSuite pSuiteBuildings = CU_add_suite("Suite_Buildings", initSuiteBuildings, cleanSuiteBuildings);
-	//CU_pSuite pSuitePros = CU_add_suite("Suite_Pros", initSuitePros, cleanSuitePros;
+	CU_pSuite pSuitePros = CU_add_suite("Suite_Pros", initSuitePros, cleanSuitePros);
 	
-	CU_add_test(pSuiteClients, "Test clients file parsing", testClientsFileParse);
+	CU_add_test(pSuiteClients, "Clients file parsing", testClientsFileParse);
 
-	CU_add_test(pSuiteBuildings, "Test building file parsing", testBuildingsFileParse);
+	CU_add_test(pSuiteBuildings, "Building file parsing", testBuildingsFileParse);
+
+	CU_add_test(pSuitePros, "Professionals and potential files parsing", testProsFileParse);
 
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 	CU_basic_run_tests();

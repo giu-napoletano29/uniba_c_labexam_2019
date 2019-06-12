@@ -33,7 +33,7 @@ void findPotential(char id[], potential *pr, int numRecords) {
 }
 
 /**
- * @brief Parse "potential" file (pros_potential.dat)
+ * @brief Parse "potential" file
  * Check out findPotential() for more information about the "potential".
  *
  * @param filePtr Pointer to file initalized from fopen()
@@ -82,11 +82,12 @@ void parsePotentialsFile(FILE *filePtr, potential *pr) {
  * @brief Initialize potential array of structs and parse professionals' potential file.
  *
  * @param allPts Array of structs (potential datatype) where data will be stored.
+ * @param filename Name of the file from which retrieving the data.
  */
-void loadPotentialsFile(potential *allPts) {
+int loadPotentialsFile(potential *allPts, char *filename) {
 	FILE *filePtr;
 
-	filePtr = fopen("pros_potential.dat", "a+");
+	filePtr = fopen(filename, "a+");
 
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
@@ -95,17 +96,19 @@ void loadPotentialsFile(potential *allPts) {
 	}
 
 	fclose(filePtr);
+	return -1;
 }
 
 /**
- * @brief Append a new potential to the "pros_potential.dat" file
+ * @brief Append a new potential to its file
  *
  * @param pt Potential struct where the data is stored
+ * @param filename Filename where data should be written
  * @return -1 go back to main menu
  */
-int appendPtsToFile(potential *pt) {
+int appendPtsToFile(potential *pt, char *filename) {
 	FILE *filePtr;
-	filePtr = fopen("pros_potential.dat", "a+");
+	filePtr = fopen(filename, "a+");
 
 	if (checkFile(filePtr)) {
 		// Save to file only if the potential is not marked for deletion
@@ -128,7 +131,7 @@ int appendPtsToFile(potential *pt) {
  */
 void rewritePtsToFile(potential *allPts, int rows) {
 	FILE *filePtr;
-	filePtr = fopen("pros_potential.dat", "w+");
+	filePtr = fopen(PTS_FNAME, "w+");
 
 	if (checkFile(filePtr)) {
 		rewind(filePtr);

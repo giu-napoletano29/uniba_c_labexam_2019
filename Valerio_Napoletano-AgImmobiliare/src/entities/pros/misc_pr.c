@@ -132,9 +132,9 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 
 	saveLocalDatePro(&pr);
 
-	appendProToFile(&pr);
+	appendProToFile(&pr, PROS_FNAME);
 
-	appendPtsToFile(&pt);
+	appendPtsToFile(&pt, PTS_FNAME);
 
 	// --- PROFESSIONALS ---
 
@@ -147,7 +147,7 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 	initProsArray(newAllPros, newProsNum);
 
 	/** - Reload pros file and stores the parsed data in the memory. */
-	loadProsFile(newAllPros);
+	loadProsFile(newAllPros, PROS_FNAME);
 
 	/** - Write ordered array of structs from memory to the pros file */
 	rewriteProsToFile(newAllPros, newProsNum);

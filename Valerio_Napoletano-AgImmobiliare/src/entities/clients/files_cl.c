@@ -19,7 +19,7 @@
 #include "req_cl.h" // For reqID() and reqPIVA()
 
 /**
- * @brief Parse "clients" file (clients.dat)
+ * @brief Parse "clients" file
  *
  * @param filePtr Pointer to file initalized from fopen()
  * @param cl Client array of structs for storing parsed data.
@@ -105,7 +105,7 @@ void parseClientFile(FILE *filePtr, client *cl) {
  */
 int rewriteClientsToFile(client *cl, int rows) {
 	FILE *filePtr;
-	filePtr = fopen("clients.dat", "w+");
+	filePtr = fopen(CLIENTS_FNAME, "w+");
 
 	// Sort clients in the memory before writing
 	sortClients(cl, rows);
@@ -129,7 +129,7 @@ int rewriteClientsToFile(client *cl, int rows) {
 }
 
 /**
- * @brief Append a new client to the "clients.dat" file
+ * @brief Append a new client to the clients file
  *
  * @param cl Client struct where the data is stored
  * @param filename Filename where data should be written
@@ -155,10 +155,10 @@ int appendClientToFile(client *cl, char *filename) {
 }
 
 /**
- * @brief Load the "clients.dat" file and run the parsing function
+ * @brief Load the clients file and run the parsing function
  *
  * @param cl Array of structs (client data type) where the data will be saved.
- * @param filename Filename where data should be loaded from.
+ * @param filename Name of the file from which retrieving the data.
  * @return -1 going back to the menu
  */
 int loadClientFile(client *cl, char *filename) {
