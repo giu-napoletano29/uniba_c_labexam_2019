@@ -15,9 +15,7 @@
 #include "tests.h"
 
 int main(void) {
-	bool runTestsAtStartup = true;
-
-	if (runTestsAtStartup) {
+	if (RUN_TESTS_AT_STARTUP) {
 		startTests();
 		// ANSI escape codes not supported in CUnit output, falling back to original
 		newLine();

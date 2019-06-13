@@ -6,12 +6,14 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 #include "utils.h"
 #include "file_utils.h"
 #include "agency.h"
 #include "consts.h"
+#include "tests.h"
 
 #include "entities/buildings/files_bl.h"
 #include "entities/buildings/misc_bl.h"
@@ -273,6 +275,9 @@ void mainMenu() {
 		puts("1. Clienti");
 		puts("2. Professionisti");
 		puts("3. Immobili");
+		if (SHOW_TESTS_MAIN_MENU) {
+			puts("\n4. Avvia tests con CUnit");
+		}
 		newLine();
 
 		if (error) {
@@ -296,6 +301,16 @@ void mainMenu() {
 				choice = buildingsMenu();
 				break;
 				// choice = -1 represent the "go back to main menu" value from other functions
+			case 4:
+				if (SHOW_TESTS_MAIN_MENU) {
+					clearScr();
+					startTests();
+					// ANSI escape codes not supported in CUnit output, falling back to original
+					system("pause");
+				} else {
+					error = true;
+				}
+				break;
 			case -1:
 				error = false;
 				break;

@@ -120,13 +120,13 @@ void testBuildingDeletion() {
 	building newTestBuilding;
 	initBuildingsArray(&newTestBuilding, 1);
 
-	// Initial loading and parsing of the temp clients file
+	// Initial loading and parsing of the temp building file
 	loadBuildingsFile(&testBuilding, buildingsTestFile);
 	
 	// Delete client from the file
 	deleteBuilding(&testBuilding, 1, 93781, buildingsTestFile);
 
-	// Initial loading and parsing of the temp clients file
+	// Re-load and re-parsing and parsing of the temp building file
 	loadBuildingsFile(&newTestBuilding, buildingsTestFile);
 
 	// Check that it's empty

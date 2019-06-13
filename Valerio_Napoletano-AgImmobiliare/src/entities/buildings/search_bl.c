@@ -25,7 +25,7 @@ void searchBuildingsForPrice(building *allBuildings, int numBuildings) {
 	// Boolean for keeping track if at least one record has been found
 	bool found = false;
 	double maxPrice = 0;
-	
+
 	clearScr();
 
 	printSectionName("Ricerca immobili", false);
@@ -38,13 +38,7 @@ void searchBuildingsForPrice(building *allBuildings, int numBuildings) {
 	for (int i = 0; i < numBuildings; i++) {
 		if ((allBuildings + i)->price < maxPrice) {
 			found = true;
-
-			setCyanColor();
-			printf("--- IMMOBILE %d ---\n", (allBuildings + i)->id);
-			resetColor();
 			showBuildingData(allBuildings + i);
-			
-			newLine();
 		}
 	}
 
@@ -54,6 +48,7 @@ void searchBuildingsForPrice(building *allBuildings, int numBuildings) {
 		resetColor();
 	}
 
+	newLine();
 	pause();
 }
 
@@ -77,17 +72,11 @@ void searchBuildingsForCity(building *allBuildings, int numBuildings) {
 	convertToUpperCase(city);
 
 	newLine();
-	
+
 	for (int i = 0; i < numBuildings; i++) {
 		if (strstr((allBuildings + i)->city, city) != NULL) {
 			found = true;
-
-			setCyanColor();
-			printf("--- IMMOBILE %d ---\n", (allBuildings + i)->id);
-			resetColor();
 			showBuildingData(allBuildings + i);
-
-			newLine();
 		}
 	}
 
@@ -97,6 +86,7 @@ void searchBuildingsForCity(building *allBuildings, int numBuildings) {
 		resetColor();
 	}
 
+	newLine();
 	pause();
 }
 

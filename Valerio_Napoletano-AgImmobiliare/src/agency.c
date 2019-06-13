@@ -102,7 +102,7 @@ int resultsAgency(building *bl, int numBuildings) {
 			}
 		} else {
 			setRedColor();
-			printf("E' stato inserito un intervallo errato.\n\n");
+			printf("\nE' stato inserito un intervallo di data non valido.\n");
 			error = true;
 			resetColor();
 		}

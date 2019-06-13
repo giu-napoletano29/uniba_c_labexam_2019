@@ -63,7 +63,7 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 					strcpy((bl + builNum)->province, token);
 					break;
 				case 5:
-					// Save parsed Epoch time into clients struct
+					// Save parsed Epoch time into building struct
 					(bl + builNum)->regDate = parseDate(token);
 					break;
 				case 6:
@@ -311,7 +311,7 @@ int appendBuildingToFile(building *bl, char *filename) {
 	FILE *filePtr;
 	filePtr = fopen(filename, "a+");
 	if (checkFile(filePtr)) {
-		// Save to file only if the client is not marked for deletion
+		// Save to file only if the building is not marked for deletion
 		if (!bl->toDelete) {
 			fprintf(filePtr, "%d,%s,%d,%s,%s", bl->id, bl->street, bl->civic, bl->city, bl->province);
 
