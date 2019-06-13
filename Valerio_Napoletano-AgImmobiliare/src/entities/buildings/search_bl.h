@@ -10,5 +10,8 @@
 
 void searchBuildingsForPrice(building *allBuildings, int numBuildings);
 void searchBuildingsForCity(building *allBuildings, int numBuildings);
+void searchBuildingsCtrType(building *allBuildings, int numBuildings);
+void searchBuildingsByType(building *allBuildings, int numBuildings);
+int searchBuilding(building *allBuildings, int numBuildings);
 
 #endif /* ENTITIES_BUILDINGS_SEARCH_BL_H_ */

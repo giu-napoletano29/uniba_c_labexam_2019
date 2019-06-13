@@ -14,7 +14,6 @@
 
 int loadBuildingsFile(building *bl, char *filename);
 void parseBuildingsFile(FILE *filePtr, building *cl);
-int searchBuilding(building *allBuildings, int numBuildings);
 int rewriteBuildingsToFile(building *bl, int rows, char *filename);
 int checkDuplicateBuildings(building *bl, int rows);
 int appendBuildingToFile(building *bl, char *filename);

@@ -18,6 +18,7 @@
 #include "entities/buildings/files_bl.h"
 #include "entities/buildings/misc_bl.h"
 #include "entities/buildings/show_bl.h"
+#include "entities/buildings/search_bl.h"
 
 #include "entities/clients/files_cl.h"
 #include "entities/clients/misc_cl.h"

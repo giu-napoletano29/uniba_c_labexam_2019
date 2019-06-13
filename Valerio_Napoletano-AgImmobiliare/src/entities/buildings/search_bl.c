@@ -33,8 +33,6 @@ void searchBuildingsForPrice(building *allBuildings, int numBuildings) {
 	printf("\nPrezzo massimo dell'immobile da cercare: ");
 	maxPrice = readInteger();
 
-	newLine();
-
 	for (int i = 0; i < numBuildings; i++) {
 		if ((allBuildings + i)->price < maxPrice) {
 			found = true;
@@ -71,8 +69,6 @@ void searchBuildingsForCity(building *allBuildings, int numBuildings) {
 	readString(city, false, false);
 	convertToUpperCase(city);
 
-	newLine();
-
 	for (int i = 0; i < numBuildings; i++) {
 		if (strstr((allBuildings + i)->city, city) != NULL) {
 			found = true;
@@ -90,3 +86,134 @@ void searchBuildingsForCity(building *allBuildings, int numBuildings) {
 	pause();
 }
 
+/**
+ * @brief Search buildings available with a specific contract type
+ * 
+ * @param allBuildings Array of structs of all registered buildings
+ * @param numBuildings Number of buildings registered
+ */
+void searchBuildingsCtrType(building *allBuildings, int numBuildings) {
+	// Boolean for keeping track if at least one record has been found
+	bool found = false;
+	int ctrType = 0;
+
+	clearScr();
+
+	printSectionName("Ricerca immobili", false);
+
+	printContractChoices();
+	printf("\n\nSeleziona tipo di contratto: ");
+	ctrType = readInteger();
+
+	for (int i = 0; i < numBuildings; i++) {
+		if ((allBuildings + i)->ctrType == ctrType) {
+			found = true;
+			showBuildingData(allBuildings + i);
+		}
+	}
+
+	if (!found) {
+		setYellowColor();
+		printf("\nNessun record trovato.\n");
+		resetColor();
+	}
+
+	newLine();
+	pause();
+}
+
+/**
+ * @brief Search buildings available with a specific type
+ * 
+ * @param allBuildings Array of structs of all registered buildings
+ * @param numBuildings Number of buildings registered
+ */
+void searchBuildingsByType(building *allBuildings, int numBuildings) {
+	// Boolean for keeping track if at least one record has been found
+	bool found = false;
+	unsigned short int buildingType = 0;
+
+	clearScr();
+
+	printSectionName("Ricerca immobili", false);
+	newLine();
+	printBuildingChoices();
+	printf("\n\nSeleziona tipo di immobile: ");
+	buildingType = readInteger();
+	
+	for (int i = 0; i < numBuildings; i++) {
+		if ((allBuildings + i)->builType == buildingType) {
+			found = true;
+			showBuildingData(allBuildings + i);
+		}
+	}
+
+	if (!found) {
+		setYellowColor();
+		printf("\nNessun record trovato.\n");
+		resetColor();
+	}
+
+	newLine();
+	pause();
+}
+
+/**
+ * @brief Search for a specific building using a criteria.
+ *
+ * @param allBuildings Array of structs of all registered buildings.
+ * @param numBuildings Number of buildings registered.
+ */
+int searchBuilding(building *allBuildings, int numBuildings) {
+	bool error = false;
+	short int choice = 0;
+
+	clearScr();
+	printSectionName("Ricerca immobili", false);
+
+	if (numBuildings != 0) {
+		do {
+			newLine();
+
+			puts("Scegli un criterio:");
+			puts("1. Prezzo massimo");
+			puts("2. Localita'");
+			puts("3. Tipologia contratto");
+			puts("4. Tipologia immobile");
+			puts("5. Torna indietro");
+
+			newLine();
+			printf("Criterio: ");
+			choice = readInteger();
+
+			switch (choice) {
+				case 1:
+					searchBuildingsForPrice(allBuildings, numBuildings);
+					break;
+				case 2:
+					searchBuildingsForCity(allBuildings, numBuildings);
+					break;
+				case 3:
+					searchBuildingsCtrType(allBuildings, numBuildings);
+					break;
+				case 4:
+					searchBuildingsByType(allBuildings, numBuildings);
+					break;
+				case 5:
+					// This is used as a flag for the "go back" choice
+					// It's not that likely that an user will manually insert -1 as a choice.
+					choice = -1;
+					error = false;
+					break;
+				default:
+					error = true;
+					break;
+			}
+		} while (error == true);
+	} else {
+		dbEmptyError();
+		pause();
+	}
+
+	return -1;
+}

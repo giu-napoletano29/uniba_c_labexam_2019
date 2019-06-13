@@ -249,58 +249,6 @@ int checkDuplicateBuildings(building *bl, int rows) {
 }
 
 /**
- * @brief Search for a specific building using a criteria.
- *
- * @param allBuildings Array of structs of all registered buildings.
- * @param numBuildings Number of buildings registered.
- */
-int searchBuilding(building *allBuildings, int numBuildings) {
-	bool error = false;
-	short int choice = 0;
-
-	clearScr();
-	printSectionName("Ricerca immobili", false);
-
-	if (numBuildings != 0) {
-		do {
-			newLine();
-
-			puts("Scegli un'operazione:");
-			puts("1. Prezzo");
-			puts("2. Localita'");
-			puts("3. Torna indietro");
-
-			newLine();
-			printf("Operazione: ");
-			choice = readInteger();
-
-			switch (choice) {
-				case 1:
-					searchBuildingsForPrice(allBuildings, numBuildings);
-					break;
-				case 2:
-					searchBuildingsForCity(allBuildings, numBuildings);
-					break;
-				case 3:
-					// This is used as a flag for the "go back" choice
-					// It's not that likely that an user will manually insert -1 as a choice.
-					choice = -1;
-					error = false;
-					break;
-				default:
-					error = true;
-					break;
-			}
-		} while (error == true);
-	} else {
-		dbEmptyError();
-		pause();
-	}
-
-	return -1;
-}
-
-/**
  * @brief Append a new building to the chosen Filename
  *
  * @param filename Filename where data should be written
