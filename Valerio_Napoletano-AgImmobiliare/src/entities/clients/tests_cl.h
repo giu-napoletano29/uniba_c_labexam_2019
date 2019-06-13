@@ -1,8 +1,8 @@
-/*
- * tests_cl.h
- *
- *  Created on: 12 giu 2019
- *      Author: Saverio Valerio
+/**
+ * @file tests_cl.h
+ * @author Saverio Valerio
+ * @date 12 June 2019
+ * @brief Header file with prototypes of the functions that made up the "clients" CUnit test suite
  */
 
 #ifndef ENTITIES_CLIENTS_TESTS_CL_H_

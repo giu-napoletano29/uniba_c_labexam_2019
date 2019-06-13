@@ -1,5 +1,5 @@
 /**
- * @file req_pr.c
+ * @file req_pr.h
  * @author Saverio Valerio
  * @date 1 June 2019
  * @brief Header file containing prototypes related to the "request professionals' data" functions.

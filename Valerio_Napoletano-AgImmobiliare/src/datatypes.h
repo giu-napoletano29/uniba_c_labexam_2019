@@ -59,7 +59,7 @@ typedef struct {
 	char surname[MAX_STRING_SIZE];
 	clientType clType; /**< Client type */
 	char companyName[MAX_STRING_SIZE]; /**< Company name (if type is company) */
-	int budget; /**< Integer is enough, does not make any sense having a "float/double" budget */
+	unsigned int budget; /**< Integer is enough, does not make any sense having a "float/double" budget */
 	time_t regDate; /**< Registration date in Epoch time */
 	buildingType buildingType; /**< Type of building that needs to be searched */
 	bool toDelete; /**< If true this client won't be saved in the file */
@@ -75,7 +75,7 @@ typedef struct {
 	// Email address
 	char email[MAX_STRING_SIZE];
 	time_t regDate; /**< Registration date in Epoch time */
-	int buildingsSold; /**< Number of buildings that this professional has sold */
+	unsigned int buildingsSold; /**< Number of buildings that this professional has sold */
 	bool toDelete; /**< If true this professional won't be saved in the file */
 } professional;
 
@@ -86,9 +86,9 @@ typedef struct {
 } potential;
 
 typedef struct {
-	int id;
+	unsigned int id;
 	char street[MAX_STRING_SIZE];
-	short int civic;
+	unsigned short int civic;
 	char city[MAX_STRING_SIZE];
 	char province[MAX_STRING_SIZE];
 	time_t regDate; /**< Registration date in Epoch time */
