@@ -212,7 +212,7 @@ void reqBuildingSold(building *bl) {
 
 		printf("Quando? Inserisci una data (gg/mm/yyyy): ");
 		readString(soldOnString, false, false, false);
-		bl->soldOn = parseDate(soldOnString);
+		bl->soldOn = parseDate(soldOnString, true);
 	} else {
 		bl->soldOn = 0;
 	}

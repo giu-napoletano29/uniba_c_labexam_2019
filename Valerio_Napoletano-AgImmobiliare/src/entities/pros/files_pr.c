@@ -65,9 +65,9 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
 					break;
 				case 6:
 					/*
-					 *  Save parsed Epoch time into clients struct
+					 *  Save parsed Epoch time into professional struct
 					 */
-					(allPros + proNum)->regDate = parseDate(token);
+					(allPros + proNum)->regDate = parseDate(token, false);
 					break;
 				case 7:
 					(allPros + proNum)->buildingsSold = atoi(token);

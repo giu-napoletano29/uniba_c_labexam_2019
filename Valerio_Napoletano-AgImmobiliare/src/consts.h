@@ -53,7 +53,7 @@
  * Using the newly "Version Helper functions" also requires the usage of the Visual C++ toolset, pretty overkill for our usage.
  * 
  * This is why using this macro is required. 
- * It's false as default because target computers in our University should run on Windows 7. 
+ * It's false as default because target computers in our university should run Windows 7. 
  * 
  * @see https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
  * @see https://github.com/ytdl-org/youtube-dl/issues/15758

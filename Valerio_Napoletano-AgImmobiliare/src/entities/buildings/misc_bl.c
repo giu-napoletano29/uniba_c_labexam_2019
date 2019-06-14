@@ -295,7 +295,7 @@ int sellBuilding(building *allBuildings, unsigned int numBuildings) {
 
 			printf("\nInserisci la data di vendita/inizio affitto (gg/mm/yyyy): ");
 			readString(soldOnString, false, false, false);
-			(allBuildings + i)->soldOn = parseDate(soldOnString);
+			(allBuildings + i)->soldOn = parseDate(soldOnString, true);
 
 			found = true;
 		}

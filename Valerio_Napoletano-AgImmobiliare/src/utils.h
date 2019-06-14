@@ -16,7 +16,7 @@ bool isChar(char *str);
 
 void printFormattedDate(time_t epochTime);
 void printSectionName(char *string, bool isHome);
-time_t parseDate(char string[MAX_STRING_SIZE]);
+time_t parseDate(char string[MAX_STRING_SIZE], bool errorCheck);
 
 void convertToUpperCase(char *s);
 bool strCompare(char *from, char *to);

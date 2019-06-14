@@ -291,24 +291,49 @@ double readDouble() {
  * @brief Parse date from a string formatted in day/month/year.
  *
  * @param string Date string to parse
+ * @param errorCheck If enabled asks to the user to insert a correct date
  * @return time_t value (encoded in UNIX Epoch time)
  */
-time_t parseDate(char string[MAX_STRING_SIZE]) {
+time_t parseDate(char string[MAX_STRING_SIZE], bool errorCheck) {
+	bool error = false;
+	time_t currentTime = time(NULL);
+	time_t epochDate = 0;
+
 	// Temp "tm" struct required for parsing the date properly from the file
 	struct tm tempDate = { 0 };
 
-	sscanf(string, "%d/%d/%d", &tempDate.tm_mday, &tempDate.tm_mon, &tempDate.tm_year);
+	do {
+		sscanf(string, "%d/%d/%d", &tempDate.tm_mday, &tempDate.tm_mon, &tempDate.tm_year);
 
-	/**
-	 * tm_mon is defined as a range between 0 to 11.
-	 * tm_year starts from 1900.
-	 *
-	 * @see http://www.cplusplus.com/reference/ctime/tm/
-	 */
-	tempDate.tm_mon -= 1;
-	tempDate.tm_year -= 1900;
+		/**
+		 * tm_mon is defined as a range between 0 to 11.
+		 * tm_year starts from 1900.
+		 *
+		 * @see http://www.cplusplus.com/reference/ctime/tm/
+		 */
+		tempDate.tm_mon -= 1;
+		tempDate.tm_year -= 1900;
 
-	return mktime(&tempDate);
+		// Convert parsed date to UNIX Epoch value
+		epochDate = mktime(&tempDate);
+
+		// Check if date is valid if mktime was able to convert it properly to time_t
+		// and if it's not greater than timeNow
+		if (errorCheck && (epochDate == -1 || epochDate > currentTime)) {
+			error = true;
+
+			setRedColor();
+			puts("\nData non valida.");
+			setYellowColor();
+			printf("\nInserisci una data corretta: ");
+			resetColor();
+			readString(string, false, false, false);
+		} else {
+			error = false;
+		}
+	} while (error == true);
+
+	return epochDate;
 }
 
 /**
@@ -383,7 +408,7 @@ void setTitle(char *titleToSet) {
 
 	strcpy(defaultName, "Agenzia Immobiliare");
 
-	// For string concatenation
+// For string concatenation
 	snprintf(command, sizeof command, "%s %s - %s", "title", titleToSet, defaultName);
 
 	system(command);
@@ -396,10 +421,10 @@ void setTitle(char *titleToSet) {
  * @param isHome Shows the program title if true
  */
 void printSectionName(char *string, bool isHome) {
-	// Set the console window title
+// Set the console window title
 	setTitle(string);
 
-	// Show only if isHome boolean is true
+// Show only if isHome boolean is true
 	if (isHome) {
 		setCyanColor();
 		puts("||| Agenzia Immobiliare di Saverio Valerio e Giuseppe Napoletano |||\n");

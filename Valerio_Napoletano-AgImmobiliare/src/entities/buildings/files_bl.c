@@ -64,7 +64,7 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 					break;
 				case 5:
 					// Save parsed Epoch time into building struct
-					(bl + builNum)->regDate = parseDate(token);
+					(bl + builNum)->regDate = parseDate(token, false);
 					break;
 				case 6:
 					(bl + builNum)->price = strtod(token, NULL);
@@ -77,7 +77,7 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 					strcpy((bl + builNum)->phone, token);
 					break;
 				case 9:
-					(bl + builNum)->soldOn = parseDate(token);
+					(bl + builNum)->soldOn = parseDate(token, false);
 
 					// If parseDate failed we assume that the building is still on sale.
 					if ((bl + builNum)->soldOn == -1) {
