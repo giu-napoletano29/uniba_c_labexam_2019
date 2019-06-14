@@ -110,24 +110,24 @@ int showAllClients(client *allClients, unsigned int numClients) {
 	bool runRewrite = false;
 	bool checkExpiration = false;
 
-	// Sort clients in the memory
-	sortClients(allClients, numClients);
-
-	// Rewrite ordered clients file
-	rewriteClientsToFile(allClients, numClients, CLIENTS_FNAME);
-
-	clearScr();
-	printSectionName("Lista clienti", false);
-
-	setYellowColor();
-	printf("\nVuoi eliminare i clienti registrati da piu' di %d giorni? (quindi scaduti)\n(s/n): ",
-			CLIENT_EXPIRE_DAYS);
-	resetColor();
-	if (askConfirm()) {
-		checkExpiration = true;
-	}
-
 	if (numClients != 0) {
+		// Sort clients in the memory
+		sortClients(allClients, numClients);
+
+		// Rewrite ordered clients file
+		rewriteClientsToFile(allClients, numClients, CLIENTS_FNAME);
+
+		clearScr();
+		printSectionName("Lista clienti", false);
+
+		setYellowColor();
+		printf("\nVuoi eliminare i clienti registrati da piu' di %d giorni? (quindi scaduti)\n(s/n): ",
+		CLIENT_EXPIRE_DAYS);
+		resetColor();
+		if (askConfirm()) {
+			checkExpiration = true;
+		}
+
 		for (unsigned int i = 0; i < numClients; i++) {
 			showClientData((allClients + i), checkExpiration);
 
