@@ -10,6 +10,6 @@
 
 void showClientType();
 void showClientData(client *cl, bool checkExpiration);
-int showAllClients(client *cl, int numClients);
+int showAllClients(client *cl, unsigned int numClients);
 
 #endif /* ENTITIES_CLIENTS_SHOW_CL_H_ */

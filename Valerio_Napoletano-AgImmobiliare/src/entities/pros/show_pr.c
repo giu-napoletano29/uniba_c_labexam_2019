@@ -21,7 +21,7 @@
  * @param allPts Array of structs of all available potentials records
  * @param numRecords Number of professionals/potentials saved in the array.
  */
-void showProData(professional *pr, potential *allPts, int numRecords) {
+void showProData(professional *pr, potential *allPts, unsigned int numRecords) {
 	setCyanColor();
 	printf("\n-- PROFESSIONISTA --\n");
 	printf("Codice fiscale: ");
@@ -71,7 +71,7 @@ void showProData(professional *pr, potential *allPts, int numRecords) {
  * @param numRecords Number of professionals/potentials saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-int showAllPros(professional *allPros, potential *allPts, int numRecords) {
+int showAllPros(professional *allPros, potential *allPts, unsigned int numRecords) {
 	sortPros(allPros, numRecords);
 	rewriteProsToFile(allPros, numRecords, PROS_FNAME);
 
@@ -79,7 +79,7 @@ int showAllPros(professional *allPros, potential *allPts, int numRecords) {
 	printSectionName("Lista professionisti", false);
 
 	if (numRecords != 0) {
-		for (int i = 0; i < numRecords; i++) {
+		for (unsigned int i = 0; i < numRecords; i++) {
 			showProData((allPros + i), allPts, numRecords);
 		}
 	} else {

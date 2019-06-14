@@ -27,12 +27,12 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
 	char line[MAX_TEXT_SIZE] = "";
 	char *token;
 
-	int field = 0;
+	unsigned short int field = 0;
 	// Buildings counter
-	int builNum = 0;
+	unsigned int builNum = 0;
 
 	// Temp var for string to integer conversion (enum)
-	int enumTmp = 0;
+	unsigned short int enumTmp = 0;
 
 	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
@@ -117,7 +117,7 @@ void parseBuildingsFile(FILE *filePtr, building *bl) {
  * @return -1 for going back to the main menu.
  */
 int loadBuildingsFile(building *bl, char *filename) {
-	int result = 0;
+	unsigned short int result = 0;
 	
 	FILE *filePtr;
 	filePtr = fopen(filename, "a+");
@@ -140,7 +140,7 @@ int loadBuildingsFile(building *bl, char *filename) {
  * @param filename Filename where data is stored
  * 
  */
-int rewriteBuildingsToFile(building *bl, int rows, char *filename) {
+int rewriteBuildingsToFile(building *bl, unsigned int rows, char *filename) {
 	FILE *filePtr;
 	//TODO: find a good solution to prevent data loss when file is opened in w+
 	filePtr = fopen(filename, "w+");
@@ -149,7 +149,7 @@ int rewriteBuildingsToFile(building *bl, int rows, char *filename) {
 	if (filePtr != NULL) {
 		rewind(filePtr);
 
-		for (int i = 0; i < rows; i++) {
+		for (unsigned int i = 0; i < rows; i++) {
 			if (!(bl + i)->toDelete) {
 				fprintf(filePtr, "%d,%s,%d,%s,%s", (bl + i)->id, (bl + i)->street, (bl + i)->civic,
 						(bl + i)->city, (bl + i)->province);
@@ -182,13 +182,13 @@ int rewriteBuildingsToFile(building *bl, int rows, char *filename) {
  * @param rows How many buildings are registered
  * @return -1 if duplicates are found.
  */
-int checkDuplicateBuildings(building *bl, int rows) {
+int checkDuplicateBuildings(building *bl, unsigned int rows) {
 	bool result = false;
 	bool error = false;
-	short int choice = 0;
+	unsigned short int choice = 0;
 
-	for (int i = 0; i < rows; i++) {
-		for (int j = i + 1; j < rows; j++) {
+	for (unsigned int i = 0; i < rows; i++) {
+		for (unsigned int j = i + 1; j < rows; j++) {
 			if ((bl + i)->id == (bl + j)->id && !result) {
 				clearScr();
 				setRedColor();

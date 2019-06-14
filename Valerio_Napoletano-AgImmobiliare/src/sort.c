@@ -20,13 +20,13 @@
  * @param pr Array of structs, professional data type
  * @param rows Numbers of records in the "pr" array of structs.
  */
-void sortPros(professional *pr, int rows) {
+void sortPros(professional *pr, unsigned int rows) {
 	professional cmp = { "", "", "", "", "", "", 0, 0, false };
-	int indexMin = 0;
+	unsigned int indexMin = 0;
 
-	for (int j = 0; j < rows - 1; j++) {
+	for (unsigned int j = 0; j < rows - 1; j++) {
 		indexMin = j;
-		for (int i = j + 1; i < rows; i++) {
+		for (unsigned int i = j + 1; i < rows; i++) {
 			if (strcmp((pr + i)->surname, (pr + indexMin)->surname) < 0) {
 				indexMin = i;
 			}
@@ -71,13 +71,13 @@ void sortPros(professional *pr, int rows) {
  * @param cl Array of structs, client data type
  * @param rows Numbers of records in the "cl" array of structs.
  */
-void sortClients(client *cl, int rows) {
+void sortClients(client *cl, unsigned int rows) {
 	client cmp = { "", "", "", single, "", 0, 0, flat, false };
-	int indexMin = 0;
+	unsigned int indexMin = 0;
 
-	for (int j = 0; j < rows - 1; j++) {
+	for (unsigned int j = 0; j < rows - 1; j++) {
 		indexMin = j;
-		for (int i = j + 1; i < rows; i++) {
+		for (unsigned int i = j + 1; i < rows; i++) {
 			if (strcmp((cl + i)->surname, (cl + indexMin)->surname) < 0) {
 				indexMin = i;
 			}
@@ -126,13 +126,13 @@ void sortClients(client *cl, int rows) {
  * @param bl Array of structs, building data type
  * @param rows Numbers of records in the "bl" array of structs.
  */
-void sortBuildings(building *bl, int rows) {
+void sortBuildings(building *bl, unsigned int rows) {
 	building cmp = { 0, "", 0, "", "", 0, 0.0, "", "", 0, rent, flat, false };
-	int indexMin = 0;
+	unsigned int indexMin = 0;
 
-	for (int j = 0; j < rows - 1; j++) {
+	for (unsigned int j = 0; j < rows - 1; j++) {
 		indexMin = j;
-		for (int i = j + 1; i < rows; i++) {
+		for (unsigned int i = j + 1; i < rows; i++) {
 			if (strcmp((bl + i)->owner, (bl + indexMin)->owner) < 0) {
 				indexMin = i;
 			}

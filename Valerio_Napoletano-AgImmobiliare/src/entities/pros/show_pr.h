@@ -8,7 +8,7 @@
 #ifndef ENTITIES_PROS_SHOW_PR_H_
 #define ENTITIES_PROS_SHOW_PR_H_
 
-void showProData(professional *pr, potential *allPts, int numRecords);
-int showAllPros(professional *allPros, potential *allPts, int numRecords);
+void showProData(professional *pr, potential *allPts, unsigned int numRecords);
+int showAllPros(professional *allPros, potential *allPts, unsigned int numRecords);
 
 #endif /* ENTITIES_PROS_SHOW_PR_H_ */

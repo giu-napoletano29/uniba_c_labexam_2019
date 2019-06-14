@@ -24,8 +24,8 @@
  * @param po "Potential" type struct.
  * @param size How many elements the array of struct will keep.
  */
-void initPotentialsArray(potential *po, int size) {
-	for (int i = 0; i < size; i++) {
+void initPotentialsArray(potential *po, unsigned int size) {
+	for (unsigned int i = 0; i < size; i++) {
 		strcpy((po + i)->id, "");
 		strcpy((po + i)->content, "");
 	}
@@ -37,8 +37,8 @@ void initPotentialsArray(potential *po, int size) {
  * @param pro "Professional" type struct.
  * @param size How many elements the array of struct will keep.
  */
-void initProsArray(professional *pro, int size) {
-	for (int i = 0; i < size; i++) {
+void initProsArray(professional *pro, unsigned int size) {
+	for (unsigned int i = 0; i < size; i++) {
 		strcpy((pro + i)->id, "");
 		strcpy((pro + i)->name, "");
 		strcpy((pro + i)->surname, "");
@@ -70,7 +70,7 @@ void saveLocalDatePro(professional *pr) {
  * @param allPros Array of structs where all pros are available.
  * @param numRecords Number of pros registered.
  */
-void checkDuplicateProID(professional *pr, professional *allPros, int numRecords) {
+void checkDuplicateProID(professional *pr, professional *allPros, unsigned int numRecords) {
 	bool error = false;
 	do {
 		if (error) {
@@ -80,7 +80,7 @@ void checkDuplicateProID(professional *pr, professional *allPros, int numRecords
 		}
 		reqProCF(pr);
 
-		for (int i = 0; i < numRecords; i++) {
+		for (unsigned int i = 0; i < numRecords; i++) {
 			if (strcmp(pr->id, (allPros + i)->id) == 0) {
 				error = true;
 				i = numRecords;
@@ -104,10 +104,10 @@ void checkDuplicateProID(professional *pr, professional *allPros, int numRecords
  * @param numRecords Number of items professionals/potentials saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-int addPro(professional *allPros, potential *allPts, int numRecords) {
+int addPro(professional *allPros, potential *allPts, unsigned int numRecords) {
 	professional pr = { "", "", "", "", "", "", 0, 0, false };
 	potential pt = { "", "" };
-	int newProsNum = 0;
+	unsigned int newProsNum = 0;
 
 	clearScr();
 	printSectionName("Aggiunta professionista", false);
@@ -154,16 +154,16 @@ int addPro(professional *allPros, potential *allPts, int numRecords) {
 	return -1;
 }
 
-int deletePro(professional *allPros, potential *allPts, int numRecords, char *toDeleteID, char *prosFile,
+int deletePro(professional *allPros, potential *allPts, unsigned int numRecords, char *toDeleteID, char *prosFile,
 		char *ptsFile) {
 
-	for (int i = 0; i < numRecords; i++) {
+	for (unsigned int i = 0; i < numRecords; i++) {
 		if (strCompare(toDeleteID, (allPros + i)->id)) {
 			(allPros + i)->toDelete = true;
 		}
 	}
 
-	for (int i = 0; i < numRecords; i++) {
+	for (unsigned int i = 0; i < numRecords; i++) {
 		if (strCompare(toDeleteID, (allPts + i)->id)) {
 			(allPts + i)->toDelete = true;
 		}
@@ -182,10 +182,10 @@ int deletePro(professional *allPros, potential *allPts, int numRecords, char *to
  * @param numRecords Number of professionals/potentials registered.
  * @return -1 for going back to the menu
  */
-int requestProDeletion(professional *allPros, potential *allPts, int numRecords) {
+int requestProDeletion(professional *allPros, potential *allPts, unsigned int numRecords) {
 	bool found = false;
-	int proIndex = 0;
-	int ptsIndex = 0;
+	unsigned int proIndex = 0;
+	unsigned int ptsIndex = 0;
 	char toDeleteID[MAX_STRING_SIZE] = "";
 
 	clearScr();
@@ -194,13 +194,13 @@ int requestProDeletion(professional *allPros, potential *allPts, int numRecords)
 	printf("\nInserisci Codice Fiscale del professionista da eliminare: ");
 	readString(toDeleteID, false, false);
 
-	for (int i = 0; i < numRecords; i++) {
+	for (unsigned int i = 0; i < numRecords; i++) {
 		if (strCompare(toDeleteID, (allPros + i)->id)) {
 			found = true;
 			proIndex = i;
 		}
 
-		for (int i = 0; i < numRecords; i++) {
+		for (unsigned int i = 0; i < numRecords; i++) {
 			if (strCompare(toDeleteID, (allPts + i)->id)) {
 				ptsIndex = i;
 			}

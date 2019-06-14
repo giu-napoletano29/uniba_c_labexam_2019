@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <time.h> // For printFormattedDate()
 
-// Only for getting MAX_STRING_SIZE constant
+// Only for getting MAX_STRING_SIZE constantint rows
 #include "datatypes.h"
 
 /**
@@ -104,7 +104,7 @@ void setMagentaColor() {
  */
 bool isOnlyAlpha(char *str) {
 	bool result = false;
-	for (int i = 0; i < strlen(str); i++) {
+	for (unsigned int i = 0; i < strlen(str); i++) {
 		/*! isalpha: Non-zero value if the character is a numeric character
 		 *  zero otherwise. */
 		if (isalpha(str[i]) == 0) {
@@ -122,7 +122,7 @@ bool isOnlyAlpha(char *str) {
  */
 bool anyChar(char *str) {
 	bool charFound = false;
-	for (int i = 0; i < strlen(str); i++) {
+	for (unsigned int i = 0; i < strlen(str); i++) {
 		/** isalpha: Non-zero value if the character is a numeric character, zero otherwise. */
 		if (isalpha(str[i]) != 0) {
 			charFound = true;
@@ -321,9 +321,9 @@ void printFormattedDate(time_t epochTime) {
  * @param str String to convert to uppercase.
  */
 void convertToUpperCase(char *str) {
-	int len = 0;
+	unsigned int len = 0;
 	len = strlen(str);
-	for (int i = 0; i < len; i++) {
+	for (unsigned int i = 0; i < len; i++) {
 		str[i] = toupper(str[i]);
 	}
 }

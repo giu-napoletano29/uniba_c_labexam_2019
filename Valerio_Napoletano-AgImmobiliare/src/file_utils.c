@@ -45,7 +45,7 @@ bool checkFile(FILE *filePtr) {
  */
 int countFileRows(char *name) {
 	FILE *filePtr;
-	int rowsNum = 0;
+	unsigned int rowsNum = 0;
 	char line[MAX_TEXT_SIZE] = "";
 
 	filePtr = fopen(name, "a+");

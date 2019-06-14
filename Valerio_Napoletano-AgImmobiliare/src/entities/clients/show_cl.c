@@ -22,7 +22,7 @@
  *
  * @param type Integer that represents the client type.
  */
-void showClientType(int type) {
+void showClientType(unsigned short int type) {
 	switch (type) {
 		case 1:
 			printf("Famiglia");
@@ -106,7 +106,7 @@ void showClientData(client *cl, bool checkExpiration) {
  * @param numClients Number of items (clients) saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-int showAllClients(client *allClients, int numClients) {
+int showAllClients(client *allClients, unsigned int numClients) {
 	bool runRewrite = false;
 	bool checkExpiration = false;
 
@@ -128,7 +128,7 @@ int showAllClients(client *allClients, int numClients) {
 	}
 
 	if (numClients != 0) {
-		for (int i = 0; i < numClients; i++) {
+		for (unsigned int i = 0; i < numClients; i++) {
 			showClientData((allClients + i), checkExpiration);
 
 			// Check if some clients are ready for deletion.

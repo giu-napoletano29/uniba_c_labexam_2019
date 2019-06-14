@@ -25,7 +25,7 @@
  * @param bl "building" type struct
  */
 void genBuildingID(building *bl) {
-	int randNum = 0;
+	unsigned int randNum = 0;
 	srand(time(NULL));
 
 	randNum = rand();

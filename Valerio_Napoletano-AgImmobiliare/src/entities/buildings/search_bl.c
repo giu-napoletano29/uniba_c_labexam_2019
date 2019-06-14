@@ -21,7 +21,7 @@
  * @param allBuildings Array of structs of all registered buildings
  * @param numBuildings Number of buildings registered
  */
-void searchBuildingsForPrice(building *allBuildings, int numBuildings) {
+void searchBuildingsForPrice(building *allBuildings, unsigned int numBuildings) {
 	// Boolean for keeping track if at least one record has been found
 	bool found = false;
 	double maxPrice = 0;
@@ -33,7 +33,7 @@ void searchBuildingsForPrice(building *allBuildings, int numBuildings) {
 	printf("\nPrezzo massimo dell'immobile da cercare: ");
 	maxPrice = readInteger();
 
-	for (int i = 0; i < numBuildings; i++) {
+	for (unsigned int i = 0; i < numBuildings; i++) {
 		if ((allBuildings + i)->price < maxPrice) {
 			found = true;
 			showBuildingData(allBuildings + i);
@@ -56,7 +56,7 @@ void searchBuildingsForPrice(building *allBuildings, int numBuildings) {
  * @param allBuildings Array of structs of all registered buildings
  * @param numBuildings Number of buildings registered
  */
-void searchBuildingsForCity(building *allBuildings, int numBuildings) {
+void searchBuildingsForCity(building *allBuildings, unsigned int numBuildings) {
 	// Boolean for keeping track if at least one record has been found
 	bool found = false;
 	char city[MAX_STRING_SIZE] = "";
@@ -69,7 +69,7 @@ void searchBuildingsForCity(building *allBuildings, int numBuildings) {
 	readString(city, false, false);
 	convertToUpperCase(city);
 
-	for (int i = 0; i < numBuildings; i++) {
+	for (unsigned int i = 0; i < numBuildings; i++) {
 		if (strstr((allBuildings + i)->city, city) != NULL) {
 			found = true;
 			showBuildingData(allBuildings + i);
@@ -92,10 +92,10 @@ void searchBuildingsForCity(building *allBuildings, int numBuildings) {
  * @param allBuildings Array of structs of all registered buildings
  * @param numBuildings Number of buildings registered
  */
-void searchBuildingsCtrType(building *allBuildings, int numBuildings) {
+void searchBuildingsCtrType(building *allBuildings, unsigned int numBuildings) {
 	// Boolean for keeping track if at least one record has been found
 	bool found = false;
-	int ctrType = 0;
+	unsigned short int ctrType = 0;
 
 	clearScr();
 
@@ -105,7 +105,7 @@ void searchBuildingsCtrType(building *allBuildings, int numBuildings) {
 	printf("\n\nSeleziona tipo di contratto: ");
 	ctrType = readInteger();
 
-	for (int i = 0; i < numBuildings; i++) {
+	for (unsigned int i = 0; i < numBuildings; i++) {
 		if ((allBuildings + i)->ctrType == ctrType) {
 			found = true;
 			showBuildingData(allBuildings + i);
@@ -128,7 +128,7 @@ void searchBuildingsCtrType(building *allBuildings, int numBuildings) {
  * @param allBuildings Array of structs of all registered buildings
  * @param numBuildings Number of buildings registered
  */
-void searchBuildingsByType(building *allBuildings, int numBuildings) {
+void searchBuildingsByType(building *allBuildings, unsigned int numBuildings) {
 	// Boolean for keeping track if at least one record has been found
 	bool found = false;
 	unsigned short int buildingType = 0;
@@ -141,7 +141,7 @@ void searchBuildingsByType(building *allBuildings, int numBuildings) {
 	printf("\n\nSeleziona tipo di immobile: ");
 	buildingType = readInteger();
 	
-	for (int i = 0; i < numBuildings; i++) {
+	for (unsigned int i = 0; i < numBuildings; i++) {
 		if ((allBuildings + i)->builType == buildingType) {
 			found = true;
 			showBuildingData(allBuildings + i);
@@ -164,9 +164,9 @@ void searchBuildingsByType(building *allBuildings, int numBuildings) {
  * @param allBuildings Array of structs of all registered buildings.
  * @param numBuildings Number of buildings registered.
  */
-int searchBuilding(building *allBuildings, int numBuildings) {
+int searchBuilding(building *allBuildings, unsigned int numBuildings) {
 	bool error = false;
-	short int choice = 0;
+	unsigned short int choice = 0;
 
 	clearScr();
 	printSectionName("Ricerca immobili", false);

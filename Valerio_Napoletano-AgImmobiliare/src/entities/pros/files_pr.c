@@ -28,9 +28,9 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
 	char line[MAX_TEXT_SIZE] = "";
 	char *token;
 
-	int field = 0;
+	unsigned short int field = 0;
 	// Pros counter
-	int proNum = 0;
+	unsigned int proNum = 0;
 
 	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
@@ -147,13 +147,13 @@ int appendProToFile(professional *pr, char *filename) {
  * @param rows How many professionals are registered
  * @param filename Filename where data is storeds
  */
-void rewriteProsToFile(professional *allPros, int rows, char *filename) {
+void rewriteProsToFile(professional *allPros, unsigned int rows, char *filename) {
 	FILE *filePtr;
 	filePtr = fopen(filename, "w+");
 
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
-		for (int i = 0; i < rows; i++) {
+		for (unsigned int i = 0; i < rows; i++) {
 			// Write to file only if toDelete bool is false
 			if (!(allPros + i)->toDelete) {
 				fprintf(filePtr, "%s,%s,%s,%s,%s,%s", (allPros + i)->id, (allPros + i)->name,
@@ -179,13 +179,13 @@ void rewriteProsToFile(professional *allPros, int rows, char *filename) {
  * @param rows How many professionals/potentials are registered
  * @return -1 if duplicates are found.
  */
-int checkDuplicatePros(professional *allPros, potential *allPts, int rows) {
+int checkDuplicatePros(professional *allPros, potential *allPts, unsigned int rows) {
 	bool result = false;
 	bool error = false;
-	short int choice = 0;
+	short unsigned int choice = 0;
 
-	for (int i = 0; i < rows; i++) {
-		for (int j = i + 1; j < rows; j++) {
+	for (unsigned int i = 0; i < rows; i++) {
+		for (unsigned int j = i + 1; j < rows; j++) {
 			if (strCompare((allPros + i)->id, (allPros + j)->id)) {
 				clearScr();
 				setRedColor();

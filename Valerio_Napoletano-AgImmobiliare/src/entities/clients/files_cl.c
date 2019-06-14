@@ -28,12 +28,12 @@ void parseClientFile(FILE *filePtr, client *cl) {
 	char line[MAX_TEXT_SIZE] = "";
 	char *token;
 
-	int field = 0;
+	unsigned short int field = 0;
 	// Client counter
-	int clientsNum = 0;
+	unsigned int clientsNum = 0;
 
 	// Temp var for string to integer conversion (enum)
-	int enumTmp = 0;
+	unsigned short int enumTmp = 0;
 
 	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
@@ -104,7 +104,7 @@ void parseClientFile(FILE *filePtr, client *cl) {
  * @param filename Filename where data should be written
  * @return -1 go back to main menu
  */
-int rewriteClientsToFile(client *cl, int rows, char *filename) {
+int rewriteClientsToFile(client *cl, unsigned int rows, char *filename) {
 	FILE *filePtr;
 	filePtr = fopen(filename, "w+");
 
@@ -112,7 +112,7 @@ int rewriteClientsToFile(client *cl, int rows, char *filename) {
 	sortClients(cl, rows);
 
 	if (checkFile(filePtr)) {
-		for (int i = 0; i < rows; i++) {
+		for (unsigned int i = 0; i < rows; i++) {
 			// Save client to file only if the client is not marked for deletion
 			if (!(cl + i)->toDelete) {
 				fprintf(filePtr, "%s,%s,%s,%d,%s,%d", (cl + i)->id, (cl + i)->name, (cl + i)->surname,
@@ -180,13 +180,13 @@ int loadClientFile(client *cl, char *filename) {
  * @param rows How many clients are registered
  * @return true if duplicates are found.
  */
-bool checkDuplicateClients(client *cl, int rows) {
+bool checkDuplicateClients(client *cl, unsigned int rows) {
 	bool result = false;
 	bool error = false;
-	short int choice = 0;
+	unsigned short int choice = 0;
 
-	for (int i = 0; i < rows; i++) {
-		for (int j = i + 1; j < rows; j++) {
+	for (unsigned int i = 0; i < rows; i++) {
+		for (unsigned int j = i + 1; j < rows; j++) {
 			if (strCompare((cl + i)->id, (cl + j)->id)) {
 				clearScr();
 				setRedColor();

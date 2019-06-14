@@ -21,8 +21,8 @@
  * @param pr Potentials array of structs
  * @param numRecords Number of professionals/potentials registered
  */
-void findPotential(char id[], potential *pr, int numRecords) {
-	for (int i = 0; i < numRecords; i++) {
+void findPotential(char id[], potential *pr, unsigned int numRecords) {
+	for (unsigned int i = 0; i < numRecords; i++) {
 		if (strCompare(id, (pr + i)->id)) {
 			setCyanColor();
 			printf("Potenziale: ");
@@ -43,9 +43,9 @@ void parsePotentialsFile(FILE *filePtr, potential *pr) {
 	char line[MAX_TEXT_SIZE] = "";
 	char *token;
 
-	int field = 0;
+	unsigned short int field = 0;
 	// Pros counter
-	int proNum = 0;
+	unsigned int proNum = 0;
 
 	while (fgets(line, sizeof line, filePtr) != NULL) /* read a line */
 	{
@@ -130,13 +130,13 @@ int appendPtsToFile(potential *pt, char *filename) {
  * @param rows How many potentials are registered
  * @param filename Filename where data is stored
  */
-void rewritePtsToFile(potential *allPts, int rows, char *filename) {
+void rewritePtsToFile(potential *allPts, unsigned int rows, char *filename) {
 	FILE *filePtr;
 	filePtr = fopen(filename, "w+");
 
 	if (checkFile(filePtr)) {
 		rewind(filePtr);
-		for (int i = 0; i < rows; i++) {
+		for (unsigned int i = 0; i < rows; i++) {
 			// Write to file only if toDelete bool is false
 			if (!(allPts + i)->toDelete) {
 				fprintf(filePtr, "%s|%s\n", (allPts + i)->id, (allPts + i)->content);

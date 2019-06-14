@@ -23,15 +23,15 @@
  * @param numBuildings Number of available buildings.
  * @return -1 for going back to the main menu
  */
-int resultsAgency(building *bl, int numBuildings) {
+int resultsAgency(building *bl, unsigned int numBuildings) {
 	char startDateIntervalStr[10] = "";
 	char endDateIntervalStr[10] = "";
 	
 	time_t startDateInterval = 0;
 	time_t endDateInterval = 0;
 	
-	short int numBuildingsFound = 0;
-	int totPrice = 0;
+	unsigned int numBuildingsFound = 0;
+	unsigned int totPrice = 0;
 	bool error = false;
 
 	clearScr();
@@ -53,7 +53,7 @@ int resultsAgency(building *bl, int numBuildings) {
 			// NOT SOLD HISTOGRAM
 			setRedColor();
 			printf("\nNON VENDUTI: \t|");
-			for (int i = 0; i < numBuildings; i++) {
+			for (unsigned int i = 0; i < numBuildings; i++) {
 				if ((bl + i)->regDate >= startDateInterval && (bl + i)->regDate <= endDateInterval &&  (bl + i)->soldOn == 0) {
 					printf("=");
 					numBuildingsFound++;
@@ -67,7 +67,7 @@ int resultsAgency(building *bl, int numBuildings) {
 			newLine();
 			setGreenColor();
 			printf("\nVENDUTI: \t|");
-			for (int i = 0; i < numBuildings; i++) {
+			for (unsigned int i = 0; i < numBuildings; i++) {
 				if ((bl + i)->soldOn >= startDateInterval && (bl + i)->soldOn <= endDateInterval) {
 					printf("=");
 					numBuildingsFound++;
@@ -87,7 +87,7 @@ int resultsAgency(building *bl, int numBuildings) {
 
 			printf("\nVuoi visualizzare la lista degli immobili venduti? (s/n): ");
 			if (askConfirm()) {
-				for (int i = 0; i < numBuildings; i++) {
+				for (unsigned int i = 0; i < numBuildings; i++) {
 					if ((bl + i)->soldOn >= startDateInterval && (bl + i)->soldOn <= endDateInterval) {
 						showBuildingData(bl + i);
 						numBuildingsFound++;

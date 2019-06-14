@@ -8,12 +8,12 @@
 #ifndef ENTITIES_CLIENTS_MISC_CL_H_
 #define ENTITIES_CLIENTS_MISC_CL_H_
 
-int addClient(client *allClients, int numClients);
+int addClient(client *allClients, unsigned int numClients);
 void saveLocalDate(client *cl);
 bool checkIfUserExpired(time_t epochTime, char id[]);
-void initClientsArray(client *cl, int size);
-int requestClientDeletion(client *allClients, int numClients);
-int deleteClient(client *allClients, int numClients, char *toDeleteID, char *filename);
-void checkDuplicateClientID(client *cl, client *allClients, int numClients);
+void initClientsArray(client *cl, unsigned int size);
+int requestClientDeletion(client *allClients, unsigned int numClients);
+int deleteClient(client *allClients, unsigned int numClients, char *toDeleteID, char *filename);
+void checkDuplicateClientID(client *cl, client *allClients, unsigned int numClients);
 
 #endif /* ENTITIES_CLIENTS_MISC_CL_H_ */

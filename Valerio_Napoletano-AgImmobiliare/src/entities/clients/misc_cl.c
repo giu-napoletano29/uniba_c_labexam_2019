@@ -45,9 +45,9 @@ void saveLocalDate(client *cl) {
  * @param numClients Number of items (clients) saved in the array.
  * @return -1 for going back to the main menu.
  */
-int addClient(client *allClients, int numClients) {
+int addClient(client *allClients, unsigned int numClients) {
 	client cl = { "", "", "", 1, "", 0, 0, 1, false };
-	int newClientsNum = 0;
+	unsigned int newClientsNum = 0;
 
 	clearScr();
 	printSectionName("Aggiunta cliente", false);
@@ -95,7 +95,7 @@ int addClient(client *allClients, int numClients) {
  * @param allClients Array of structs where all clients are available.
  * @param numClients Number of clients registered.
  */
-void checkDuplicateClientID(client *cl, client *allClients, int numClients) {
+void checkDuplicateClientID(client *cl, client *allClients, unsigned int numClients) {
 	bool error = false;
 	do {
 		if (error) {
@@ -105,7 +105,7 @@ void checkDuplicateClientID(client *cl, client *allClients, int numClients) {
 		}
 		reqID(cl);
 
-		for (int i = 0; i < numClients; i++) {
+		for (unsigned int i = 0; i < numClients; i++) {
 			if (strcmp(cl->id, (allClients + i)->id) == 0) {
 				error = true;
 				i = numClients;
@@ -124,7 +124,7 @@ void checkDuplicateClientID(client *cl, client *allClients, int numClients) {
  * @param numClients Number of clients registered.
  * @return -1 for going back to the menu
  */
-int requestClientDeletion(client *allClients, int numClients) {
+int requestClientDeletion(client *allClients, unsigned int numClients) {
 	bool found = false;
 	char toDeleteID[MAX_STRING_SIZE] = "0";
 
@@ -134,7 +134,7 @@ int requestClientDeletion(client *allClients, int numClients) {
 	printf("\nInserisci Codice Fiscale o Partita IVA del cliente da eliminare: ");
 	readString(toDeleteID, false, false);
 
-	for (int i = 0; i < numClients; i++) {
+	for (unsigned int i = 0; i < numClients; i++) {
 		if (strCompare(toDeleteID, (allClients + i)->id)) {
 			(allClients + i)->toDelete = true;
 			found = true;
@@ -175,9 +175,9 @@ int requestClientDeletion(client *allClients, int numClients) {
  * 
  * @return
  */
-int deleteClient(client *allClients, int numClients, char *toDeleteID, char *filename) {
+int deleteClient(client *allClients, unsigned int numClients, char *toDeleteID, char *filename) {
 	unsigned short int result = 0;
-	for (int i = 0; i < numClients; i++) {
+	for (unsigned int i = 0; i < numClients; i++) {
 		if (strCompare(toDeleteID, (allClients + i)->id)) {
 			(allClients + i)->toDelete = true;
 			result = 1;
@@ -240,8 +240,8 @@ bool checkIfUserExpired(time_t epochTime, char id[]) {
  * @param cl "client" type struct.
  * @param size How many elements the array of struct will keep.
  */
-void initClientsArray(client *cl, int size) {
-	for (int i = 0; i < size; i++) {
+void initClientsArray(client *cl, unsigned int size) {
+	for (unsigned int i = 0; i < size; i++) {
 		strcpy((cl + i)->id, "");
 		strcpy((cl + i)->name, "");
 		strcpy((cl + i)->surname, "");

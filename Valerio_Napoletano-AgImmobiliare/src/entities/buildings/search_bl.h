@@ -8,10 +8,10 @@
 #ifndef ENTITIES_BUILDINGS_SEARCH_BL_H_
 #define ENTITIES_BUILDINGS_SEARCH_BL_H_
 
-void searchBuildingsForPrice(building *allBuildings, int numBuildings);
-void searchBuildingsForCity(building *allBuildings, int numBuildings);
-void searchBuildingsCtrType(building *allBuildings, int numBuildings);
-void searchBuildingsByType(building *allBuildings, int numBuildings);
-int searchBuilding(building *allBuildings, int numBuildings);
+void searchBuildingsForPrice(building *allBuildings, unsigned int numBuildings);
+void searchBuildingsForCity(building *allBuildings, unsigned int numBuildings);
+void searchBuildingsCtrType(building *allBuildings, unsigned int numBuildings);
+void searchBuildingsByType(building *allBuildings, unsigned int numBuildings);
+int searchBuilding(building *allBuildings, unsigned int numBuildings);
 
 #endif /* ENTITIES_BUILDINGS_SEARCH_BL_H_ */

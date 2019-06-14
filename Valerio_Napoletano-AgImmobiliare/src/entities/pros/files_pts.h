@@ -5,8 +5,8 @@
  * @brief Header file with prototypes of functions related to the professionals' "potential".
  */
 
-void findPotential(char id[], potential *pr, int num_profess);
+void findPotential(char id[], potential *pr, unsigned int num_profess);
 void parsePotentialsFile(FILE *filePtr, potential *pr);
 int loadPotentialsFile(potential *allPts, char *filename);
 int appendPtsToFile(potential *pt, char *filename);
-void rewritePtsToFile(potential *allPts, int rows, char *filename);
+void rewritePtsToFile(potential *allPts, unsigned int rows, char *filename);

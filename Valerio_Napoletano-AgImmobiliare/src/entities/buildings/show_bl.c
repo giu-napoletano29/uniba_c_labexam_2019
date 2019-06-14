@@ -20,7 +20,7 @@
  *
  * @param type Integer that represents the building type.
  */
-void showBuildingType(int type) {
+void showBuildingType(unsigned short int type) {
 	switch (type) {
 		case 1:
 			printf("Appartamento");
@@ -51,7 +51,7 @@ void showBuildingType(int type) {
  *
  * @param type Integer that represents the contract type.
  */
-void showContractType(int type) {
+void showContractType(unsigned short int type) {
 	switch (type) {
 		case 1:
 			printf("Affitto");
@@ -166,7 +166,7 @@ void showBuildingData(building *bl) {
  * @param numBuildings Number of items (buildings) saved in the array.
  * @return Value for returning back to the menu (-1)
  */
-int showAllBuildings(building *bl, int numBuildings) {
+int showAllBuildings(building *bl, unsigned int numBuildings) {
 	sortBuildings(bl, numBuildings);
 	rewriteBuildingsToFile(bl, numBuildings, BUILDINGS_FNAME);
 
@@ -174,7 +174,7 @@ int showAllBuildings(building *bl, int numBuildings) {
 	printSectionName("Lista immobili", false);
 
 	if (numBuildings != 0) {
-		for (int i = 0; i < numBuildings; i++) {
+		for (unsigned int i = 0; i < numBuildings; i++) {
 			showBuildingData(bl + i);
 		}
 		newLine();

@@ -19,8 +19,8 @@
  * @param bl "building" type array of struct.
  * @param size How many elements the array of struct will keep.
  */
-void initBuildingsArray(building *bl, int size) {
-	for (int i = 0; i < size; i++) {
+void initBuildingsArray(building *bl, unsigned int size) {
+	for (unsigned int i = 0; i < size; i++) {
 		(bl + i)->id = 0;
 		strcpy((bl + i)->street, "");
 		(bl + i)->civic = 0;
@@ -55,12 +55,12 @@ void saveBuildingLocalDate(building *bl) {
  * @param allBuildings Array of structs where all buildings are available.
  * @param numBuildings Number of buildings registered.
  */
-void checkDuplicateBuildingID(building *bl, building *allBuildings, int numBuildings) {
+void checkDuplicateBuildingID(building *bl, building *allBuildings, unsigned int numBuildings) {
 	bool error = false;
 	do {
 		genBuildingID(bl);
 
-		for (int i = 0; i < numBuildings; i++) {
+		for (unsigned int i = 0; i < numBuildings; i++) {
 			if (bl->id == (allBuildings + i)->id) {
 				error = true;
 				i = numBuildings;
@@ -78,7 +78,7 @@ void checkDuplicateBuildingID(building *bl, building *allBuildings, int numBuild
  *
  * @return -1 for going back to the main menu.
  */
-int addBuilding(building *allBuildings, int numBuildings) {
+int addBuilding(building *allBuildings, unsigned int numBuildings) {
 	building bl = { 0, "", 0, "", "", 0, 0, "", "", 1, 0 };
 
 	clearScr();
@@ -118,7 +118,7 @@ int addBuilding(building *allBuildings, int numBuildings) {
  * @param numBuildings Number of buildings registered.
  * @return -1 for going back to the menu
  */
-int editBuilding(building *allBuildings, int numBuildings) {
+int editBuilding(building *allBuildings, unsigned int numBuildings) {
 	unsigned int toEditID = 0;
 	unsigned int buildingPos = 0;
 	bool found = false;
@@ -129,7 +129,7 @@ int editBuilding(building *allBuildings, int numBuildings) {
 	printf("\nInserisci identiticativo immobile da modificare: ");
 	toEditID = readInteger();
 
-	for (int i = 0; i < numBuildings; i++) {
+	for (unsigned int i = 0; i < numBuildings; i++) {
 		if (toEditID == (allBuildings + i)->id) {
 			buildingPos = i;
 			found = true;
@@ -189,9 +189,9 @@ int editBuilding(building *allBuildings, int numBuildings) {
  * 
  * @return 1 successful
  */
-int deleteBuilding(building *allBuildings, int numBuildings, int toDeleteID, char *filename) {
+int deleteBuilding(building *allBuildings, unsigned int numBuildings, unsigned int toDeleteID, char *filename) {
 	unsigned short int result = 0;
-	for (int i = 0; i < numBuildings; i++) {
+	for (unsigned int i = 0; i < numBuildings; i++) {
 		if (toDeleteID == (allBuildings + i)->id) {
 			(allBuildings + i)->toDelete = true;
 			result = 1;
@@ -210,8 +210,8 @@ int deleteBuilding(building *allBuildings, int numBuildings, int toDeleteID, cha
  * @param filename Filename where data is stored
  * @return -1 for going back to the menu
  */
-int requestBuildingDeletion(building *allBuildings, int numBuildings, char *filename) {
-	int toDeleteID = 0;
+int requestBuildingDeletion(building *allBuildings, unsigned int numBuildings, char *filename) {
+	unsigned int toDeleteID = 0;
 	bool found = false;
 
 	clearScr();
@@ -220,7 +220,7 @@ int requestBuildingDeletion(building *allBuildings, int numBuildings, char *file
 	printf("\nInserisci identiticativo immobile da eliminare: ");
 	toDeleteID = readInteger();
 
-	for (int i = 0; i < numBuildings; i++) {
+	for (unsigned int i = 0; i < numBuildings; i++) {
 		if (toDeleteID == (allBuildings + i)->id) {
 			found = true;
 
@@ -256,8 +256,8 @@ int requestBuildingDeletion(building *allBuildings, int numBuildings, char *file
  * @param numBuildings Number of buildings registered.
  * @return -1 for going back to the menu
  */
-int sellBuilding(building *allBuildings, int numBuildings) {
-	int buildingID = 0;
+int sellBuilding(building *allBuildings, unsigned int numBuildings) {
+	unsigned int buildingID = 0;
 	char soldOnString[MAX_STRING_SIZE] = "";
 	bool found = false;
 
@@ -267,7 +267,7 @@ int sellBuilding(building *allBuildings, int numBuildings) {
 	printf("\nInserisci identiticativo immobile: ");
 	buildingID = readInteger();
 
-	for (int i = 0; i < numBuildings; i++) {
+	for (unsigned int i = 0; i < numBuildings; i++) {
 		if (buildingID == (allBuildings + i)->id && (allBuildings + i)->soldOn == 0) {
 
 			showBuildingData(allBuildings + i);
