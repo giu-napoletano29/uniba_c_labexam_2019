@@ -11,7 +11,9 @@
 #include "req_bl.h"
 #include "show_bl.h"
 #include "files_bl.h"
+#include "../../file_utils.h"
 #include "../../utils.h"
+#include "../../sort.h"
 
 /**
  * @brief Initialize an array of structs of buildings.
@@ -80,6 +82,7 @@ void checkDuplicateBuildingID(building *bl, building *allBuildings, unsigned int
  */
 int addBuilding(building *allBuildings, unsigned int numBuildings) {
 	building bl = { 0, "", 0, "", "", 0, 0, "", "", 1, 0 };
+	unsigned int newBuildingsNum = 0;
 
 	clearScr();
 	printSectionName("Aggiunta immobile", false);
@@ -107,6 +110,24 @@ int addBuilding(building *allBuildings, unsigned int numBuildings) {
 	saveBuildingLocalDate(&bl);
 
 	appendBuildingToFile(&bl, BUILDINGS_FNAME);
+
+	/** - Re-declare and re-initialize the array of structs with the newly created client */
+	newBuildingsNum = countFileRows(BUILDINGS_FNAME);
+
+	// Reload and rewrite ordered array only if required
+	if (newBuildingsNum > 1) {
+		/** Sort buildings in the memory */
+		sortBuildings(allBuildings, newBuildingsNum);
+
+		building newAllBuildings[newBuildingsNum];
+		initBuildingsArray(newAllBuildings, newBuildingsNum);
+
+		/** - Load buildings file and stores the parsed data in the memory. */
+		loadBuildingsFile(newAllBuildings, BUILDINGS_FNAME);
+
+		/** Rewrite ordered array of structs from memory to the clients file */
+		rewriteBuildingsToFile(newAllBuildings, newBuildingsNum, BUILDINGS_FNAME);
+	}
 
 	return -1;
 }

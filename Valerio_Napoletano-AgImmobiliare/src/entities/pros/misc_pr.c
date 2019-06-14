@@ -135,27 +135,29 @@ int addPro(professional *allPros, potential *allPts, unsigned int numRecords) {
 
 	appendPtsToFile(&pt, PTS_FNAME);
 
-	// --- PROFESSIONALS ---
-
-	/** - Sort professionls in the memory */
-	sortPros(allPros, numRecords);
-
-	/** - Re-declare and re-initialize the array of structs with the newly created pros */
 	newProsNum = countFileRows("professionals");
-	professional newAllPros[newProsNum];
-	initProsArray(newAllPros, newProsNum);
+	
+	// Reload and rewrite ordered array only if required
+	if (newProsNum > 1) {
+		/** - Sort professionls in the memory */
+		sortPros(allPros, numRecords);
 
-	/** - Reload pros file and stores the parsed data in the memory. */
-	loadProsFile(newAllPros, PROS_FNAME);
+		/** - Re-declare and re-initialize the array of structs with the newly created pros */
+		professional newAllPros[newProsNum];
+		initProsArray(newAllPros, newProsNum);
 
-	/** - Write ordered array of structs from memory to the pros file */
-	rewriteProsToFile(newAllPros, newProsNum, PROS_FNAME);
+		/** - Reload pros file and stores the parsed data in the memory. */
+		loadProsFile(newAllPros, PROS_FNAME);
+
+		/** - Write ordered array of structs from memory to the pros file */
+		rewriteProsToFile(newAllPros, newProsNum, PROS_FNAME);
+	}
 
 	return -1;
 }
 
-int deletePro(professional *allPros, potential *allPts, unsigned int numRecords, char *toDeleteID, char *prosFile,
-		char *ptsFile) {
+int deletePro(professional *allPros, potential *allPts, unsigned int numRecords, char *toDeleteID,
+		char *prosFile, char *ptsFile) {
 
 	for (unsigned int i = 0; i < numRecords; i++) {
 		if (strCompare(toDeleteID, (allPros + i)->id)) {
@@ -170,7 +172,7 @@ int deletePro(professional *allPros, potential *allPts, unsigned int numRecords,
 	}
 	rewriteProsToFile(allPros, numRecords, prosFile);
 	rewritePtsToFile(allPts, numRecords, ptsFile);
-	
+
 	return -1;
 }
 

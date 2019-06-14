@@ -71,20 +71,24 @@ int addClient(client *allClients, unsigned int numClients) {
 
 	appendClientToFile(&cl, CLIENTS_FNAME);
 
-	/** Sort clients in the memory */
-	sortClients(allClients, numClients);
-
 	/** - Re-declare and re-initialize the array of structs with the newly created client */
-	newClientsNum = countFileRows("clients");
-	client newAllClients[newClientsNum];
-	initClientsArray(newAllClients, newClientsNum);
+	newClientsNum = countFileRows(CLIENTS_FNAME);
+	
+	// Reload and rewrite ordered array only if required
+	if (newClientsNum > 1) {
+		/** Sort clients in the memory */
+		sortClients(allClients, numClients);
+		
+		client newAllClients[newClientsNum];
+		initClientsArray(newAllClients, newClientsNum);
 
-	/** - Load client file and stores the parsed data in the memory. */
-	loadClientFile(newAllClients, CLIENTS_FNAME);
+		/** - Load client file and stores the parsed data in the memory. */
+		loadClientFile(newAllClients, CLIENTS_FNAME);
 
-	/** Rewrite ordered array of structs from memory to the clients file */
-	rewriteClientsToFile(newAllClients, newClientsNum, CLIENTS_FNAME);
-
+		/** Rewrite ordered array of structs from memory to the clients file */
+		rewriteClientsToFile(newAllClients, newClientsNum, CLIENTS_FNAME);
+	}
+	
 	return -1;
 }
 
@@ -96,25 +100,29 @@ int addClient(client *allClients, unsigned int numClients) {
  * @param numClients Number of clients registered.
  */
 void checkDuplicateClientID(client *cl, client *allClients, unsigned int numClients) {
-	bool error = false;
-	do {
-		if (error) {
-			setYellowColor();
-			puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
-			resetColor();
-		}
-		reqID(cl);
-
-		for (unsigned int i = 0; i < numClients; i++) {
-			if (strcmp(cl->id, (allClients + i)->id) == 0) {
-				error = true;
-				i = numClients;
-			} else {
-				error = false;
+	if (numClients != 0) {
+		bool error = false;
+		do {
+			if (error) {
+				setYellowColor();
+				puts("\nQuesto ID e' gia' presente nel database.\nSi prega di inserirne uno diverso.\n");
+				resetColor();
 			}
-		}
+			reqID(cl);
 
-	} while (error == true);
+			for (unsigned int i = 0; i < numClients; i++) {
+				if (strCompare(cl->id, (allClients + i)->id)) {
+					error = true;
+					i = numClients;
+				} else {
+					error = false;
+				}
+			}
+
+		} while (error == true);
+	} else {
+		reqID(cl);
+	}
 }
 
 /**

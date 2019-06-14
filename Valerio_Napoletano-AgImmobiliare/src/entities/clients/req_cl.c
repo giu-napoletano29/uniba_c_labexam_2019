@@ -87,6 +87,7 @@ void reqID(client *cl) {
 		reqPIVA(cl);
 	} else {
 		reqCF(cl);
+		convertToUpperCase(cl->id);
 	}
 	clearScr();
 }

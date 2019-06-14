@@ -45,12 +45,13 @@ int clientsMenu() {
 	initClientsArray(allClients, clientsNum);
 
 	/** - Load client file and stores the parsed data in the memory. */
-	loadClientFile(allClients, CLIENTS_FNAME);
-
-	/**
-	 - Check if there's any client with duplicated IDs
-	 If so asks the user to change it. */
-	checkDuplicateClients(allClients, clientsNum);
+	if (clientsNum > 0) {
+		loadClientFile(allClients, CLIENTS_FNAME);
+		/**
+		 - Check if there's any client with duplicated IDs
+		 If so asks the user to change it. */
+		checkDuplicateClients(allClients, clientsNum);
+	}
 
 	do {
 		clearScr();
@@ -120,13 +121,15 @@ int professMenu() {
 	initPotentialsArray(allPts, potsNum);
 
 	/** - Load pros file and stores the parsed data in the memory. */
-	loadProsFile(allPros, PROS_FNAME);
-	loadPotentialsFile(allPts, PTS_FNAME);
+	if (prosNum > 0) {
+		loadProsFile(allPros, PROS_FNAME);
+		loadPotentialsFile(allPts, PTS_FNAME);
 
-	/**
-	 - Check if there's any client with duplicated IDs
-	 If so asks the user to change it. */
-	checkDuplicatePros(allPros, allPts, prosNum);
+		/**
+		 - Check if there's any client with duplicated IDs
+		 If so asks the user to change it. */
+		checkDuplicatePros(allPros, allPts, prosNum);
+	}
 
 	do {
 		clearScr();
@@ -188,13 +191,15 @@ int buildingsMenu() {
 	building allBuildings[buildingsNum];
 	initBuildingsArray(allBuildings, buildingsNum);
 
-	/** - Load buildings file and stores the parsed data in the memory. */
-	loadBuildingsFile(allBuildings, BUILDINGS_FNAME);
+	if (buildingsNum > 0) {
+		/** - Load buildings file and stores the parsed data in the memory. */
+		loadBuildingsFile(allBuildings, BUILDINGS_FNAME);
 
-	/**
-	 - Check if there's any client with duplicated IDs
-	 If so asks the user to change it. */
-	checkDuplicateBuildings(allBuildings, buildingsNum);
+		/**
+		 - Check if there's any client with duplicated IDs
+		 If so asks the user to change it. */
+		checkDuplicateBuildings(allBuildings, buildingsNum);
+	}
 
 	do {
 		clearScr();
