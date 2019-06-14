@@ -72,11 +72,14 @@ void showProData(professional *pr, potential *allPts, unsigned int numRecords) {
  * @return Value for returning back to the menu (-1)
  */
 int showAllPros(professional *allPros, potential *allPts, unsigned int numRecords) {
-	sortPros(allPros, numRecords);
-	rewriteProsToFile(allPros, numRecords, PROS_FNAME);
-
 	clearScr();
 	printSectionName("Lista professionisti", false);
+
+	// Sort and rewrite pros to file only if needed
+	if (numRecords > 1) {
+		sortPros(allPros, numRecords);
+		rewriteProsToFile(allPros, numRecords, PROS_FNAME);
+	}
 
 	if (numRecords != 0) {
 		for (unsigned int i = 0; i < numRecords; i++) {
@@ -85,6 +88,7 @@ int showAllPros(professional *allPros, potential *allPts, unsigned int numRecord
 	} else {
 		dbEmptyError();
 	}
+
 	pause();
 	return -1;
 }

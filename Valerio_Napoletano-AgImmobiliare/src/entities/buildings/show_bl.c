@@ -167,11 +167,14 @@ void showBuildingData(building *bl) {
  * @return Value for returning back to the menu (-1)
  */
 int showAllBuildings(building *bl, unsigned int numBuildings) {
-	sortBuildings(bl, numBuildings);
-	rewriteBuildingsToFile(bl, numBuildings, BUILDINGS_FNAME);
-
 	clearScr();
 	printSectionName("Lista immobili", false);
+
+	// Sort and rewrite to file building only if needed
+	if (numBuildings > 1) {
+		sortBuildings(bl, numBuildings);
+		rewriteBuildingsToFile(bl, numBuildings, BUILDINGS_FNAME);
+	}
 
 	if (numBuildings != 0) {
 		for (unsigned int i = 0; i < numBuildings; i++) {
