@@ -58,9 +58,9 @@ int countFileRows(char *name) {
 			rowsNum++;
 		}
 	}
+	fclose(filePtr);
 	return rowsNum;
 }
-
 
 /**
  * @brief Save formatted date in day/month/year to file.
