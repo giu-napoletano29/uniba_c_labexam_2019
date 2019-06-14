@@ -193,7 +193,7 @@ int editBuilding(building *allBuildings, unsigned int numBuildings) {
 		rewriteBuildingsToFile(allBuildings, numBuildings, BUILDINGS_FNAME);
 	} else {
 		setRedColor();
-		printf("\nNessun immobile trovato con l'ID inserito\noppure risulta venduto.");
+		puts("\nNessun immobile trovato con l'ID inserito\noppure risulta venduto.\n");
 		resetColor();
 		pause();
 	}

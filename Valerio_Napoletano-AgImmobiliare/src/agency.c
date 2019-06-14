@@ -110,7 +110,6 @@ int resultsAgency(building *bl, unsigned int numBuildings) {
 	} else {
 		dbEmptyError();
 	}
-	newLine();
 	pause();
 
 	return -1;

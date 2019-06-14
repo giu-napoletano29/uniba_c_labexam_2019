@@ -135,7 +135,7 @@ int addPro(professional *allPros, potential *allPts, unsigned int numRecords) {
 
 	appendPtsToFile(&pt, PTS_FNAME);
 
-	newProsNum = countFileRows("professionals");
+	newProsNum = countFileRows(PROS_FNAME);
 	
 	// Reload and rewrite ordered array only if required
 	if (newProsNum > 1) {
