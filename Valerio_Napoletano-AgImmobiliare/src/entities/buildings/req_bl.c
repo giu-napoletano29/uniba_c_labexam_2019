@@ -117,8 +117,21 @@ void reqBuildingOwner(building *bl) {
  * @param bl "building" type struct
  */
 void reqBuildingPhone(building *bl) {
-	printf("Numero telefono proprietario: ");
-	readString(bl->phone, false, true);
+	bool error = false;
+
+	do {
+		printf("Numero di telefono proprietario: ");
+
+		if (readString(bl->phone, false, false) != 10) {
+			setYellowColor();
+			puts("\nInserisci un numero di telefono corretto (10 cifre).\n");
+			resetColor();
+			error = true;
+		} else {
+			error = false;
+		}
+	} while (error == true);
+	
 	clearScr();
 }
 

@@ -77,6 +77,7 @@ void reqProSurname(professional *pr) {
 void reqProArea(professional *pr) {
 	printf("Area: ");
 	readString(pr->area, true, false);
+	convertToUpperCase(pr->area);
 
 	clearScr();
 }
@@ -87,9 +88,21 @@ void reqProArea(professional *pr) {
  * @param pr "professional" type struct
  */
 void reqProPhone(professional *pr) {
-	printf("Numero di telefono: ");
-	readString(pr->phone, false, false);
+	bool error = false;
 
+	do {
+		printf("Numero di telefono: ");
+
+		if (readString(pr->phone, false, false) != 10) {
+			setYellowColor();
+			puts("\nInserisci un numero di telefono corretto (10 cifre).\n");
+			resetColor();
+			error = true;
+		} else {
+			error = false;
+		}
+	} while (error == true);
+	
 	clearScr();
 }
 
@@ -99,9 +112,22 @@ void reqProPhone(professional *pr) {
  * @param pr "professional" type struct
  */
 void reqProEmail(professional *pr) {
-	printf("Indirizzo e-mail: ");
-	readString(pr->email, false, false);
+	bool error = false;
 
+	do {		
+		printf("Indirizzo e-mail: ");	
+		readString(pr->email, false, false);
+
+		if (strstr(pr->email, "@") == NULL) {
+			setYellowColor();
+			puts("\nInserisci un indirizzo email corretto.\n");
+			resetColor();
+			error = true;
+		} else {
+			error = false;
+		}
+	} while (error == true);
+	
 	clearScr();
 }
 
@@ -131,5 +157,4 @@ void reqProPotential(professional *pr, potential *pt) {
 
 	clearScr();
 }
-
 
