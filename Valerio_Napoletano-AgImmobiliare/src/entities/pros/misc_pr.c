@@ -194,7 +194,7 @@ int requestProDeletion(professional *allPros, potential *allPts, unsigned int nu
 	printSectionName("Eliminazione professionista", false);
 
 	printf("\nInserisci Codice Fiscale del professionista da eliminare: ");
-	readString(toDeleteID, false, false);
+	readString(toDeleteID, false, false, true);
 
 	for (unsigned int i = 0; i < numRecords; i++) {
 		if (strCompare(toDeleteID, (allPros + i)->id)) {

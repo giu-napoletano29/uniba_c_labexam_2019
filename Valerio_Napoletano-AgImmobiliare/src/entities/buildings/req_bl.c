@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h> // For using time(null)
+#include <ctype.h>
 
 #include "../../utils.h"
 #include "../../datatypes.h"
@@ -39,9 +40,8 @@ void genBuildingID(building *bl) {
  * @param bl "building" type struct
  */
 void reqBuildingStreet(building *bl) {
-	//TODO: Only checks are both false for reading spaces
 	printf("\nVia/Piazza/Viale: ");
-	readString(bl->street, false, false);
+	readString(bl->street, true, false, false);
 	convertToUpperCase(bl->street);
 
 	printf("\nNumero civico: ");
@@ -56,8 +56,9 @@ void reqBuildingStreet(building *bl) {
  */
 void reqBuildingCity(building *bl) {
 	printf("Citta': ");
-	readString(bl->city, false, false);
+	readString(bl->city, true, false, false);
 	convertToUpperCase(bl->city);
+
 	clearScr();
 }
 
@@ -71,7 +72,7 @@ void reqBuildingProvince(building *bl) {
 
 	printf("Provincia (come sigla): ");
 	do {
-		if (readString(bl->province, true, false) != 2) {
+		if (readString(bl->province, true, false, false) != 2) {
 			error = true;
 			setYellowColor();
 			puts("\nValore errato!");
@@ -105,8 +106,7 @@ void reqBuildingPrice(building *bl) {
  */
 void reqBuildingOwner(building *bl) {
 	printf("Nome e cognome proprietario: ");
-	//TODO: Only checks are both false for reading spaces
-	readString(bl->owner, false, false);
+	readString(bl->owner, true, false, false);
 	convertToUpperCase(bl->owner);
 	clearScr();
 }
@@ -122,7 +122,7 @@ void reqBuildingPhone(building *bl) {
 	do {
 		printf("Numero di telefono proprietario: ");
 
-		if (readString(bl->phone, false, false) != 10) {
+		if (readString(bl->phone, false, false, false) != 10) {
 			setYellowColor();
 			puts("\nInserisci un numero di telefono corretto (10 cifre).\n");
 			resetColor();
@@ -131,7 +131,7 @@ void reqBuildingPhone(building *bl) {
 			error = false;
 		}
 	} while (error == true);
-	
+
 	clearScr();
 }
 
@@ -204,18 +204,18 @@ void reqBuildingSold(building *bl) {
 	clearScr();
 
 	printf("L'immobile e' stato venduto/dato in affitto? (s/n): ");
-	
+
 	if (askConfirm()) {
 		newLine();
 		// Workaround for avoiding askConfirm() conflict with readString
 		fflush(stdin);
-		
+
 		printf("Quando? Inserisci una data (gg/mm/yyyy): ");
-		readString(soldOnString, false, false);
+		readString(soldOnString, false, false, false);
 		bl->soldOn = parseDate(soldOnString);
 	} else {
 		bl->soldOn = 0;
 	}
-	
+
 	clearScr();
 }

@@ -39,11 +39,11 @@ int resultsAgency(building *bl, unsigned int numBuildings) {
 
 	if (numBuildings != 0) {
 		printf("\nInserisci primo intervallo di data (gg/mm/aaaa): ");
-		readString(startDateIntervalStr, false, false);
+		readString(startDateIntervalStr, false, false, false);
 		startDateInterval = parseDate(startDateIntervalStr);
 
 		printf("\nInserisci secondo intervallo di data (gg/mm/aaaa): ");
-		readString(endDateIntervalStr, false, false);
+		readString(endDateIntervalStr, false, false, false);
 		endDateInterval = parseDate(endDateIntervalStr);
 
 		if (startDateInterval < endDateInterval) {

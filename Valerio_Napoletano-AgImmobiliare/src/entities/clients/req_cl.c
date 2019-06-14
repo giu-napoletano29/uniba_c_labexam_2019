@@ -38,7 +38,7 @@ void reqPIVA(client *cl) {
 		printf("Partita IVA: ");
 
 		/** Validate P.IVA length */
-		if (readString(cl->id, false, true) != 11) {
+		if (readString(cl->id, false, true, false) != 11) {
 			error = true;
 		} else {
 			error = false;
@@ -68,7 +68,7 @@ void reqCF(client *cl) {
 		printf("Codice fiscale: ");
 
 		/** Validate CF length */
-		if (readString(cl->id, false, false) != 16) {
+		if (readString(cl->id, false, false, true) != 16) {
 			error = true;
 		} else {
 			error = false;
@@ -99,7 +99,7 @@ void reqID(client *cl) {
  */
 void reqName(client *cl) {
 	printf("Nome: ");
-	readString(cl->name, true, false);
+	readString(cl->name, true, false, false);
 
 	clearScr();
 }
@@ -111,7 +111,7 @@ void reqName(client *cl) {
  */
 void reqSurname(client *cl) {
 	printf("Cognome: ");
-	readString(cl->surname, true, false);
+	readString(cl->surname, true, false, false);
 
 	clearScr();
 }
@@ -159,7 +159,7 @@ void reqCompanyName(client *cl) {
 		newLine();
 		printf("Nome azienda: ");
 		// numCheck is false because a company name can have numbers
-		readString(cl->companyName, false, false);
+		readString(cl->companyName, true, false, false);
 	} else {
 		strcpy(cl->companyName, "-");
 	}

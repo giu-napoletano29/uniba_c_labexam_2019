@@ -22,7 +22,7 @@ void convertToUpperCase(char *s);
 bool strCompare(char *from, char *to);
 bool askConfirm();
 
-int readString(char *value, bool onlyAlpha, bool onlyNumbers);
+int readString(char *value, bool onlyAlpha, bool onlyNumbers, bool onlyAlphaNumbers);
 int readInteger();
 double readDouble();
 

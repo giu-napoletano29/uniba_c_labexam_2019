@@ -31,7 +31,7 @@ void reqProCF(professional *pr) {
 		printf("Codice fiscale: ");
 
 		/** Validate CF length */
-		if (readString(pr->id, false, false) != 16) {
+		if (readString(pr->id, false, false, true) != 16) {
 			error = true;
 		} else {
 			error = false;
@@ -50,7 +50,7 @@ void reqProCF(professional *pr) {
  */
 void reqProName(professional *pr) {
 	printf("Nome: ");
-	readString(pr->name, true, false);
+	readString(pr->name, true, false, false);
 	convertToUpperCase(pr->name);
 
 	clearScr();
@@ -63,7 +63,7 @@ void reqProName(professional *pr) {
  */
 void reqProSurname(professional *pr) {
 	printf("Cognome: ");
-	readString(pr->surname, true, false);
+	readString(pr->surname, true, false, false);
 	convertToUpperCase(pr->surname);
 
 	clearScr();
@@ -76,7 +76,7 @@ void reqProSurname(professional *pr) {
  */
 void reqProArea(professional *pr) {
 	printf("Area: ");
-	readString(pr->area, true, false);
+	readString(pr->area, true, false, false);
 	convertToUpperCase(pr->area);
 
 	clearScr();
@@ -93,7 +93,7 @@ void reqProPhone(professional *pr) {
 	do {
 		printf("Numero di telefono: ");
 
-		if (readString(pr->phone, false, false) != 10) {
+		if (readString(pr->phone, false, true, false) != 10) {
 			setYellowColor();
 			puts("\nInserisci un numero di telefono corretto (10 cifre).\n");
 			resetColor();
@@ -116,7 +116,7 @@ void reqProEmail(professional *pr) {
 
 	do {		
 		printf("Indirizzo e-mail: ");	
-		readString(pr->email, false, false);
+		readString(pr->email, false, false, false);
 
 		if (strstr(pr->email, "@") == NULL) {
 			setYellowColor();
@@ -153,7 +153,7 @@ void reqProPotential(professional *pr, potential *pt) {
 	printf("Potenziale: ");
 
 	strcpy(pt->id, pr->id);
-	readString(pt->content, false, false);
+	readString(pt->content, false, false, false);
 
 	clearScr();
 }

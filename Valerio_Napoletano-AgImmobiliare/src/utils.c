@@ -96,19 +96,40 @@ void setGreenColor() {
 }
 
 /**
- * @brief Check if the string has only alphabetic characters.
+ * @brief Check if the string has only alphabetic characters or a space.
  * i.e either an uppercase letter (ABCDEFGHIJKLMNOPQRSTUVWXYZ)
- * or a lowercase letter (abcdefghijklmnopqrstuvwxyz)
- *
+ * a lowercase letter (abcdefghijklmnopqrstuvwxyz)
+ * or a space
+ * 
  * @param str String to check
  * @return true if string is only made up by alphabetic characters, false otherwise.
  */
 bool isOnlyAlpha(char *str) {
 	bool result = false;
 	for (unsigned int i = 0; i < strlen(str); i++) {
-		/*! isalpha: Non-zero value if the character is a numeric character
-		 *  zero otherwise. */
-		if (isalpha(str[i]) == 0) {
+		// Does not allow any punctuation character, any number or any control caracter
+		if ((ispunct(str[i]) != 0) || isdigit(str[i]) != 0 || iscntrl(str[i]) != 0) {
+			result = true;
+		}
+	}
+	return result;
+}
+
+/**
+ * @brief Check if the string has only alphabetic characters, a space or numbers
+ * i.e either an uppercase letter (ABCDEFGHIJKLMNOPQRSTUVWXYZ)
+ * a lowercase letter (abcdefghijklmnopqrstuvwxyz)
+ * or a space
+ * or numbers
+ * 
+ * @param str String to check
+ * @return true if string is only made up by alphabetic characters, space or numbers. False otherwise.
+ */
+bool isOnlyAlphaNumbers(char *str) {
+	bool result = false;
+	for (unsigned int i = 0; i < strlen(str); i++) {
+		// Does not allow any punctuation character or any control caracter
+		if ((ispunct(str[i]) != 0) || iscntrl(str[i]) != 0) {
 			result = true;
 		}
 	}
@@ -135,15 +156,15 @@ bool anyChar(char *str) {
 /**
  * @brief Read a string from stdin with input checks.
  *
- * Parameters onlyAlpha and onlyNumbers are useful for input validation.
- * Keep in mind that "onlyAlpha" does not allow spaces in the string.
+ * Parameters are useful for applying granular control on the input validation.
  *
  * @param value Value from stdin to store in memory.
- * @param onlyAlpha If true allows only alphabetical letters in the string.
+ * @param onlyAlpha If true allows only alphabetical characters in the string.
  * @param onlyNumbers If true allows only digits in the string.
+ * @param onlyAlphaNumbers If true allows only digits and alphanumeric characters (therefore symbols are not allowed)
  * @return int String length. If returned int is -1 an error has occurred.
  */
-int readString(char *value, bool onlyAlpha, bool onlyNumbers) {
+int readString(char *value, bool onlyAlpha, bool onlyNumbers, bool onlyAlphaNumbers) {
 	bool error = false;
 	char inputVal[MAX_STRING_SIZE] = "";
 
@@ -156,12 +177,17 @@ int readString(char *value, bool onlyAlpha, bool onlyNumbers) {
 		if (onlyAlpha && isOnlyAlpha(inputVal)) {
 			error = true;
 			setYellowColor();
-			printf("\nValore errato.\nInserisci una stringa corretta senza spazi: ");
+			printf("\nValore errato.\nInserisci una stringa corretta senza simboli o numeri: ");
 			resetColor();
 		} else if (onlyNumbers && anyChar(inputVal)) {
 			error = true;
 			setYellowColor();
-			printf("\nValore errato.\nInserisci solo cifre senza spazi: ");
+			printf("\nValore errato.\nInserisci solo cifre senza spazi o simboli: ");
+			resetColor();
+		} else if (onlyAlphaNumbers && isOnlyAlphaNumbers(inputVal)) {
+			error = true;
+			setYellowColor();
+			printf("\nValore errato.\nInserisci solo cifre e/o numeri senza simboli: ");
 			resetColor();
 		} else {
 			error = false;
@@ -202,6 +228,21 @@ int readInteger() {
 			value = atoi(buffer);
 			error = false;
 		}
+
+		if (error == false) {
+			for (unsigned int i = 0; i < strlen(buffer); i++) {
+				if (isdigit(buffer[i]) == 0) {
+					error = true;
+					i = strlen(buffer);
+					setYellowColor();
+					puts("\nInserisci un numero corretto e premi Invio: ");
+					resetColor();
+				} else {
+					error = false;
+				}
+			}
+		}
+
 	} while (error == true);
 
 	return value;
@@ -211,7 +252,7 @@ int readInteger() {
  * @brief Read a string from stdin with input checks and convert to a double.
  *
  * Note that floating point numbers SHOULD NOT be used for handling currency values.
- * Still this is a quick way for "handling decimals" without overengineering this software. * 
+ * Still this is a quick way for "handling decimals" without overengineering this software. *
  * @see https://stackoverflow.com/questions/3730019/why-not-use-double-or-float-to-represent-currency/3730040#3730040
  * @return int Double from stdin. -1 if an unrecoverable error is detected.
  */
@@ -230,11 +271,11 @@ double readDouble() {
 		// Remove the useless \n
 		sscanf(buffer, "%[^\n]", buffer);
 
-		/** 
+		/**
 		 * In Italy (and most EU countries) the decimal separator is the "comma"
 		 * Therefore, we expect that the user will insert a decimal value with a comma.
 		 * Still, the double format expects a "dot" as the decimal separator.
-		 * 
+		 *
 		 * The comma will then be replaced with a dot (if needed) for saving everything properly.
 		 */
 		// Check if a comma can be found in the buffer string
@@ -256,6 +297,21 @@ double readDouble() {
 		} else {
 			error = false;
 		}
+
+		if (error == false) {
+			for (unsigned int i = 0; i < strlen(buffer); i++) {
+				if (isdigit(buffer[i]) == 0) {
+					error = true;
+					i = strlen(buffer);
+					setYellowColor();
+					puts("\nInserisci un numero corretto e premi Invio: ");
+					resetColor();
+				} else {
+					error = false;
+				}
+			}
+		}
+
 	} while (error == true);
 
 	return value;

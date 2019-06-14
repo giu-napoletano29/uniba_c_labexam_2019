@@ -140,7 +140,7 @@ int requestClientDeletion(client *allClients, unsigned int numClients) {
 	printSectionName("Eliminazione cliente", false);
 
 	printf("\nInserisci Codice Fiscale o Partita IVA del cliente da eliminare: ");
-	readString(toDeleteID, false, false);
+	readString(toDeleteID, false, false, false);
 
 	for (unsigned int i = 0; i < numClients; i++) {
 		if (strCompare(toDeleteID, (allClients + i)->id)) {

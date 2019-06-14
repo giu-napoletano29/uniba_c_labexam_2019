@@ -66,7 +66,7 @@ void searchBuildingsForCity(building *allBuildings, unsigned int numBuildings) {
 	printSectionName("Ricerca immobili", false);
 
 	printf("\nCitta' dov'e' situato l'immobile: ");
-	readString(city, false, false);
+	readString(city, true, false, false);
 	convertToUpperCase(city);
 
 	for (unsigned int i = 0; i < numBuildings; i++) {
