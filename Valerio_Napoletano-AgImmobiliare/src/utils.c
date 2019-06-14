@@ -96,17 +96,6 @@ void setGreenColor() {
 }
 
 /**
- * @brief Set magenta color to stdout using ANSI escape codes.
- *
- * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
- */
-void setMagentaColor() {
-	if (ENABLE_COLORS) {
-		printf("\033[1;35m");
-	}
-}
-
-/**
  * @brief Check if the string has only alphabetic characters.
  * i.e either an uppercase letter (ABCDEFGHIJKLMNOPQRSTUVWXYZ)
  * or a lowercase letter (abcdefghijklmnopqrstuvwxyz)

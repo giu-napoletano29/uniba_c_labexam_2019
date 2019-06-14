@@ -31,7 +31,6 @@ void setRedColor();
 void setYellowColor();
 void setGreenColor();
 void setCyanColor();
-void setMagentaColor();
 
 void pause();
 void notFoundError();
