@@ -271,13 +271,11 @@ double readDouble() {
 
 		// Format the string for getting the value double value
 		sscanf(buffer, "%lf", &value);
-
-		/** Check if there are any numbers in the string. */
-		// TODO: Handle decimal numbers and anyChar
-		if (anyChar(buffer)) {
+		// If the input string can not be converted to a double the "error" value can be 0 or -1
+		if (value == 0 || value == -1) {
 			error = true;
 			setYellowColor();
-			printf("\nInserisci un numero corretto e premi Invio: ");
+			printf("\nInserisci un numero decimale corretto e premi Invio: ");
 			resetColor();
 		} else {
 			error = false;
