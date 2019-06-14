@@ -128,7 +128,7 @@ bool isOnlyAlpha(char *str) {
 bool isOnlyAlphaNumbers(char *str) {
 	bool result = false;
 	for (unsigned int i = 0; i < strlen(str); i++) {
-		// Does not allow any punctuation character or any control caracter
+		// Does not allow any punctuation character or any control character.
 		if ((ispunct(str[i]) != 0) || iscntrl(str[i]) != 0) {
 			result = true;
 		}
@@ -137,16 +137,15 @@ bool isOnlyAlphaNumbers(char *str) {
 }
 
 /**
- * @brief Check if any character can be found in the string.
+ * @brief Check if any character/punctuation/control character can be found in the string.
  *
  * @param str String to check.
- * @return true if char has been found in the string, otherwise return false.
+ * @return true if values has been found in the string, otherwise return false.
  */
 bool anyChar(char *str) {
 	bool charFound = false;
 	for (unsigned int i = 0; i < strlen(str); i++) {
-		/** isalpha: Non-zero value if the character is a numeric character, zero otherwise. */
-		if (isalpha(str[i]) != 0) {
+		if ((isalpha(str[i]) != 0) || (ispunct(str[i]) != 0) || iscntrl(str[i]) != 0) {
 			charFound = true;
 		}
 	}
@@ -228,21 +227,6 @@ int readInteger() {
 			value = atoi(buffer);
 			error = false;
 		}
-
-		if (error == false) {
-			for (unsigned int i = 0; i < strlen(buffer); i++) {
-				if (isdigit(buffer[i]) == 0) {
-					error = true;
-					i = strlen(buffer);
-					setYellowColor();
-					puts("\nInserisci un numero corretto e premi Invio: ");
-					resetColor();
-				} else {
-					error = false;
-				}
-			}
-		}
-
 	} while (error == true);
 
 	return value;
@@ -289,29 +273,15 @@ double readDouble() {
 		sscanf(buffer, "%lf", &value);
 
 		/** Check if there are any numbers in the string. */
+		// TODO: Handle decimal numbers and anyChar
 		if (anyChar(buffer)) {
 			error = true;
 			setYellowColor();
-			puts("\nInserisci un numero corretto e premi Invio: ");
+			printf("\nInserisci un numero corretto e premi Invio: ");
 			resetColor();
 		} else {
 			error = false;
 		}
-
-		if (error == false) {
-			for (unsigned int i = 0; i < strlen(buffer); i++) {
-				if (isdigit(buffer[i]) == 0) {
-					error = true;
-					i = strlen(buffer);
-					setYellowColor();
-					puts("\nInserisci un numero corretto e premi Invio: ");
-					resetColor();
-				} else {
-					error = false;
-				}
-			}
-		}
-
 	} while (error == true);
 
 	return value;

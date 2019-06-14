@@ -40,7 +40,7 @@ void genBuildingID(building *bl) {
  * @param bl "building" type struct
  */
 void reqBuildingStreet(building *bl) {
-	printf("\nVia/Piazza/Viale: ");
+	printf("Indirizzo: ");
 	readString(bl->street, true, false, false);
 	convertToUpperCase(bl->street);
 
@@ -122,7 +122,7 @@ void reqBuildingPhone(building *bl) {
 	do {
 		printf("Numero di telefono proprietario: ");
 
-		if (readString(bl->phone, false, false, false) != 10) {
+		if (readString(bl->phone, false, true, false) != 10) {
 			setYellowColor();
 			puts("\nInserisci un numero di telefono corretto (10 cifre).\n");
 			resetColor();
