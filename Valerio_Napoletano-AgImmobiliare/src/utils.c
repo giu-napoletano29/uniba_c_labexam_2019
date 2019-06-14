@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <time.h> // For printFormattedDate()
 
-// Only for getting MAX_STRING_SIZE constantint rows
+// Only for getting MAX_STRING_SIZE
 #include "datatypes.h"
 
 /**
