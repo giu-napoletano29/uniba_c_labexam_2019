@@ -46,7 +46,9 @@ void clearScr() {
  * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
  */
 void resetColor() {
-	printf("\033[0m");
+	if (ENABLE_COLORS) {
+		printf("\033[0m");
+	}
 }
 
 /**
@@ -55,7 +57,9 @@ void resetColor() {
  * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
  */
 void setRedColor() {
-	printf("\033[1;31m");
+	if (ENABLE_COLORS) {
+		printf("\033[1;31m");
+	}
 }
 
 /**
@@ -64,7 +68,9 @@ void setRedColor() {
  * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
  */
 void setYellowColor() {
-	printf("\033[01;33m");
+	if (ENABLE_COLORS) {
+		printf("\033[01;33m");
+	}
 }
 
 /**
@@ -73,7 +79,9 @@ void setYellowColor() {
  * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
  */
 void setCyanColor() {
-	printf("\033[1;36m");
+	if (ENABLE_COLORS) {
+		printf("\033[1;36m");
+	}
 }
 
 /**
@@ -82,7 +90,9 @@ void setCyanColor() {
  * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
  */
 void setGreenColor() {
-	printf("\033[0;32m");
+	if (ENABLE_COLORS) {
+		printf("\033[0;32m");
+	}
 }
 
 /**
@@ -91,7 +101,9 @@ void setGreenColor() {
  * @see https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
  */
 void setMagentaColor() {
-	printf("\033[1;35m");
+	if (ENABLE_COLORS) {
+		printf("\033[1;35m");
+	}
 }
 
 /**
@@ -238,11 +250,11 @@ double readDouble() {
 		 */
 		// Check if a comma can be found in the buffer string
 		comma = strchr(buffer, ',');
-		
+
 		// Replace the comma with a dot
 		if (comma)
 			*comma = '.';
-		
+
 		// Format the string for getting the value double value
 		sscanf(buffer, "%lf", &value);
 
@@ -259,7 +271,6 @@ double readDouble() {
 
 	return value;
 }
-
 
 /**
  * @brief Parse date from a string formatted in day/month/year.

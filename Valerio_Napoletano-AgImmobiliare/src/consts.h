@@ -43,4 +43,22 @@
 /** If needed, tests can be executed at the startup, without waiting for the menu choice */
 #define RUN_TESTS_AT_STARTUP false
 
+/** 
+ * Sadly, ANSI escape sequences for setting colors are supported only on Windows 10, build 16257 onwards.
+ * basically the Windows 1 Anniversary Update released in 2016
+ * 
+ * Also, checking the Windows version number is a real pain, basically thanks to the deprecation of GetVersion() and GetVersionEx()
+ * by Microsoft that makes these functions unreliable on Windows 10.
+ * 
+ * Using the newly "Version Helper functions" also requires the usage of the Visual C++ toolset, pretty overkill for our usage.
+ * 
+ * This is why using this constant is required. 
+ * It's false as default because target computers in our University should run on Windows 7. 
+ * 
+ * @see https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
+ * @see https://github.com/ytdl-org/youtube-dl/issues/15758
+ * @see https://docs.microsoft.com/en-us/windows/desktop/SysInfo/targeting-your-application-at-windows-8-1
+ */
+#define ENABLE_COLORS false
+
 #endif /* CONSTS_H */
