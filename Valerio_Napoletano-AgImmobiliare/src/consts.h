@@ -59,6 +59,6 @@
  * @see https://github.com/ytdl-org/youtube-dl/issues/15758
  * @see https://docs.microsoft.com/en-us/windows/desktop/SysInfo/targeting-your-application-at-windows-8-1
  */
-#define ENABLE_COLORS true
+#define ENABLE_COLORS false
 
 #endif /* CONSTS_H */
