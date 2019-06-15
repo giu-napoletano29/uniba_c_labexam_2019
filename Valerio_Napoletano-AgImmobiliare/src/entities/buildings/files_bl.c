@@ -142,7 +142,6 @@ int loadBuildingsFile(building *bl, char *filename) {
  */
 int rewriteBuildingsToFile(building *bl, unsigned int rows, char *filename) {
 	FILE *filePtr;
-	//TODO: find a good solution to prevent data loss when file is opened in w+
 	filePtr = fopen(filename, "w+");
 	checkFile(filePtr);
 
