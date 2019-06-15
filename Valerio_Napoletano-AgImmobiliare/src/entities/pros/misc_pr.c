@@ -209,10 +209,10 @@ int requestProDeletion(professional *allPros, potential *allPts, unsigned int nu
 		}
 	}
 
-	// Show professional data before deletion confirmation (for user visual validation)
-	showProData((allPros + proIndex), (allPts + ptsIndex), numRecords);
-
 	if (found) {
+		// Show professional data before deletion confirmation (for user visual validation)
+		showProData((allPros + proIndex), (allPts + ptsIndex), numRecords);
+		
 		setYellowColor();
 		printf("\nSei sicuro di voler cancellare il professionistsa selezionato? (s/n): ");
 		resetColor();
