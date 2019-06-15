@@ -214,7 +214,7 @@ int requestProDeletion(professional *allPros, potential *allPts, unsigned int nu
 		showProData((allPros + proIndex), (allPts + ptsIndex), numRecords);
 		
 		setYellowColor();
-		printf("\nSei sicuro di voler cancellare il professionistsa selezionato? (s/n): ");
+		printf("\nSei sicuro di voler cancellare il professionista selezionato? (s/n): ");
 		resetColor();
 
 		if (askConfirm()) {
