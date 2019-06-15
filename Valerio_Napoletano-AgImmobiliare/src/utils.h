@@ -19,6 +19,7 @@ void printSectionName(char *string, bool isHome);
 time_t parseDate(char string[MAX_STRING_SIZE], bool errorCheck);
 
 void convertToUpperCase(char *s);
+void convertToLowerCase(char *str);
 bool strCompare(char *from, char *to);
 bool askConfirm();
 

@@ -62,6 +62,7 @@ void parseProsFile(FILE *filePtr, professional *allPros) {
 					break;
 				case 5:
 					strcpy((allPros + proNum)->email, token);
+					convertToLowerCase((allPros + proNum)->email);
 					break;
 				case 6:
 					/*

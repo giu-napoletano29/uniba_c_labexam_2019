@@ -378,6 +378,19 @@ void convertToUpperCase(char *str) {
 }
 
 /**
+ * @brief Convert every char in the string to lowercase
+ *
+ * @param str String to convert to lowercase.
+ */
+void convertToLowerCase(char *str) {
+	unsigned int len = 0;
+	len = strlen(str);
+	for (unsigned int i = 0; i < len; i++) {
+		str[i] = tolower(str[i]);
+	}
+}
+
+/**
  * @brief System pause highlighted in yellow.
  */
 void pause() {
