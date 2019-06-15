@@ -471,7 +471,7 @@ bool askConfirm() {
 	bool error = false;
 
 	do {
-		scanf("%1s", usrInput);
+		readString(usrInput, true, false, false);
 
 		if (strCompare(usrInput, "s") || strCompare(usrInput, "y")) {
 			choice = true;

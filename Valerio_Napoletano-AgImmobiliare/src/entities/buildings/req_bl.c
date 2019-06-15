@@ -207,9 +207,6 @@ void reqBuildingSold(building *bl) {
 
 	if (askConfirm()) {
 		newLine();
-		// Workaround for avoiding askConfirm() conflict with readString
-		fflush(stdin);
-
 		printf("Quando? Inserisci una data (gg/mm/yyyy): ");
 		readString(soldOnString, false, false, false);
 		bl->soldOn = parseDate(soldOnString, true);
