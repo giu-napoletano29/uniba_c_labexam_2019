@@ -53,7 +53,11 @@ void showClientType(unsigned short int type) {
 void showClientData(client *cl, bool checkExpiration) {
 	setCyanColor();
 	printf("\n-- CLIENTE --\n");
-	printf("Codice fiscale: ");
+	if (cl->clType == 3) {
+		printf("Partita IVA: ");
+	} else {
+		printf("Codice fiscale: ");
+	}
 	resetColor();
 	printf("%s \n", cl->id);
 

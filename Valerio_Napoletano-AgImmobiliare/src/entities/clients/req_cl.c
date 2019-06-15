@@ -156,7 +156,6 @@ void reqType(client *cl) {
  */
 void reqCompanyName(client *cl) {
 	if (cl->clType == 3) {
-		newLine();
 		printf("Nome azienda: ");
 		// numCheck is false because a company name can have numbers
 		readString(cl->companyName, true, false, false);
