@@ -2,7 +2,7 @@
  * @file sort.c
  * @author Giuseppe Napoletano
  * @date 25 May 2019
- * @brief Sorting functions (with Bubble Sort) in alphabetical order by surname.
+ * @brief Sorting functions (with Selection Sort) in alphabetical order by surname.
  */
 
 #include <stdio.h>
@@ -30,7 +30,8 @@ void sortPros(professional *pr, unsigned int rows) {
 			if (strcmp((pr + i)->surname, (pr + indexMin)->surname) < 0) {
 				indexMin = i;
 			}
-		}	// Element are moved at the end of the comparison process to avoid useless operation
+		}	
+		// Element are moved at the end of the comparison process for avoiding an useless operation
 		cmp.buildingsSold = (pr + j)->buildingsSold;
 		(pr + j)->buildingsSold = (pr + indexMin)->buildingsSold;
 		(pr + indexMin)->buildingsSold = cmp.buildingsSold;
@@ -81,7 +82,8 @@ void sortClients(client *cl, unsigned int rows) {
 			if (strcmp((cl + i)->surname, (cl + indexMin)->surname) < 0) {
 				indexMin = i;
 			}
-		}	// Element are moved at the end of the comparison process to avoid useless operation
+		}
+		// Element are moved at the end of the comparison process to avoid useless operation
 		cmp.budget = (cl + j)->budget;
 		(cl + j)->budget = (cl + indexMin)->budget;
 		(cl + indexMin)->budget = cmp.budget;
